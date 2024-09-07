@@ -1,4 +1,9 @@
-﻿// Please see documentation at https://learn.microsoft.com/aspnet/core/client-side/bundling-and-minification
-// for details on configuring this project to bundle and minify static web assets.
-
-// Write your JavaScript code.
+﻿setInterval(function() {
+        $.ajax({
+            url: '/home',
+            type: 'GET',
+            success: function (data) {
+                $('.weather-status').html($(data).find('.weather-status').html());
+            }
+        })
+    }, 60000); // Làm mới mỗi 60 giây

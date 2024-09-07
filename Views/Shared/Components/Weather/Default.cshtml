@@ -1,0 +1,31 @@
+﻿@model dynamic
+
+@{
+    string iconUrl = $"https:{Model.current.condition.icon}";
+    string description = Model.current.condition.text;
+    double temp = Model.current.temp_c;
+    string date = DateTime.Now.ToString("dddd, dd MMMM yyyy");
+}
+
+<div class="weather-status">
+    <img src="@iconUrl" alt="Weather icon" />
+    <span>@temp°C, @description</span>
+    <span>@date</span>
+</div>
+
+<style>
+    .weather-status {
+        display: flex;
+        align-items: center;
+        background-color: #333;
+        color: white;
+        padding: 10px;
+        border-radius: 5px;
+        font-family: Arial, sans-serif;
+    }
+
+    .weather-status img {
+        width: 50px;
+        margin-right: 10px;
+    }
+</style>

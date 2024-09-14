@@ -1,0 +1,190 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <title>Category Management</title>
+<style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 20px auto;
+            background-color: white;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            padding: 20px;
+        }
+
+        h1 {
+            color: #333;
+            font-size: 24px;
+            text-align: center;
+        }
+
+        .add-category-btn {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-bottom: 20px;
+            transition: background-color 0.3s;
+            float : right;
+        }
+
+        .add-category-btn:hover {
+            background-color: #45a049;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+
+        th, td {
+            padding: 15px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+            color: #333;
+        }
+
+        td {
+            background-color: #fff;
+        }
+
+        .actions button {
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 8px 16px;
+            margin-right: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .actions button:hover {
+            background-color: #0056b3;
+        }
+
+        .delete-btn {
+            background-color: #e74c3c;
+        }
+
+        .delete-btn:hover {
+            background-color: #c0392b;
+        }
+
+        .edit-btn {
+            background-color: #f39c12;
+        }
+
+        .edit-btn:hover {
+            background-color: #d35400;
+        }
+
+        @@media (max-width: 768px) {
+            table {
+                width: 100%;
+            }
+
+            th, td {
+                padding: 10px;
+            }
+
+            .add-category-btn {
+                width: 100%;
+                margin-bottom: 10px;
+            }
+        }
+ </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Category Management</h1>
+
+        <button class="add-category-btn" onclick="window.location.href='/admin/category/add'">Add Category</button>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Category Name</th>
+                    <th>Description</th>
+                    <th>Parent Category</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Example rows (This should be dynamically generated) -->
+                <tr>
+                    <td>1</td>
+                    <td>Electronics</td>
+                    <td>Electronic gadgets and devices</td>
+                    <td>None</td>
+                    <td>
+                        <button id="toggleButton" class="btn btn-card btn-primary btn-round">Active</button>
+                        </td>
+                    <td class="actions">
+                        <button class="edit-btn" onclick="window.location.href='/edit-category/1'">Edit</button>
+                        <button class="delete-btn" onclick="deleteCategory(1)">Delete</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>Smartphones</td>
+                    <td>All types of smartphones</td>
+                    <td>Electronics</td>
+                    <td>Active</td>
+                    <td class="actions">
+                        <button class="edit-btn" onclick="window.location.href='/edit-category/2'">Edit</button>
+                        <button class="delete-btn" onclick="deleteCategory(2)">Delete</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        function deleteCategory(id) {
+            if (confirm('Are you sure you want to delete this category?')) {
+                // Perform deletion logic (e.g., make an API call to delete the category)
+                console.log('Deleted category with ID:', id);
+            }
+        }
+        const button = document.getElementById('toggleButton');
+        button.addEventListener('click', () => {
+            if (button.classList.contains('active')) {
+                button.classList.remove('active');
+                button.classList.add('inactive');
+                button.textContent = 'Inactive';
+            } else {
+                button.classList.remove('inactive');
+                button.classList.add('active');
+                button.textContent = 'Active';
+            }
+        });
+    </script>
+
+</body>
+</html>

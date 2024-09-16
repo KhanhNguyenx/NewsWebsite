@@ -5,10 +5,12 @@ namespace NewsWebsite.Areas.Admin.Controllers
     [Area("Admin")]
     public class CategoryController : Controller
     {
+        [HttpGet]
         public IActionResult Index()
         {
             return View();
         }
+        [HttpGet]
         public IActionResult Add()
         {
             return View();

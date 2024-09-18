@@ -11,7 +11,7 @@ namespace NewsWebsite.Areas.Admin.Controllers
             return View();
         }
         [HttpGet]
-        public IActionResult Add()
+        public IActionResult Upsert()
         {
             return View();
         }

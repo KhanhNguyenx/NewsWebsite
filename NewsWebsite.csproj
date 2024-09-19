@@ -26,4 +26,32 @@
     <Folder Include="Areas\Author\Views\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Include="wwwroot\.DS_Store" />
+    <None Include="wwwroot\css\.DS_Store" />
+    <None Include="wwwroot\css\bootstrap-grid.css.map" />
+    <None Include="wwwroot\css\bootstrap-grid.min.css.map" />
+    <None Include="wwwroot\css\bootstrap-reboot.css.map" />
+    <None Include="wwwroot\css\bootstrap-reboot.min.css.map" />
+    <None Include="wwwroot\css\bootstrap.css.map" />
+    <None Include="wwwroot\css\bootstrap.min.css.map" />
+    <None Include="wwwroot\fonts\fontawesome-webfont.svg" />
+    <None Include="wwwroot\fonts\fontawesome-webfont.woff2" />
+    <None Include="wwwroot\images\.DS_Store" />
+    <None Include="wwwroot\images\version\.DS_Store" />
+    <None Include="wwwroot\js\.DS_Store" />
+    <None Include="wwwroot\js\animate.js" />
+    <None Include="wwwroot\js\bootstrap.js" />
+    <None Include="wwwroot\js\bootstrap.min.js" />
+    <None Include="wwwroot\js\carousel.js" />
+    <None Include="wwwroot\js\custom.js" />
+    <None Include="wwwroot\js\food-map.js" />
+    <None Include="wwwroot\js\garden-map.js" />
+    <None Include="wwwroot\js\jquery.min.js" />
+    <None Include="wwwroot\js\masonry.js" />
+    <None Include="wwwroot\js\site.js" />
+    <None Include="wwwroot\js\tether.min.js" />
+    <None Include="wwwroot\upload\.DS_Store" />
+  </ItemGroup>
+
 </Project>

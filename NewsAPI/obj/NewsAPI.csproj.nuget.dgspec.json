@@ -1,31 +1,27 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Du Lieu\\ASP.NET-API\\FullSourceNews\\NewsAPI\\NewsAPI.csproj": {}
+    "D:\\API_Work\\NewsWebsite\\NewsAPI\\NewsAPI.csproj": {}
   },
   "projects": {
-    "D:\\Du Lieu\\ASP.NET-API\\FullSourceNews\\NewsAPI\\NewsAPI.csproj": {
+    "D:\\API_Work\\NewsWebsite\\NewsAPI\\NewsAPI.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Du Lieu\\ASP.NET-API\\FullSourceNews\\NewsAPI\\NewsAPI.csproj",
+        "projectUniqueName": "D:\\API_Work\\NewsWebsite\\NewsAPI\\NewsAPI.csproj",
         "projectName": "NewsAPI",
-        "projectPath": "D:\\Du Lieu\\ASP.NET-API\\FullSourceNews\\NewsAPI\\NewsAPI.csproj",
-        "packagesPath": "C:\\Users\\ADMIN\\.nuget\\packages\\",
-        "outputPath": "D:\\Du Lieu\\ASP.NET-API\\FullSourceNews\\NewsAPI\\obj\\",
+        "projectPath": "D:\\API_Work\\NewsWebsite\\NewsAPI\\NewsAPI.csproj",
+        "packagesPath": "C:\\Users\\Tokisaki\\.nuget\\packages\\",
+        "outputPath": "D:\\API_Work\\NewsWebsite\\NewsAPI\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-        ],
         "configFilePaths": [
-          "C:\\Users\\ADMIN\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Users\\Tokisaki\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "net8.0"
         ],
         "sources": {
-          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages": {},
           "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
@@ -50,6 +46,24 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "dependencies": {
+            "AutoMapper": {
+              "target": "Package",
+              "version": "[13.0.1, )"
+            },
+            "Microsoft.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[8.0.8, )"
+            },
+            "Microsoft.EntityFrameworkCore.SqlServer": {
+              "target": "Package",
+              "version": "[8.0.8, )"
+            },
+            "Microsoft.EntityFrameworkCore.Tools": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[8.0.8, )"
+            },
             "Swashbuckle.AspNetCore": {
               "target": "Package",
               "version": "[6.4.0, )"
@@ -74,7 +88,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.400/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.401/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

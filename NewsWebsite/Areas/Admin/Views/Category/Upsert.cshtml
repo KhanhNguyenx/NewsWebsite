@@ -1,0 +1,166 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Category</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tiny.cloud/1/0ji5g5v5wu6qxi10daivqdjto7xekdg9mxmvqpl9wnl22b3d/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+            color: #333;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: #333;
+        }
+
+        input[type="text"],
+        textarea,
+        select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+            color: #333;
+            background-color: #f9f9f9;
+        }
+
+        textarea {
+            resize: vertical;
+            height: 100px;
+        }
+
+        .form-actions {
+            text-align: center;
+            margin-top: 30px;
+        }
+
+        .btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            width: 150px;
+        }
+
+        .btn-submit {
+            background-color: #28a745;
+            color: white;
+        }
+
+        .btn-cancel {
+            background-color: #6c757d;
+            color: white;
+            margin-left: 10px;
+        }
+
+        .status-group {
+            display: flex;
+            align-items: center;
+            margin-top: 10px;
+        }
+
+        .status-group label {
+            margin-right: 20px;
+        }
+
+        .status-group input[type="radio"] {
+            margin-right: 10px;
+            cursor: pointer;
+        }
+
+        .form-group select {
+            width: 100%;
+            height: 40px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Add Category</h1>
+
+        <form>
+            <!-- Category Name -->
+            <div class="form-group">
+                <label for="categoryName">Category Name</label>
+                <input type="text" id="categoryName" name="categoryName" placeholder="Enter category name">
+            </div>
+
+            <!-- Description -->
+            <div class="form-group">
+                <label for="description">Description</label>
+                <textarea id="description" name="description" placeholder="Enter description"></textarea>
+            </div>
+
+            <!-- Parent Category -->
+            <div class="form-group">
+                <label for="parentCategory">Parent Category</label>
+                <select id="parentCategory" name="parentCategory">
+                    <option value="None">None</option>
+                    <option value="Electronics">Electronics</option>
+                    <option value="Furniture">Furniture</option>
+                    <option value="Clothing">Clothing</option>
+                </select>
+            </div>
+
+            <!-- Status -->
+            <div class="form-group">
+                <label>Status</label>
+                <div class="status-group">
+                    <input type="radio" id="active" name="status" value="Active" checked>
+                    <label for="active">Active</label>
+
+                    <input type="radio" id="inactive" name="status" value="Inactive">
+                    <label for="inactive">Inactive</label>
+                </div>
+            </div>
+
+            <!-- Submit and Cancel buttons -->
+            <div class="form-actions">
+                <button type="submit" class="btn btn-submit">Submit</button>
+                <button type="button" class="btn btn-cancel" onclick="window.location.href='/admin/category'">Cancel</button>
+            </div>
+        </form>
+    </div>
+
+</body>
+<script>
+    tinymce.init({
+        selector: '#description',  // Target the textarea by its ID
+        plugins: 'advlist autolink lists link image charmap preview anchor pagebreak',
+        toolbar_mode: 'floating',
+        toolbar: 'undo redo | formatselect | bold italic backcolor | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | removeformat',
+        branding: false, // Removes the "Powered by TinyMCE" footer
+        height: 300, // Set the height of the editor
+    });
+</script>
+
+</html>

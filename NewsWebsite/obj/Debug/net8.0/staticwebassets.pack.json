@@ -5,6 +5,366 @@
       "PackagePath": "staticwebassets\\NewsWebsite.bundle.scp.css"
     },
     {
+      "Id": "D:\\Du Lieu\\ASP.NET-API\\FullSourceNews\\NewsWebsite\\wwwroot\\adminAsset\\css\\apexcharts.css",
+      "PackagePath": "staticwebassets\\adminAsset\\css\\apexcharts.css"
+    },
+    {
+      "Id": "D:\\Du Lieu\\ASP.NET-API\\FullSourceNews\\NewsWebsite\\wwwroot\\adminAsset\\css\\styles.bundle.css",
+      "PackagePath": "staticwebassets\\adminAsset\\css\\styles.bundle.css"
+    },
+    {
+      "Id": "D:\\Du Lieu\\ASP.NET-API\\FullSourceNews\\NewsWebsite\\wwwroot\\adminAsset\\css\\styles.css",
+      "PackagePath": "staticwebassets\\adminAsset\\css\\styles.css"
+    },
+    {
+      "Id": "D:\\Du Lieu\\ASP.NET-API\\FullSourceNews\\NewsWebsite\\wwwroot\\adminAsset\\fonts\\keenicons-duotone.ttf",
+      "PackagePath": "staticwebassets\\adminAsset\\fonts\\keenicons-duotone.ttf"
+    },
+    {
+      "Id": "D:\\Du Lieu\\ASP.NET-API\\FullSourceNews\\NewsWebsite\\wwwroot\\adminAsset\\fonts\\keenicons-duotone.woff",
+      "PackagePath": "staticwebassets\\adminAsset\\fonts\\keenicons-duotone.woff"
+    },
+    {
+      "Id": "D:\\Du Lieu\\ASP.NET-API\\FullSourceNews\\NewsWebsite\\wwwroot\\adminAsset\\fonts\\keenicons-filled.ttf",
+      "PackagePath": "staticwebassets\\adminAsset\\fonts\\keenicons-filled.ttf"
+    },
+    {
+      "Id": "D:\\Du Lieu\\ASP.NET-API\\FullSourceNews\\NewsWebsite\\wwwroot\\adminAsset\\fonts\\keenicons-filled.woff",
+      "PackagePath": "staticwebassets\\adminAsset\\fonts\\keenicons-filled.woff"
+    },
+    {
+      "Id": "D:\\Du Lieu\\ASP.NET-API\\FullSourceNews\\NewsWebsite\\wwwroot\\adminAsset\\fonts\\keenicons-outline.ttf",
+      "PackagePath": "staticwebassets\\adminAsset\\fonts\\keenicons-outline.ttf"
+    },
+    {
+      "Id": "D:\\Du Lieu\\ASP.NET-API\\FullSourceNews\\NewsWebsite\\wwwroot\\adminAsset\\fonts\\keenicons-outline.woff",
+      "PackagePath": "staticwebassets\\adminAsset\\fonts\\keenicons-outline.woff"
+    },
+    {
+      "Id": "D:\\Du Lieu\\ASP.NET-API\\FullSourceNews\\NewsWebsite\\wwwroot\\adminAsset\\fonts\\keenicons-solid.ttf",
+      "PackagePath": "staticwebassets\\adminAsset\\fonts\\keenicons-solid.ttf"
+    },
+    {
+      "Id": "D:\\Du Lieu\\ASP.NET-API\\FullSourceNews\\NewsWebsite\\wwwroot\\adminAsset\\fonts\\keenicons-solid.woff",
+      "PackagePath": "staticwebassets\\adminAsset\\fonts\\keenicons-solid.woff"
+    },
+    {
+      "Id": "D:\\Du Lieu\\ASP.NET-API\\FullSourceNews\\NewsWebsite\\wwwroot\\adminAsset\\images\\1.jpg",
+      "PackagePath": "staticwebassets\\adminAsset\\images\\1.jpg"
+    },
+    {
+      "Id": "D:\\Du Lieu\\ASP.NET-API\\FullSourceNews\\NewsWebsite\\wwwroot\\adminAsset\\images\\2-dark.png",
+      "PackagePath": "staticwebassets\\adminAsset\\images\\2-dark.png"
+    },
+    {
+      "Id": "D:\\Du Lieu\\ASP.NET-API\\FullSourceNews\\NewsWebsite\\wwwroot\\adminAsset\\images\\2.png",
+      "PackagePath": "staticwebassets\\adminAsset\\images\\2.png"
+    },
+    {
+      "Id": "D:\\Du Lieu\\ASP.NET-API\\FullSourceNews\\NewsWebsite\\wwwroot\\adminAsset\\images\\300-1.png",
+      "PackagePath": "staticwebassets\\adminAsset\\images\\300-1.png"
+    },
+    {
+      "Id": "D:\\Du Lieu\\ASP.NET-API\\FullSourceNews\\NewsWebsite\\wwwroot\\adminAsset\\images\\300-10.png",
+      "PackagePath": "staticwebassets\\adminAsset\\images\\300-10.png"
+    },
+    {
+      "Id": "D:\\Du Lieu\\ASP.NET-API\\FullSourceNews\\NewsWebsite\\wwwroot\\adminAsset\\images\\300-11.png",
+      "PackagePath": "staticwebassets\\adminAsset\\images\\300-11.png"
+    },
+    {
+      "Id": "D:\\Du Lieu\\ASP.NET-API\\FullSourceNews\\NewsWebsite\\wwwroot\\adminAsset\\images\\300-12.png",
+      "PackagePath": "staticwebassets\\adminAsset\\images\\300-12.png"
+    },
+    {
+      "Id": "D:\\Du Lieu\\ASP.NET-API\\FullSourceNews\\NewsWebsite\\wwwroot\\adminAsset\\images\\300-13.png",
+      "PackagePath": "staticwebassets\\adminAsset\\images\\300-13.png"
+    },
+    {
+      "Id": "D:\\Du Lieu\\ASP.NET-API\\FullSourceNews\\NewsWebsite\\wwwroot\\adminAsset\\images\\300-14.png",
+      "PackagePath": "staticwebassets\\adminAsset\\images\\300-14.png"
+    },
+    {
+      "Id": "D:\\Du Lieu\\ASP.NET-API\\FullSourceNews\\NewsWebsite\\wwwroot\\adminAsset\\images\\300-15.png",
+      "PackagePath": "staticwebassets\\adminAsset\\images\\300-15.png"
+    },
+    {
+      "Id": "D:\\Du Lieu\\ASP.NET-API\\FullSourceNews\\NewsWebsite\\wwwroot\\adminAsset\\images\\300-16.png",
+      "PackagePath": "staticwebassets\\adminAsset\\images\\300-16.png"
+    },
+    {
+      "Id": "D:\\Du Lieu\\ASP.NET-API\\FullSourceNews\\NewsWebsite\\wwwroot\\adminAsset\\images\\300-17.png",
+      "PackagePath": "staticwebassets\\adminAsset\\images\\300-17.png"
+    },
+    {
+      "Id": "D:\\Du Lieu\\ASP.NET-API\\FullSourceNews\\NewsWebsite\\wwwroot\\adminAsset\\images\\300-18.png",
+      "PackagePath": "staticwebassets\\adminAsset\\images\\300-18.png"
+    },
+    {
+      "Id": "D:\\Du Lieu\\ASP.NET-API\\FullSourceNews\\NewsWebsite\\wwwroot\\adminAsset\\images\\300-19.png",
+      "PackagePath": "staticwebassets\\adminAsset\\images\\300-19.png"
+    },
+    {
+      "Id": "D:\\Du Lieu\\ASP.NET-API\\FullSourceNews\\NewsWebsite\\wwwroot\\adminAsset\\images\\300-2.png",
+      "PackagePath": "staticwebassets\\adminAsset\\images\\300-2.png"
+    },
+    {
+      "Id": "D:\\Du Lieu\\ASP.NET-API\\FullSourceNews\\NewsWebsite\\wwwroot\\adminAsset\\images\\300-20.png",
+      "PackagePath": "staticwebassets\\adminAsset\\images\\300-20.png"
+    },
+    {
+      "Id": "D:\\Du Lieu\\ASP.NET-API\\FullSourceNews\\NewsWebsite\\wwwroot\\adminAsset\\images\\300-21.png",
+      "PackagePath": "staticwebassets\\adminAsset\\images\\300-21.png"
+    },
+    {
+      "Id": "D:\\Du Lieu\\ASP.NET-API\\FullSourceNews\\NewsWebsite\\wwwroot\\adminAsset\\images\\300-22.png",
+      "PackagePath": "staticwebassets\\adminAsset\\images\\300-22.png"
+    },
+    {
+      "Id": "D:\\Du Lieu\\ASP.NET-API\\FullSourceNews\\NewsWebsite\\wwwroot\\adminAsset\\images\\300-23.png",
+      "PackagePath": "staticwebassets\\adminAsset\\images\\300-23.png"
+    },
+    {
+      "Id": "D:\\Du Lieu\\ASP.NET-API\\FullSourceNews\\NewsWebsite\\wwwroot\\adminAsset\\images\\300-24.png",
+      "PackagePath": "staticwebassets\\adminAsset\\images\\300-24.png"
+    },
+    {
+      "Id": "D:\\Du Lieu\\ASP.NET-API\\FullSourceNews\\NewsWebsite\\wwwroot\\adminAsset\\images\\300-25.png",
+      "PackagePath": "staticwebassets\\adminAsset\\images\\300-25.png"
+    },
+    {
+      "Id": "D:\\Du Lieu\\ASP.NET-API\\FullSourceNews\\NewsWebsite\\wwwroot\\adminAsset\\images\\300-26.png",
+      "PackagePath": "staticwebassets\\adminAsset\\images\\300-26.png"
+    },
+    {
+      "Id": "D:\\Du Lieu\\ASP.NET-API\\FullSourceNews\\NewsWebsite\\wwwroot\\adminAsset\\images\\300-27.png",
+      "PackagePath": "staticwebassets\\adminAsset\\images\\300-27.png"
+    },
+    {
+      "Id": "D:\\Du Lieu\\ASP.NET-API\\FullSourceNews\\NewsWebsite\\wwwroot\\adminAsset\\images\\300-28.png",
+      "PackagePath": "staticwebassets\\adminAsset\\images\\300-28.png"
+    },
+    {
+      "Id": "D:\\Du Lieu\\ASP.NET-API\\FullSourceNews\\NewsWebsite\\wwwroot\\adminAsset\\images\\300-29.png",
+      "PackagePath": "staticwebassets\\adminAsset\\images\\300-29.png"
+    },
+    {
+      "Id": "D:\\Du Lieu\\ASP.NET-API\\FullSourceNews\\NewsWebsite\\wwwroot\\adminAsset\\images\\300-3.png",
+      "PackagePath": "staticwebassets\\adminAsset\\images\\300-3.png"
+    },
+    {
+      "Id": "D:\\Du Lieu\\ASP.NET-API\\FullSourceNews\\NewsWebsite\\wwwroot\\adminAsset\\images\\300-30.png",
+      "PackagePath": "staticwebassets\\adminAsset\\images\\300-30.png"
+    },
+    {
+      "Id": "D:\\Du Lieu\\ASP.NET-API\\FullSourceNews\\NewsWebsite\\wwwroot\\adminAsset\\images\\300-34.png",
+      "PackagePath": "staticwebassets\\adminAsset\\images\\300-34.png"
+    },
+    {
+      "Id": "D:\\Du Lieu\\ASP.NET-API\\FullSourceNews\\NewsWebsite\\wwwroot\\adminAsset\\images\\300-4.png",
+      "PackagePath": "staticwebassets\\adminAsset\\images\\300-4.png"
+    },
+    {
+      "Id": "D:\\Du Lieu\\ASP.NET-API\\FullSourceNews\\NewsWebsite\\wwwroot\\adminAsset\\images\\300-5.png",
+      "PackagePath": "staticwebassets\\adminAsset\\images\\300-5.png"
+    },
+    {
+      "Id": "D:\\Du Lieu\\ASP.NET-API\\FullSourceNews\\NewsWebsite\\wwwroot\\adminAsset\\images\\300-6.png",
+      "PackagePath": "staticwebassets\\adminAsset\\images\\300-6.png"
+    },
+    {
+      "Id": "D:\\Du Lieu\\ASP.NET-API\\FullSourceNews\\NewsWebsite\\wwwroot\\adminAsset\\images\\300-7.png",
+      "PackagePath": "staticwebassets\\adminAsset\\images\\300-7.png"
+    },
+    {
+      "Id": "D:\\Du Lieu\\ASP.NET-API\\FullSourceNews\\NewsWebsite\\wwwroot\\adminAsset\\images\\300-8.png",
+      "PackagePath": "staticwebassets\\adminAsset\\images\\300-8.png"
+    },
+    {
+      "Id": "D:\\Du Lieu\\ASP.NET-API\\FullSourceNews\\NewsWebsite\\wwwroot\\adminAsset\\images\\300-9.png",
+      "PackagePath": "staticwebassets\\adminAsset\\images\\300-9.png"
+    },
+    {
+      "Id": "D:\\Du Lieu\\ASP.NET-API\\FullSourceNews\\NewsWebsite\\wwwroot\\adminAsset\\images\\33-dark.svg",
+      "PackagePath": "staticwebassets\\adminAsset\\images\\33-dark.svg"
+    },
+    {
+      "Id": "D:\\Du Lieu\\ASP.NET-API\\FullSourceNews\\NewsWebsite\\wwwroot\\adminAsset\\images\\33.svg",
+      "PackagePath": "staticwebassets\\adminAsset\\images\\33.svg"
+    },
+    {
+      "Id": "D:\\Du Lieu\\ASP.NET-API\\FullSourceNews\\NewsWebsite\\wwwroot\\adminAsset\\images\\6.jpg",
+      "PackagePath": "staticwebassets\\adminAsset\\images\\6.jpg"
+    },
+    {
+      "Id": "D:\\Du Lieu\\ASP.NET-API\\FullSourceNews\\NewsWebsite\\wwwroot\\adminAsset\\images\\ai.svg",
+      "PackagePath": "staticwebassets\\adminAsset\\images\\ai.svg"
+    },
+    {
+      "Id": "D:\\Du Lieu\\ASP.NET-API\\FullSourceNews\\NewsWebsite\\wwwroot\\adminAsset\\images\\apple-touch-icon.png",
+      "PackagePath": "staticwebassets\\adminAsset\\images\\apple-touch-icon.png"
+    },
+    {
+      "Id": "D:\\Du Lieu\\ASP.NET-API\\FullSourceNews\\NewsWebsite\\wwwroot\\adminAsset\\images\\bg-3-dark.png",
+      "PackagePath": "staticwebassets\\adminAsset\\images\\bg-3-dark.png"
+    },
+    {
+      "Id": "D:\\Du Lieu\\ASP.NET-API\\FullSourceNews\\NewsWebsite\\wwwroot\\adminAsset\\images\\bg-3.png",
+      "PackagePath": "staticwebassets\\adminAsset\\images\\bg-3.png"
+    },
+    {
+      "Id": "D:\\Du Lieu\\ASP.NET-API\\FullSourceNews\\NewsWebsite\\wwwroot\\adminAsset\\images\\default-logo-dark.svg",
+      "PackagePath": "staticwebassets\\adminAsset\\images\\default-logo-dark.svg"
+    },
+    {
+      "Id": "D:\\Du Lieu\\ASP.NET-API\\FullSourceNews\\NewsWebsite\\wwwroot\\adminAsset\\images\\default-logo.svg",
+      "PackagePath": "staticwebassets\\adminAsset\\images\\default-logo.svg"
+    },
+    {
+      "Id": "D:\\Du Lieu\\ASP.NET-API\\FullSourceNews\\NewsWebsite\\wwwroot\\adminAsset\\images\\doc.svg",
+      "PackagePath": "staticwebassets\\adminAsset\\images\\doc.svg"
+    },
+    {
+      "Id": "D:\\Du Lieu\\ASP.NET-API\\FullSourceNews\\NewsWebsite\\wwwroot\\adminAsset\\images\\evernote.svg",
+      "PackagePath": "staticwebassets\\adminAsset\\images\\evernote.svg"
+    },
+    {
+      "Id": "D:\\Du Lieu\\ASP.NET-API\\FullSourceNews\\NewsWebsite\\wwwroot\\adminAsset\\images\\favicon-16x16.png",
+      "PackagePath": "staticwebassets\\adminAsset\\images\\favicon-16x16.png"
+    },
+    {
+      "Id": "D:\\Du Lieu\\ASP.NET-API\\FullSourceNews\\NewsWebsite\\wwwroot\\adminAsset\\images\\favicon-32x32.png",
+      "PackagePath": "staticwebassets\\adminAsset\\images\\favicon-32x32.png"
+    },
+    {
+      "Id": "D:\\Du Lieu\\ASP.NET-API\\FullSourceNews\\NewsWebsite\\wwwroot\\adminAsset\\images\\figma.svg",
+      "PackagePath": "staticwebassets\\adminAsset\\images\\figma.svg"
+    },
+    {
+      "Id": "D:\\Du Lieu\\ASP.NET-API\\FullSourceNews\\NewsWebsite\\wwwroot\\adminAsset\\images\\france.svg",
+      "PackagePath": "staticwebassets\\adminAsset\\images\\france.svg"
+    },
+    {
+      "Id": "D:\\Du Lieu\\ASP.NET-API\\FullSourceNews\\NewsWebsite\\wwwroot\\adminAsset\\images\\germany.svg",
+      "PackagePath": "staticwebassets\\adminAsset\\images\\germany.svg"
+    },
+    {
+      "Id": "D:\\Du Lieu\\ASP.NET-API\\FullSourceNews\\NewsWebsite\\wwwroot\\adminAsset\\images\\gitlab.svg",
+      "PackagePath": "staticwebassets\\adminAsset\\images\\gitlab.svg"
+    },
+    {
+      "Id": "D:\\Du Lieu\\ASP.NET-API\\FullSourceNews\\NewsWebsite\\wwwroot\\adminAsset\\images\\google-webdev.svg",
+      "PackagePath": "staticwebassets\\adminAsset\\images\\google-webdev.svg"
+    },
+    {
+      "Id": "D:\\Du Lieu\\ASP.NET-API\\FullSourceNews\\NewsWebsite\\wwwroot\\adminAsset\\images\\inferno.svg",
+      "PackagePath": "staticwebassets\\adminAsset\\images\\inferno.svg"
+    },
+    {
+      "Id": "D:\\Du Lieu\\ASP.NET-API\\FullSourceNews\\NewsWebsite\\wwwroot\\adminAsset\\images\\instagram-03.svg",
+      "PackagePath": "staticwebassets\\adminAsset\\images\\instagram-03.svg"
+    },
+    {
+      "Id": "D:\\Du Lieu\\ASP.NET-API\\FullSourceNews\\NewsWebsite\\wwwroot\\adminAsset\\images\\japan.svg",
+      "PackagePath": "staticwebassets\\adminAsset\\images\\japan.svg"
+    },
+    {
+      "Id": "D:\\Du Lieu\\ASP.NET-API\\FullSourceNews\\NewsWebsite\\wwwroot\\adminAsset\\images\\javascript.svg",
+      "PackagePath": "staticwebassets\\adminAsset\\images\\javascript.svg"
+    },
+    {
+      "Id": "D:\\Du Lieu\\ASP.NET-API\\FullSourceNews\\NewsWebsite\\wwwroot\\adminAsset\\images\\jira.svg",
+      "PackagePath": "staticwebassets\\adminAsset\\images\\jira.svg"
+    },
+    {
+      "Id": "D:\\Du Lieu\\ASP.NET-API\\FullSourceNews\\NewsWebsite\\wwwroot\\adminAsset\\images\\keenicons-duotone.svg",
+      "PackagePath": "staticwebassets\\adminAsset\\images\\keenicons-duotone.svg"
+    },
+    {
+      "Id": "D:\\Du Lieu\\ASP.NET-API\\FullSourceNews\\NewsWebsite\\wwwroot\\adminAsset\\images\\keenicons-filled.svg",
+      "PackagePath": "staticwebassets\\adminAsset\\images\\keenicons-filled.svg"
+    },
+    {
+      "Id": "D:\\Du Lieu\\ASP.NET-API\\FullSourceNews\\NewsWebsite\\wwwroot\\adminAsset\\images\\keenicons-outline.svg",
+      "PackagePath": "staticwebassets\\adminAsset\\images\\keenicons-outline.svg"
+    },
+    {
+      "Id": "D:\\Du Lieu\\ASP.NET-API\\FullSourceNews\\NewsWebsite\\wwwroot\\adminAsset\\images\\keenicons-solid.svg",
+      "PackagePath": "staticwebassets\\adminAsset\\images\\keenicons-solid.svg"
+    },
+    {
+      "Id": "D:\\Du Lieu\\ASP.NET-API\\FullSourceNews\\NewsWebsite\\wwwroot\\adminAsset\\images\\linkedin-2.svg",
+      "PackagePath": "staticwebassets\\adminAsset\\images\\linkedin-2.svg"
+    },
+    {
+      "Id": "D:\\Du Lieu\\ASP.NET-API\\FullSourceNews\\NewsWebsite\\wwwroot\\adminAsset\\images\\mini-logo.svg",
+      "PackagePath": "staticwebassets\\adminAsset\\images\\mini-logo.svg"
+    },
+    {
+      "Id": "D:\\Du Lieu\\ASP.NET-API\\FullSourceNews\\NewsWebsite\\wwwroot\\adminAsset\\images\\og-image.png",
+      "PackagePath": "staticwebassets\\adminAsset\\images\\og-image.png"
+    },
+    {
+      "Id": "D:\\Du Lieu\\ASP.NET-API\\FullSourceNews\\NewsWebsite\\wwwroot\\adminAsset\\images\\pdf.svg",
+      "PackagePath": "staticwebassets\\adminAsset\\images\\pdf.svg"
+    },
+    {
+      "Id": "D:\\Du Lieu\\ASP.NET-API\\FullSourceNews\\NewsWebsite\\wwwroot\\adminAsset\\images\\php.svg",
+      "PackagePath": "staticwebassets\\adminAsset\\images\\php.svg"
+    },
+    {
+      "Id": "D:\\Du Lieu\\ASP.NET-API\\FullSourceNews\\NewsWebsite\\wwwroot\\adminAsset\\images\\spain.svg",
+      "PackagePath": "staticwebassets\\adminAsset\\images\\spain.svg"
+    },
+    {
+      "Id": "D:\\Du Lieu\\ASP.NET-API\\FullSourceNews\\NewsWebsite\\wwwroot\\adminAsset\\images\\svg.svg",
+      "PackagePath": "staticwebassets\\adminAsset\\images\\svg.svg"
+    },
+    {
+      "Id": "D:\\Du Lieu\\ASP.NET-API\\FullSourceNews\\NewsWebsite\\wwwroot\\adminAsset\\images\\tiktok-dark.svg",
+      "PackagePath": "staticwebassets\\adminAsset\\images\\tiktok-dark.svg"
+    },
+    {
+      "Id": "D:\\Du Lieu\\ASP.NET-API\\FullSourceNews\\NewsWebsite\\wwwroot\\adminAsset\\images\\tiktok.svg",
+      "PackagePath": "staticwebassets\\adminAsset\\images\\tiktok.svg"
+    },
+    {
+      "Id": "D:\\Du Lieu\\ASP.NET-API\\FullSourceNews\\NewsWebsite\\wwwroot\\adminAsset\\images\\united-states.svg",
+      "PackagePath": "staticwebassets\\adminAsset\\images\\united-states.svg"
+    },
+    {
+      "Id": "D:\\Du Lieu\\ASP.NET-API\\FullSourceNews\\NewsWebsite\\wwwroot\\adminAsset\\images\\word.svg",
+      "PackagePath": "staticwebassets\\adminAsset\\images\\word.svg"
+    },
+    {
+      "Id": "D:\\Du Lieu\\ASP.NET-API\\FullSourceNews\\NewsWebsite\\wwwroot\\adminAsset\\images\\xls.svg",
+      "PackagePath": "staticwebassets\\adminAsset\\images\\xls.svg"
+    },
+    {
+      "Id": "D:\\Du Lieu\\ASP.NET-API\\FullSourceNews\\NewsWebsite\\wwwroot\\adminAsset\\images\\youtube-2.svg",
+      "PackagePath": "staticwebassets\\adminAsset\\images\\youtube-2.svg"
+    },
+    {
+      "Id": "D:\\Du Lieu\\ASP.NET-API\\FullSourceNews\\NewsWebsite\\wwwroot\\adminAsset\\images\\zoom.svg",
+      "PackagePath": "staticwebassets\\adminAsset\\images\\zoom.svg"
+    },
+    {
+      "Id": "D:\\Du Lieu\\ASP.NET-API\\FullSourceNews\\NewsWebsite\\wwwroot\\adminAsset\\js\\apexcharts.min.js",
+      "PackagePath": "staticwebassets\\adminAsset\\js\\apexcharts.min.js"
+    },
+    {
+      "Id": "D:\\Du Lieu\\ASP.NET-API\\FullSourceNews\\NewsWebsite\\wwwroot\\adminAsset\\js\\core.bundle.js",
+      "PackagePath": "staticwebassets\\adminAsset\\js\\core.bundle.js"
+    },
+    {
+      "Id": "D:\\Du Lieu\\ASP.NET-API\\FullSourceNews\\NewsWebsite\\wwwroot\\adminAsset\\js\\demo1.js",
+      "PackagePath": "staticwebassets\\adminAsset\\js\\demo1.js"
+    },
+    {
+      "Id": "D:\\Du Lieu\\ASP.NET-API\\FullSourceNews\\NewsWebsite\\wwwroot\\adminAsset\\js\\general.js",
+      "PackagePath": "staticwebassets\\adminAsset\\js\\general.js"
+    },
+    {
       "Id": "D:\\Du Lieu\\ASP.NET-API\\FullSourceNews\\NewsWebsite\\wwwroot\\adminAssets\\css\\animate.css\\css\\animate.css",
       "PackagePath": "staticwebassets\\adminAssets\\css\\animate.css\\css\\animate.css"
     },

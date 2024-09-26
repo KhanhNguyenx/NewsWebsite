@@ -1113,7 +1113,6 @@ D:\Du Lieu\ASP.NET-API\FullSourceNews\NewsWebsite\obj\Debug\net8.0\NewsWebsite.M
 D:\Du Lieu\ASP.NET-API\FullSourceNews\NewsWebsite\obj\Debug\net8.0\NewsWebsite.MvcApplicationPartsAssemblyInfo.cache
 D:\Du Lieu\ASP.NET-API\FullSourceNews\NewsWebsite\obj\Debug\net8.0\NewsWebsite.RazorAssemblyInfo.cache
 D:\Du Lieu\ASP.NET-API\FullSourceNews\NewsWebsite\obj\Debug\net8.0\NewsWebsite.RazorAssemblyInfo.cs
-D:\Du Lieu\ASP.NET-API\FullSourceNews\NewsWebsite\obj\Debug\net8.0\NewsWebsite.sourcelink.json
 D:\Du Lieu\ASP.NET-API\FullSourceNews\NewsWebsite\obj\Debug\net8.0\staticwebassets.build.json
 D:\Du Lieu\ASP.NET-API\FullSourceNews\NewsWebsite\obj\Debug\net8.0\staticwebassets.development.json
 D:\Du Lieu\ASP.NET-API\FullSourceNews\NewsWebsite\obj\Debug\net8.0\staticwebassets\msbuild.NewsWebsite.Microsoft.AspNetCore.StaticWebAssets.props

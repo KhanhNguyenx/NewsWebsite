@@ -98,6 +98,10 @@ StyleCopReport.xml
 *.svclog
 *.scc
 
+# Ignore bin and obj directories
+bin/
+obj/
+
 # Chutzpah Test files
 _Chutzpah*
 

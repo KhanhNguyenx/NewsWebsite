@@ -1,17 +1,14 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "D:\\API_Work\\NewsWebsite\\NewsWebsite\\",
+  "WorkspaceRootPath": "D:\\Du Lieu\\ASP.NET-API\\NewsWebsite\\NewsWebsite\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{34AD28B0-8726-4901-9910-37DC0C7F5267}|NewsWebsite.csproj|d:\\api_work\\newswebsite\\newswebsite\\areas\\admin\\views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{34AD28B0-8726-4901-9910-37DC0C7F5267}|NewsWebsite.csproj|solutionrelative:areas\\admin\\views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{34AD28B0-8726-4901-9910-37DC0C7F5267}|NewsWebsite.csproj|d:\\du lieu\\asp.net-api\\newswebsite\\newswebsite\\views\\signup\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{34AD28B0-8726-4901-9910-37DC0C7F5267}|NewsWebsite.csproj|solutionrelative:views\\signup\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Dowload\\WebsiteTemplate\\New folder\\index.html||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{34AD28B0-8726-4901-9910-37DC0C7F5267}|NewsWebsite.csproj|d:\\api_work\\newswebsite\\newswebsite\\areas\\admin\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{34AD28B0-8726-4901-9910-37DC0C7F5267}|NewsWebsite.csproj|solutionrelative:areas\\admin\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{34AD28B0-8726-4901-9910-37DC0C7F5267}|NewsWebsite.csproj|d:\\du lieu\\asp.net-api\\newswebsite\\newswebsite\\views\\signin\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{34AD28B0-8726-4901-9910-37DC0C7F5267}|NewsWebsite.csproj|solutionrelative:views\\signin\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     }
   ],
   "DocumentGroupContainers": [
@@ -34,39 +31,28 @@
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "index.html",
-              "DocumentMoniker": "D:\\Dowload\\WebsiteTemplate\\New folder\\index.html",
-              "RelativeDocumentMoniker": "..\\..\\..\\Dowload\\WebsiteTemplate\\New folder\\index.html",
-              "ToolTip": "D:\\Dowload\\WebsiteTemplate\\New folder\\index.html",
-              "RelativeToolTip": "..\\..\\..\\Dowload\\WebsiteTemplate\\New folder\\index.html",
-              "ViewState": "AgIAAC4SAAAAAAAAAAAmwEQSAAAEAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001512|",
-              "WhenOpened": "2024-09-26T07:06:00.933Z"
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "D:\\Du Lieu\\ASP.NET-API\\NewsWebsite\\NewsWebsite\\Views\\Signin\\Index.cshtml",
+              "RelativeDocumentMoniker": "Views\\Signin\\Index.cshtml",
+              "ToolTip": "D:\\Du Lieu\\ASP.NET-API\\NewsWebsite\\NewsWebsite\\Views\\Signin\\Index.cshtml",
+              "RelativeToolTip": "Views\\Signin\\Index.cshtml",
+              "ViewState": "AgIAAAkAAAAAAAAAAAAAAB0AAAAjAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-09-28T14:50:01.394Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 0,
               "Title": "Index.cshtml",
-              "DocumentMoniker": "D:\\API_Work\\NewsWebsite\\NewsWebsite\\Areas\\Admin\\Views\\Home\\Index.cshtml",
-              "RelativeDocumentMoniker": "Areas\\Admin\\Views\\Home\\Index.cshtml",
-              "ToolTip": "D:\\API_Work\\NewsWebsite\\NewsWebsite\\Areas\\Admin\\Views\\Home\\Index.cshtml",
-              "RelativeToolTip": "Areas\\Admin\\Views\\Home\\Index.cshtml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABgAAAAWAAAAAAAAAA==",
+              "DocumentMoniker": "D:\\Du Lieu\\ASP.NET-API\\NewsWebsite\\NewsWebsite\\Views\\SignUp\\Index.cshtml",
+              "RelativeDocumentMoniker": "Views\\SignUp\\Index.cshtml",
+              "ToolTip": "D:\\Du Lieu\\ASP.NET-API\\NewsWebsite\\NewsWebsite\\Views\\SignUp\\Index.cshtml",
+              "RelativeToolTip": "Views\\SignUp\\Index.cshtml",
+              "ViewState": "AgIAAFQAAAAAAAAAAAAvwCQAAAAcAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-09-26T07:35:48.818Z",
+              "WhenOpened": "2024-09-28T14:43:30.942Z",
               "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "_Layout.cshtml",
-              "DocumentMoniker": "D:\\API_Work\\NewsWebsite\\NewsWebsite\\Areas\\Admin\\Views\\Shared\\_Layout.cshtml",
-              "RelativeDocumentMoniker": "Areas\\Admin\\Views\\Shared\\_Layout.cshtml",
-              "ToolTip": "D:\\API_Work\\NewsWebsite\\NewsWebsite\\Areas\\Admin\\Views\\Shared\\_Layout.cshtml",
-              "RelativeToolTip": "Areas\\Admin\\Views\\Shared\\_Layout.cshtml",
-              "ViewState": "AgIAAP0EAAAAAAAAAAD4vw0FAAAYAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-09-26T07:35:48.829Z"
             }
           ]
         }

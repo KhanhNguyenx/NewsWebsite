@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace NewsAPI.Models;
 
-public partial class Category
+public partial class CategoryDTO
 {
     public int Id { get; set; }
 
@@ -15,5 +15,4 @@ public partial class Category
 
     public bool Status { get; set; }
 
-    public virtual ICollection<Post> Posts { get; set; } = new List<Post>();
 }

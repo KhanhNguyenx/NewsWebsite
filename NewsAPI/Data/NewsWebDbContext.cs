@@ -32,30 +32,24 @@ public partial class NewsWebDbContext : DbContext
 
     public virtual DbSet<UserProfile> UserProfiles { get; set; }
 
-//    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-//#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
-//        => optionsBuilder.UseSqlServer("Data Source=localhost;Initial Catalog=NewsWebsite;Persist Security Info=True;User ID=sa;Password=123456;TrustServerCertificate=True;");
-
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<Category>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Categori__3213E83FC888B77B");
+            entity.HasKey(e => e.Id).HasName("PK_Category");
 
-            entity.Property(e => e.Id).HasColumnName("id");
+            entity.Property(e => e.Id)
+                .ValueGeneratedNever()
+                .HasColumnName("id");
             entity.Property(e => e.CategoryName).HasMaxLength(100);
             entity.Property(e => e.Description).HasMaxLength(250);
             entity.Property(e => e.ParentCategoryId).HasColumnName("ParentCategoryID");
             entity.Property(e => e.Status).HasDefaultValue(true);
-
-            entity.HasOne(d => d.ParentCategory).WithMany(p => p.InverseParentCategory)
-                .HasForeignKey(d => d.ParentCategoryId)
-                .HasConstraintName("fk_ParentCategory");
         });
 
         modelBuilder.Entity<Comment>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Comments__3213E83F069A5E2D");
+            entity.HasKey(e => e.Id).HasName("PK__Comments__3213E83FB771C144");
 
             entity.Property(e => e.Id).HasColumnName("id");
             entity.Property(e => e.CommentDate)
@@ -74,7 +68,7 @@ public partial class NewsWebDbContext : DbContext
 
         modelBuilder.Entity<Image>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Images__3213E83FF5156DBA");
+            entity.HasKey(e => e.Id).HasName("PK__Images__3213E83FD2630EA5");
 
             entity.Property(e => e.Id).HasColumnName("id");
             entity.Property(e => e.Caption).HasMaxLength(200);
@@ -92,7 +86,7 @@ public partial class NewsWebDbContext : DbContext
 
         modelBuilder.Entity<Log>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Logs__3213E83F7A3B4515");
+            entity.HasKey(e => e.Id).HasName("PK__Logs__3213E83F2B70C6F2");
 
             entity.Property(e => e.Id).HasColumnName("id");
             entity.Property(e => e.Action).HasMaxLength(100);
@@ -107,14 +101,13 @@ public partial class NewsWebDbContext : DbContext
 
         modelBuilder.Entity<Post>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Posts__3213E83F46359EC4");
+            entity.HasKey(e => e.Id).HasName("PK__Posts__3213E83F18446A96");
 
-            entity.HasIndex(e => e.Slug, "UQ__Posts__BC7B5FB680D47B0C").IsUnique();
+            entity.HasIndex(e => e.Slug, "UQ__Posts__BC7B5FB6ECF19B45").IsUnique();
 
             entity.Property(e => e.Id).HasColumnName("id");
             entity.Property(e => e.CategoryId).HasColumnName("CategoryID");
             entity.Property(e => e.Contents).HasColumnType("text");
-            entity.Property(e => e.Description).HasMaxLength(250);
             entity.Property(e => e.Slug).HasMaxLength(200);
             entity.Property(e => e.Status).HasDefaultValue(true);
             entity.Property(e => e.Title).HasMaxLength(200);
@@ -127,11 +120,11 @@ public partial class NewsWebDbContext : DbContext
 
         modelBuilder.Entity<User>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Users__3213E83F40A43054");
+            entity.HasKey(e => e.Id).HasName("PK__Users__3213E83FF72FA76F");
 
-            entity.HasIndex(e => e.Username, "UQ__Users__536C85E435D8F30E").IsUnique();
+            entity.HasIndex(e => e.Username, "UQ__Users__536C85E4F6058E2F").IsUnique();
 
-            entity.HasIndex(e => e.Email, "UQ__Users__A9D105349F1B3893").IsUnique();
+            entity.HasIndex(e => e.Email, "UQ__Users__A9D10534BCAEBBB9").IsUnique();
 
             entity.Property(e => e.Id).HasColumnName("id");
             entity.Property(e => e.Email).HasMaxLength(100);
@@ -145,7 +138,7 @@ public partial class NewsWebDbContext : DbContext
 
         modelBuilder.Entity<UserPost>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__UserPost__3213E83F5107AA33");
+            entity.HasKey(e => e.Id).HasName("PK__UserPost__3213E83FA6B08632");
 
             entity.ToTable("UserPost");
 
@@ -167,7 +160,7 @@ public partial class NewsWebDbContext : DbContext
 
         modelBuilder.Entity<UserProfile>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__UserProf__3213E83F001D68CC");
+            entity.HasKey(e => e.Id).HasName("PK__UserProf__3213E83F429C11CE");
 
             entity.ToTable("UserProfile");
 

@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using NewsAPI.Models;
 
 namespace NewsAPI.Data
 {
@@ -6,7 +7,7 @@ namespace NewsAPI.Data
     {
         public AutoMapperProfile()
         {
-            //CreateMap<Account, AccountDTO>().ReverseMap();
+            CreateMap<Category, CategoryDTO>().ReverseMap();
 
             //CreateMap<ContentType, M_SelectDropDown>()
             //    .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Id.ToString()))

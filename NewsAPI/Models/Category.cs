@@ -11,13 +11,9 @@ public partial class Category
 
     public string? Description { get; set; }
 
-    public int? ParentCategoryId { get; set; }
+    public int ParentCategoryId { get; set; }
 
     public bool Status { get; set; }
-
-    public virtual ICollection<Category> InverseParentCategory { get; set; } = new List<Category>();
-
-    public virtual Category? ParentCategory { get; set; }
 
     public virtual ICollection<Post> Posts { get; set; } = new List<Post>();
 }

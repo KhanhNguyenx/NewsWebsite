@@ -101,6 +101,7 @@ StyleCopReport.xml
 # Ignore bin and obj directories
 bin/
 obj/
+vs/
 
 # Chutzpah Test files
 _Chutzpah*

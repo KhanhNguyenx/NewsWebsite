@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using NewsAPI;
 using NewsAPI.Data;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -11,6 +12,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 var getConnectionStr = builder.Configuration.GetConnectionString("MyConnectString");
 builder.Services.AddDbContext<NewsWebDbContext>(option => option.UseSqlServer(getConnectionStr));
+DI_AddService.myServiceRegister(builder.Services);
 
 var app = builder.Build();
 

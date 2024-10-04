@@ -23,8 +23,6 @@ public partial class Post
 
     public int LikeNumber { get; set; }
 
-    public string Description { get; set; } = null!;
-
     public virtual Category Category { get; set; } = null!;
 
     public virtual ICollection<Comment> Comments { get; set; } = new List<Comment>();

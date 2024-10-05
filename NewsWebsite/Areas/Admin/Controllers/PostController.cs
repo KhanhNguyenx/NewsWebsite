@@ -2,10 +2,14 @@
 
 namespace NewsWebsite.Areas.Admin.Controllers
 {
+    [Area("Admin")]
     public class PostController : Controller
     {
-        [Area("Admin")]
         public IActionResult Index()
+        {
+            return View();
+        }
+        public IActionResult Upsert()
         {
             return View();
         }

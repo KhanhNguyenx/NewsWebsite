@@ -3,9 +3,9 @@ using System.Collections.Generic;
 
 namespace NewsAPI.Models;
 
-public partial class Log
+public partial class LogDTO
 {
-    public string Id { get; set; } = null!;
+    public int Id { get; set; }
 
     public int? UserId { get; set; }
 
@@ -16,6 +16,7 @@ public partial class Log
     public string? Details { get; set; }
 
     public int? EntityId { get; set; }
+    public int Status { get; set; }
 
     public string? EntityType { get; set; }
 }

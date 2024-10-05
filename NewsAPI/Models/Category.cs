@@ -13,7 +13,7 @@ public partial class Category
 
     public int ParentCategoryId { get; set; }
 
-    public bool Status { get; set; }
+    public int Status { get; set; }
 
     public virtual ICollection<Post> Posts { get; set; } = new List<Post>();
 }

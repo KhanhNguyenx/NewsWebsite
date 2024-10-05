@@ -13,6 +13,6 @@ public partial class CategoryDTO
 
     public int ParentCategoryId { get; set; }
 
-    public bool Status { get; set; }
+    public int Status { get; set; }
 
 }

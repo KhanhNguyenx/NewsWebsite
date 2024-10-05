@@ -6,12 +6,14 @@ namespace NewsAPI.Services
 {
     public interface IGenericServive<T> where T : class
     {
-        Task<T> GetASync(int id);
-        Task<IEnumerable<T>> GetListASync();
-        Task<IEnumerable<T>> GetListASync(Expression<Func<T, bool>> exception);
-        Task<T> CreateASync(T entity);
-        Task<T> UpdateASync(T entity);
-        Task<int> DeleteASync(T entity);
+        Task<T> GetAsync(int id);
+        Task<IEnumerable<T>> GetListAsync();
+        Task<IEnumerable<T>> GetListAsync(Expression<Func<T, bool>> exception);
+        Task<IEnumerable<T>> SearchAsync(Expression<Func<T, bool>> expression);
+        Task<T> CreateAsync(T entity);
+        Task<T> UpdateAsync(T entity);
+        Task<int> DeleteAsync(T entity);
+        int Delete(T entity);
         Task<int> MaxIdAsync(Expression<Func<T, int>> exception);
         Task<int> MinIdAsync(Expression<Func<T, int>> exception);
            // Lấy top các đối tượng theo thứ tự ưu tiên
@@ -31,39 +33,61 @@ namespace NewsAPI.Services
             _dbSet = _context.Set<T>();
         }
 
-        public async Task<T> CreateASync(T entity)
+        public async Task<T> CreateAsync(T entity)
         {
             await _dbSet.AddAsync(entity);
             await _context.SaveChangesAsync();
             return entity;
         }
 
-        public async Task<int> DeleteASync(T entity)
+        public async Task<int> DeleteAsync(T entity)
         {
             try
             {
-                _dbSet.Remove(entity);
-                _context.Entry(entity).State = EntityState.Modified;
-                await _context.SaveChangesAsync();
-                return 1;
+                // Giả sử thuộc tính "Status" là để kiểm tra trạng thái của đối tượng (1 = active, 0 = deleted)
+                var propertyInfo = entity.GetType().GetProperty("Status");
+                if (propertyInfo != null)
+                {
+                    propertyInfo.SetValue(entity, 0); // Đặt Status = 0 (tương đương với việc "xóa")
+                }
+
+                _context.Entry(entity).State = EntityState.Modified; // Cập nhật trạng thái
+                await _context.SaveChangesAsync(); // Lưu thay đổi
+                return 1; // Trả về thành công
+            }
+            catch
+            {
+                return 0; // Trả về thất bại
+            }
+        }
+        public int Delete(T entity)
+        {
+            try
+            {
+                _context.Entry(entity).State = EntityState.Deleted;
+                var result = _context.SaveChanges();
+                return result;
             }
             catch
             {
                 return 0;
             }
         }
-
-        public async Task<T> GetASync(int id)
+        public async Task<IEnumerable<T>> SearchAsync(Expression<Func<T, bool>> expression)
+        {
+            return await _dbSet.Where(expression).ToListAsync();
+        }
+        public async Task<T> GetAsync(int id)
         {
             return await _dbSet.FindAsync(id);
         }
 
-        public async Task<IEnumerable<T>> GetListASync()
+        public async Task<IEnumerable<T>> GetListAsync()
         {
             return await _dbSet.ToListAsync();
         }
 
-        public async Task<IEnumerable<T>> GetListASync(Expression<Func<T, bool>> exception)
+        public async Task<IEnumerable<T>> GetListAsync(Expression<Func<T, bool>> exception)
         {
             return await _dbSet.Where(exception).ToListAsync();
         }
@@ -78,7 +102,7 @@ namespace NewsAPI.Services
             return await _dbSet.MinAsync(exception);
         }
 
-        public async Task<T> UpdateASync(T entity)
+        public async Task<T> UpdateAsync(T entity)
         {
             _dbSet.Attach(entity);
             _context.Entry(entity).State = EntityState.Modified;

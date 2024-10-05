@@ -13,7 +13,7 @@ public partial class Image
 
     public string? Caption { get; set; }
 
-    public bool Status { get; set; }
+    public int Status { get; set; }
 
     public virtual Post Post { get; set; } = null!;
 }

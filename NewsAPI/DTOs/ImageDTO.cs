@@ -3,17 +3,15 @@ using System.Collections.Generic;
 
 namespace NewsAPI.Models;
 
-public partial class Comment
+public partial class ImageDTO
 {
     public int Id { get; set; }
 
     public int PostId { get; set; }
 
-    public int? UserId { get; set; }
+    public string ImageUrl { get; set; } = null!;
 
-    public string CommentText { get; set; } = null!;
-
-    public DateTime CommentDate { get; set; }
+    public string? Caption { get; set; }
 
     public int Status { get; set; }
 

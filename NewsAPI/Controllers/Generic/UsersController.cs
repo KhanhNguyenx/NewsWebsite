@@ -5,25 +5,25 @@ using NewsAPI.Models;
 using NewsAPI.Services;
 using System.Linq.Expressions;
 
-namespace NewsAPI.Controllers
+namespace NewsAPI.Controllers.Generic
 {
     [Route("[controller]/[action]"), ApiController]
-    public class CategoriesController : ControllerBase
+    public class UsersController : ControllerBase
     {
-        private readonly IGenericServive<Category> _genericServive;
+        private readonly IGenericServive<User> _genericServive;
         private readonly IMapper _mapper;
-        public CategoriesController(IGenericServive<Category> genericServive, IMapper mapper)
+        public UsersController(IGenericServive<User> genericServive, IMapper mapper)
         {
             _genericServive = genericServive;
             _mapper = mapper;
         }
         [HttpGet]
-        public async Task<ActionResult<CategoryDTO>> Get(int id) 
+        public async Task<ActionResult<UserDTO>> Get(int id)
         {
             var entity = await _genericServive.GetAsync(id);
             if (entity != null)
             {
-                var dto = new CategoryDTO();
+                var dto = new UserDTO();
                 _mapper.Map(entity, dto);
                 return Ok(dto);
             }
@@ -31,19 +31,19 @@ namespace NewsAPI.Controllers
                 return NoContent();
         }
         [HttpGet]
-        public async Task<ActionResult<Category>> GetFull(int id)
+        public async Task<ActionResult<User>> GetFull(int id)
         {
             return await _genericServive.GetAsync(id);
         }
         [HttpPost]
-        public async Task<ActionResult<CategoryDTO>> Create(CategoryDTO model)
+        public async Task<ActionResult<UserDTO>> Create(UserDTO model)
         {
-            Expression<Func<Category, int>> filter = (x => x.Id);
+            Expression<Func<User, int>> filter = (x => x.Id);
             // Get Max Id in table of Database --> set for model + 1
             model.Id = await _genericServive.MaxIdAsync(filter) + 1;
 
             //Mapp data model --> newModel
-            var newModel = new Category();
+            var newModel = new User();
             //newModel. = DateTime.Now;
             _mapper.Map(model, newModel);
 
@@ -53,12 +53,12 @@ namespace NewsAPI.Controllers
                 return NoContent();
         }
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<CategoryDTO>>> GetList()
+        public async Task<ActionResult<IEnumerable<UserDTO>>> GetList()
         {
             var entityList = await _genericServive.GetListAsync();
             if (entityList != null)
             {
-                var dtoList = new List<CategoryDTO>();
+                var dtoList = new List<UserDTO>();
                 _mapper.Map(entityList, dtoList);
                 return Ok(dtoList);
             }
@@ -67,14 +67,14 @@ namespace NewsAPI.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<CategoryDTO>>> Search(string txtSearch)
+        public async Task<ActionResult<IEnumerable<UserDTO>>> Search(string txtSearch)
         {
-            Expression<Func<Category, bool>> filter;
-            filter = a => a.Status != -1 && (a.CategoryName!.Contains(txtSearch));
+            Expression<Func<User, bool>> filter;
+            filter = a => a.Status != -1 && (a.Role!.Contains(txtSearch) || a.FullName!.Contains(txtSearch));
             var entityList = await _genericServive.SearchAsync(filter);
             if (entityList != null)
             {
-                var dtoList = new List<CategoryDTO>();
+                var dtoList = new List<UserDTO>();
                 _mapper.Map(entityList, dtoList);
                 return Ok(dtoList);
             }
@@ -112,14 +112,14 @@ namespace NewsAPI.Controllers
 
         //Another Way to Create...
         //[HttpPost]
-        //public async Task<ActionResult<CategoryDTO>> Create(CategoryDTO model)
+        //public async Task<ActionResult<UsersDTO>> Create(UsersDTO model)
         //{
-        //    Expression<Func<Category, int>> filter = (x => x.Id);
+        //    Expression<Func<Users, int>> filter = (x => x.Id);
         //    // Get Max Id in table of Database --> set for model + 1
         //    model.Id = await _genericServive.MaxIdAsync(filter) + 1;
 
         //    //Mapp data model --> newModel
-        //    var newModel = new Category();
+        //    var newModel = new Users();
         //    //newModel. = DateTime.Now;
         //    _mapper.Map(model, newModel);
 
@@ -130,7 +130,7 @@ namespace NewsAPI.Controllers
         //}
 
         [HttpPut]
-        public async Task<ActionResult<CategoryDTO>> Update(CategoryDTO model)
+        public async Task<ActionResult<UserDTO>> Update(UserDTO model)
         {
             var entity = await _genericServive.GetAsync(model.Id);
             if (entity != null)

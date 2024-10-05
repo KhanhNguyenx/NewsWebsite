@@ -3,19 +3,18 @@ using System.Collections.Generic;
 
 namespace NewsAPI.Models;
 
-public partial class UserPost
+public partial class UserProfileDTO
 {
     public int Id { get; set; }
 
     public int UserId { get; set; }
 
-    public int PostId { get; set; }
+    public string? Bio { get; set; }
 
+    public string? AvatarUrl { get; set; }
     public int Status { get; set; }
 
-    public DateTime PublishedDate { get; set; }
-
-    public virtual Post Post { get; set; } = null!;
+    public string? SocialLinks { get; set; }
 
     public virtual User User { get; set; } = null!;
 }

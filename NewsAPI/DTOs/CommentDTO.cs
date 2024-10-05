@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace NewsAPI.Models;
 
-public partial class Comment
+public partial class CommentDTO
 {
     public int Id { get; set; }
 

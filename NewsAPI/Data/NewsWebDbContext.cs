@@ -31,12 +31,13 @@ public partial class NewsWebDbContext : DbContext
     public virtual DbSet<UserPost> UserPosts { get; set; }
 
     public virtual DbSet<UserProfile> UserProfiles { get; set; }
-
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<Category>(entity =>
         {
             entity.HasKey(e => e.Id).HasName("PK_Category");
+
+            entity.ToTable(tb => tb.HasTrigger("trg_Categories_Log"));
 
             entity.Property(e => e.Id)
                 .ValueGeneratedNever()
@@ -44,20 +45,22 @@ public partial class NewsWebDbContext : DbContext
             entity.Property(e => e.CategoryName).HasMaxLength(100);
             entity.Property(e => e.Description).HasMaxLength(250);
             entity.Property(e => e.ParentCategoryId).HasColumnName("ParentCategoryID");
-            entity.Property(e => e.Status).HasDefaultValue(true);
+            entity.Property(e => e.Status).HasDefaultValue(1);
         });
 
         modelBuilder.Entity<Comment>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Comments__3213E83FB771C144");
+            entity.HasKey(e => e.Id).HasName("PK_Id_Comment");
 
-            entity.Property(e => e.Id).HasColumnName("id");
+            entity.Property(e => e.Id)
+                .ValueGeneratedNever()
+                .HasColumnName("id");
             entity.Property(e => e.CommentDate)
                 .HasDefaultValueSql("(getdate())")
                 .HasColumnType("datetime");
             entity.Property(e => e.CommentText).HasColumnType("text");
             entity.Property(e => e.PostId).HasColumnName("PostID");
-            entity.Property(e => e.Status).HasDefaultValue(true);
+            entity.Property(e => e.Status).HasDefaultValue(1);
             entity.Property(e => e.UserId).HasColumnName("UserID");
 
             entity.HasOne(d => d.Post).WithMany(p => p.Comments)
@@ -68,15 +71,17 @@ public partial class NewsWebDbContext : DbContext
 
         modelBuilder.Entity<Image>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Images__3213E83FD2630EA5");
+            entity.HasKey(e => e.Id).HasName("PK_Id_Image");
 
-            entity.Property(e => e.Id).HasColumnName("id");
+            entity.Property(e => e.Id)
+                .ValueGeneratedNever()
+                .HasColumnName("id");
             entity.Property(e => e.Caption).HasMaxLength(200);
             entity.Property(e => e.ImageUrl)
                 .HasMaxLength(500)
                 .HasColumnName("ImageURL");
             entity.Property(e => e.PostId).HasColumnName("PostID");
-            entity.Property(e => e.Status).HasDefaultValue(true);
+            entity.Property(e => e.Status).HasDefaultValue(1);
 
             entity.HasOne(d => d.Post).WithMany(p => p.Images)
                 .HasForeignKey(d => d.PostId)
@@ -86,9 +91,18 @@ public partial class NewsWebDbContext : DbContext
 
         modelBuilder.Entity<Log>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Logs__3213E83F2B70C6F2");
+            entity.HasKey(e => e.Id).HasName("PK_Id_Log");
 
-            entity.Property(e => e.Id).HasColumnName("id");
+            entity.ToTable(tb =>
+                {
+                    tb.HasTrigger("trg_Logs_PreventDelete");
+                    tb.HasTrigger("trg_Logs_PreventUpdate");
+                });
+
+            entity.Property(e => e.Id)
+                .HasMaxLength(100)
+                .IsUnicode(false)
+                .HasColumnName("id");
             entity.Property(e => e.Action).HasMaxLength(100);
             entity.Property(e => e.ActionDate)
                 .HasDefaultValueSql("(getdate())")
@@ -101,15 +115,17 @@ public partial class NewsWebDbContext : DbContext
 
         modelBuilder.Entity<Post>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Posts__3213E83F18446A96");
+            entity.HasKey(e => e.Id).HasName("PK_Id_Post");
 
-            entity.HasIndex(e => e.Slug, "UQ__Posts__BC7B5FB6ECF19B45").IsUnique();
+            entity.HasIndex(e => e.Slug, "UQ__Posts__BC7B5FB6BB1BA5EB").IsUnique();
 
-            entity.Property(e => e.Id).HasColumnName("id");
+            entity.Property(e => e.Id)
+                .ValueGeneratedNever()
+                .HasColumnName("id");
             entity.Property(e => e.CategoryId).HasColumnName("CategoryID");
             entity.Property(e => e.Contents).HasColumnType("text");
             entity.Property(e => e.Slug).HasMaxLength(200);
-            entity.Property(e => e.Status).HasDefaultValue(true);
+            entity.Property(e => e.Status).HasDefaultValue(1);
             entity.Property(e => e.Title).HasMaxLength(200);
 
             entity.HasOne(d => d.Category).WithMany(p => p.Posts)
@@ -120,29 +136,33 @@ public partial class NewsWebDbContext : DbContext
 
         modelBuilder.Entity<User>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Users__3213E83FF72FA76F");
+            entity.HasKey(e => e.Id).HasName("PK_Id_Users");
 
-            entity.HasIndex(e => e.Username, "UQ__Users__536C85E4F6058E2F").IsUnique();
+            entity.HasIndex(e => e.Username, "UQ__Users__536C85E42C842A00").IsUnique();
 
-            entity.HasIndex(e => e.Email, "UQ__Users__A9D10534BCAEBBB9").IsUnique();
+            entity.HasIndex(e => e.Email, "UQ__Users__A9D105344CB5CF38").IsUnique();
 
-            entity.Property(e => e.Id).HasColumnName("id");
+            entity.Property(e => e.Id)
+                .ValueGeneratedNever()
+                .HasColumnName("id");
             entity.Property(e => e.Email).HasMaxLength(100);
             entity.Property(e => e.FullName).HasMaxLength(100);
             entity.Property(e => e.Notes).HasMaxLength(250);
             entity.Property(e => e.PasswordHash).HasMaxLength(256);
             entity.Property(e => e.Role).HasMaxLength(50);
-            entity.Property(e => e.Status).HasDefaultValue(true);
+            entity.Property(e => e.Status).HasDefaultValue(1);
             entity.Property(e => e.Username).HasMaxLength(100);
         });
 
         modelBuilder.Entity<UserPost>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__UserPost__3213E83FA6B08632");
+            entity.HasKey(e => e.Id).HasName("PK_Id_UserPost");
 
             entity.ToTable("UserPost");
 
-            entity.Property(e => e.Id).HasColumnName("id");
+            entity.Property(e => e.Id)
+                .ValueGeneratedNever()
+                .HasColumnName("id");
             entity.Property(e => e.PostId).HasColumnName("PostID");
             entity.Property(e => e.PublishedDate).HasColumnType("datetime");
             entity.Property(e => e.UserId).HasColumnName("UserID");
@@ -160,16 +180,19 @@ public partial class NewsWebDbContext : DbContext
 
         modelBuilder.Entity<UserProfile>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__UserProf__3213E83F429C11CE");
+            entity.HasKey(e => e.Id).HasName("PK_Id_UserProfile");
 
             entity.ToTable("UserProfile");
 
-            entity.Property(e => e.Id).HasColumnName("id");
+            entity.Property(e => e.Id)
+                .ValueGeneratedNever()
+                .HasColumnName("id");
             entity.Property(e => e.AvatarUrl)
                 .HasMaxLength(500)
                 .HasColumnName("AvatarURL");
             entity.Property(e => e.Bio).HasMaxLength(500);
             entity.Property(e => e.SocialLinks).HasMaxLength(1000);
+            entity.Property(e => e.Status).HasDefaultValue(1);
             entity.Property(e => e.UserId).HasColumnName("UserID");
 
             entity.HasOne(d => d.User).WithMany(p => p.UserProfiles)

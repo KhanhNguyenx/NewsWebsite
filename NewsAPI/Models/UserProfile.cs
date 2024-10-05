@@ -15,5 +15,7 @@ public partial class UserProfile
 
     public string? SocialLinks { get; set; }
 
+    public int Status { get; set; }
+
     public virtual User User { get; set; } = null!;
 }

@@ -62,4 +62,8 @@
     <None Include="wwwroot\upload\.DS_Store" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\NewsAPI\NewsAPI.csproj" />
+  </ItemGroup>
+
 </Project>

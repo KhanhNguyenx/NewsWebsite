@@ -117,7 +117,7 @@
             <!-- Description -->
             <div class="form-group">
                 <label for="description">Description</label>
-                <textarea id="description" name="description" placeholder="Enter description"></textarea>
+                <textarea id="editor" name="description" placeholder="Enter description"></textarea>
             </div>
 
             <!-- Parent Category -->
@@ -153,14 +153,48 @@
 
 </body>
 <script>
-    tinymce.init({
-        selector: '#description',  // Target the textarea by its ID
-        plugins: 'advlist autolink lists link image charmap preview anchor pagebreak',
-        toolbar_mode: 'floating',
-        toolbar: 'undo redo | formatselect | bold italic backcolor | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | removeformat',
-        branding: false, // Removes the "Powered by TinyMCE" footer
-        height: 300, // Set the height of the editor
-    });
+        tinymce.init({
+            selector: '#editor',
+        plugins: 'image code link lists media table',
+        toolbar: 'undo redo | bold italic underline | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image media | formatselect fontsizeselect | blockquote',
+        height: 400,
+        automatic_uploads: true,
+        file_picker_types: 'image',
+        images_upload_handler: function (blobInfo, success, failure) {
+          var xhr, formData;
+
+        // Creating an XMLHttpRequest to handle the image upload
+        xhr = new XMLHttpRequest();
+        xhr.open('POST', '/upload_image'); // Make sure this route is correct
+
+        xhr.onload = function() {
+            if (xhr.status === 200) {
+              var json = JSON.parse(xhr.responseText);
+
+        if (json && typeof json.location === 'string') {
+            success(json.location);  // Sending the image URL back to TinyMCE
+              } else {
+            failure('Invalid JSON response: ' + xhr.responseText);
+              }
+            } else {
+            failure('Image upload failed with status ' + xhr.status);
+            }
+          };
+
+        // Handling any upload errors
+        xhr.onerror = function() {
+            failure('Image upload failed: ' + xhr.statusText);
+          };
+
+        // Create the form data for the image file
+        formData = new FormData();
+        formData.append('file', blobInfo.blob(), blobInfo.filename());
+
+        // Send the form data
+        xhr.send(formData);
+        }
+      });
 </script>
+
 
 </html>

@@ -1,197 +1,53 @@
-﻿<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Categories List</title>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
-    <style>
-        body {
-            font-family: 'Roboto', sans-serif;
-            background-color: #FFFFFF;
-            color: #333;
-            margin: 0;
-        }
+﻿@model IEnumerable<NewsAPI.Models.CategoryDTO>
 
-        h1 {
-            text-align: center;
-            margin-bottom: 30px;
-            color: #333;
-        }
+@{
+    ViewData["Title"] = "Index";
+}
 
-        .table-container {
-            width: 100%;
-            overflow-x: auto;
-        }
+<h1>Index</h1>
 
-        .search-bar {
-            width: 300px;
-            padding: 10px;
-            margin-bottom: 20px;
-            border-radius: 5px;
-            border: 1px solid #CCC;
-            background-color: #F9F9F9;
-            color: #333;
-        }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            background-color: #FFF;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
-
-        th, td {
-            padding: 12px 15px;
-            text-align: left;
-            border-bottom: 1px solid #E0E0E0;
-        }
-
-        th {
-            background-color: #F4F4F4;
-            color: #333;
-            position: relative;
-        }
-
-            th:first-child, td:first-child {
-                text-align: center;
-            }
-
-        tr:hover {
-            background-color: #F9F9F9;
-        }
-
-        img {
-            width: 50px;
-            height: 50px;
-            object-fit: cover;
-            border-radius: 5px;
-        }
-
-        .actions button {
-            padding: 8px 12px;
-            border-radius: 20px;
-            border: none;
-            cursor: pointer;
-            font-size: 14px;
-            width: 80px;
-            text-align: center;
-            margin-right: 5px;
-        }
-
-        .btn-enable {
-            background-color: #28a745;
-            color: white;
-            border-radius: 20px;
-        }
-
-        .btn-disable {
-            background-color: #dc3545;
-            color: white;
-            border-radius: 20px;
-        }
-
-        .btn-edit {
-            background-color: #007bff;
-            color: white;
-        }
-
-        .btn-delete {
-            background-color: #dc3545;
-            color: white;
-        }
-
-        .btn-detail {
-            background-color: #6c757d;
-            color: white;
-        }
-
-        .pagination {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-top: 20px;
-        }
-
-            .pagination button {
-                padding: 10px;
-                background-color: #F4F4F4;
-                color: #333;
-                border: 1px solid #CCC;
-                border-radius: 5px;
-                cursor: pointer;
-            }
-
-                .pagination button:disabled {
-                    opacity: 0.5;
-                    cursor: not-allowed;
-                }
-
-            .pagination select {
-                padding: 10px;
-                background-color: #F4F4F4;
-                color: #333;
-                border: 1px solid #CCC;
-                border-radius: 5px;
-            }
-
-        .add-category-btn {
-            background-color: #4CAF50;
-            color: white;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            margin-bottom: 20px;
-            transition: background-color 0.3s;
-            float: right;
-            margin-bottom: 10px;
-        }
-    </style>
-</head>
-<body>
-
-    <h1>Categories List</h1>
-    <input class="search-bar" type="text" placeholder="Search...">
-    <button class="add-category-btn" onclick="window.location.href='/admin/category/upsert'">Add Category</button>
-    <div class="table-container">
-        <table>
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Category Name</th>
-                    <th>Description</th>
-                    <th>Parent Category</th>
-                    <th>Status</th>
-                    <th>Actions</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>1</td>
-                    <td>Category Name	</td>
-                    <td>Description</td>
-                    <td>Parent Category</td>
-                    <td><button class="btn-enable">Enable</button></td>
-                    <td class="actions">
-                        <button class="btn-edit">Edit</button>
-                        <button class="btn-delete">Delete</button>
-                        <button class="btn-detail">Detail</button>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-
-    <div class="pagination">
-        <div class="pages">
-            <button>&laquo;</button>
-            <button>1</button>
-            <button>2</button>
-            <button>3</button>
-            <button>&raquo;</button>
-        </div>
-    </div>
-
-</body>
-</html>
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.CategoryName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ParentCategoryId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Status)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.CategoryName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ParentCategoryId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Status)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

@@ -1,9 +1,8 @@
 ﻿<!DOCTYPE html>
 <html lang="en" data-layout="vertical" data-topbar="light" data-sidebar="dark" data-sidebar-size="lg" data-sidebar-image="none" data-preloader="disable" data-theme="default" data-theme-colors="default">
 <head>
-
     <meta charset="utf-8">
-    <title>Create Product | Velzon - Admin &amp; Dashboard Template</title>
+    <title>Upsert Post </title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta content="Premium Multipurpose Admin &amp; Dashboard Template" name="description">
     <meta content="Themesbrand" name="author">
@@ -21,9 +20,12 @@
     <link href="~/Upsert/css/app.min.css" rel="stylesheet" type="text/css">
     <!-- custom Css-->
     <link href="~/Upsert/css/custom.min.css" rel="stylesheet" type="text/css">
-
+    @{
+        Layout = null;
+    }
 </head>
 <body>
+
     <div class="page-content">
         <div class="container-fluid">
             <form id="createproduct-form" autocomplete="off" class="needs-validation" novalidate="">
@@ -41,26 +43,19 @@
                                 <div>
                                     <label>Description</label>
                                     <div id="ckeditor-classic">
-                                        <p>Tommy Hilfiger men striped pink sweatshirt. Crafted with cotton. Material composition is 100% organic cotton. This is one of the world’s leading designer lifestyle brands and is internationally recognized for celebrating the essence of classic American cool style, featuring preppy with a twist designs.</p>
-                                        <ul>
-                                            <li>Full Sleeve</li>
-                                            <li>Cotton</li>
-                                            <li>All Sizes available</li>
-                                            <li>4 Different Color</li>
-                                        </ul>
+                                        
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <!-- end card -->
-
                         <div class="card">
                             <div class="card-header">
-                                <h5 class="card-title mb-0">Post Gallery</h5>
+                                <h5 class="card-title mb-0">Product Gallery</h5>
                             </div>
                             <div class="card-body">
                                 <div class="mb-4">
-                                    <h5 class="fs-14 mb-1">Post Image</h5>
+                                    <h5 class="fs-14 mb-1">Product Image</h5>
                                     <p class="text-muted">Add Product main Image.</p>
                                     <div class="text-center">
                                         <div class="position-relative d-inline-block">
@@ -81,6 +76,48 @@
                                             </div>
                                         </div>
                                     </div>
+                                </div>
+                                <div>
+                                    <h5 class="fs-14 mb-1">Product Gallery</h5>
+                                    <p class="text-muted">Add Product Gallery Images.</p>
+                                    <div class="dropzone">
+                                        <div class="fallback">
+                                            <input name="file" type="file" multiple="multiple">
+                                        </div>
+                                        <div class="dz-message needsclick">
+                                            <div class="mb-3">
+                                                <i class="display-4 text-muted ri-upload-cloud-2-fill"></i>
+                                            </div>
+
+                                            <h5>Drop files here or click to upload.</h5>
+                                        </div>
+                                    </div>
+
+                                    <ul class="list-unstyled mb-0" id="dropzone-preview">
+                                        <li class="mt-2" id="dropzone-preview-list">
+                                            <!-- This is used as the file preview template -->
+                                            <div class="border rounded">
+                                                <div class="d-flex p-2">
+                                                    <div class="flex-shrink-0 me-3">
+                                                        <div class="avatar-sm bg-light rounded">
+                                                            <img data-dz-thumbnail="" class="img-fluid rounded d-block" src="#" alt="Product-Image">
+                                                        </div>
+                                                    </div>
+                                                    <div class="flex-grow-1">
+                                                        <div class="pt-1">
+                                                            <h5 class="fs-14 mb-1" data-dz-name="">�&nbsp;</h5>
+                                                            <p class="fs-13 text-muted mb-0" data-dz-size=""></p>
+                                                            <strong class="error text-danger" data-dz-errormessage=""></strong>
+                                                        </div>
+                                                    </div>
+                                                    <div class="flex-shrink-0 ms-3">
+                                                        <button data-dz-remove="" class="btn btn-sm btn-danger">Delete</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                    <!-- end dropzon-preview -->
                                 </div>
                             </div>
                         </div>

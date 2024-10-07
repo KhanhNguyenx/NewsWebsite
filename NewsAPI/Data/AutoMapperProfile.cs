@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using NewsAPI.Models;
+using NewsAPI.DTOs;
 
 namespace NewsAPI.Data
 {

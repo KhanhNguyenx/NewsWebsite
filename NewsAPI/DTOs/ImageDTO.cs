@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace NewsAPI.Models;
+namespace NewsAPI.DTOs;
 
 public partial class ImageDTO
 {
@@ -15,5 +15,4 @@ public partial class ImageDTO
 
     public int Status { get; set; }
 
-    public virtual Post Post { get; set; } = null!;
 }

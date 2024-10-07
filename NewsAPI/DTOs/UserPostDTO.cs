@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace NewsAPI.Models;
+namespace NewsAPI.DTOs;
 
 public partial class UserPostDTO
 {
@@ -14,8 +14,4 @@ public partial class UserPostDTO
     public int Status { get; set; }
 
     public DateTime PublishedDate { get; set; }
-
-    public virtual Post Post { get; set; } = null!;
-
-    public virtual User User { get; set; } = null!;
 }

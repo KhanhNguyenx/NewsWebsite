@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using NewsAPI.Models;
+using NewsAPI.DTOs;
 using NewsAPI.Services;
 using System.Linq.Expressions;
 

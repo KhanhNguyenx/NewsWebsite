@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace NewsAPI.Models;
+namespace NewsAPI.DTOs;
 
 public partial class CategoryDTO
 {

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace NewsAPI.Models;
+namespace NewsAPI.DTOs;
 
 public partial class UserDTO
 {
@@ -23,7 +23,4 @@ public partial class UserDTO
 
     public string? Notes { get; set; }
 
-    public virtual ICollection<UserPost> UserPosts { get; set; } = new List<UserPost>();
-
-    public virtual ICollection<UserProfile> UserProfiles { get; set; } = new List<UserProfile>();
 }

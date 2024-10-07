@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace NewsAPI.Models;
+namespace NewsAPI.DTOs;
 
 public partial class PostDTO
 {
@@ -22,12 +22,4 @@ public partial class PostDTO
     public bool IsHot { get; set; }
 
     public int LikeNumber { get; set; }
-
-    public virtual Category Category { get; set; } = null!;
-
-    public virtual ICollection<Comment> Comments { get; set; } = new List<Comment>();
-
-    public virtual ICollection<Image> Images { get; set; } = new List<Image>();
-
-    public virtual ICollection<UserPost> UserPosts { get; set; } = new List<UserPost>();
 }

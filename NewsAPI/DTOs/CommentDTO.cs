@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace NewsAPI.Models;
+namespace NewsAPI.DTOs;
 
 public partial class CommentDTO
 {
@@ -16,6 +16,4 @@ public partial class CommentDTO
     public DateTime CommentDate { get; set; }
 
     public int Status { get; set; }
-
-    public virtual Post Post { get; set; } = null!;
 }

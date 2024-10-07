@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-
-namespace NewsAPI.Models;
+namespace NewsAPI.DTOs;
 
 public partial class UserProfileDTO
 {
@@ -16,5 +15,4 @@ public partial class UserProfileDTO
 
     public string? SocialLinks { get; set; }
 
-    public virtual User User { get; set; } = null!;
 }

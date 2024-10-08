@@ -11,7 +11,6 @@
     <link rel="stylesheet" type="text/css" href="~/AdminCategory/style.css">
 </head>
 <body>
-    @model IEnumerable<NewsAPI.DTOs.CategoryDTO>
     <div class="container">
         <div class="row align-items-center">
             <div class="col-md-6">
@@ -45,6 +44,7 @@
                                 </tr>
                             </thead>
                             <tbody>
+                                @model IEnumerable<NewsAPI.DTOs.CategoryDTO>
                                 @foreach (var item in Model)
                                 {
                                     <tr>

@@ -22,7 +22,7 @@ namespace NewsWebsite.Areas.Admin.Controllers
         public IActionResult Index()
         {
             List<CategoryDTO> categoryList = new List<CategoryDTO>();
-            HttpResponseMessage response = _client.GetAsync(_client.BaseAddress + "/Categories/GetList").Result;
+            HttpResponseMessage response = _client.GetAsync(_client.BaseAddress + "Categories/GetList").Result;
             if (response.IsSuccessStatusCode)
             {
                 string data = response.Content.ReadAsStringAsync().Result;

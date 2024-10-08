@@ -23,8 +23,8 @@ namespace NewsWebsite.Areas.Admin.Controllers
         {
             List<CategoryDTO> categoryList = new List<CategoryDTO>();
             HttpResponseMessage response = _client.GetAsync(_client.BaseAddress + "/Categories/GetList").Result;
-            if (response.IsSuccessStatusCode) 
-            { 
+            if (response.IsSuccessStatusCode)
+            {
                 string data = response.Content.ReadAsStringAsync().Result;
                 categoryList = JsonConvert.DeserializeObject<List<CategoryDTO>>(data);
             }

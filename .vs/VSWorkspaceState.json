@@ -1,0 +1,14 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\NewsWebsite",
+    "\\NewsWebsite\\Areas",
+    "\\NewsWebsite\\Areas\\Admin",
+    "\\NewsWebsite\\Areas\\Admin\\Views",
+    "\\NewsWebsite\\Areas\\Admin\\Views\\Category",
+    "\\NewsWebsite\\Views",
+    "\\NewsWebsite\\Views\\Shared"
+  ],
+  "SelectedNode": "\\NewsWebsite\\Views\\Shared\\_Layout.cshtml",
+  "PreviewInSolutionExplorer": false
+}

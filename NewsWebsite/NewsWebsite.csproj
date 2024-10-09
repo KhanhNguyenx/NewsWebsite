@@ -37,6 +37,7 @@
 
   <ItemGroup>
     <None Include="wwwroot\.DS_Store" />
+    <None Include="wwwroot\ckeditor\.circleci\config.yml" />
     <None Include="wwwroot\css\.DS_Store" />
     <None Include="wwwroot\css\bootstrap-grid.css.map" />
     <None Include="wwwroot\css\bootstrap-grid.min.css.map" />

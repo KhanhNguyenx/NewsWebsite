@@ -1,11 +1,9 @@
-﻿<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Add Category</title>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
-    <script src="https://cdn.tiny.cloud/1/0ji5g5v5wu6qxi10daivqdjto7xekdg9mxmvqpl9wnl22b3d/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
+﻿
+@{
+    ViewData["Title"] = "Upsert";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
     <style>
         body {
             font-family: 'Roboto', sans-serif;
@@ -14,7 +12,7 @@
         }
 
         .container {
-            max-width: 600px;
+            max-width: 1000px;
             margin: 0 auto;
             background-color: #fff;
             padding: 30px;
@@ -53,7 +51,8 @@
 
         textarea {
             resize: vertical;
-            height: 100px;
+            height: 200px;
+            width: 1000px;
         }
 
         .form-actions {
@@ -68,6 +67,7 @@
             cursor: pointer;
             font-size: 16px;
             width: 150px;
+            align-items: center;
         }
 
         .btn-submit {
@@ -87,114 +87,76 @@
             margin-top: 10px;
         }
 
-        .status-group label {
-            margin-right: 20px;
-        }
+            .status-group label {
+                margin-right: 20px;
+            }
 
-        .status-group input[type="radio"] {
-            margin-right: 10px;
-            cursor: pointer;
-        }
+            .status-group input[type="radio"] {
+                margin-right: 10px;
+                cursor: pointer;
+            }
 
         .form-group select {
             width: 100%;
             height: 40px;
         }
     </style>
-</head>
-<body>
 
-    <div class="container">
-        <h1>Add Category</h1>
+<div class="container">
+    <h1>Add Category</h1>
 
-        <form>
-            <!-- Category Name -->
-            <div class="form-group">
-                <label for="categoryName">Category Name</label>
-                <input type="text" id="categoryName" name="categoryName" placeholder="Enter category name">
+    <form>
+        <!-- Category Name -->
+        <div class="form-group">
+            <label for="categoryName">Category Name</label>
+            <input type="text" id="categoryName" name="categoryName" placeholder="Enter category name">
+        </div>
+
+        <!-- Description -->
+        <label for="description">Description</label>
+        <textarea class="form-group" id="description" name="description" placeholder="Enter description"></textarea>
+
+        <!-- Parent Category -->
+        <div class="form-group">
+            <label for="parentCategory">Parent Category</label>
+            <select id="parentCategory" name="parentCategory">
+                <option value="None">None</option>
+                <option value="Electronics">Electronics</option>
+                <option value="Furniture">Furniture</option>
+                <option value="Clothing">Clothing</option>
+            </select>
+        </div>
+
+        <!-- Status -->
+        <div class="form-group">
+            <label>Status</label>
+            <div class="status-group">
+                <input type="radio" id="active" name="status" value="Active" checked>
+                <label for="active">Active</label>
+
+                <input type="radio" id="inactive" name="status" value="Inactive">
+                <label for="inactive">Inactive</label>
             </div>
+        </div>
 
-            <!-- Description -->
-            <div class="form-group">
-                <label for="description">Description</label>
-                <textarea id="editor" name="description" placeholder="Enter description"></textarea>
-            </div>
+        <!-- Submit and Cancel buttons -->
+        <div class="form-actions">
+            <button type="submit" class="btn btn-submit">Submit</button>
+            <button type="button" class="btn btn-cancel" onclick="window.location.href='/admin/category'">Cancel</button>
+        </div>
+    </form>
+</div>
 
-            <!-- Parent Category -->
-            <div class="form-group">
-                <label for="parentCategory">Parent Category</label>
-                <select id="parentCategory" name="parentCategory">
-                    <option value="None">None</option>
-                    <option value="Electronics">Electronics</option>
-                    <option value="Furniture">Furniture</option>
-                    <option value="Clothing">Clothing</option>
-                </select>
-            </div>
+@*     <script src="//cdn.ckeditor.com/4.22.1/full/ckeditor.js"></script> *@
+@section Scripts {
+    <script type="text/javascript" src="~/ckeditor/editor.js"></script>
+    <script type="text/javascript" src="~/ckeditor/ckeditor.js"></script>
 
-            <!-- Status -->
-            <div class="form-group">
-                <label>Status</label>
-                <div class="status-group">
-                    <input type="radio" id="active" name="status" value="Active" checked>
-                    <label for="active">Active</label>
-
-                    <input type="radio" id="inactive" name="status" value="Inactive">
-                    <label for="inactive">Inactive</label>
-                </div>
-            </div>
-
-            <!-- Submit and Cancel buttons -->
-            <div class="form-actions">
-                <button type="submit" class="btn btn-submit">Submit</button>
-                <button type="button" class="btn btn-cancel" onclick="window.location.href='/admin/category'">Cancel</button>
-            </div>
-        </form>
-    </div>
-
-</body>
-<script>
-        tinymce.init({
-            selector: '#editor',
-        plugins: 'image code link lists media table',
-        toolbar: 'undo redo | bold italic underline | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image media | formatselect fontsizeselect | blockquote',
-        height: 400,
-        automatic_uploads: true,
-        file_picker_types: 'image',
-        images_upload_handler: function (blobInfo, success, failure) {
-          var xhr, formData;
-
-        // Creating an XMLHttpRequest to handle the image upload
-        xhr = new XMLHttpRequest();
-        xhr.open('POST', '/upload_image'); // Make sure this route is correct
-
-        xhr.onload = function() {
-            if (xhr.status === 200) {
-              var json = JSON.parse(xhr.responseText);
-
-        if (json && typeof json.location === 'string') {
-            success(json.location);  // Sending the image URL back to TinyMCE
-              } else {
-            failure('Invalid JSON response: ' + xhr.responseText);
-              }
-            } else {
-            failure('Image upload failed with status ' + xhr.status);
-            }
-          };
-
-        // Handling any upload errors
-        xhr.onerror = function() {
-            failure('Image upload failed: ' + xhr.statusText);
-          };
-
-        // Create the form data for the image file
-        formData = new FormData();
-        formData.append('file', blobInfo.blob(), blobInfo.filename());
-
-        // Send the form data
-        xhr.send(formData);
+    <script>
+        window.onload = function () {
+            InitCKEditorFull('description');
         }
-      });
-</script>
+    </script>
+}
 
 
-</html>

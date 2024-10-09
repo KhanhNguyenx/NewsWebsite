@@ -133,14 +133,10 @@ License: https://keenthemes.com/metronic/tailwind/docs/getting-started/license
                         Password
                     </label>
                     <div class="input" data-toggle-password="true">
-                        <input name="user_password" placeholder="Enter Password" type="password" value="">
-                        <button class="btn btn-icon" data-toggle-password-trigger="true" type="button">
-                            <i class="ki-filled ki-eye text-gray-500 toggle-password-active:hidden">
-                            </i>
-                            <i class="ki-filled ki-eye-slash text-gray-500 hidden toggle-password-active:block">
-                            </i>
+                        <input id="password-input-1" name="user_password_1" placeholder="Enter Password 1" type="password" value="">
+                        <button class="btn btn-icon" type="button" onclick="togglePassword('password-input-1', 'eye-icon-1')">
+                            <i id="eye-icon-1" class="ki-filled ki-eye text-gray-500"></i>
                         </button>
-
                     </div>
                 </div>
                 <div class="flex flex-col gap-1">
@@ -148,12 +144,9 @@ License: https://keenthemes.com/metronic/tailwind/docs/getting-started/license
                         Confirm Password
                     </label>
                     <div class="input" data-toggle-password="true">
-                        <input name="user_password" placeholder="Re-enter Password" type="password" value="">
-                        <button class="btn btn-icon" data-toggle-password-trigger="true" type="button">
-                            <i class="ki-filled ki-eye text-gray-500 toggle-password-active:hidden">
-                            </i>
-                            <i class="ki-filled ki-eye-slash text-gray-500 hidden toggle-password-active:block">
-                            </i>
+                        <input id="password-input-2" name="user_password_2" placeholder="Enter Password 2" type="password" value="">
+                        <button class="btn btn-icon" type="button" onclick="togglePassword('password-input-2', 'eye-icon-2')">
+                            <i id="eye-icon-2" class="ki-filled ki-eye text-gray-500"></i>
                         </button>
                     </div>
                 </div>
@@ -177,6 +170,25 @@ License: https://keenthemes.com/metronic/tailwind/docs/getting-started/license
     <script src="~/SignUp/images/js/core.bundle.js">
     </script>
     <script src="~/SignUp/images/js/apexcharts.min.js">
+    </script>
+    <script>
+        function togglePassword(inputId, iconId) {
+            var passwordInput = document.getElementById(inputId);
+            var eyeIcon = document.getElementById(iconId);
+
+            if (passwordInput.type === "password") {
+                // Hiển thị mật khẩu
+                passwordInput.type = "text";
+                eyeIcon.classList.remove("ki-eye");
+                eyeIcon.classList.add("ki-eye-slash");
+            } else {
+                // Ẩn mật khẩu
+                passwordInput.type = "password";
+                eyeIcon.classList.remove("ki-eye-slash");
+                eyeIcon.classList.add("ki-eye");
+            }
+        }
+
     </script>
     <!-- End of Scripts -->
 

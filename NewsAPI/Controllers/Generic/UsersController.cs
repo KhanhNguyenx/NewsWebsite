@@ -5,6 +5,12 @@ using NewsAPI.Models;
 using NewsAPI.DTOs;
 using NewsAPI.Services;
 using System.Linq.Expressions;
+using Microsoft.IdentityModel.Tokens;
+using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
+using System.Text;
+using NewsAPI.Data;
+using Microsoft.AspNetCore.Authorization;
 
 namespace NewsAPI.Controllers.Generic
 {
@@ -13,11 +19,66 @@ namespace NewsAPI.Controllers.Generic
     {
         private readonly IGenericServive<User> _genericServive;
         private readonly IMapper _mapper;
-        public UsersController(IGenericServive<User> genericServive, IMapper mapper)
+        private readonly IConfiguration _configuration;
+        private readonly NewsWebDbContext _dbcontext;
+
+        public UsersController(IGenericServive<User> genericServive, IMapper mapper, IConfiguration configuration, NewsWebDbContext newsWebDbContext)
         {
             _genericServive = genericServive;
             _mapper = mapper;
+            _configuration = configuration;
+            _dbcontext = newsWebDbContext;
         }
+        private string GenerateAccessToken(User user)
+        {
+            var guid = Guid.NewGuid().ToString();
+            var auThoClaims = new List<Claim>
+            {
+                new Claim("Id", user.Id.ToString()),
+                new Claim("Username", user.Username.ToString()),
+                new Claim(ClaimTypes.Name, user.FullName),
+                new Claim(ClaimTypes.Role,"Role"),
+                new Claim(JwtRegisteredClaimNames.Jti, guid),
+                new Claim(JwtRegisteredClaimNames.Email, user.Email)
+            };
+            var jwtSetting = _configuration.GetSection("JwtSettings");
+            var secretKeyBytes = Encoding.UTF8.GetBytes(jwtSetting["SecretKey"]);
+            var securityKey = new SymmetricSecurityKey(secretKeyBytes);
+            var credetials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha512Signature);
+            var token = new JwtSecurityToken(
+                issuer: jwtSetting["Issuer"],
+                audience: jwtSetting["Audience"],
+                claims: auThoClaims,
+                expires: DateTime.UtcNow.AddMinutes(60),
+                signingCredentials: credetials
+                );
+            var accessToken = new JwtSecurityTokenHandler().WriteToken(token);
+            return accessToken;
+        }
+
+        [HttpPost]
+        public IActionResult Login([FromBody] LoginModel loginModel)
+        {
+            var user = _dbcontext.Users.SingleOrDefault(p=> p.Username == loginModel.Username && loginModel.PasswordHash == p.PasswordHash);
+            if (user == null) 
+            {
+                return Ok(new ApiResponse
+                {
+                    Success = false,
+                    Message = "Invalid user/password"
+                });
+            }
+
+            return Ok(new ApiResponse
+            {
+                Success = true,
+                
+                Message = GenerateAccessToken(user),
+                Data = user,
+            });
+        }
+
+
         [HttpGet]
         public async Task<ActionResult<UserDTO>> Get(int id)
         {
@@ -37,6 +98,7 @@ namespace NewsAPI.Controllers.Generic
             return await _genericServive.GetAsync(id);
         }
         [HttpPost]
+        [Authorize]
         public async Task<ActionResult<UserDTO>> Create(UserDTO model)
         {
             Expression<Func<User, int>> filter = (x => x.Id);

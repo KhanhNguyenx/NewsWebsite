@@ -11,13 +11,16 @@ namespace NewsAPI.Controllers
     [Route("[controller]/[action]"), ApiController]
     public class CategoriesController : ControllerBase
     {
+        
         private readonly IGenericServive<Category> _genericServive;
         private readonly IMapper _mapper;
+        
         public CategoriesController(IGenericServive<Category> genericServive, IMapper mapper)
         {
             _genericServive = genericServive;
             _mapper = mapper;
         }
+
         [HttpGet]
         public async Task<ActionResult<CategoryDTO>> Get(int id) 
         {
@@ -31,6 +34,7 @@ namespace NewsAPI.Controllers
             else
                 return NoContent();
         }
+
         [HttpGet]
         public async Task<ActionResult<Category>> GetFull(int id)
         {

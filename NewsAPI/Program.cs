@@ -19,7 +19,7 @@ DI_AddService.myServiceRegister(builder.Services);
 
 
 //JwtSetting
-var secretkey = builder.Configuration["JwtSetting:SecretKey"];
+var secretkey = builder.Configuration["JwtSettings:SecretKey"];
 var secretKeyBytes = Encoding.UTF8.GetBytes(secretkey);
 builder.Services.AddAuthentication(options =>
 {
@@ -30,10 +30,10 @@ builder.Services.AddAuthentication(options =>
 {    option.TokenValidationParameters = new TokenValidationParameters
     {
         ValidateIssuer = true,
-        ValidIssuer = builder.Configuration["JwtSetting:Issuer"],
+        ValidIssuer = builder.Configuration["JwtSettings:Issuer"],
         ValidateLifetime = true,
         ValidateAudience = true,
-        ValidAudience = builder.Configuration["JwtSetting:Audience"],
+        ValidAudience = builder.Configuration["JwtSettings:Audience"],
         ValidateIssuerSigningKey = true,
         IssuerSigningKey = new SymmetricSecurityKey(secretKeyBytes),
         ClockSkew = TimeSpan.Zero,

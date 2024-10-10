@@ -31,6 +31,7 @@ public partial class NewsWebDbContext : DbContext
     public virtual DbSet<UserPost> UserPosts { get; set; }
 
     public virtual DbSet<UserProfile> UserProfiles { get; set; }
+
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<Category>(entity =>
@@ -137,6 +138,8 @@ public partial class NewsWebDbContext : DbContext
         modelBuilder.Entity<User>(entity =>
         {
             entity.HasKey(e => e.Id).HasName("PK_Id_Users");
+
+            entity.ToTable(tb => tb.HasTrigger("trg_Users_Log"));
 
             entity.HasIndex(e => e.Username, "UQ__Users__536C85E42C842A00").IsUnique();
 

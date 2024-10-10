@@ -98,7 +98,7 @@ namespace NewsAPI.Controllers.Generic
             return await _genericServive.GetAsync(id);
         }
         [HttpPost]
-        [Authorize]
+        
         public async Task<ActionResult<UserDTO>> Create(UserDTO model)
         {
             Expression<Func<User, int>> filter = (x => x.Id);

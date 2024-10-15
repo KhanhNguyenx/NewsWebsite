@@ -32,19 +32,6 @@ namespace NewsWebsite.Areas.Admin.Controllers
             }
             return View(categoryList);
         }
-        //[HttpGet]
-        //public IActionResult Upsert()
-        //{
-        //    List<CategoryDTO> categoryList = new List<CategoryDTO>();
-        //    HttpResponseMessage response = _client.GetAsync(_client.BaseAddress + "Categories/GetList").Result;
-        //    if (response.IsSuccessStatusCode)
-        //    {
-        //        string data = response.Content.ReadAsStringAsync().Result;
-        //        categoryList = JsonConvert.DeserializeObject<List<CategoryDTO>>(data);
-        //    }
-        //    return View(categoryList);
-        //}
-
         [HttpGet]
         public IActionResult Upsert()
         {
@@ -84,7 +71,6 @@ namespace NewsWebsite.Areas.Admin.Controllers
             {
                 string data = JsonConvert.SerializeObject(model);
                 StringContent content = new StringContent(data, encoding: System.Text.Encoding.UTF8, "application/json");
-
                 HttpResponseMessage response = _client.PostAsync(_client.BaseAddress + "Categories/Create", content).Result;
                 if (response.IsSuccessStatusCode)
                 {
@@ -99,31 +85,5 @@ namespace NewsWebsite.Areas.Admin.Controllers
             }
             return View();
         }
-
-        //[HttpPost]
-        //public async Task<IActionResult> Upsert(CategoryDTO model)
-        //{
-        //    if (!ModelState.IsValid)
-        //    {
-        //        return View();
-        //    }
-        //    try
-        //    {
-        //        string data = JsonConvert.SerializeObject(model);
-        //        StringContent content = new StringContent(data, encoding: System.Text.Encoding.UTF8, "application.json");
-        //        HttpResponseMessage response = await _client.PostAsync(_client.BaseAddress + "Categories/Create", content);
-        //        if (response.IsSuccessStatusCode)
-        //        {
-        //            TempData["successMessage"] = "Category Created!";
-        //            return RedirectToAction("Index");
-        //        }
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        TempData["successMessage"] = ex.Message;
-        //        return View();
-        //    }
-        //    return View();
-        //}
     }
 }

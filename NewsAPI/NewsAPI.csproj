@@ -27,7 +27,7 @@
 
   <ItemGroup>
     <Reference Include="EncrypDecryp">
-      <HintPath>..\..\Security\End_Encryp_Decryp\EncrypDecryp\bin\Debug\net8.0-windows\EncrypDecryp.dll</HintPath>
+      <HintPath>..\NewsWebsite\EncrypDecryp.dll</HintPath>
     </Reference>
   </ItemGroup>
 

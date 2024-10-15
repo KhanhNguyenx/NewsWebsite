@@ -16,11 +16,10 @@ namespace NewsAPI.Services
         int Delete(T entity);
         Task<int> MaxIdAsync(Expression<Func<T, int>> exception);
         Task<int> MinIdAsync(Expression<Func<T, int>> exception);
-           // Lấy top các đối tượng theo thứ tự ưu tiên
-    Task<IEnumerable<T>> GetTopAsync<TKey>(int count, Expression<Func<T, TKey>> orderBy);
-
-    // Lấy các đối tượng mới nhất
-    Task<IEnumerable<T>> GetLatestAsync<TKey>(int count, Expression<Func<T, TKey>> orderByDescending);
+        // Lấy top các đối tượng theo thứ tự ưu tiên
+        Task<IEnumerable<T>> GetTopAsync<TKey>(int count, Expression<Func<T, TKey>> orderBy);
+        // Lấy các đối tượng mới nhất
+        Task<IEnumerable<T>> GetLatestAsync<TKey>(int count, Expression<Func<T, TKey>> orderByDescending);
 
     }
     public class GenericService<T> : IGenericServive<T> where T : class

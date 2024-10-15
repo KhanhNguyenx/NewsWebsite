@@ -41,14 +41,14 @@ namespace NewsAPI
                     ValidAudience = builder.Configuration["JwtSettings:Audience"],
                     ValidateIssuerSigningKey = true,
                     IssuerSigningKey = new SymmetricSecurityKey(secretKeyBytes),
-                    ClockSkew = TimeSpan.Zero,
+                    ClockSkew = TimeSpan.FromHours(1),
                 };
-            })
+            }).AddCookie()
             .AddGoogle(googleOptions =>
             {
                 googleOptions.ClientId = decryption.Decrypt(builder.Configuration["Google:ClientId"]);
                 googleOptions.ClientSecret = decryption.Decrypt(builder.Configuration["Google:ClientSecret"]);
-                googleOptions.CallbackPath = "/auth/google-callback";
+                googleOptions.CallbackPath = "/api/auth/google-callback";
             });
 
         }
@@ -59,6 +59,13 @@ namespace NewsAPI
             Services.AddScoped<IAppSettingService, AppSettingService>();
             //Services.AddTransient<IOTPService, IOTPService>();
             Services.AddScoped(typeof(IGenericServive<>), typeof(GenericService<>));
+            Services.AddCors(options =>
+            {
+                options.AddPolicy("AllowAll",
+                    builder => builder.AllowAnyOrigin()
+                                      .AllowAnyMethod()
+                                      .AllowAnyHeader());
+            });
         }
     }
 }

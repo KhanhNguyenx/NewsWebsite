@@ -56,7 +56,7 @@ namespace NewsAPI.Controllers.Generic
             return accessToken;
         }
 
-        [HttpPost]
+        [HttpGet]
         public IActionResult Login([FromBody] LoginModel loginModel)
         {
             var user = _dbcontext.Users.SingleOrDefault(p=> p.Username == loginModel.Username && loginModel.PasswordHash == p.PasswordHash);
@@ -72,8 +72,8 @@ namespace NewsAPI.Controllers.Generic
             return Ok(new ApiResponse
             {
                 Success = true,
-                
-                Message = GenerateAccessToken(user),
+                AccessToken = GenerateAccessToken(user),
+                Message = "Login Success",
                 Data = user,
             });
         }
@@ -98,22 +98,24 @@ namespace NewsAPI.Controllers.Generic
             return await _genericServive.GetAsync(id);
         }
         [HttpPost]
-        
-        public async Task<ActionResult<UserDTO>> Create(UserDTO model)
+        [Authorize]
+        public async Task<ActionResult<UserDTO>> Create([FromBody]UserDTO model)
         {
-            Expression<Func<User, int>> filter = (x => x.Id);
-            // Get Max Id in table of Database --> set for model + 1
-            model.Id = await _genericServive.MaxIdAsync(filter) + 1;
+            if (ModelState.IsValid)
+            {
+                Expression<Func<User, int>> filter = (x => x.Id);
+                // Get Max Id in table of Database --> set for model + 1
+                model.Id = await _genericServive.MaxIdAsync(filter) + 1;
 
-            //Mapp data model --> newModel
-            var newModel = new User();
-            //newModel. = DateTime.Now;
-            _mapper.Map(model, newModel);
+                //Mapp data model --> newModel
+                var newModel = new User();
+                //newModel. = DateTime.Now;
+                _mapper.Map(model, newModel);
 
-            if (await _genericServive.CreateAsync(newModel) != null)
-                return Ok(model);
-            else
-                return NoContent();
+                if (await _genericServive.CreateAsync(newModel) != null)
+                    return Ok(model);
+            }
+            return NoContent();
         }
         [HttpGet]
         public async Task<ActionResult<IEnumerable<UserDTO>>> GetList()

@@ -104,7 +104,7 @@ License: https://keenthemes.com/metronic/tailwind/docs/getting-started/license
                     </div>
                 </div>
                 <div class="grid grid-cols-2 gap-2.5">
-                    <a class="btn btn-light btn-sm justify-center" href="#">
+                    <a class="btn btn-light btn-sm justify-center" href="https://localhost:44358/api/auth/google-signin">
                         <img alt="" class="size-3.5 shrink-0" src="~/Signin/images/google.svg">
                         Use Google
                     </a>
@@ -171,3 +171,19 @@ License: https://keenthemes.com/metronic/tailwind/docs/getting-started/license
 
 </body>
 </html>
+<script>
+    async function handleGoogleCallback() {
+        const params = new URLSearchParams(window.location.search);
+        const token = params.get('token');
+        if (token) {
+            // Save the token in localStorage
+            localStorage.setItem('jwt', token);
+            
+            // Redirect to the homepage or dashboard
+            window.location.href = "/dashboard";  // Change this to your desired page
+        }
+    }
+
+    // Call the function when the page loads
+    window.onload = handleGoogleCallback;
+</script>

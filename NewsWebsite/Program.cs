@@ -1,7 +1,11 @@
+﻿using EncrypDecryp;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 using NewsAPI.Data;
 using System.Configuration;
+using System.Text;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -12,7 +16,10 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddRazorPages().AddRazorRuntimeCompilation();
 var getConnectionStr = builder.Configuration.GetConnectionString("MyConnectString");
 builder.Services.AddDbContext<NewsWebDbContext>(option => option.UseSqlServer(getConnectionStr));
-
+//builder.Services.ConfigureApplicationCookie(options =>
+//{
+//    options.Cookie.SameSite = SameSiteMode.Lax;
+//});
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -31,7 +38,7 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
-
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllerRoute(

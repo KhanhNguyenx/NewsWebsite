@@ -117,11 +117,12 @@ else if (!string.IsNullOrWhiteSpace(errorMessage))
         <button type="button" class="btn-close float-end" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
 }
+
+@model NewsAPI.DTOs.CategoryDTO
 <form method="post">
-    @* @model IEnumerable<NewsAPI.DTOs.CategoryDTO> *@
-    @model NewsAPI.DTOs.CategoryDTO
     <div class="container">
-        <h1>Add Category</h1>
+        <h1>Create Category</h1>
+
         <!-- Category Name -->
         <div class="form-group">
             <label for="categoryName">Category Name</label>
@@ -131,19 +132,6 @@ else if (!string.IsNullOrWhiteSpace(errorMessage))
         <!-- Description -->
         <label for="Description">Description</label>
         <textarea class="form-group" id="Description" name="Description" placeholder="Enter description"></textarea>
-
-
-        <!-- Parent Category -->
-        @* <div class="form-group">
-        <label for="parentCategory">Parent Category</label>
-        <select id="parentCategory" name="ParentCategoryId" class="form-control">
-        <option value="0">None</option>
-        @foreach (var category in ViewBag.CategoryList)
-        {
-        <option value="@category.Id">@category.CategoryName</option>
-        }
-        </select>
-        </div> *@
 
         <div class="form-group">
             <label for="parentCategory">Parent Category</label>
@@ -162,7 +150,6 @@ else if (!string.IsNullOrWhiteSpace(errorMessage))
                 }
             </select>
         </div>
-
 
         <!-- Status -->
         <div class="form-group">
@@ -183,6 +170,7 @@ else if (!string.IsNullOrWhiteSpace(errorMessage))
         </div>
     </div>
 </form>
+
 
 @section Scripts {
     <script src="//cdn.ckeditor.com/4.22.1/full/ckeditor.js"></script>

@@ -32,19 +32,6 @@ namespace NewsWebsite.Areas.Admin.Controllers
             }
             return View(categoryList);
         }
-        //[HttpGet]
-        //public IActionResult Upsert()
-        //{
-        //    List<CategoryDTO> categoryList = new List<CategoryDTO>();
-        //    HttpResponseMessage response = _client.GetAsync(_client.BaseAddress + "Categories/GetList").Result;
-        //    if (response.IsSuccessStatusCode)
-        //    {
-        //        string data = response.Content.ReadAsStringAsync().Result;
-        //        categoryList = JsonConvert.DeserializeObject<List<CategoryDTO>>(data);
-        //    }
-        //    return View(categoryList);
-        //}
-
         [HttpGet]
         public IActionResult Upsert()
         {
@@ -68,10 +55,9 @@ namespace NewsWebsite.Areas.Admin.Controllers
 
             // Gán dữ liệu vào ViewBag
             ViewBag.CategoryList = categoryList;
-
-            // Trả về view với một model rỗng để tạo mới
             var model = new CategoryDTO();
             return View(model);
+
         }
         [HttpPost]
         public IActionResult Upsert(CategoryDTO model)
@@ -84,7 +70,6 @@ namespace NewsWebsite.Areas.Admin.Controllers
             {
                 string data = JsonConvert.SerializeObject(model);
                 StringContent content = new StringContent(data, encoding: System.Text.Encoding.UTF8, "application/json");
-
                 HttpResponseMessage response = _client.PostAsync(_client.BaseAddress + "Categories/Create", content).Result;
                 if (response.IsSuccessStatusCode)
                 {
@@ -94,36 +79,63 @@ namespace NewsWebsite.Areas.Admin.Controllers
             }
             catch (Exception ex)
             {
-                TempData["successMessage"] = ex.Message;
+                TempData["errorMessage"] = ex.Message;
+                return View();
+            }
+            return View();
+        }
+        [HttpGet]
+        public IActionResult Detail()
+        {
+            //CategoryDTO record = new CategoryDTO();
+            //HttpResponseMessage response = _client.GetAsync(_client.BaseAddress + "Categories/Get" + id).Result;
+            //if (response.IsSuccessStatusCode)
+            //{
+            //    string data = response.Content.ReadAsStringAsync().Result;
+            //    record = JsonConvert.DeserializeObject<CategoryDTO>(data);
+            //}
+            //return View(record);
+            return View();
+        }
+        [HttpGet]
+        public IActionResult Delete(int id)
+        {
+            try
+            {
+                CategoryDTO record = new CategoryDTO();
+                HttpResponseMessage response = _client.GetAsync(_client.BaseAddress + "Categories/Get" + id).Result;
+                if (response.IsSuccessStatusCode)
+                {
+                    string data = response.Content.ReadAsStringAsync().Result;
+                    record = JsonConvert.DeserializeObject<CategoryDTO>(data);
+                }
+                return View(record);
+            }
+            catch (Exception ex)
+            {
+                TempData["errorMessage"] = ex.Message;
+                return View();
+            }
+        }
+        [HttpPost, ActionName("Delete")]
+        public IActionResult deletedConfirm(int id)
+        {
+            try
+            {
+                HttpResponseMessage response = _client.DeleteAsync(_client.BaseAddress + "Categories/Delete" + id).Result;
+                if (response.IsSuccessStatusCode)
+                {
+                    TempData["successMessage"] = "Category Deleted!";
+                    return RedirectToAction("Index");
+                }
+            }
+            catch (Exception ex)
+            {
+                TempData["errorMessage"] = ex.Message;
                 return View();
             }
             return View();
         }
 
-        //[HttpPost]
-        //public async Task<IActionResult> Upsert(CategoryDTO model)
-        //{
-        //    if (!ModelState.IsValid)
-        //    {
-        //        return View();
-        //    }
-        //    try
-        //    {
-        //        string data = JsonConvert.SerializeObject(model);
-        //        StringContent content = new StringContent(data, encoding: System.Text.Encoding.UTF8, "application.json");
-        //        HttpResponseMessage response = await _client.PostAsync(_client.BaseAddress + "Categories/Create", content);
-        //        if (response.IsSuccessStatusCode)
-        //        {
-        //            TempData["successMessage"] = "Category Created!";
-        //            return RedirectToAction("Index");
-        //        }
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        TempData["successMessage"] = ex.Message;
-        //        return View();
-        //    }
-        //    return View();
-        //}
     }
 }

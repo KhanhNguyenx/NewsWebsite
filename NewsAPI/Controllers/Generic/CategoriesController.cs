@@ -88,7 +88,7 @@ namespace NewsAPI.Controllers
         }
 
         //Delete Forever
-        [HttpDelete]
+        [HttpDelete("{id}")]
         public ActionResult Delete(int id)
         {
             var entity = _genericServive.GetAsync(id);

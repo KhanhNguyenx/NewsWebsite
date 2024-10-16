@@ -22,7 +22,7 @@ namespace NewsAPI
             builder.Services.AddDbContext<NewsWebDbContext>(option => option.UseSqlServer(decryptedConnectionString));
 
             //JwtSetting
-            var secretkey = decryption.Decrypt(builder.Configuration["JwtSettings:SecretKey"]);
+            var secretkey = /*decryption.Decrypt(*/builder.Configuration["JwtSettings:SecretKey"]/*)*/;
             var secretKeyBytes = Encoding.UTF8.GetBytes(secretkey);
             builder.Services.AddAuthentication(options =>
             {
@@ -51,6 +51,34 @@ namespace NewsAPI
                 googleOptions.CallbackPath = "/api/auth/google-callback";
             });
 
+
+            //Roles After Authentication
+            builder.Services.AddAuthorization(options =>
+            {
+                options.AddPolicy("RequireAdminRole", policy => policy.RequireRole("Admin"));
+                options.AddPolicy("RequireUserRole", policy => policy.RequireRole("User", "Admin")); // Nếu cả User và Admin đều được phép
+            });
+
+
+            //CORS Single
+            builder.Services.AddCors(option =>
+            {
+                option.AddPolicy("Policy1",
+                    policy =>
+                    {
+                        policy.WithOrigins().AllowAnyHeader().AllowAnyMethod();
+                    });
+            });
+
+            //CORS ALl
+            builder.Services.AddCors(option =>
+            {
+                option.AddDefaultPolicy(
+                    policy =>
+                    {
+                        policy.WithOrigins().AllowAnyHeader().AllowAnyMethod();
+                    });
+            });
         }
         public static void myServiceRegister(IServiceCollection Services)
         {

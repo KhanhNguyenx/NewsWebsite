@@ -27,7 +27,14 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-app.UseCors("AllowAll");
+app.UseHsts(); //Browser only use Https
+app.UseRouting();
+
+//CORS single
+app.UseCors("Policy1");
+//CORS all
+app.UseCors();
+//app.UseCors("AllowAll");
 //ConfigAuthen
 app.UseAuthentication();
 

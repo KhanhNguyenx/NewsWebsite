@@ -11,6 +11,7 @@ using System.Security.Claims;
 using System.Text;
 using NewsAPI.Data;
 using Microsoft.AspNetCore.Authorization;
+using EncrypDecryp;
 
 namespace NewsAPI.Controllers.Generic
 {
@@ -31,13 +32,14 @@ namespace NewsAPI.Controllers.Generic
         }
         private string GenerateAccessToken(User user)
         {
+            Decryption decryption = new Decryption();
             var guid = Guid.NewGuid().ToString();
             var auThoClaims = new List<Claim>
             {
                 new Claim("Id", user.Id.ToString()),
                 new Claim("Username", user.Username.ToString()),
                 new Claim(ClaimTypes.Name, user.FullName),
-                new Claim(ClaimTypes.Role,"Role"),
+                new Claim(ClaimTypes.Role, user.Role),
                 new Claim(JwtRegisteredClaimNames.Jti, guid),
                 new Claim(JwtRegisteredClaimNames.Email, user.Email)
             };
@@ -76,6 +78,21 @@ namespace NewsAPI.Controllers.Generic
                 Message = "Login Success",
                 Data = user,
             });
+        }
+
+        [HttpGet("admin")]
+        [Authorize(Policy = "RequireAdminRole")] // Chỉ cho phép admin
+        public IActionResult AdminOnlyMethod()
+        {
+            var userClaims = User.Claims.Select(c => new { c.Type, c.Value }).ToList();
+            return Ok(new { Message = "This is an admin-only endpoint.", Claims = userClaims });
+        }
+
+        [HttpGet("user")]
+        [Authorize(Policy = "RequireUserRole")] // Cho phép cả user và admin
+        public IActionResult UserOrAdminMethod()
+        {
+            return Ok(new { Message = "This is accessible by both users and admins." });
         }
 
 

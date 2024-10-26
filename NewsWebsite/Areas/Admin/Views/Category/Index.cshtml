@@ -1,111 +1,136 @@
-﻿ <div class="container">
-        <div class="row align-items-center">
-            <div class="col-md-6">
-                <div class="mb-3">
-                    <h5 class="card-title">Category List <span class="text-muted fw-normal ms-2">(834)</span></h5>
-                </div>
-            </div>
-            <div class="col-md-6">
-                <div class="d-flex flex-wrap align-items-center justify-content-end gap-2 mb-3">
-                    <div>
-                        <a href="#" data-bs-toggle="modal" data-bs-target=".add-new" class="btn btn-primary"><i class="bx bx-plus me-1"></i> Add New</a>
-                    </div>
-                </div>
+﻿<div class="container">
+    <div class="row align-items-center">
+        <div class="col-md-6">
+            <div class="mb-3">
+                <h5 class="card-title">Category List <span class="text-muted fw-normal ms-2">(834)</span></h5>
             </div>
         </div>
-        <div class="row">
-            <div class="col-lg-12">
-                <div class="">
-                    <div class="table-responsive">
-                        <table class="table project-list-table table-nowrap align-middle table-borderless">
-                            <thead>
-                                <tr>
-                                    <th scope="col" class="ps-4" style="width: 50px;">
-                                        <div class="form-check font-size-16"><input type="checkbox" class="form-check-input" id="contacusercheck" /><label class="form-check-label" for="contacusercheck"></label></div>
-                                    </th>
-                                    <th scope="col">Category Name</th>
-                                    <th scope="col">Description</th>
-                                    <th scope="col">ParentCategoryId</th>
-                                    <th scope="col">Status</th>
-                                    <th scope="col" style="width: 200px;">Action</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @model IEnumerable<NewsAPI.DTOs.CategoryDTO>
-                                @foreach (var item in Model)
-                                {
-                                    <tr>
-                                        <th scope="row" class="ps-4">
-                                            <div class="form-check font-size-16">
-                                                <input type="checkbox" class="form-check-input" id="contacusercheck@item.Id" />
-                                                <label class="form-check-label" for="contacusercheck@item.Id"></label>
-                                            </div>
-                                        </th>
-                                        <td>@Html.DisplayFor(modelItem => item.CategoryName)</td>
-                                        <td>@Html.DisplayFor(modelItem => item.Description)</td>
-                                        <td>@Html.DisplayFor(modelItem => item.ParentCategoryId)</td>
-                                        <td>
-                                            @if (item.Status == 1)
-                                            {
-                                                <span class="badge badge-soft-success mb-0">On</span>
-                                            }
-                                            else if (item.Status == 0)
-                                            {
-                                                <span class="badge badge-soft-danger mb-0">Off</span>
-                                            }
-                                            else
-                                            {
-                                                <span class="badge badge-soft-warning mb-0">Deleted</span>
-                                            }
-
-                                        </td>
-                                        <td>
-                                            <ul class="list-inline mb-0">
-                                                <li class="list-inline-item">
-                                                    <a asp-action="Edit" asp-route-id="@item.Id" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit" class="px-2 text-primary">
-                                                        <i class="bx bx-pencil font-size-18"></i>
-                                                    </a>
-                                                </li>
-                                                <li class="list-inline-item">
-                                                    <a asp-action="Delete" asp-route-id="@item.Id" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete" class="px-2 text-danger">
-                                                        <i class="bx bx-trash-alt font-size-18"></i>
-                                                    </a>
-                                                </li>
-                                                <li class="list-inline-item">
-                                                    <a asp-action="Details" asp-route-id="@item.Id" data-bs-toggle="tooltip" data-bs-placement="top" title="Details" class="px-2 text-info">
-                                                        <i class="bx bx-detail font-size-18"></i>
-                                                    </a>
-                                                </li>
-                                            </ul>
-                                        </td>
-                                    </tr>
-                                }
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="row g-0 align-items-center pb-4">
-            <div class="col-sm-6">
-                <div><p class="mb-sm-0">Showing 1 to 10 of 57 entries</p></div>
-            </div>
-            <div class="col-sm-6">
-                <div class="float-sm-end">
-                    <ul class="pagination mb-sm-0">
-                        <li class="page-item disabled">
-                            <a href="#" class="page-link"><i class="mdi mdi-chevron-left"></i></a>
-                        </li>
-                        <li class="page-item active"><a href="#" class="page-link">1</a></li>
-                        <li class="page-item"><a href="#" class="page-link">2</a></li>
-                        <li class="page-item"><a href="#" class="page-link">3</a></li>
-                        <li class="page-item"><a href="#" class="page-link">4</a></li>
-                        <li class="page-item"><a href="#" class="page-link">5</a></li>
-                        <li class="page-item">
-                            <a href="#" class="page-link"><i class="mdi mdi-chevron-right"></i></a>
-                        </li>
-                    </ul>
+        <div class="col-md-6">
+            <div class="d-flex flex-wrap align-items-center justify-content-end gap-2 mb-3">
+                <div>
+                    <a href="/Admin/Category/Upsert" data-bs-toggle="modal" data-bs-target=".add-new" class="btn btn-primary"><i class="bx bx-plus me-1"></i> Add New</a>
                 </div>
             </div>
         </div>
     </div>
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="">
+                <div class="table-responsive">
+                    <table class="table project-list-table table-nowrap align-middle table-borderless">
+                        <thead>
+                            <tr>
+                                <th scope="col" class="ps-4" style="width: 50px;">
+                                    <div class="form-check font-size-16"><input type="checkbox" class="form-check-input" id="contacusercheck" /><label class="form-check-label" for="contacusercheck"></label></div>
+                                </th>
+                                <th scope="col">Category Name</th>
+                                <th scope="col">Description</th>
+                                <th scope="col">ParentCategory</th>
+                                <th scope="col">Status</th>
+                                <th scope="col" style="width: 200px;">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @model IEnumerable<NewsAPI.DTOs.CategoryDTO>
+                            @{
+                                var categories = Model.ToList(); // Chuyển model thành danh sách
+                            }
+
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <th scope="row" class="ps-4">
+                                        <div class="form-check font-size-16">
+                                            <input type="checkbox" class="form-check-input" id="contacusercheck@item.Id" />
+                                            <label class="form-check-label" for="contacusercheck@item.Id"></label>
+                                        </div>
+                                    </th>
+                                    <td>@Html.DisplayFor(modelItem => item.CategoryName)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.Description)</td>
+                                    @* <td>@Html.DisplayFor(modelItem => item.ParentCategoryId)</td> *@
+                                    <td>
+                                        @if (item.ParentCategoryId == 0)
+                                        {
+                                            <!-- Trường hợp không có ParentCategoryId thì để trống -->
+                                            <span></span>
+                                        }
+                                        else
+                                        {
+                                            var parentCategory = categories.FirstOrDefault(c => c.Id == item.ParentCategoryId);
+                                            if (parentCategory != null)
+                                            {
+                                                @parentCategory.CategoryName <!-- Hiển thị tên của thể loại cha -->
+                                            }
+                                            else
+                                            {
+                                                <span>Unknown Parent</span> <!-- Trường hợp không tìm thấy thể loại cha -->
+                                            }
+                                        }
+                                    </td>
+                                    <td>
+                                        @if (item.Status == 1)
+                                        {
+                                            <span class="badge badge-soft-success mb-0">On</span>
+                                        }
+                                        else if (item.Status == 0)
+                                        {
+                                            <span class="badge badge-soft-danger mb-0">Off</span>
+                                        }
+                                        else
+                                        {
+                                            <span class="badge badge-soft-warning mb-0">Deleted</span>
+                                        }
+
+                                    </td>
+                                    <td>
+                                        <ul class="list-inline mb-0">
+                                            <li class="list-inline-item">
+                                                <a href="/Admin/Category/Upsert/@item.Id" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit" class="px-2 text-primary">
+                                                    <i class="bx bx-pencil font-size-18"></i>
+                                                </a>
+                                            </li>
+                                            <li class="list-inline-item">
+                                                <a href="javascript:void(0);" data-id="@item.Id" class="px-2 text-danger delete-category" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete">
+                                                    <i class="bx bx-trash-alt font-size-18"></i>
+                                                </a>
+                                            </li>
+                                            <li class="list-inline-item">
+                                                <a asp-action="Details" asp-route-id="@item.Id" data-bs-toggle="tooltip" data-bs-placement="top" title="Details" class="px-2 text-info">
+                                                    <i class="bx bx-detail font-size-18"></i>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row g-0 align-items-center pb-4">
+        <div class="col-sm-6">
+            <div><p class="mb-sm-0">Showing 1 to 10 of 57 entries</p></div>
+        </div>
+        <div class="col-sm-6">
+            <div class="float-sm-end">
+                <ul class="pagination mb-sm-0">
+                    <li class="page-item disabled">
+                        <a href="#" class="page-link"><i class="mdi mdi-chevron-left"></i></a>
+                    </li>
+                    <li class="page-item active"><a href="#" class="page-link">1</a></li>
+                    <li class="page-item"><a href="#" class="page-link">2</a></li>
+                    <li class="page-item"><a href="#" class="page-link">3</a></li>
+                    <li class="page-item"><a href="#" class="page-link">4</a></li>
+                    <li class="page-item"><a href="#" class="page-link">5</a></li>
+                    <li class="page-item">
+                        <a href="#" class="page-link"><i class="mdi mdi-chevron-right"></i></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+

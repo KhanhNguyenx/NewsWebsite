@@ -31,16 +31,16 @@ namespace NewsAPI.Controllers
         [HttpGet("google-callback")]
         public async Task<IActionResult> GoogleCallback()
         {
-            var authenticateResult = await HttpContext.AuthenticateAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+            var authenticateResult = await HttpContext.AuthenticateAsync(GoogleDefaults.AuthenticationScheme);
             if (!authenticateResult.Succeeded)
                 return BadRequest("Error authenticating with Google.");
 
             var email = authenticateResult.Principal.FindFirst(ClaimTypes.Email)?.Value;
             var userId = authenticateResult.Principal.FindFirst(ClaimTypes.NameIdentifier)?.Value;
 
-            // Tạo hoặc tìm người dùng trong cơ sở dữ liệu
+            // Create or find the user in the database here
 
-            // Tạo ClaimsPrincipal cho người dùng
+            // Create ClaimsPrincipal for the user
             var claims = new List<Claim>
     {
         new Claim(ClaimTypes.Name, email),
@@ -50,15 +50,19 @@ namespace NewsAPI.Controllers
             var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
             var authProperties = new AuthenticationProperties
             {
-                IsPersistent = true // Lưu phiên đăng nhập lâu dài nếu cần
+                IsPersistent = true // Keep user signed in
             };
 
-            // Đăng nhập bằng Cookies
+            // Sign in using Cookies
             await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(claimsIdentity), authProperties);
 
-            // Chuyển hướng sau khi đăng nhập thành công
-            return RedirectToAction("Index", "Home");
+            // Optionally generate a JWT token if needed
+            var jwtToken = GenerateJwtToken(email, userId);
+
+            // Return the JWT token or redirect after signing in
+            return Ok(new { Token = jwtToken }); // Adjust as needed
         }
+
 
 
         private string GenerateJwtToken(string email, string userId)

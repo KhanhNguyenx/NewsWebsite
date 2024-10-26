@@ -1,8 +1,8 @@
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
-using NewsAPI;
 using NewsAPI.Data;
+using NewsAPI.Helpers;
 using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -35,6 +35,8 @@ app.UseCors("Policy1");
 //CORS all
 app.UseCors();
 //app.UseCors("AllowAll");
+app.UseRateLimiter();
+app.MapControllers();
 //ConfigAuthen
 app.UseAuthentication();
 

@@ -12,6 +12,7 @@ using System.Text;
 using NewsAPI.Data;
 using Microsoft.AspNetCore.Authorization;
 using EncrypDecryp;
+using System.Security.Cryptography;
 
 namespace NewsAPI.Controllers.Generic
 {
@@ -44,7 +45,8 @@ namespace NewsAPI.Controllers.Generic
                 new Claim(JwtRegisteredClaimNames.Email, user.Email)
             };
             var jwtSetting = _configuration.GetSection("JwtSettings");
-            var secretKeyBytes = Encoding.UTF8.GetBytes(jwtSetting["SecretKey"]);
+            var DecrypKey = jwtSetting["SecretKey"];
+            var secretKeyBytes = Encoding.UTF8.GetBytes(/*decryption.Decrypt(*/DecrypKey)/*)*/;
             var securityKey = new SymmetricSecurityKey(secretKeyBytes);
             var credetials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha512Signature);
             var token = new JwtSecurityToken(
@@ -57,12 +59,68 @@ namespace NewsAPI.Controllers.Generic
             var accessToken = new JwtSecurityTokenHandler().WriteToken(token);
             return accessToken;
         }
+        private string GenerateRefreshToken(User user)
+        {
+            var guid = Guid.NewGuid().ToString();
+            var auThoClaims = new List<Claim>
+    {
+        new Claim("Id", user.Id.ToString()),
+        new Claim("Username", user.Username.ToString()),
+        new Claim(JwtRegisteredClaimNames.Jti, guid)
+    };
 
-        [HttpGet]
+            var jwtSetting = _configuration.GetSection("JwtSettings");
+            var DecrypKey = jwtSetting["SecretKey"];
+            var secretKeyBytes = Encoding.UTF8.GetBytes(/*decryption.Decrypt(*/DecrypKey)/*)*/;
+            var securityKey = new SymmetricSecurityKey(secretKeyBytes);
+            var credetials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha512Signature);
+
+            var refreshToken = new JwtSecurityToken(
+                issuer: jwtSetting["Issuer"],
+                audience: jwtSetting["Audience"],
+                claims: auThoClaims,
+                expires: DateTime.UtcNow.AddDays(7), // Refresh Token sẽ có hiệu lực trong 7 ngày
+                signingCredentials: credetials
+            );
+
+            var refreshTokenString = new JwtSecurityTokenHandler().WriteToken(refreshToken);
+            return refreshTokenString;
+        }
+
+
+        private ClaimsPrincipal GetPrincipalFromExpiredToken(string token)
+        {
+            Decryption decryption = new Decryption();
+            var decrypstring =/* decryption.Decrypt(*/_configuration["JwtSettings:SecretKey"]/*)*/;
+            var tokenValidationParameters = new TokenValidationParameters
+            {
+                ValidateIssuer = true,
+                ValidIssuer = _configuration["JwtSettings:Issuer"],
+                ValidateLifetime = true,
+                ValidateAudience = true,
+                ValidAudience = _configuration["JwtSettings:Audience"],
+                ValidateIssuerSigningKey = true,
+                IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(decrypstring)),
+                ClockSkew = TimeSpan.FromHours(1)
+            };
+
+            var tokenHandler = new JwtSecurityTokenHandler();
+            var principal = tokenHandler.ValidateToken(token, tokenValidationParameters, out SecurityToken securityToken);
+
+            var jwtSecurityToken = securityToken as JwtSecurityToken;
+            if (jwtSecurityToken == null || !jwtSecurityToken.Header.Alg.Equals(SecurityAlgorithms.HmacSha512Signature, StringComparison.InvariantCultureIgnoreCase))
+            {
+                throw new SecurityTokenException("Invalid token");
+            }
+
+            return principal;
+        }
+
+        [HttpPost]
         public IActionResult Login([FromBody] LoginModel loginModel)
         {
-            var user = _dbcontext.Users.SingleOrDefault(p=> p.Username == loginModel.Username && loginModel.PasswordHash == p.PasswordHash);
-            if (user == null) 
+            var user = _dbcontext.Users.SingleOrDefault(p => p.Username == loginModel.Username && loginModel.PasswordHash == p.PasswordHash);
+            if (user == null)
             {
                 return Ok(new ApiResponse
                 {
@@ -71,14 +129,70 @@ namespace NewsAPI.Controllers.Generic
                 });
             }
 
+            var accessToken = GenerateAccessToken(user);
+            var refreshToken = GenerateRefreshToken(user);
+
+            // Lưu RefreshToken vào cơ sở dữ liệu
+            user.AccessToken = accessToken;
+            user.RefreshToken = refreshToken;
+            user.RefreshTokenExpiryTime = DateTime.UtcNow.AddDays(7); // Refresh token có hiệu lực trong 7 ngày
+            _dbcontext.SaveChanges();
+
             return Ok(new ApiResponse
             {
                 Success = true,
-                AccessToken = GenerateAccessToken(user),
+                AccessToken = accessToken,
+                RefreshToken = refreshToken,
                 Message = "Login Success",
                 Data = user,
             });
         }
+
+        [HttpPost("refresh-token")]
+        public IActionResult RefreshToken([FromBody] TokenModel tokenModel)
+        {
+            var principal = GetPrincipalFromExpiredToken(tokenModel.AccessToken);
+
+            // Lấy claim 'Id' từ token để truy xuất người dùng
+            var userIdClaim = principal.Claims.FirstOrDefault(c => c.Type == "Id");
+            if (userIdClaim == null)
+            {
+                return Ok(new ApiResponse
+                {
+                    Success = false,
+                    Message = "Invalid token"
+                });
+            }
+
+            var userId = userIdClaim.Value;
+            var user = _dbcontext.Users.FirstOrDefault(u => u.Id == int.Parse(userId));
+
+            if (user == null || user.RefreshToken != tokenModel.RefreshToken || user.RefreshTokenExpiryTime <= DateTime.UtcNow)
+            {
+                return Ok(new ApiResponse
+                {
+                    Success = false,
+                    Message = "Invalid refresh token"
+                });
+            }
+
+
+            var newAccessToken = GenerateAccessToken(user);
+            var newRefreshToken = GenerateRefreshToken(user);
+
+            // Cập nhật RefreshToken mới
+            user.RefreshToken = newRefreshToken;
+            user.RefreshTokenExpiryTime = DateTime.UtcNow.AddDays(7);
+            _dbcontext.SaveChanges();
+
+            return Ok(new ApiResponse
+            {
+                Success = true,
+                Data = user
+            });
+        }
+
+
 
         [HttpGet("admin")]
         [Authorize(Policy = "RequireAdminRole")] // Chỉ cho phép admin

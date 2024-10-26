@@ -31,7 +31,6 @@ public partial class NewsWebDbContext : DbContext
     public virtual DbSet<UserPost> UserPosts { get; set; }
 
     public virtual DbSet<UserProfile> UserProfiles { get; set; }
-
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<Category>(entity =>
@@ -148,10 +147,17 @@ public partial class NewsWebDbContext : DbContext
             entity.Property(e => e.Id)
                 .ValueGeneratedNever()
                 .HasColumnName("id");
+            entity.Property(e => e.AccessToken)
+                .HasMaxLength(255)
+                .IsUnicode(false);
             entity.Property(e => e.Email).HasMaxLength(100);
             entity.Property(e => e.FullName).HasMaxLength(100);
             entity.Property(e => e.Notes).HasMaxLength(250);
             entity.Property(e => e.PasswordHash).HasMaxLength(256);
+            entity.Property(e => e.RefreshToken)
+                .HasMaxLength(255)
+                .IsUnicode(false);
+            entity.Property(e => e.RefreshTokenExpiryTime).HasColumnType("datetime");
             entity.Property(e => e.Role).HasMaxLength(50);
             entity.Property(e => e.Status).HasDefaultValue(1);
             entity.Property(e => e.Username).HasMaxLength(100);

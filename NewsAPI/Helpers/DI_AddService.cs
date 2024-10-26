@@ -6,8 +6,10 @@ using NewsAPI.Services;
 using System.Net;
 using System.Text;
 using EncrypDecryp;
+using Microsoft.AspNetCore.RateLimiting;
+using System.Threading.RateLimiting;
 
-namespace NewsAPI
+namespace NewsAPI.Helpers
 {
     public class DI_AddService
     {
@@ -79,6 +81,36 @@ namespace NewsAPI
                         policy.WithOrigins().AllowAnyHeader().AllowAnyMethod();
                     });
             });
+
+
+            //Rate Limited
+            builder.Services.AddMemoryCache();
+            builder.Services.AddRateLimiter(option =>
+            {
+                option.AddFixedWindowLimiter(policyName: "Fixed", opt =>
+                {
+                    opt.PermitLimit = 5; //limited 5 request
+                    opt.Window = TimeSpan.FromMinutes(1);
+                    opt.QueueProcessingOrder = QueueProcessingOrder.OldestFirst;
+                    opt.QueueLimit = 2; //Limit number of request in queue
+                });
+            });
+
+            //RateLimitedAll
+            //builder.Services.AddMemoryCache();
+            //builder.Services.AddRateLimiter(option =>
+            //{
+            //    option.RejectionStatusCode = 429;
+            //    option.GlobalLimiter = PartitionedRateLimiter.Create<HttpContext, string>(HttpContext => RateLimitPartition.GetFixedWindowLimiter(partitionKey: HttpContext.Request.Headers.Host.ToString(),
+            //        factory: partition => new FixedWindowRateLimiterOptions
+            //        {
+            //            AutoReplenishment = true,
+            //            PermitLimit = 10,
+            //            QueueLimit = 0,
+            //            Window = TimeSpan.FromMinutes(1)
+            //        }));
+            //});
+
         }
         public static void myServiceRegister(IServiceCollection Services)
         {

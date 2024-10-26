@@ -2,9 +2,9 @@
 using NewsAPI.Models;
 using NewsAPI.DTOs;
 
-namespace NewsAPI.Data
+namespace NewsAPI.Helpers
 {
-    public class AutoMapperProfile :Profile
+    public class AutoMapperProfile : Profile
     {
         public AutoMapperProfile()
         {

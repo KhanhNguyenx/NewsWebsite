@@ -21,11 +21,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Controllers\Simple\" />
-    <Folder Include="Models\NewFolder\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <Reference Include="EncrypDecryp">
       <HintPath>..\NewsWebsite\EncrypDecryp.dll</HintPath>
     </Reference>

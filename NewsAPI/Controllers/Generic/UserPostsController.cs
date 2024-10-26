@@ -1,35 +1,35 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using NewsAPI.Models;
+using Microsoft.AspNetCore.RateLimiting;
 using NewsAPI.DTOs;
+using NewsAPI.Models;
 using NewsAPI.Services;
 using System.Linq.Expressions;
-using Microsoft.AspNetCore.RateLimiting;
 
 namespace NewsAPI.Controllers
 {
     [EnableRateLimiting("Fixed")]
     [Route("[controller]/[action]"), ApiController]
-    public class CategoriesController : ControllerBase
+    public class UserPostsController : ControllerBase
     {
-        
-        private readonly IGenericServive<Category> _genericServive;
+
+        private readonly IGenericServive<UserPost> _genericServive;
         private readonly IMapper _mapper;
-        
-        public CategoriesController(IGenericServive<Category> genericServive, IMapper mapper)
+
+        public UserPostsController(IGenericServive<UserPost> genericServive, IMapper mapper)
         {
             _genericServive = genericServive;
             _mapper = mapper;
         }
 
         [HttpGet]
-        public async Task<ActionResult<CategoryDTO>> Get(int id) 
+        public async Task<ActionResult<UserPostDTO>> Get(int id)
         {
             var entity = await _genericServive.GetAsync(id);
             if (entity != null)
             {
-                var dto = new CategoryDTO();
+                var dto = new UserPostDTO();
                 _mapper.Map(entity, dto);
                 return Ok(dto);
             }
@@ -38,19 +38,19 @@ namespace NewsAPI.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<Category>> GetFull(int id)
+        public async Task<ActionResult<UserPost>> GetFull(int id)
         {
             return await _genericServive.GetAsync(id);
         }
         [HttpPost]
-        public async Task<ActionResult<CategoryDTO>> Create(CategoryDTO model)
+        public async Task<ActionResult<UserPostDTO>> Create(UserPostDTO model)
         {
-            Expression<Func<Category, int>> filter = (x => x.Id);
+            Expression<Func<UserPost, int>> filter = (x => x.Id);
             // Get Max Id in table of Database --> set for model + 1
             model.Id = await _genericServive.MaxIdAsync(filter) + 1;
 
             //Mapp data model --> newModel
-            var newModel = new Category();
+            var newModel = new UserPost();
             //newModel. = DateTime.Now;
             _mapper.Map(model, newModel);
 
@@ -60,12 +60,12 @@ namespace NewsAPI.Controllers
                 return NoContent();
         }
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<CategoryDTO>>> GetList()
+        public async Task<ActionResult<IEnumerable<UserPostDTO>>> GetList()
         {
             var entityList = await _genericServive.GetListAsync();
             if (entityList != null)
             {
-                var dtoList = new List<CategoryDTO>();
+                var dtoList = new List<UserPostDTO>();
                 _mapper.Map(entityList, dtoList);
                 return Ok(dtoList);
             }
@@ -74,14 +74,14 @@ namespace NewsAPI.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<CategoryDTO>>> Search(string txtSearch)
+        public async Task<ActionResult<IEnumerable<UserPostDTO>>> Search(string txtSearch)
         {
-            Expression<Func<Category, bool>> filter;
-            filter = a => a.Status != -1 && (a.CategoryName!.Contains(txtSearch));
+            Expression<Func<UserPost, bool>> filter;
+            filter = a => a.Status != -1 /*&& (a.PublishedDate!.Contains(txtSearch) || a.Slug!.Contains(txtSearch))*/;
             var entityList = await _genericServive.SearchAsync(filter);
             if (entityList != null)
             {
-                var dtoList = new List<CategoryDTO>();
+                var dtoList = new List<UserPostDTO>();
                 _mapper.Map(entityList, dtoList);
                 return Ok(dtoList);
             }
@@ -118,15 +118,15 @@ namespace NewsAPI.Controllers
         }
 
         //Another Way to Create...
-        //[HttpPost]
-        //public async Task<ActionResult<CategoryDTO>> Create(CategoryDTO model)
+        //[HttpUserPost]
+        //public async Task<ActionResult<UserPostDTO>> Create(UserPostDTO model)
         //{
-        //    Expression<Func<Category, int>> filter = (x => x.Id);
+        //    Expression<Func<UserPost, int>> filter = (x => x.Id);
         //    // Get Max Id in table of Database --> set for model + 1
         //    model.Id = await _genericServive.MaxIdAsync(filter) + 1;
 
         //    //Mapp data model --> newModel
-        //    var newModel = new Category();
+        //    var newModel = new UserPost();
         //    //newModel. = DateTime.Now;
         //    _mapper.Map(model, newModel);
 
@@ -137,7 +137,7 @@ namespace NewsAPI.Controllers
         //}
 
         [HttpPut]
-        public async Task<ActionResult<CategoryDTO>> Update(CategoryDTO model)
+        public async Task<ActionResult<UserPostDTO>> Update(UserPostDTO model)
         {
             var entity = await _genericServive.GetAsync(model.Id);
             if (entity != null)

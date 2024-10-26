@@ -5,6 +5,7 @@ using NewsAPI.Data;
 using NewsAPI.DTOs;
 using NewsWebsite.Models;
 using System.Text;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace NewsWebsite.Areas.Admin.Controllers
 {
@@ -21,28 +22,33 @@ namespace NewsWebsite.Areas.Admin.Controllers
         }
 
         [HttpGet]
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
             List<CategoryDTO> categoryList = new List<CategoryDTO>();
-            HttpResponseMessage response = _client.GetAsync(_client.BaseAddress + "Categories/GetList").Result;
-            if (response.IsSuccessStatusCode)
+            using (var response = await _client.GetAsync($"{_client.BaseAddress}Categories/GetList"))
             {
-                string data = response.Content.ReadAsStringAsync().Result;
-                categoryList = JsonConvert.DeserializeObject<List<CategoryDTO>>(data);
+                if (response.IsSuccessStatusCode)
+                {
+                    var data = await response.Content.ReadAsStringAsync();
+                    categoryList = JsonConvert.DeserializeObject<List<CategoryDTO>>(data);
+                }
             }
             return View(categoryList);
         }
+
         [HttpGet]
-        public IActionResult Upsert()
+        public async Task<IActionResult> Create()
         {
             List<CategoryDTO> categoryList = new List<CategoryDTO>();
 
             // Gọi API lấy danh sách danh mục
-            HttpResponseMessage response = _client.GetAsync(_client.BaseAddress + "Categories/GetList").Result;
-            if (response.IsSuccessStatusCode)
+            using (var response = await _client.GetAsync($"{_client.BaseAddress}Categories/GetList"))
             {
-                string data = response.Content.ReadAsStringAsync().Result;
-                categoryList = JsonConvert.DeserializeObject<List<CategoryDTO>>(data);
+                if (response.IsSuccessStatusCode)
+                {
+                    var data = await response.Content.ReadAsStringAsync();
+                    categoryList = JsonConvert.DeserializeObject<List<CategoryDTO>>(data);
+                }
             }
 
             // Kiểm tra xem categoryList có dữ liệu hay không
@@ -57,85 +63,91 @@ namespace NewsWebsite.Areas.Admin.Controllers
             ViewBag.CategoryList = categoryList;
             var model = new CategoryDTO();
             return View(model);
-
         }
+
         [HttpPost]
-        public IActionResult Upsert(CategoryDTO model)
+        public async Task<IActionResult> Create(CategoryDTO model)
         {
             if (!ModelState.IsValid)
             {
-                return View();
+                return View(model); // Trả về view với model để hiển thị lỗi
             }
+
             try
             {
                 string data = JsonConvert.SerializeObject(model);
-                StringContent content = new StringContent(data, encoding: System.Text.Encoding.UTF8, "application/json");
-                HttpResponseMessage response = _client.PostAsync(_client.BaseAddress + "Categories/Create", content).Result;
-                if (response.IsSuccessStatusCode)
+                using (StringContent content = new StringContent(data, System.Text.Encoding.UTF8, "application/json"))
                 {
-                    TempData["successMessage"] = "Category Created!";
-                    return RedirectToAction("Index");
+                    HttpResponseMessage response = await _client.PostAsync($"{_client.BaseAddress}Categories/Create", content);
+                    if (response.IsSuccessStatusCode)
+                    {
+                        TempData["successMessage"] = "Category Created!";
+                        return RedirectToAction("Index");
+                    }
                 }
             }
             catch (Exception ex)
             {
                 TempData["errorMessage"] = ex.Message;
-                return View();
             }
-            return View();
+
+            return View(model); // Trả về view với model nếu có lỗi
         }
         [HttpGet]
-        public IActionResult Detail()
-        {
-            //CategoryDTO record = new CategoryDTO();
-            //HttpResponseMessage response = _client.GetAsync(_client.BaseAddress + "Categories/Get" + id).Result;
-            //if (response.IsSuccessStatusCode)
-            //{
-            //    string data = response.Content.ReadAsStringAsync().Result;
-            //    record = JsonConvert.DeserializeObject<CategoryDTO>(data);
-            //}
-            //return View(record);
-            return View();
-        }
-        [HttpGet]
-        public IActionResult Delete(int id)
+        public async Task<IActionResult> Edit(int id)
         {
             try
             {
-                CategoryDTO record = new CategoryDTO();
-                HttpResponseMessage response = _client.GetAsync(_client.BaseAddress + "Categories/Get" + id).Result;
-                if (response.IsSuccessStatusCode)
+                CategoryDTO category = null; // Khởi tạo category là null
+                using (var response = await _client.GetAsync($"{_client.BaseAddress}/Categories/Get/{id}"))
                 {
-                    string data = response.Content.ReadAsStringAsync().Result;
-                    record = JsonConvert.DeserializeObject<CategoryDTO>(data);
+                    if (response.IsSuccessStatusCode)
+                    {
+                        var data = await response.Content.ReadAsStringAsync();
+                        category = JsonConvert.DeserializeObject<CategoryDTO>(data);
+                    }
+                    else
+                    {
+                        TempData["errorMessage"] = "Category not found!";
+                        return RedirectToAction("Index"); // Quay về trang Index nếu không tìm thấy
+                    }
                 }
-                return View(record);
-            }
-            catch (Exception ex)
-            {
-                TempData["errorMessage"] = ex.Message;
-                return View();
-            }
-        }
-        [HttpPost, ActionName("Delete")]
-        public IActionResult deletedConfirm(int id)
-        {
-            try
-            {
-                HttpResponseMessage response = _client.DeleteAsync(_client.BaseAddress + "Categories/Delete" + id).Result;
-                if (response.IsSuccessStatusCode)
+
+                if (category == null)
                 {
-                    TempData["successMessage"] = "Category Deleted!";
+                    TempData["errorMessage"] = "Category not found!";
                     return RedirectToAction("Index");
                 }
+
+                return View(category);
             }
             catch (Exception ex)
             {
                 TempData["errorMessage"] = ex.Message;
-                return View();
+                return RedirectToAction("Index"); // Quay về trang Index nếu có lỗi
             }
-            return View();
         }
 
+        [HttpPost]
+        public IActionResult Edit(CategoryDTO model)
+        {
+            try
+            {
+                string data = JsonConvert.SerializeObject(model);
+                StringContent content = new StringContent(data, Encoding.UTF8, "application/json");
+                HttpResponseMessage response = _client.PutAsync(_client.BaseAddress + "/Categories/Update", content).Result;
+                if (response.IsSuccessStatusCode)
+                {
+                    TempData["successMessage"] = "Category Updated!";
+                    return RedirectToAction("Index");
+                }
+            }
+            catch (Exception ex)
+            {
+                TempData["errorMessage"] = ex.Message;
+                return View();
+            }
+            return View();
+        }
     }
 }

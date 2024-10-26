@@ -3256,7 +3256,25 @@
             </header>
             <!-- End of Header -->
             <!-- Content -->
-            
+            @{
+                var errorMessage = TempData["errorMessage"]?.ToString();
+                var successMessage = TempData["successMessage"]?.ToString();
+            }
+            @if (!string.IsNullOrWhiteSpace(successMessage))
+            {
+                <div class="alert alert-success">
+                    <b>Success: </b>@successMessage
+                    <button type="button" class="btn-close float-end" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            }
+            else if (!string.IsNullOrWhiteSpace(errorMessage))
+            {
+                <div class="alert alert-danger">
+                    <b>Error: </b>@errorMessage
+                    <button type="button" class="btn-close float-end" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            }
+
             @RenderBody()
             <!-- End of Content -->
             <!-- Footer -->
@@ -4595,6 +4613,30 @@
     <script src="~/adminAsset/js/alert.js"></script>
     <!-- End of Scripts -->
 
-
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            // Attach click event to delete-category links
+            $(document).on('click', '.delete-category', function () {
+                var categoryId = $(this).data('id');
+                var deleteUrl = `/Categories/Delete/${categoryId}`;
+                console.log(deleteUrl); 
+                // Confirm deletion
+                if (confirm("Are you sure you want to delete this category?")) {
+                    $.ajax({
+                        url: deleteUrl,
+                        type: 'DELETE', // Specify the HTTP method
+                        success: function (result) {
+                            alert("Category deleted successfully!");
+                            location.reload(); // Reload the page to see the updated list
+                        },
+                        error: function (xhr, status, error) {
+                            alert("Error occurred while deleting the category: " + error);
+                        }
+                    });
+                }
+            });
+        });
+    </script>
 </body>
 </html>

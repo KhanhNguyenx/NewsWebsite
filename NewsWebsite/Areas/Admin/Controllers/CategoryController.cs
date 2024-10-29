@@ -93,13 +93,13 @@ namespace NewsWebsite.Areas.Admin.Controllers
 
             return View(model); // Trả về view với model nếu có lỗi
         }
-        [HttpGet]
+        [HttpGet("{id}")]
         public async Task<IActionResult> Edit(int id)
         {
             try
             {
                 CategoryDTO category = null; // Khởi tạo category là null
-                using (var response = await _client.GetAsync($"{_client.BaseAddress}/Categories/Get/{id}"))
+                using (var response = await _client.GetAsync($"{_client.BaseAddress}Categories/Get/{id}"))
                 {
                     if (response.IsSuccessStatusCode)
                     {

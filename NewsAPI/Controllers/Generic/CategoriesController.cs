@@ -53,9 +53,8 @@ namespace NewsAPI.Controllers
             var newModel = new Category();
             //newModel. = DateTime.Now;
             _mapper.Map(model, newModel);
-
-            if (await _genericServive.CreateAsync(newModel) != null)
-                return Ok(model);
+            if(await _genericServive.CreateAsync(newModel) != null)
+                return Ok(newModel);
             else
                 return NoContent();
         }

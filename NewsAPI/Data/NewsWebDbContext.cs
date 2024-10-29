@@ -31,6 +31,7 @@ public partial class NewsWebDbContext : DbContext
     public virtual DbSet<UserPost> UserPosts { get; set; }
 
     public virtual DbSet<UserProfile> UserProfiles { get; set; }
+
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<Category>(entity =>
@@ -45,7 +46,6 @@ public partial class NewsWebDbContext : DbContext
             entity.Property(e => e.CategoryName).HasMaxLength(100);
             entity.Property(e => e.Description).HasMaxLength(250);
             entity.Property(e => e.ParentCategoryId).HasColumnName("ParentCategoryID");
-            entity.Property(e => e.Status).HasDefaultValue(1);
         });
 
         modelBuilder.Entity<Comment>(entity =>
@@ -60,7 +60,6 @@ public partial class NewsWebDbContext : DbContext
                 .HasColumnType("datetime");
             entity.Property(e => e.CommentText).HasColumnType("text");
             entity.Property(e => e.PostId).HasColumnName("PostID");
-            entity.Property(e => e.Status).HasDefaultValue(1);
             entity.Property(e => e.UserId).HasColumnName("UserID");
 
             entity.HasOne(d => d.Post).WithMany(p => p.Comments)
@@ -81,7 +80,6 @@ public partial class NewsWebDbContext : DbContext
                 .HasMaxLength(500)
                 .HasColumnName("ImageURL");
             entity.Property(e => e.PostId).HasColumnName("PostID");
-            entity.Property(e => e.Status).HasDefaultValue(1);
 
             entity.HasOne(d => d.Post).WithMany(p => p.Images)
                 .HasForeignKey(d => d.PostId)
@@ -117,7 +115,7 @@ public partial class NewsWebDbContext : DbContext
         {
             entity.HasKey(e => e.Id).HasName("PK_Id_Post");
 
-            entity.HasIndex(e => e.Slug, "UQ__Posts__BC7B5FB6BB1BA5EB").IsUnique();
+            entity.HasIndex(e => e.Slug, "UQ__Posts__BC7B5FB68C5DC839").IsUnique();
 
             entity.Property(e => e.Id)
                 .ValueGeneratedNever()
@@ -125,7 +123,6 @@ public partial class NewsWebDbContext : DbContext
             entity.Property(e => e.CategoryId).HasColumnName("CategoryID");
             entity.Property(e => e.Contents).HasColumnType("text");
             entity.Property(e => e.Slug).HasMaxLength(200);
-            entity.Property(e => e.Status).HasDefaultValue(1);
             entity.Property(e => e.Title).HasMaxLength(200);
 
             entity.HasOne(d => d.Category).WithMany(p => p.Posts)
@@ -140,26 +137,25 @@ public partial class NewsWebDbContext : DbContext
 
             entity.ToTable(tb => tb.HasTrigger("trg_Users_Log"));
 
-            entity.HasIndex(e => e.Username, "UQ__Users__536C85E42C842A00").IsUnique();
+            entity.HasIndex(e => e.Username, "UQ__Users__536C85E47C32AAD3").IsUnique();
 
-            entity.HasIndex(e => e.Email, "UQ__Users__A9D105344CB5CF38").IsUnique();
+            entity.HasIndex(e => e.Email, "UQ__Users__A9D10534B3544A71").IsUnique();
 
             entity.Property(e => e.Id)
                 .ValueGeneratedNever()
                 .HasColumnName("id");
             entity.Property(e => e.AccessToken)
-                .HasMaxLength(255)
+                .HasMaxLength(1000)
                 .IsUnicode(false);
             entity.Property(e => e.Email).HasMaxLength(100);
             entity.Property(e => e.FullName).HasMaxLength(100);
             entity.Property(e => e.Notes).HasMaxLength(250);
             entity.Property(e => e.PasswordHash).HasMaxLength(256);
             entity.Property(e => e.RefreshToken)
-                .HasMaxLength(255)
+                .HasMaxLength(1000)
                 .IsUnicode(false);
             entity.Property(e => e.RefreshTokenExpiryTime).HasColumnType("datetime");
             entity.Property(e => e.Role).HasMaxLength(50);
-            entity.Property(e => e.Status).HasDefaultValue(1);
             entity.Property(e => e.Username).HasMaxLength(100);
         });
 
@@ -201,7 +197,6 @@ public partial class NewsWebDbContext : DbContext
                 .HasColumnName("AvatarURL");
             entity.Property(e => e.Bio).HasMaxLength(500);
             entity.Property(e => e.SocialLinks).HasMaxLength(1000);
-            entity.Property(e => e.Status).HasDefaultValue(1);
             entity.Property(e => e.UserId).HasColumnName("UserID");
 
             entity.HasOne(d => d.User).WithMany(p => p.UserProfiles)

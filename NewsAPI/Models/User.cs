@@ -23,11 +23,11 @@ public partial class User
 
     public string? Notes { get; set; }
 
+    public DateTime? RefreshTokenExpiryTime { get; set; }
+
     public string? AccessToken { get; set; }
 
     public string? RefreshToken { get; set; }
-
-    public DateTime? RefreshTokenExpiryTime { get; set; }
 
     public virtual ICollection<UserPost> UserPosts { get; set; } = new List<UserPost>();
 

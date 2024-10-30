@@ -1,11 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using NewsAPI.Models;
 using Newtonsoft.Json;
-using NewsAPI.Data;
 using NewsAPI.DTOs;
-using NewsWebsite.Models;
-using System.Text;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace NewsWebsite.Areas.Admin.Controllers
 {
@@ -35,13 +30,14 @@ namespace NewsWebsite.Areas.Admin.Controllers
             }
             return View(categoryList);
         }
-
         [HttpGet]
-        public async Task<IActionResult> Create()
+        public async Task<IActionResult> Upsert(int id = 0)
         {
-            List<CategoryDTO> categoryList = new List<CategoryDTO>();
+            // Initialize an empty model for the view
+            var model = new CategoryDTO();
 
-            // Gọi API lấy danh sách danh mục
+            // Fetch the list of categories for the ParentCategory dropdown
+            List<CategoryDTO> categoryList = new List<CategoryDTO>();
             using (var response = await _client.GetAsync($"{_client.BaseAddress}Categories/GetList"))
             {
                 if (response.IsSuccessStatusCode)
@@ -49,24 +45,39 @@ namespace NewsWebsite.Areas.Admin.Controllers
                     var data = await response.Content.ReadAsStringAsync();
                     categoryList = JsonConvert.DeserializeObject<List<CategoryDTO>>(data);
                 }
+                else
+                {
+                    TempData["ErrorMessage"] = "Failed to retrieve categories list!";
+                }
             }
 
-            // Kiểm tra xem categoryList có dữ liệu hay không
-            if (categoryList == null || categoryList.Count == 0)
-            {
-                // Thêm thông báo lỗi nếu không có dữ liệu
-                TempData["ErrorMessage"] = "No categories found!";
-                return View(); // Trả về view mà không có danh sách
-            }
-
-            // Gán dữ liệu vào ViewBag
+            // Assign category list to ViewBag for the dropdown in the view
             ViewBag.CategoryList = categoryList;
-            var model = new CategoryDTO();
+
+            // If id is not 0, fetch the specific category details for editing
+            if (id != 0)
+            {
+                using (var response = await _client.GetAsync($"{_client.BaseAddress}Categories/Get?id={id}"))
+                {
+                    if (response.IsSuccessStatusCode)
+                    {
+                        var data = await response.Content.ReadAsStringAsync();
+                        model = JsonConvert.DeserializeObject<CategoryDTO>(data);
+                    }
+                    else
+                    {
+                        TempData["ErrorMessage"] = "Failed to retrieve category details!";
+                        return View(model); // Return the view with an error message
+                    }
+                }
+            }
+
             return View(model);
         }
 
+
         [HttpPost]
-        public async Task<IActionResult> Create(CategoryDTO model)
+        public async Task<IActionResult> Upsert(CategoryDTO model)
         {
             if (!ModelState.IsValid)
             {
@@ -93,61 +104,62 @@ namespace NewsWebsite.Areas.Admin.Controllers
 
             return View(model); // Trả về view với model nếu có lỗi
         }
-        [HttpGet("{id}")]
-        public async Task<IActionResult> Edit(int id)
-        {
-            try
-            {
-                CategoryDTO category = null; // Khởi tạo category là null
-                using (var response = await _client.GetAsync($"{_client.BaseAddress}Categories/Get/{id}"))
-                {
-                    if (response.IsSuccessStatusCode)
-                    {
-                        var data = await response.Content.ReadAsStringAsync();
-                        category = JsonConvert.DeserializeObject<CategoryDTO>(data);
-                    }
-                    else
-                    {
-                        TempData["errorMessage"] = "Category not found!";
-                        return RedirectToAction("Index"); // Quay về trang Index nếu không tìm thấy
-                    }
-                }
 
-                if (category == null)
-                {
-                    TempData["errorMessage"] = "Category not found!";
-                    return RedirectToAction("Index");
-                }
+        //[HttpGet("{id}")]
+        //public async Task<IActionResult> Edit(int id)
+        //{
+        //    try
+        //    {
+        //        CategoryDTO category = null; // Khởi tạo category là null
+        //        using (var response = await _client.GetAsync($"{_client.BaseAddress}Categories/Get?{id}"))
+        //        {
+        //            if (response.IsSuccessStatusCode)
+        //            {
+        //                var data = await response.Content.ReadAsStringAsync();
+        //                category = JsonConvert.DeserializeObject<CategoryDTO>(data);
+        //            }
+        //            else
+        //            {
+        //                TempData["errorMessage"] = "Category not found!";
+        //                return RedirectToAction("Index"); // Quay về trang Index nếu không tìm thấy
+        //            }
+        //        }
 
-                return View(category);
-            }
-            catch (Exception ex)
-            {
-                TempData["errorMessage"] = ex.Message;
-                return RedirectToAction("Index"); // Quay về trang Index nếu có lỗi
-            }
-        }
+        //        if (category == null)
+        //        {
+        //            TempData["errorMessage"] = "Category not found!";
+        //            return RedirectToAction("Index");
+        //        }
 
-        [HttpPost]
-        public IActionResult Edit(CategoryDTO model)
-        {
-            try
-            {
-                string data = JsonConvert.SerializeObject(model);
-                StringContent content = new StringContent(data, Encoding.UTF8, "application/json");
-                HttpResponseMessage response = _client.PutAsync(_client.BaseAddress + "/Categories/Update", content).Result;
-                if (response.IsSuccessStatusCode)
-                {
-                    TempData["successMessage"] = "Category Updated!";
-                    return RedirectToAction("Index");
-                }
-            }
-            catch (Exception ex)
-            {
-                TempData["errorMessage"] = ex.Message;
-                return View();
-            }
-            return View();
-        }
+        //        return View(category);
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        TempData["errorMessage"] = ex.Message;
+        //        return RedirectToAction("Index"); // Quay về trang Index nếu có lỗi
+        //    }
+        //}
+
+        //[HttpPost]
+        //public IActionResult Edit(CategoryDTO model)
+        //{
+        //    try
+        //    {
+        //        string data = JsonConvert.SerializeObject(model);
+        //        StringContent content = new StringContent(data, Encoding.UTF8, "application/json");
+        //        HttpResponseMessage response = _client.PutAsync(_client.BaseAddress + "/Categories/Update", content).Result;
+        //        if (response.IsSuccessStatusCode)
+        //        {
+        //            TempData["successMessage"] = "Category Updated!";
+        //            return RedirectToAction("Index");
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        TempData["errorMessage"] = ex.Message;
+        //        return View();
+        //    }
+        //    return View();
+        //}
     }
 }

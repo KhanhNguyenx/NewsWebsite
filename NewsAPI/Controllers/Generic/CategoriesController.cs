@@ -44,7 +44,6 @@ namespace NewsAPI.Controllers
             return await _genericServive.GetAsync(id);
         }
         [HttpPost]
-        [Authorize]
         public async Task<ActionResult<CategoryDTO>> Create(CategoryDTO model)
         {
             Expression<Func<Category, int>> filter = (x => x.Id);

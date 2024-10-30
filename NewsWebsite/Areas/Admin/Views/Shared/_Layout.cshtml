@@ -43,7 +43,7 @@
 
         gtag('config', 'G-52YZ3XGZJ6');
     </script>
-    @await RenderSectionAsync("Scripts", required: false);
+    @await RenderSectionAsync("Scripts", required: false)
 
 </head>
 <body class="antialiased flex h-full text-base text-gray-700 [--tw-page-bg:#fefefe] [--tw-page-bg-dark:var(--tw-coal-500)] demo1 sidebar-fixed header-fixed bg-[--tw-page-bg] dark:bg-[--tw-page-bg-dark]">
@@ -4209,33 +4209,6 @@
     <script src="~/adminAsset/js/apexcharts.min.js"></script>
     <script src="~/adminAsset/js/general.js"></script>
     <script src="~/adminAsset/js/demo1.js"></script>
-    <script src="~/adminAsset/js/alert.js"></script>
     <!-- End of Scripts -->
-
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script type="text/javascript">
-        $(document).ready(function () {
-            // Attach click event to delete-category links
-            $(document).on('click', '.delete-category', function () {
-                var categoryId = $(this).data('id');
-                var deleteUrl = `/Categories/Delete/${categoryId}`;
-                console.log(deleteUrl); 
-                // Confirm deletion
-                if (confirm("Are you sure you want to delete this category?")) {
-                    $.ajax({
-                        url: deleteUrl,
-                        type: 'DELETE', // Specify the HTTP method
-                        success: function (result) {
-                            alert("Category deleted successfully!");
-                            location.reload(); // Reload the page to see the updated list
-                        },
-                        error: function (xhr, status, error) {
-                            alert("Error occurred while deleting the category: " + error);
-                        }
-                    });
-                }
-            });
-        });
-    </script>
 </body>
 </html>

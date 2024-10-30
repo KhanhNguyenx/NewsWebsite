@@ -125,7 +125,7 @@
                 {
                     @foreach (var category in ViewBag.CategoryList)
                     {
-                        <option value="@category.Id == @Model.ParentCategoryId">@category.CategoryName</option>
+                        <option value="@category.Id">@category.CategoryName</option>
                     }
                 }
                 else

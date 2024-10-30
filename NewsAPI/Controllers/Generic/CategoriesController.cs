@@ -10,7 +10,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace NewsAPI.Controllers
 {
-    [EnableRateLimiting("Fixed")]
+    //[EnableRateLimiting("Fixed")]
     [Route("[controller]/[action]"), ApiController]
     public class CategoriesController : ControllerBase
     {

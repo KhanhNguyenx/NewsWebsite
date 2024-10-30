@@ -6,6 +6,7 @@ using NewsAPI.DTOs;
 using NewsAPI.Services;
 using System.Linq.Expressions;
 using Microsoft.AspNetCore.RateLimiting;
+using Microsoft.AspNetCore.Authorization;
 
 namespace NewsAPI.Controllers
 {
@@ -43,6 +44,7 @@ namespace NewsAPI.Controllers
             return await _genericServive.GetAsync(id);
         }
         [HttpPost]
+        [Authorize]
         public async Task<ActionResult<CategoryDTO>> Create(CategoryDTO model)
         {
             Expression<Func<Category, int>> filter = (x => x.Id);
@@ -54,7 +56,7 @@ namespace NewsAPI.Controllers
             //newModel. = DateTime.Now;
             _mapper.Map(model, newModel);
             if(await _genericServive.CreateAsync(newModel) != null)
-                return Ok(newModel);
+                return Ok(model);
             else
                 return NoContent();
         }

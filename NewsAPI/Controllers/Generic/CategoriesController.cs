@@ -148,5 +148,18 @@ namespace NewsAPI.Controllers
             }
             return NotFound();
         }
+        [HttpGet]
+        public async Task<IActionResult> GetPagedProducts(int pageNumber, int pageSize)
+        {
+            var (records, totalRecords) = await _genericServive.GetPagedListAsync(pageNumber, pageSize);
+            var result = new
+            {
+                TotalRecords = totalRecords,
+                PageNumber = pageNumber,
+                PageSize = pageSize,
+                Records = _mapper.Map<IEnumerable<CategoryDTO>>(records)
+            };
+            return Ok(result);
+        }
     }
 }

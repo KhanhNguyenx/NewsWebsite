@@ -48,7 +48,7 @@ namespace NewsAPI.Services
                 var propertyInfo = entity.GetType().GetProperty("Status");
                 if (propertyInfo != null)
                 {
-                    propertyInfo.SetValue(entity, 0); // Đặt Status = 0 (tương đương với việc "xóa")
+                    propertyInfo.SetValue(entity, -1); // Đặt Status = 0 (tương đương với việc "xóa")
                 }
 
                 _context.Entry(entity).State = EntityState.Modified; // Cập nhật trạng thái

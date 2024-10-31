@@ -1,11 +1,6 @@
-﻿using EncrypDecryp;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.IdentityModel.Tokens;
+﻿using Microsoft.EntityFrameworkCore;
 using NewsAPI.Data;
-using System.Configuration;
-using System.Text;
+using NewsAPI.Services;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -16,6 +11,11 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddRazorPages().AddRazorRuntimeCompilation();
 var getConnectionStr = builder.Configuration.GetConnectionString("MyConnectString");
 builder.Services.AddDbContext<NewsWebDbContext>(option => option.UseSqlServer(getConnectionStr));
+
+builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+builder.Services.AddScoped(typeof(IGenericServive<>), typeof(GenericService<>));
+builder.Services.AddControllersWithViews();
+
 //builder.Services.ConfigureApplicationCookie(options =>
 //{
 //    options.Cookie.SameSite = SameSiteMode.Lax;

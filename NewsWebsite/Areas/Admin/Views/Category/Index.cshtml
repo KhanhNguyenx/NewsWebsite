@@ -70,17 +70,16 @@
                                     <td>
                                         @if (item.Status == 1)
                                         {
-                                            <span class="badge badge-soft-success mb-0">On</span>
+                                            <span class="badge rounded-pill bg-success mb-0">On</span>
                                         }
                                         else if (item.Status == 0)
                                         {
-                                            <span class="badge badge-soft-danger mb-0">Off</span>
+                                            <span class="badge rounded-pill bg-warning mb-0">Off</span>
                                         }
                                         else
                                         {
-                                            <span class="badge badge-soft-warning mb-0">Deleted</span>
+                                            <span class="badge rounded-pill bg-danger mb-0">Deleted</span>
                                         }
-
                                     </td>
                                     <td>
                                         <ul class="list-inline mb-0">
@@ -130,4 +129,27 @@
         </div>
     </div>
 </div>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $('.delete-category').on('click', function () {
+            var categoryId = $(this).data('id'); // Lấy ID từ thuộc tính data-id
+            var confirmation = confirm('Bạn có chắc chắn muốn xóa danh mục này?');
+
+            if (confirmation) {
+                $.ajax({
+                    url: '/Categories/UpDelete?id=' + categoryId, // Đường dẫn đến API xóa
+                    type: 'DELETE', // Phương thức DELETE
+                    success: function (result) {
+                        alert('Danh mục đã được xóa thành công.');
+                        location.reload(); // Tải lại trang để cập nhật danh sách
+                    },
+                    error: function (xhr, status, error) {
+                        alert('Có lỗi xảy ra: ' + xhr.responseText);
+                    }
+                });
+            }
+        });
+    });
+</script>
 

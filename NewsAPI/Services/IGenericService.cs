@@ -20,6 +20,7 @@ namespace NewsAPI.Services
         Task<IEnumerable<T>> GetTopAsync<TKey>(int count, Expression<Func<T, TKey>> orderBy);
         // Lấy các đối tượng mới nhất
         Task<IEnumerable<T>> GetLatestAsync<TKey>(int count, Expression<Func<T, TKey>> orderByDescending);
+        Task<(IEnumerable<T>, int)> GetPagedListAsync(int pageNumber, int pageSize);
 
     }
     public class GenericService<T> : IGenericServive<T> where T : class
@@ -118,6 +119,15 @@ namespace NewsAPI.Services
         public async Task<IEnumerable<T>> GetLatestAsync<TKey>(int count, Expression<Func<T, TKey>> orderByDescending)
         {
             return await _dbSet.OrderByDescending(orderByDescending).Take(count).ToListAsync();
+        }
+        public async Task<(IEnumerable<T>, int)> GetPagedListAsync(int pageNumber, int pageSize)
+        {
+            var totalRecords = await _dbSet.CountAsync();
+            var data = await _dbSet
+                .Skip((pageNumber - 1) * pageSize)
+                .Take(pageSize)
+                .ToListAsync();
+            return (data, totalRecords);
         }
     }
 }

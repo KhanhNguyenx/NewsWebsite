@@ -53,8 +53,8 @@
                             
                             <div class="card-body dropzone">
                                 <div class="mb-4">
-                                    <h5 class="fs-14 mb-1">Product Image</h5>
-                                    <p class="text-muted">Add Product main Image.</p>
+                                    <h5 class="fs-14 mb-1"> Image</h5>
+                                    <p class="text-muted">Add main Image.</p>
                                     <div class="text-center">
                                         <div class="position-relative d-inline-block">
                                             <div class="position-absolute top-100 start-100 translate-middle">
@@ -149,7 +149,7 @@
                                                 <div class="mb-3">
                                                     <label class="form-label" for="stocks-input">Stocks</label>
                                                     <input type="text" class="form-control" id="stocks-input" placeholder="Stocks" required="">
-                                                    <div class="invalid-feedback">Please Enter a product stocks.</div>
+                                                    <div class="invalid-feedback">Please Enter a stocks.</div>
                                                 </div>
                                             </div>
                                             <div class="col-lg-3 col-sm-6">
@@ -158,7 +158,7 @@
                                                     <div class="input-group has-validation mb-3">
                                                         <span class="input-group-text" id="product-price-addon">$</span>
                                                         <input type="text" class="form-control" id="product-price-input" placeholder="Enter price" aria-label="Price" aria-describedby="product-price-addon" required="">
-                                                        <div class="invalid-feedback">Please Enter a product price.</div>
+                                                        <div class="invalid-feedback">Please Enter a price.</div>
                                                     </div>
 
                                                 </div>
@@ -176,7 +176,7 @@
                                                 <div class="mb-3">
                                                     <label class="form-label" for="orders-input">Orders</label>
                                                     <input type="text" class="form-control" id="orders-input" placeholder="Orders" required="">
-                                                    <div class="invalid-feedback">Please Enter a product orders.</div>
+                                                    <div class="invalid-feedback">Please Enter a orders.</div>
                                                 </div>
                                             </div>
                                             <!-- end col -->
@@ -217,9 +217,13 @@
                             <!-- end card body -->
                         </div>
                         <!-- end card -->
-                        <div class="text-end mb-3">
-                            <button type="submit" class="btn btn-success w-sm">Submit</button>
+                        <div class="d-flex justify-content-between mb-3">
+                            <a href="@Url.Action("Index", "Post")" class="btn btn-danger w-sm">Back</a>
+                            <a href="#" class="btn btn-success w-sm">Submit</a>
+                            
                         </div>
+
+
                     </div>
                     <!-- end col -->
 
@@ -267,14 +271,14 @@
 
                         <div class="card">
                             <div class="card-header">
-                                <h5 class="card-title mb-0">Product Categories</h5>
+                                <h5 class="card-title mb-0"> Categories</h5>
                             </div>
                             <div class="card-body">
                                 <p class="text-muted mb-2">
                                     <a href="@Url.Action("Upsert", "Category")" class="float-end text-decoration-underline">
                                         Add
                                         New
-                                    </a>Select product category
+                                    </a>Select category
                                 </p>
                                 <select class="form-select" id="choices-category-input" name="choices-category-input" data-choices="" data-choices-search-false="">
                                     <option value="Appliances">Appliances</option>
@@ -292,7 +296,7 @@
                         <!-- end card -->
                         <div class="card">
                             <div class="card-header">
-                                <h5 class="card-title mb-0">Product Tags</h5>
+                                <h5 class="card-title mb-0">Tags</h5>
                             </div>
                             <div class="card-body">
                                 <div class="hstack gap-3 align-items-start">
@@ -307,10 +311,10 @@
 
                         <div class="card">
                             <div class="card-header">
-                                <h5 class="card-title mb-0">Product Short Description</h5>
+                                <h5 class="card-title mb-0"> Short Description</h5>
                             </div>
                             <div class="card-body">
-                                <p class="text-muted mb-2">Add short description for product</p>
+                                <p class="text-muted mb-2">Add short description </p>
                                 <textarea class="form-control" placeholder="Must enter minimum of a 100 characters" rows="3"></textarea>
                             </div>
                             <!-- end card body -->

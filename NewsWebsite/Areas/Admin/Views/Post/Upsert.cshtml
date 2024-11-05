@@ -50,10 +50,8 @@
                         </div>
                         <!-- end card -->
                         <div class="card">
-                            <div class="card-header">
-                                <h5 class="card-title mb-0">Product Gallery</h5>
-                            </div>
-                            <div class="card-body">
+                            
+                            <div class="card-body dropzone">
                                 <div class="mb-4">
                                     <h5 class="fs-14 mb-1">Product Image</h5>
                                     <p class="text-muted">Add Product main Image.</p>
@@ -70,7 +68,7 @@
                                                 <input class="form-control d-none" value="" id="product-image-input" type="file" accept="image/png, image/gif, image/jpeg">
                                             </div>
                                             <div class="avatar-lg">
-                                                <div class="avatar-title bg-light rounded">
+                                                <div class="avatar-title bg-light rounded" >
                                                     <img src="" id="product-img" class="avatar-md h-auto">
                                                 </div>
                                             </div>
@@ -78,20 +76,8 @@
                                     </div>
                                 </div>
                                 <div>
-                                    <h5 class="fs-14 mb-1">Product Gallery</h5>
-                                    <p class="text-muted">Add Product Gallery Images.</p>
-                                    <div class="dropzone">
-                                        <div class="fallback">
-                                            <input name="file" type="file" multiple="multiple">
-                                        </div>
-                                        <div class="dz-message needsclick">
-                                            <div class="mb-3">
-                                                <i class="display-4 text-muted ri-upload-cloud-2-fill"></i>
-                                            </div>
-
-                                            <h5>Drop files here or click to upload.</h5>
-                                        </div>
-                                    </div>
+                                   
+                                    
 
                                     <ul class="list-unstyled mb-0" id="dropzone-preview">
                                         <li class="mt-2" id="dropzone-preview-list">
@@ -285,7 +271,7 @@
                             </div>
                             <div class="card-body">
                                 <p class="text-muted mb-2">
-                                    <a href="#" class="float-end text-decoration-underline">
+                                    <a href="@Url.Action("Upsert", "Category")" class="float-end text-decoration-underline">
                                         Add
                                         New
                                     </a>Select product category

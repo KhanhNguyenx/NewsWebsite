@@ -1,8 +1,9 @@
 {
   "ExpandedNodes": [
     "",
+    "\\NewsAPI",
     "\\NewsWebsite"
   ],
-  "SelectedNode": "\\NewsWebsite\\NewsWebsite.sln",
+  "SelectedNode": "\\NewsAPI\\appsettings.json",
   "PreviewInSolutionExplorer": false
 }

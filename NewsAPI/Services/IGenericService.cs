@@ -48,7 +48,7 @@ namespace NewsAPI.Services
                 var propertyInfo = entity.GetType().GetProperty("Status");
                 if (propertyInfo != null)
                 {
-                    propertyInfo.SetValue(entity, -1); // Đặt Status = 0 (tương đương với việc "xóa")
+                    propertyInfo.SetValue(entity, 0); // Đặt Status = 0 (tương đương với việc "xóa")
                 }
 
                 _context.Entry(entity).State = EntityState.Modified; // Cập nhật trạng thái
@@ -92,9 +92,9 @@ namespace NewsAPI.Services
             return await _dbSet.Where(exception).ToListAsync();
         }
 
-        public async Task<int> MaxIdAsync(Expression<Func<T, int>> exception)
+        public async Task<int> MaxIdAsync(Expression<Func<T, int>> selector)
         {
-            return await _dbSet.MaxAsync(exception);
+            return await _dbSet.AnyAsync() ? await _dbSet.MaxAsync(selector) : 0;
         }
 
         public async Task<int> MinIdAsync(Expression<Func<T, int>> exception)

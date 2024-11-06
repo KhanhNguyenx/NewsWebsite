@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using NewsAPI.Data;
 using NewsAPI.Helpers;
+using NewsAPI.Middleware;
 using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -37,10 +38,13 @@ app.UseCors();
 //app.UseCors("AllowAll");
 app.UseRateLimiter();
 app.MapControllers();
+//app.UseMiddleware<AntiXSSMiddleware>();
 //ConfigAuthen
 app.UseAuthentication();
 
 app.UseAuthorization();
+
+app.UseMiddleware<JwtExpirationMiddleware>();
 
 app.MapControllers();
 

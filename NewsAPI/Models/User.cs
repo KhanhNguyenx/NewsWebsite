@@ -15,19 +15,15 @@ public partial class User
 
     public string FullName { get; set; } = null!;
 
-    public string Role { get; set; } = null!;
-
     public bool IsAuthor { get; set; }
 
     public int Status { get; set; }
 
     public string? Notes { get; set; }
 
-    public DateTime? RefreshTokenExpiryTime { get; set; }
+    public virtual ICollection<RefreshToken> RefreshTokens { get; set; } = new List<RefreshToken>();
 
-    public string? AccessToken { get; set; }
-
-    public string? RefreshToken { get; set; }
+    public virtual ICollection<RoleUser> RoleUsers { get; set; } = new List<RoleUser>();
 
     public virtual ICollection<UserPost> UserPosts { get; set; } = new List<UserPost>();
 

@@ -8,6 +8,9 @@ using System.Text;
 using EncrypDecryp;
 using Microsoft.AspNetCore.RateLimiting;
 using System.Threading.RateLimiting;
+using NewsAPI.Services.SimpleService;
+using NewsAPI.Controllers.Generic;
+using NewsAPI.Controllers;
 
 namespace NewsAPI.Helpers
 {
@@ -117,6 +120,10 @@ namespace NewsAPI.Helpers
 
             Services.AddAutoMapper(typeof(AutoMapperProfile).Assembly);
             Services.AddScoped<IAppSettingService, AppSettingService>();
+            Services.AddScoped<IUserService, UserService>();
+            Services.AddScoped<UsersController>();
+            Services.AddScoped<RoleUsersController>();
+            Services.AddScoped<IRefreshTokenService, RefreshTokenService>();
             //Services.AddTransient<IOTPService, IOTPService>();
             Services.AddScoped(typeof(IGenericServive<>), typeof(GenericService<>));
             Services.AddCors(options =>

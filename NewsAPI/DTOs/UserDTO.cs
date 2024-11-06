@@ -15,8 +15,6 @@ public partial class UserDTO
 
     public string FullName { get; set; } = null!;
 
-    public string Role { get; set; } = null!;
-
     public bool IsAuthor { get; set; }
 
     public int Status { get; set; }

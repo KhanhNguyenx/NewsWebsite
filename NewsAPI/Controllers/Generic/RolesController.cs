@@ -1,80 +1,69 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using NewsAPI.Models;
 using NewsAPI.DTOs;
+using NewsAPI.Models;
 using NewsAPI.Services;
 using System.Linq.Expressions;
-using Microsoft.IdentityModel.Tokens;
-using System.IdentityModel.Tokens.Jwt;
-using System.Security.Claims;
-using System.Text;
-using NewsAPI.Data;
-using Microsoft.AspNetCore.Authorization;
-using EncrypDecryp;
-using System.Security.Cryptography;
-using NewsAPI.Services.SimpleService;
 
 namespace NewsAPI.Controllers.Generic
 {
+    //[EnableRateLimiting("Fixed")]
     [Route("[controller]/[action]"), ApiController]
-    public class UsersController : ControllerBase
+    public class RolesController : ControllerBase
     {
-        private readonly IGenericServive<User> _genericServive;
-        private readonly IUserService _userService;
+
+        private readonly IGenericServive<Role> _genericServive;
         private readonly IMapper _mapper;
 
-        public UsersController(IGenericServive<User> genericServive, IMapper mapper, IUserService user)
+        public RolesController(IGenericServive<Role> genericServive, IMapper mapper)
         {
             _genericServive = genericServive;
             _mapper = mapper;
-            _userService = user;
         }
+
         [HttpGet]
-        public async Task<ActionResult<UserDTO>> Get(int id)
+        public async Task<ActionResult<RoleDTO>> Get(int id)
         {
-            var entity = await _userService.GetAsync(id);
+            var entity = await _genericServive.GetAsync(id);
             if (entity != null)
             {
-                var dto = new UserDTO();
+                var dto = new RoleDTO();
                 _mapper.Map(entity, dto);
                 return Ok(dto);
             }
             else
                 return NoContent();
         }
+
         [HttpGet]
-        public async Task<ActionResult<User>> GetFull(int id)
+        public async Task<ActionResult<Role>> GetFull(int id)
         {
-            return await _userService.GetAsync(id);
+            return await _genericServive.GetAsync(id);
         }
         [HttpPost]
-        //[Authorize]
-        public async Task<ActionResult<UserDTO>> Create([FromBody]UserDTO model)
+        public async Task<ActionResult<RoleDTO>> Create(RoleDTO model)
         {
-            if (ModelState.IsValid)
-            {
-                // Get Max Id in table of Database --> set for model + 1
-                model.Id = await _userService.MaxIdAsync(model.Id) + 1;
+            Expression<Func<Role, int>> filter = (x => x.Id);
+            // Get Max Id in table of Database --> set for model + 1
+            model.Id = await _genericServive.MaxIdAsync(filter) + 1;
 
-                //Mapp data model --> newModel
-                var newModel = new User();
-                //newModel. = DateTime.Now;
-                _mapper.Map(model, newModel);
-
-                if (await _userService.CreateAsync(newModel) != null)
-                    return Ok(model);
-            }
-            return NoContent();
+            //Mapp data model --> newModel
+            var newModel = new Role();
+            //newModel. = DateTime.Now;
+            _mapper.Map(model, newModel);
+            if (await _genericServive.CreateAsync(newModel) != null)
+                return Ok(model);
+            else
+                return NoContent();
         }
         [HttpGet]
-        //[Authorize("RequireAdminRole")]
-        public async Task<ActionResult<IEnumerable<UserDTO>>> GetList()
+        public async Task<ActionResult<IEnumerable<RoleDTO>>> GetList()
         {
-            var entityList = await _userService.GetListAsync();
+            var entityList = await _genericServive.GetListAsync();
             if (entityList != null)
             {
-                var dtoList = new List<UserDTO>();
+                var dtoList = new List<RoleDTO>();
                 _mapper.Map(entityList, dtoList);
                 return Ok(dtoList);
             }
@@ -83,14 +72,14 @@ namespace NewsAPI.Controllers.Generic
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<UserDTO>>> Search(string txtSearch)
+        public async Task<ActionResult<IEnumerable<RoleDTO>>> Search(string txtSearch)
         {
-            Expression<Func<User, bool>> filter;
-            filter = a => a.Status != -1 && (a.FullName!.Contains(txtSearch));
-            var entityList = await _userService.SearchAsync(filter);
+            Expression<Func<Role, bool>> filter;
+            filter = a => a.Status != -1 && (a.Name!.Contains(txtSearch));
+            var entityList = await _genericServive.SearchAsync(filter);
             if (entityList != null)
             {
-                var dtoList = new List<UserDTO>();
+                var dtoList = new List<RoleDTO>();
                 _mapper.Map(entityList, dtoList);
                 return Ok(dtoList);
             }
@@ -99,13 +88,15 @@ namespace NewsAPI.Controllers.Generic
         }
 
         //Delete Forever
-        [HttpDelete]
+        [HttpDelete("{id}")]
         public ActionResult Delete(int id)
         {
-            var result = _userService.Delete(id);
-            if (result == 1)
+            var entity = _genericServive.GetAsync(id);
+            if (entity != null)
             {
-                return Ok(new { success = true, message = "Record is deleted." });
+                var result = _genericServive.Delete(entity.Result);
+                if (result > 0)
+                    return Ok("Record is deleted");
             }
             return NotFound();
         }
@@ -126,14 +117,14 @@ namespace NewsAPI.Controllers.Generic
 
         //Another Way to Create...
         //[HttpPost]
-        //public async Task<ActionResult<UsersDTO>> Create(UsersDTO model)
+        //public async Task<ActionResult<RoleDTO>> Create(RoleDTO model)
         //{
-        //    Expression<Func<Users, int>> filter = (x => x.Id);
+        //    Expression<Func<Role, int>> filter = (x => x.Id);
         //    // Get Max Id in table of Database --> set for model + 1
         //    model.Id = await _genericServive.MaxIdAsync(filter) + 1;
 
         //    //Mapp data model --> newModel
-        //    var newModel = new Users();
+        //    var newModel = new Role();
         //    //newModel. = DateTime.Now;
         //    _mapper.Map(model, newModel);
 
@@ -144,9 +135,9 @@ namespace NewsAPI.Controllers.Generic
         //}
 
         [HttpPut]
-        public async Task<ActionResult<UserDTO>> Update(UserDTO model)
+        public async Task<ActionResult<RoleDTO>> Update(RoleDTO model)
         {
-            var entity = await _userService.GetAsync(model.Id);
+            var entity = await _genericServive.GetAsync(model.Id);
             if (entity != null)
             {
                 _mapper.Map(model, entity);
@@ -154,6 +145,19 @@ namespace NewsAPI.Controllers.Generic
                     return Ok(model);
             }
             return NotFound();
+        }
+        [HttpGet]
+        public async Task<IActionResult> GetPagedProducts(int pageNumber, int pageSize)
+        {
+            var (records, totalRecords) = await _genericServive.GetPagedListAsync(pageNumber, pageSize);
+            var result = new
+            {
+                TotalRecords = totalRecords,
+                PageNumber = pageNumber,
+                PageSize = pageSize,
+                Records = _mapper.Map<IEnumerable<RoleDTO>>(records)
+            };
+            return Ok(result);
         }
     }
 }

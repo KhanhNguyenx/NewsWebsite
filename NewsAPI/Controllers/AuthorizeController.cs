@@ -112,21 +112,21 @@ namespace NewsAPI.Controllers
 
             // Mã hóa mật khẩu
             var hashedPassword = BCrypt.Net.BCrypt.HashPassword(model.PasswordHash);
-            var newAccount = new User
-            {
-                Username = model.Username,
-                PasswordHash = hashedPassword,
-                Email = model.Email,
-                Status = 1,
-            };
+            //var newAccount = new User
+            //{
+            //    Username = model.Username,
+            //    PasswordHash = hashedPassword,
+            //    Email = model.Email,
+            //    FullName =model.Username,
+            //};
 
             // Tạo UserDTO từ newAccount
             var newAccountDTO = new UserDTO
             {
-                Username = newAccount.Username,
-                PasswordHash = newAccount.PasswordHash,
-                Email = newAccount.Email,
-                Status = newAccount.Status,
+                Username = model.Username,
+                PasswordHash = model.PasswordHash,
+                Email = model.Email,
+                FullName =model.Username,
             };
 
             try

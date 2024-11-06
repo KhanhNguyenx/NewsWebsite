@@ -23,6 +23,31 @@
     @{
         Layout = null;
     }
+    <style>
+        .avatar-lg {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .rectangle-avatar {
+            width: 500px;
+            height: 200px;
+            border-radius: 8px; /* Optional */
+            overflow: hidden; /* Ensures image stays within bounds */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        #product-img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+    </style>
 </head>
 <body>
 
@@ -57,29 +82,32 @@
                                     <p class="text-muted">Add main Image.</p>
                                     <div class="text-center">
                                         <div class="position-relative d-inline-block">
-                                            <div class="position-absolute top-100 start-100 translate-middle">
-                                                <label for="product-image-input" class="mb-0" data-bs-toggle="tooltip" data-bs-placement="right" title="Select Image">
-                                                    <div class="avatar-xs">
-                                                        <div class="avatar-title bg-light border rounded-circle text-muted cursor-pointer">
-                                                            <i class="ri-image-fill"></i>
-                                                        </div>
-                                                    </div>
-                                                </label>
+                                            <div class="position-absolute top-100 start-100">
+                                                
                                                 <input class="form-control d-none" value="" id="product-image-input" type="file" accept="image/png, image/gif, image/jpeg">
                                             </div>
-                                            <div class="avatar-lg">
-                                                <div class="avatar-title bg-light rounded" >
-                                                    <img src="" id="product-img" class="avatar-md h-auto">
+                                            <div class="avatar-lg d-flex justify-content-center align-items-center">
+                                                <label for="product-image-input" class="mb-0" data-bs-toggle="tooltip" data-bs-placement="right" title="Select Image">
+                                                <div class="avatar-title bg-light border rectangle-avatar position-relative">
+                                                    <img src="" id="product-img" class="img-fluid h-100 w-100" alt="">
+                                                    <button id="delete-image" class="btn btn-danger btn-sm position-absolute top-0 end-0 m-2 d-none">
+                                                        Delete
+                                                    </button>
                                                 </div>
+                                                </label>
                                             </div>
+                                            <input class="form-control d-none" id="product-image-input" type="file" accept="image/png, image/gif, image/jpeg">
+
+
                                         </div>
                                     </div>
                                 </div>
+                                
                                 <div>
                                    
                                     
 
-                                    <ul class="list-unstyled mb-0" id="dropzone-preview">
+                                   @*  <ul class="list-unstyled mb-0" id="dropzone-preview">
                                         <li class="mt-2" id="dropzone-preview-list">
                                             <!-- This is used as the file preview template -->
                                             <div class="border rounded">
@@ -102,7 +130,7 @@
                                                 </div>
                                             </div>
                                         </li>
-                                    </ul>
+                                    </ul> *@
                                     <!-- end dropzon-preview -->
                                 </div>
                             </div>
@@ -362,5 +390,37 @@
     <script src="~/Upsert/js/ecommerce-product-create.init.js"></script>
     <!-- App js -->
     <script src="~/Upsert/js/app.js"></script>
+    <script>
+        document.getElementById('product-image-input').addEventListener('change', function (event) {
+            const fileInput = event.target;
+            const productImg = document.getElementById('product-img');
+            const deleteButton = document.getElementById('delete-image');
+
+            // Show the uploaded image preview
+            if (fileInput.files && fileInput.files[0]) {
+                const reader = new FileReader();
+                reader.onload = function (e) {
+                    productImg.src = e.target.result;
+                    deleteButton.classList.remove('d-none'); // Show delete button
+                };
+                reader.readAsDataURL(fileInput.files[0]);
+            }
+        });
+
+        document.getElementById('delete-image').addEventListener('click', function (event) {
+            event.preventDefault(); // Prevent default form reset behavior
+
+            const productImg = document.getElementById('product-img');
+            const fileInput = document.getElementById('product-image-input');
+            const deleteButton = document.getElementById('delete-image');
+
+            // Clear only the image preview and file input
+            productImg.src = ''; // Remove the image preview
+            fileInput.value = ''; // Reset file input
+            deleteButton.classList.add('d-none'); // Hide delete button
+        });
+
+
+    </script>
 </body>
 </html>

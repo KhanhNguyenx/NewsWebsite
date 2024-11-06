@@ -2,8 +2,14 @@
   "ExpandedNodes": [
     "",
     "\\NewsAPI",
-    "\\NewsWebsite"
+    "\\NewsAPI\\Controllers",
+    "\\NewsAPI\\Controllers\\Generic",
+    "\\NewsWebsite",
+    "\\NewsWebsite\\Areas",
+    "\\NewsWebsite\\Areas\\Admin",
+    "\\NewsWebsite\\Areas\\Admin\\Views",
+    "\\NewsWebsite\\Areas\\Admin\\Views\\Shared"
   ],
-  "SelectedNode": "\\NewsAPI\\appsettings.json",
+  "SelectedNode": "\\NewsWebsite\\Areas\\Admin\\Views\\Shared\\_Layout.cshtml",
   "PreviewInSolutionExplorer": false
 }

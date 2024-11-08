@@ -44,6 +44,7 @@ namespace NewsAPI.Controllers.Generic
                 return NoContent();
         }
         [HttpGet]
+        [Authorize("RequireAdminRole")]
         public async Task<ActionResult<User>> GetFull(int id)
         {
             return await _userService.GetAsync(id);

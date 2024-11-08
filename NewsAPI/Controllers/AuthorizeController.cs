@@ -17,7 +17,7 @@ using NewsAPI.Controllers.Generic;
 
 namespace NewsAPI.Controllers
 {
-    [Route("api/auth"), ApiController]
+    [Route("[controller]/[action]"), ApiController]
     public class AuthorizeController : ControllerBase
     {
         private readonly IConfiguration _configuration;
@@ -88,7 +88,7 @@ namespace NewsAPI.Controllers
                 refreshToken = refreshToken.Token
             });
         }
-        [HttpPost("register")]
+        [HttpPost]
         public async Task<ActionResult> RegisterAsync(
                                 [FromBody] RegisterModel model,
                                 [FromServices] IServiceProvider serviceProvider)

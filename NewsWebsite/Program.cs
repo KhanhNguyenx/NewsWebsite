@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using NewsAPI.Data;
 using NewsAPI.Services;
+using NewsWebsite;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -40,6 +41,7 @@ app.UseStaticFiles();
 app.UseRouting();
 app.UseAuthentication();
 app.UseAuthorization();
+app.UseMiddleware<CheckCookieExpirationMiddleware>();
 
 app.MapControllerRoute(
     name: "areas",

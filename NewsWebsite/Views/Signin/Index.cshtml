@@ -1,6 +1,7 @@
 ﻿@{
     Layout = null;
 }
+@model NewsWebsite.Helpers.LoginM
 <!--
 Product: Metronic is a toolkit of UI components built with Tailwind CSS for developing scalable web applications quickly and efficiently
 Version: v9.0.6
@@ -124,14 +125,14 @@ License: https://keenthemes.com/metronic/tailwind/docs/getting-started/license
                     </span>
                 </div>
                 <div class="flex flex-col gap-1">
-                    <label class="form-label font-normal text-gray-900">
+                    <label asp-for="@Model.UserName" class=" form-label font-normal text-gray-900">
                         Email
                     </label>
                     <input class="input" placeholder="email@email.com" type="text" value="">
                 </div>
                 <div class="flex flex-col gap-1">
                     <div class="flex items-center justify-between gap-1">
-                        <label class="form-label font-normal text-gray-900">
+                        <label asp-for="@Model.Password" class=" form-label font-normal text-gray-900">
                             Password
                         </label>
                         <a class="text-2sm link shrink-0" href="/metronic/tailwind/demo1/authentication/classic/reset-password/enter-email/">

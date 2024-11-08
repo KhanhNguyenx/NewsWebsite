@@ -1,7 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using NewsAPI.Data;
 using NewsAPI.Services;
+using NewsAPI.Services.SimpleService;
 using NewsWebsite;
+using NewsWebsite.Services;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -16,6 +18,8 @@ builder.Services.AddDbContext<NewsWebDbContext>(option => option.UseSqlServer(ge
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 builder.Services.AddScoped(typeof(IGenericServive<>), typeof(GenericService<>));
 builder.Services.AddControllersWithViews();
+builder.Services.AddScoped<IConsumeApi, ConsumeApi>();
+
 
 //builder.Services.ConfigureApplicationCookie(options =>
 //{

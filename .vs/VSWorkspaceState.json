@@ -1,15 +1,16 @@
 {
   "ExpandedNodes": [
     "",
-    "\\NewsAPI",
-    "\\NewsAPI\\Controllers",
-    "\\NewsAPI\\Controllers\\Generic",
     "\\NewsWebsite",
     "\\NewsWebsite\\Areas",
     "\\NewsWebsite\\Areas\\Admin",
     "\\NewsWebsite\\Areas\\Admin\\Views",
-    "\\NewsWebsite\\Areas\\Admin\\Views\\Shared"
+    "\\NewsWebsite\\Areas\\Admin\\Views\\Post",
+    "\\NewsWebsite\\Areas\\Admin\\Views\\Shared",
+    "\\NewsWebsite\\wwwroot",
+    "\\NewsWebsite\\wwwroot\\Upsert",
+    "\\NewsWebsite\\wwwroot\\Upsert\\js"
   ],
-  "SelectedNode": "\\NewsWebsite\\Areas\\Admin\\Views\\Shared\\_Layout.cshtml",
+  "SelectedNode": "\\NewsWebsite\\wwwroot\\Upsert\\js\\ecommerce-product-create.init.js",
   "PreviewInSolutionExplorer": false
 }

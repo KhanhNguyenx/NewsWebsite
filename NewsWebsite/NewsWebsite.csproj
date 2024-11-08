@@ -30,11 +30,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Areas\Author\Controllers\" />
-    <Folder Include="Areas\Author\Views\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <None Include="wwwroot\.DS_Store" />
     <None Include="wwwroot\ckeditor\.circleci\config.yml" />
     <None Include="wwwroot\css\.DS_Store" />

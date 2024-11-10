@@ -63,6 +63,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Reference Include="CKFinder">
+      <HintPath>..\..\..\..\Dowload\WebsiteTemplate\CKFinder-20241109T160614Z-001\CKFinder\CKFinder.dll</HintPath>
+    </Reference>
     <Reference Include="EncrypDecryp">
       <HintPath>EncrypDecryp.dll</HintPath>
     </Reference>

@@ -26,7 +26,7 @@
 
 
         // Đây là thiết lập đường dẫn lưu file
-        BaseUrl = "/DATA";
+        BaseUrl = "~/DATA";
 
         // The phisical directory in the server where the file will end up. If
         // blank, CKFinder attempts to resolve BaseUrl.

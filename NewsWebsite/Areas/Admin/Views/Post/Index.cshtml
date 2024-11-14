@@ -42,30 +42,67 @@
             <div class="loader-fill"></div>
         </div>
     </div>
+
+
     @model List<NewsAPI.DTOs.PostDTO>
     @if (TempData["ErrorMessage"] != null)
-
     {
         <div class="alert alert-danger">
             @TempData["ErrorMessage"]
         </div>
     }
+
+    <!-- Filter options -->
+    <div class="d-flex justify-content-end mb-3">
+        <select id="category-filter" class="form-control ms-2" style="width: 200px; margin-right: 10px;">
+            <option value="">All Categories</option>
+            @{
+                var categoryList = (ViewBag.CategoryList as List<NewsAPI.DTOs.CategoryDTO>)?.OrderBy(c => c.CategoryName).ToList();
+                foreach (var category in categoryList)
+                {
+                    <option value="@category.CategoryName">@category.CategoryName</option>
+                }
+            }
+        </select>
+
+        <!-- Filter by Views -->
+        <select id="view-filter" class="form-control ms-2" style="width: 200px; margin-right: 10px;">
+            <option value="">All Views</option>
+            <option value="high">Most Viewed</option>
+            <option value="low">Least Viewed</option>
+        </select>
+
+        <!-- Search input -->
+        <div style="margin-right: 10px;">
+            <input type="text" id="search-input" class="form-control" placeholder="Search posts by title" style="width: 400px;">
+        </div>
+
+        <a href="post/upsert" class="btn btn-primary">
+            Add New Post
+        </a>
+    </div>
+
+
+    <!-- Posts Table -->
+  
+        <div class="table-responsive">
     <table class="table table-hover" id="pc-dt-simple">
         <thead>
             <tr>
-                <th>Title</th>
-                <th>Category</th>
-                <th>View</th>
-                <th>Like</th>
-                <th>Status</th>
-                <th>Hot</th>
-                <th>Action</th>
+                        <th class="col-12 col-md-2">Title</th>
+                        <th class="col-12 col-md-2">Category</th>
+                        <th class="col-12 col-md-2">View</th>
+                        <th class="col-12 col-md-2">Like</th>
+                        <th class="col-12 col-md-2">Status</th>
+                        <th class="col-12 col-md-2">Hot</th>
+                        <th class="col-12 col-md-2">Action</th>
             </tr>
         </thead>
         <tbody>
             @foreach (var post in Model)
             {
-                <tr>
+                var currentCategory = (ViewBag.CategoryList as List<NewsAPI.DTOs.CategoryDTO>)?.FirstOrDefault(c => c.Id == post.CategoryId)?.CategoryName ?? "Unknown";
+                <tr data-category="@currentCategory" data-views="@post.Views">
                     <td>
                         <div class="d-flex align-items-center">
                             <div class="flex-shrink-0">
@@ -76,18 +113,7 @@
                             </div>
                         </div>
                     </td>
-                    <td>
-                        @{
-                            // Retrieve the category list from ViewBag
-
-                            var categoryList = ViewBag.CategoryList as List<NewsAPI.DTOs.CategoryDTO>;
-
-                            // Find the category name based on CategoryId
-
-                            var categoryName = categoryList?.FirstOrDefault(c => c.Id == post.CategoryId)?.CategoryName ?? "Unknown";
-                        }
-                        @categoryName
-                    </td>
+                    <td>@currentCategory</td>
                     <td>@post.Views</td>
                     <td>@post.LikeNumber</td>
                     <td>
@@ -112,7 +138,11 @@
                 </tr>
             }
         </tbody>
+
     </table>
+    </div>
+    </div>
+
 
     <!-- [ Main Content ] end -->
     <!-- Required Js -->
@@ -169,6 +199,54 @@
                 preset_change('preset-1');
             }
         });
+    </script>
+      
+    <script>
+        function normalizeText(text) {
+            return text.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
+        }
+
+        document.getElementById('search-input').addEventListener('input', filterPosts);
+        document.getElementById('category-filter').addEventListener('change', filterPosts);
+        document.getElementById('view-filter').addEventListener('change', filterPosts);
+
+        function filterPosts() {
+            const searchValue = normalizeText(document.getElementById('search-input').value);
+            const selectedCategory = document.getElementById('category-filter').value;
+            const viewFilter = document.getElementById('view-filter').value;
+
+            const tableRows = document.querySelectorAll('#pc-dt-simple tbody tr');
+
+            // Sort rows by views if a view filter is selected
+            if (viewFilter) {
+                const rowsArray = Array.from(tableRows);
+                rowsArray.sort((a, b) => {
+                    const aViews = parseInt(a.dataset.views);
+                    const bViews = parseInt(b.dataset.views);
+                    return viewFilter === 'high' ? bViews - aViews : aViews - bViews;
+                });
+                rowsArray.forEach(row => row.parentNode.appendChild(row)); // Append sorted rows back to tbody
+            }
+
+            // Filter each row based on search, category, and views
+            tableRows.forEach(row => {
+                const titleCell = row.querySelector('td h6').textContent;
+                const category = row.getAttribute('data-category');
+                const views = parseInt(row.getAttribute('data-views'));
+
+                const matchesSearch = normalizeText(titleCell).includes(searchValue);
+                const matchesCategory = !selectedCategory || category === selectedCategory;
+                const matchesViewFilter = !viewFilter || (viewFilter === 'high' ? views > 0 : views >= 0);
+
+                if (matchesSearch && matchesCategory && matchesViewFilter) {
+                    row.style.display = '';
+                } else {
+                    row.style.display = 'none';
+                }
+            });
+        }
+
+
     </script>
 </body>
 </html>

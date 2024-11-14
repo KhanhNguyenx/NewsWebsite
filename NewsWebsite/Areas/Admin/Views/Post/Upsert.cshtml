@@ -61,9 +61,11 @@
                         </h2>
                     </div>
                     <div class="flex justify-center space-x-2">
-                        <button class="btn min-w-[7rem] border border-slate-300 font-medium text-slate-700 hover:bg-slate-150 focus:bg-slate-150 active:bg-slate-150/80 dark:border-navy-450 dark:text-navy-100 dark:hover:bg-navy-500 dark:focus:bg-navy-500 dark:active:bg-navy-500/90">
-                            Back
-                        </button>
+                        <a href="/admin/post">
+                            <button class="btn min-w-[7rem] border border-slate-300 font-medium text-slate-700 hover:bg-slate-150 focus:bg-slate-150 active:bg-slate-150/80 dark:border-navy-450 dark:text-navy-100 dark:hover:bg-navy-500 dark:focus:bg-navy-500 dark:active:bg-navy-500/90">
+                                Back
+                            </button>
+                        </a>
                         <button type="submit" class="btn min-w-[7rem] bg-primary font-medium text-white hover:bg-primary-focus focus:bg-primary-focus active:bg-primary-focus/90 dark:bg-accent dark:hover:bg-accent-focus dark:focus:bg-accent-focus dark:active:bg-accent/90">
                             Submit
                         </button>
@@ -98,26 +100,32 @@
                             </div>
                         </div>
                     </div>
+
                     <div class="col-span-12 lg:col-span-4">
                         <div class="card space-y-5 p-4 sm:p-5">
+
                             @model NewsAPI.DTOs.CategoryDTO
-                            <label class="block">
-                                <span class="font-medium text-slate-600 dark:text-navy-100">Category</span>
-                                <select name="CategoryId" class="mt-1.5 w-full" x-init="$el._x_tom = new Tom($el, {create: false, sortField: {field: 'text', direction: 'asc'}})">
-                                    <option value="">Select the category</option>
-                                    @if (ViewBag.CategoryList != null && ViewBag.CategoryList.Count > 0)
-                                    {
-                                        @foreach (var category in ViewBag.CategoryList)
-                                        {
-                                            <option value="@category.Id">@category.CategoryName</option>
-                                        }
-                                    }
-                                    else
-                                    {
-                                        <option value="">No categories available</option>
-                                    }
-                                </select>
+                            <label class="block flex items-center space-x-4">
+                                <span class="font-bold text-slate-600 dark:text-navy-100">Category</span>
+
+                                <a href="/admin/category/upsert" class="btn btn-upsert font-bold text-slate-600 dark:text-navy-100">Create</a>
+                                <a href="/admin/category/index" class="btn btn-upsert font-bold text-slate-600 dark:text-navy-100">Edit</a>
                             </label>
+
+                            <select name="CategoryId" class="mt-1.5 w-full" x-init="$el._x_tom = new Tom($el, {create: false, sortField: {field: 'text', direction: 'asc'}})">
+                                <option value="">Select the category</option>
+                                @if (ViewBag.CategoryList != null && ViewBag.CategoryList.Count > 0)
+                                {
+                                    @foreach (var category in ViewBag.CategoryList)
+                                    {
+                                        <option value="@category.Id">@category.CategoryName</option>
+                                    }
+                                }
+                                else
+                                {
+                                    <option value="">No categories available</option>
+                                }
+                            </select>
                             <span class="font-medium text-slate-600 dark:text-navy-100">Status</span>
                             <label class="inline-flex items-center space-x-2">
                                 <input checked
@@ -164,7 +172,7 @@
                             </span>
                             </span>
                             </label> *@
-
+                           
                         </div>
                     </div>
                 </div>

@@ -1,4 +1,6 @@
-﻿namespace NewsWebsite.DTO
+﻿
+
+namespace NewsWebsite.DTO
 {
     public class AccountDTO
     {
@@ -17,5 +19,6 @@
         public int Status { get; set; }
 
         public string? Notes { get; set; }
+        public virtual ICollection<RoleUserDTO> RoleUsers { get; set; } = new List<RoleUserDTO>();
     }
 }

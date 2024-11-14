@@ -69,7 +69,7 @@ namespace NewsAPI.Controllers.Generic
             return NoContent();
         }
         [HttpGet]
-        //[Authorize("RequireAdminRole")]
+        [Authorize("RequireAdminRole")]
         public async Task<ActionResult<IEnumerable<UserDTO>>> GetList()
         {
             var entityList = await _userService.GetListAsync();

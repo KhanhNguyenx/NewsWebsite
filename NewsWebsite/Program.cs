@@ -1,5 +1,7 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.EntityFrameworkCore;
 using NewsAPI.Data;
+using NewsWebsite.Helpers;
 using NewsAPI.Services;
 using NewsAPI.Services.SimpleService;
 using NewsWebsite;
@@ -20,6 +22,44 @@ builder.Services.AddScoped(typeof(IGenericServive<>), typeof(GenericService<>));
 builder.Services.AddControllersWithViews();
 builder.Services.AddScoped<IConsumeApi, ConsumeApi>();
 
+// https://learn.microsoft.com/en-us/aspnet/core/security/authentication/cookie?view=aspnetcore-8.0
+builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(options =>
+{
+    options.Cookie = new CookieBuilder
+    {
+        //Domain = "domain.vn", //Releases in active
+        Name = "Authentication",
+        HttpOnly = true,
+        Path = "/",
+        SameSite = Microsoft.AspNetCore.Http.SameSiteMode.Lax,
+        SecurePolicy = CookieSecurePolicy.Always
+    };
+    options.LoginPath = new PathString("/Authorize/Login");
+    options.LogoutPath = new PathString("/Authorize/Logout");
+    options.AccessDeniedPath = new PathString("/Error/403");
+    options.ExpireTimeSpan = TimeSpan.FromMinutes(60);
+    options.SlidingExpiration = true;
+    options.Cookie.IsEssential = true;
+});
+
+builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+//builder.Services.AddSingleton<IConsumeApi, ConsumeApi>();
+builder.Services.AddAutoMapper(typeof(AutoMapperProfile)); //Init auto mappper
+
+builder.Services.AddSession(options =>
+{
+    //options.Cookie.Domain = "domain"; //Releases in active
+    options.IdleTimeout = TimeSpan.FromMinutes(60);
+    options.Cookie.SameSite = Microsoft.AspNetCore.Http.SameSiteMode.Lax;
+    options.Cookie.SecurePolicy = CookieSecurePolicy.Always;
+    options.Cookie.IsEssential = true;
+    options.Cookie.HttpOnly = true;
+});
+
+builder.Services.AddHttpClient();
+
+// Add services to the container.
+//builder.Services.AddControllersWithViews();
 
 //builder.Services.ConfigureApplicationCookie(options =>
 //{
@@ -46,6 +86,7 @@ app.UseRouting();
 app.UseAuthentication();
 app.UseAuthorization();
 app.UseMiddleware<CheckCookieExpirationMiddleware>();
+app.UseSession();
 
 app.MapControllerRoute(
     name: "areas",

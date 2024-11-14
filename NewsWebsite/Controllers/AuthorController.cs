@@ -9,6 +9,9 @@ using NewsWebsite.Helpers;
 using NewsWebsite.Services;
 using System.Security.Claims;
 using System.Xml.Linq;
+using NewsAPI.DTOs;
+using Newtonsoft.Json;
+using System.Text;
 
 namespace NewsWebsite.Controllers
 {
@@ -16,9 +19,9 @@ namespace NewsWebsite.Controllers
     {
         private readonly IConsumeApi _callApi;
         private readonly IConfiguration _configuration;
-        public AuthorController(IConsumeApi callApi, IConfiguration configuration)
+        public AuthorController(IConsumeApi consumeApi, IConfiguration configuration)
         {
-            _callApi = callApi;
+            _callApi = consumeApi;
             _configuration = configuration;
         }
 
@@ -27,15 +30,16 @@ namespace NewsWebsite.Controllers
             if (User.Identity != null && User.Identity.IsAuthenticated)
                 return RedirectToAction("GetList");
 
-            return RedirectToAction("Login");
+            return RedirectToAction("Index", "Home");
         }
+
         [Authorize]
         public async Task<IActionResult> GetList()
         {
             if (User.Identity != null && User.Identity.IsAuthenticated)
             {
                 //ResponseData res = new ResponseData();
-                var res = await _callApi.GetAsync(@"Categories/GetList", _accessToken);
+                var res = await _callApi.GetAsync(@"Users/GetList", _accessToken);
                 if (res.success && res.data != null)
                 {
                     var resList = res.data!.ToObject<List<AccountDTO>>();
@@ -53,6 +57,7 @@ namespace NewsWebsite.Controllers
 
             return View();
         }
+
         [HttpPost]
         [AllowAnonymous]
         public async Task<ActionResult> Logins(LoginM user)
@@ -73,8 +78,8 @@ namespace NewsWebsite.Controllers
                 {
                     Dictionary<string, dynamic> dictPars = new Dictionary<string, dynamic>
                     {
-                        {"userName", user.UserName},
-                        {"password", user.Password },
+                        {"username", user.UserName},
+                        {"passwordHash", user.Password },
                     };
 
 
@@ -88,15 +93,16 @@ namespace NewsWebsite.Controllers
                         //Lưu accessToken vào biến sesion
                         HttpContext.Session.SetString(mySetting.AccessToken, token);
 
-                        var claims = new List<Claim> {
-                                            new Claim(ClaimTypes.Email, account.Email ),
-                                            new Claim(ClaimTypes.Name, account.Username),
-                                            new Claim(ClaimTypes.Sid, account.Id.ToString()),
-                                            new Claim("AccountId", account.Id.ToString()),
-                                            new Claim("AccessToken", token),
-                                            new Claim(ClaimTypes.NameIdentifier, account.Id.ToString()),
-                                            //new Claim(ClaimTypes.Role,account.RoleId.ToString())
-                                         };
+                        var claims = new List<Claim>
+                        {
+                            new Claim(ClaimTypes.Email, account.Email),                    // Email của người dùng
+                            new Claim(ClaimTypes.Name, account.Username),                  // Tên người dùng
+                            new Claim(ClaimTypes.Sid, account.Id.ToString()),              // ID của người dùng
+                            new Claim("AccountId", account.Id.ToString()),                 // ID của tài khoản
+                            new Claim("AccessToken", token),                               // Token truy cập
+                            new Claim(ClaimTypes.NameIdentifier, account.Id.ToString())    // Identifier của người dùng
+                        };
+
                         // Save Cookie
                         var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
                         var claimsPrincipal = new ClaimsPrincipal(claimsIdentity);
@@ -108,7 +114,7 @@ namespace NewsWebsite.Controllers
                             AllowRefresh = true
                         });
                         //return RedirectToAction("GetList");
-                        return RedirectToAction("Index", "Product");
+                        return RedirectToAction("Index", "Home");
                     }
                 }
                 catch (Exception ex)
@@ -134,5 +140,7 @@ namespace NewsWebsite.Controllers
             this.HttpContext.Session.Clear();
             return RedirectToAction("Login");
         }
+
+
     }
 }

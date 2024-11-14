@@ -30,6 +30,11 @@
         localStorage.getItem("_x_darkMode_on") === "true" &&
             document.documentElement.classList.add("dark");
     </script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script type="text/javascript" src="https://jeremyfagis.github.io/dropify/dist/js/dropify.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://jeremyfagis.github.io/dropify/dist/css/dropify.min.css">
+
     @{
         Layout = null;
     }
@@ -85,7 +90,7 @@
                                         <div>
                                             <span class="font-medium text-slate-600 dark:text-navy-100">Post Images</span>
                                             <div class="filepond fp-bordered fp-grid mt-1.5 [--fp-grid:2]">
-                                                <input type="file" name="Images" @* x-init="$el._x_filepond = FilePond.create($el)" *@ multiple />
+                                                <input type="file" name="Images" class="dropify" @* x-init="$el._x_filepond = FilePond.create($el)" *@ multiple />
                                             </div>
                                         </div>
                                     </div>
@@ -190,8 +195,10 @@
 
             document.getElementById("slug").value = slug;
         }
-
     </script>
-
+    <script src="https://unpkg.com/filepond/dist/filepond.min.js"></script>
+    <script src="https://unpkg.com/filepond-plugin-file-validate-type/dist/filepond-plugin-file-validate-type.min.js"></script>
+    <script src="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.min.js"></script>
+    <script>$('.dropify').dropify();</script>
 </body>
 </html>

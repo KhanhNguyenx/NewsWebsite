@@ -16,10 +16,45 @@ namespace NewsWebsite.Areas.Admin.Controllers
             _client = new HttpClient();
             _client.BaseAddress = baseAddress;
         }
-        public IActionResult Index()
+        [HttpGet]
+        public async Task<IActionResult> Index()
         {
-            return View();
+            List<PostDTO> postList = new List<PostDTO>();
+            List<CategoryDTO> categoryList = new List<CategoryDTO>();
+
+            // Fetch the list of posts from the API
+            using (var postResponse = await _client.GetAsync("Posts/GetList"))
+            {
+                if (postResponse.IsSuccessStatusCode)
+                {
+                    var postData = await postResponse.Content.ReadAsStringAsync();
+                    postList = JsonConvert.DeserializeObject<List<PostDTO>>(postData);
+                }
+                else
+                {
+                    TempData["ErrorMessage"] = "Failed to retrieve posts list!";
+                }
+            }
+
+            // Fetch the list of categories from the API
+            using (var categoryResponse = await _client.GetAsync("Categories/GetList"))
+            {
+                if (categoryResponse.IsSuccessStatusCode)
+                {
+                    var categoryData = await categoryResponse.Content.ReadAsStringAsync();
+                    categoryList = JsonConvert.DeserializeObject<List<CategoryDTO>>(categoryData);
+                    ViewBag.CategoryList = categoryList; // Store in ViewBag for use in the view
+                }
+                else
+                {
+                    TempData["ErrorMessage"] = "Failed to retrieve categories list!";
+                }
+            }
+
+            // Pass the list of posts to the view
+            return View(postList);
         }
+
         [HttpGet]
         public async Task<IActionResult> Upsert()
         {

@@ -1,146 +1,174 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Post Management</title>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
-    <link href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-    <style>
-        body {
-            margin-top: 20px;
-            background: #eee;
-            color: #708090;
-        }
+    <title>Membership List | Able Pro Dashboard Template</title>
+    <!-- [Meta] -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="Able Pro is trending dashboard template made using Bootstrap 5 design framework. Able Pro is available in Bootstrap, React, CodeIgniter, Angular,  and .net Technologies.">
+    <meta name="keywords" content="Bootstrap admin template, Dashboard UI Kit, Dashboard Template, Backend Panel, react dashboard, angular dashboard">
+    <meta name="author" content="Phoenixcoded">
 
-        .icon-1x {
-            font-size: 24px !important;
-        }
+    <!-- [Favicon] icon -->
+    <link rel="icon" href="images/favicon.svg" type="image/x-icon">
 
-        a {
-            text-decoration: none;
-        }
+    <!-- [Page specific CSS] start -->
+    <link rel="stylesheet" href="~/PostIndex/css/style.css">
+    <!-- [Page specific CSS] end -->
+    <!-- [Font] Family -->
+    <link rel="stylesheet" href="~/PostIndex/css/inter.css" id="main-font-link">
+    <!-- [phosphor Icons] https://phosphoricons.com/ -->
+    <link rel="stylesheet" href="~/PostIndex/css/style_1.css">
+    <!-- [Tabler Icons] https://tablericons.com -->
+    <link rel="stylesheet" href="~/PostIndex/css/tabler-icons.min.css">
+    <!-- [Feather Icons] https://feathericons.com -->
+    <link rel="stylesheet" href="~/PostIndex/css/feather.css">
+    <!-- [Font Awesome Icons] https://fontawesome.com/icons -->
+    <link rel="stylesheet" href="~/PostIndex/css/fontawesome.css">
+    <!-- [Material Icons] https://fonts.google.com/icons -->
+    <link rel="stylesheet" href="~/PostIndex/css/material.css">
+    <!-- [Template CSS Files] -->
+    <link rel="stylesheet" href="~/PostIndex/css/style_2.css" id="main-style-link">
+    <link rel="stylesheet" href="~/PostIndex/css/style-preset.css">
 
-            .text-primary, a.text-primary:focus, a.text-primary:hover {
-                color: #00ADBB !important;
-            }
-
-        .text-black, .text-hover-black:hover {
-            color: #000 !important;
-        }
-
-        .font-weight-bold {
-            font-weight: 700 !important;
-        }
-    </style>
 </head>
-<body>
-    <div class="container">
-        <div class="row">
-            <!-- Main content -->
-            <div class="col-lg-9 mb-3">
-                <div class="row text-left mb-5">
-                    <div class="col-lg-6 mb-3 mb-sm-0">
-                        <div class="dropdown bootstrap-select form-control form-control-lg bg-white bg-op-9 text-sm w-lg-50" style="width: 100%;">
-                            <select class="form-control form-control-lg bg-white bg-op-9 text-sm w-lg-50" data-toggle="select" tabindex="-98">
-                                <option> Categories </option>
-                                <option> Learn </option>
-                                <option> Share </option>
-                                <option> Build </option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="col-lg-6 text-lg-right">
-                        <div class="dropdown bootstrap-select form-control form-control-lg bg-white bg-op-9 ml-auto text-sm w-lg-50" style="width: 100%;">
-                            <select class="form-control form-control-lg bg-white bg-op-9 ml-auto text-sm w-lg-50" data-toggle="select" tabindex="-98">
-                                <option> Filter by </option>
-                                <option> Votes </option>
-                                <option> Replys </option>
-                                <option> Views </option>
-                            </select>
-                        </div>
-                    </div>
-                </div>
-                <!-- End of post 1 -->
-                <div class="card row-hover pos-relative py-3 px-3 mb-3 border-warning border-top-0 border-right-0 border-bottom-0 rounded-0">
-                    <div class="row align-items-center">
-                        <div class="col-md-8 mb-3 mb-sm-0">
-                            <h5>
-                                <a href="#" class="text-primary">Drupal 8 quick starter guide</a>
-                            </h5>
-                            <p class="text-sm"><span class="op-6">Posted</span> <a class="text-black" href="#">20 minutes</a> <span class="op-6">ago by</span> <a class="text-black" href="#">KenyeW</a></p>
-                            <div class="text-sm op-5"> <a class="text-black mr-2" href="#">#C++</a> <a class="text-black mr-2" href="#">#AppStrap Theme</a> <a class="text-black mr-2" href="#">#Wordpress</a> </div>
-                        </div>
-                        <div class="col-md-4 op-7">
-                            <div class="row text-center op-7">
-                                <div class="col px-1"> <i class="ion-connection-bars icon-1x"></i> <span class="d-block text-sm">141 Votes</span> </div>
-                                <div class="col px-1"> <i class="ion-ios-chatboxes-outline icon-1x"></i> <span class="d-block text-sm">122 Replys</span> </div>
-                                <div class="col px-1"> <i class="ion-ios-eye-outline icon-1x"></i> <span class="d-block text-sm">290 Views</span> </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- /End of post 1 -->
-            </div>
-            <!-- Sidebar content -->
-            <div class="col-lg-3 mb-4 mb-lg-0 px-lg-0 mt-lg-0">
-                <div style="visibility: hidden; display: none; width: 285px; height: 801px; margin: 0px; float: none; position: static; inset: 85px auto auto;"></div><div data-settings="{&quot;parent&quot;:&quot;#content&quot;,&quot;mind&quot;:&quot;#header&quot;,&quot;top&quot;:10,&quot;breakpoint&quot;:992}" data-toggle="sticky" class="sticky" style="top: 85px;">
-                    <div class="sticky-inner">
-                        <a class="btn btn-lg btn-block btn-success rounded-0 py-4 mb-3 bg-op-6 roboto-bold" href="@Url.Action("Upsert", "Post")">Add Post</a>
-                        <div class="bg-white mb-3">
-                            <h4 class="px-3 py-4 op-5 m-0">
-                                Active Topics
-                            </h4>
-                            <hr class="m-0">
-                            <div class="pos-relative px-3 py-3">
-                                <h6 class="text-primary text-sm">
-                                    <a href="#" class="text-primary">Why Bootstrap 4 is so awesome? </a>
-                                </h6>
-                                <p class="mb-0 text-sm"><span class="op-6">Posted</span> <a class="text-black" href="#">39 minutes</a> <span class="op-6">ago by</span> <a class="text-black" href="#">AppStrapMaster</a></p>
-                            </div>
-                            <hr class="m-0">
-                            <div class="pos-relative px-3 py-3">
-                                <h6 class="text-primary text-sm">
-                                    <a href="#" class="text-primary">Custom shortcut or command to launch command in terminal? </a>
-                                </h6>
-                                <p class="mb-0 text-sm"><span class="op-6">Posted</span> <a class="text-black" href="#">58 minutes</a> <span class="op-6">ago by</span> <a class="text-black" href="#">DanielD</a></p>
-                            </div>
-                            <hr class="m-0">
-                            <div class="pos-relative px-3 py-3">
-                                <h6 class="text-primary text-sm">
-                                    <a href="#" class="text-primary">HELP! My Windows XP machine is down </a>
-                                </h6>
-                                <p class="mb-0 text-sm"><span class="op-6">Posted</span> <a class="text-black" href="#">48 minutes</a> <span class="op-6">ago by</span> <a class="text-black" href="#">DanielD</a></p>
-                            </div>
-                            <hr class="m-0">
-                            <div class="pos-relative px-3 py-3">
-                                <h6 class="text-primary text-sm">
-                                    <a href="#" class="text-primary">HELP! My Windows XP machine is down </a>
-                                </h6>
-                                <p class="mb-0 text-sm"><span class="op-6">Posted</span> <a class="text-black" href="#">38 minutes</a> <span class="op-6">ago by</span> <a class="text-black" href="#">DanielD</a></p>
-                            </div>
-                            <hr class="m-0">
-                        </div>
-                        <div class="bg-white text-sm">
-                            <h4 class="px-3 py-4 op-5 m-0 roboto-bold">
-                                Stats
-                            </h4>
-                            <hr class="my-0">
-                            <div class="row text-center d-flex flex-row op-7 mx-0">
-                                <div class="col-sm-6 flex-ew text-center py-3 border-bottom border-right"> <a class="d-block lead font-weight-bold" href="#">58</a> Topics </div>
-                                <div class="col-sm-6 col flex-ew text-center py-3 border-bottom mx-0"> <a class="d-block lead font-weight-bold" href="#">1.856</a> Posts </div>
-                            </div>
-                            <div class="row d-flex flex-row op-7">
-                                <div class="col-sm-6 flex-ew text-center py-3 border-right mx-0"> <a class="d-block lead font-weight-bold" href="#">300</a> Members </div>
-                                <div class="col-sm-6 flex-ew text-center py-3 mx-0"> <a class="d-block lead font-weight-bold" href="#">DanielD</a> Newest Member </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+<!-- [Head] end -->
+<!-- [Body] Start -->
+<body data-pc-preset="preset-1" data-pc-sidebar-caption="true" data-pc-direction="ltr" data-pc-theme_contrast="false" data-pc-theme="light">
+    <!-- [ Pre-loader ] start -->
+    <div class="loader-bg">
+        <div class="loader-track">
+            <div class="loader-fill"></div>
         </div>
     </div>
+    @model List<NewsAPI.DTOs.PostDTO>
+    @if (TempData["ErrorMessage"] != null)
 
+    {
+        <div class="alert alert-danger">
+            @TempData["ErrorMessage"]
+        </div>
+    }
+    <table class="table table-hover" id="pc-dt-simple">
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Category</th>
+                <th>View</th>
+                <th>Like</th>
+                <th>Status</th>
+                <th>Hot</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var post in Model)
+            {
+                <tr>
+                    <td>
+                        <div class="d-flex align-items-center">
+                            <div class="flex-shrink-0">
+                                <img src="images/avatar-placeholder.jpg" alt="user image" class="img-radius wid-40">
+                            </div>
+                            <div class="flex-grow-1 ms-3">
+                                <h6 class="mb-0">@post.Title</h6>
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        @{
+                            // Retrieve the category list from ViewBag
+
+                            var categoryList = ViewBag.CategoryList as List<NewsAPI.DTOs.CategoryDTO>;
+
+                            // Find the category name based on CategoryId
+
+                            var categoryName = categoryList?.FirstOrDefault(c => c.Id == post.CategoryId)?.CategoryName ?? "Unknown";
+                        }
+                        @categoryName
+                    </td>
+                    <td>@post.Views</td>
+                    <td>@post.LikeNumber</td>
+                    <td>
+                        <span class="text-@(post.Status == 1 ? "success" : "secondary")">
+                            <i class="fas fa-circle f-10 m-r-10"></i>
+                            @(post.Status == 1 ? "Active" : "Inactive")
+                        </span>
+                    </td>
+                    <td>
+                        <span class="badge text-bg-@(post.IsHot ? "success" : "secondary")">
+                            @(post.IsHot ? "Hot" : "Regular")
+                        </span>
+                    </td>
+                    <td>
+                        <a href="#" class="avtar avtar-xs btn-link-secondary">
+                            <i class="ti ti-edit f-20"></i>
+                        </a>
+                        <a href="#" class="avtar avtar-xs btn-link-secondary">
+                            <i class="ti ti-trash f-20"></i>
+                        </a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <!-- [ Main Content ] end -->
+    <!-- Required Js -->
+    <script src="~/PostIndex/js/popper.min.js"></script>
+    <script src="~/PostIndex/js/simplebar.min.js"></script>
+    <script src="~/PostIndex/js/bootstrap.min.js"></script>
+    <script src="~/PostIndex/js/feather.min.js"></script>
+    <script src="~/PostIndex/js/custom-font.js"></script>
+    <script src="~/PostIndex/js/pcoded.js"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            if ('false' == "default") {
+                if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+                    dark_layout = "true";
+                } else {
+                    dark_layout = 'false';
+                }
+                layout_change_default();
+                if (dark_layout == 'true') {
+                    layout_change('dark');
+                } else {
+                    layout_change('light');
+                }
+            }
+            if ('false' != "default") {
+                if ('false' == "true") {
+                    layout_change('dark');
+                } else {
+                    layout_change('light');
+                }
+            }
+            if ('false' == "true") {
+                layout_theme_contrast_change('true');
+            } else {
+                layout_theme_contrast_change('false');
+            }
+            if ('false' == "true") {
+                change_box_container('true');
+            } else {
+                change_box_container('false');
+            }
+            if ('true' == "true") {
+                layout_caption_change('true');
+            } else {
+                layout_caption_change('false');
+            }
+            if ('false' == "true") {
+                layout_rtl_change('true');
+            } else {
+                layout_rtl_change('false');
+            }
+            if ('preset-1' != "") {
+                preset_change('preset-1');
+            }
+        });
+    </script>
 </body>
 </html>

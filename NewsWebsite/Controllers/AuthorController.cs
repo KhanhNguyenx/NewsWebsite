@@ -62,6 +62,7 @@ namespace NewsWebsite.Controllers
         [AllowAnonymous]
         public async Task<ActionResult> Logins(LoginM user)
         {
+            //user
             if (this.HttpContext.Request.Cookies.Count > 0)
             {
                 this.HttpContext.Response.Cookies.Delete("Authentication");

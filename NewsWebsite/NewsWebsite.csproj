@@ -8,9 +8,13 @@
 
   <ItemGroup>
     <Compile Remove="wwwroot\Add\**" />
+    <Compile Remove="wwwroot\ckeditor\**" />
     <Content Remove="wwwroot\Add\**" />
+    <Content Remove="wwwroot\ckeditor\**" />
     <EmbeddedResource Remove="wwwroot\Add\**" />
+    <EmbeddedResource Remove="wwwroot\ckeditor\**" />
     <None Remove="wwwroot\Add\**" />
+    <None Remove="wwwroot\ckeditor\**" />
   </ItemGroup>
 
   <ItemGroup>
@@ -31,7 +35,6 @@
 
   <ItemGroup>
     <None Include="wwwroot\.DS_Store" />
-    <None Include="wwwroot\ckeditor\.circleci\config.yml" />
     <None Include="wwwroot\css\.DS_Store" />
     <None Include="wwwroot\css\bootstrap-grid.css.map" />
     <None Include="wwwroot\css\bootstrap-grid.min.css.map" />

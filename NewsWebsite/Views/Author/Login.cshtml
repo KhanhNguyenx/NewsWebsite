@@ -2,7 +2,9 @@
 @{
     ViewData["Title"] = "Đăng nhập";
 }
-
+@{
+    Layout = null;
+}
 <!DOCTYPE html>
 <html class="h-full light" data-theme="true" data-theme-mode="light" lang="en">
 <head>
@@ -17,47 +19,109 @@
         gtag('js', new Date());
         gtag('config', 'G-52YZ3XGZJ6');
     </script>
+    <style>
+        body {
+            display: flex; /* Sử dụng Flexbox */
+            align-items: center; /* Căn giữa theo chiều dọc */
+            justify-content: center; /* Căn giữa theo chiều ngang */
+            height: 100vh; /* Chiều cao toàn màn hình */
+            margin: 0; /* Xóa khoảng cách mặc định */
+            background-color: #f3f4f6; /* Màu nền */
+        }
+
+        .card {
+            background: #ffffff; /* Màu trắng cho ô đăng nhập */
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1); /* Đổ bóng */
+            border-radius: 10px; /* Bo góc */
+            width: 400px; /* Chiều rộng ô */
+            padding: 20px; /* Khoảng cách bên trong */
+        }
+
+        input {
+            width: 70%; /* Input chiếm toàn bộ chiều ngang */
+            padding: 10px; /* Khoảng cách nội dung */
+            border: 1px solid #d1d5db; /* Viền xám */
+            border-radius: 5px; /* Bo góc */
+            font-size: 14px;
+            outline: none;
+        }
+
+            input:focus {
+                border-color: #3b82f6; /* Màu viền khi focus */
+                box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.3); /* Hiệu ứng tập trung */
+            }
+
+        button {
+            width: 100%; /* Nút chiếm toàn bộ chiều ngang */
+            padding: 12px; /* Khoảng cách nội dung */
+            background-color: #2563eb; /* Màu xanh */
+            color: white; /* Màu chữ */
+            border: none; /* Không viền */
+            border-radius: 5px; /* Bo góc */
+            font-size: 16px; /* Kích thước chữ */
+            cursor: pointer;
+        }
+
+            button:hover {
+                background-color: #1d4ed8; /* Màu khi hover */
+            }
+
+    </style>
 </head>
-<body class="antialiased flex h-full text-base text-gray-700 dark:bg-coal-500">
-    <div class="flex items-center justify-center grow bg-center bg-no-repeat page-bg">
-        <div class="card max-w-[370px] w-full">
-            <form asp-action="Logins" method="post" class="card-body flex flex-col gap-5 p-10" id="sign_in_form">
-                <div class="text-center mb-2.5">
-                    <h3 class="text-lg font-medium text-gray-900 leading-none mb-2.5">Đăng nhập</h3>
-                    <div class="text-danger" asp-validation-summary="All"></div>
+<body class="antialiased h-screen flex items-center justify-center bg-gray-100 dark:bg-gray-800">
+    <div class="card w-[400px] shadow-xl rounded-lg bg-white p-8">
+        <form asp-action="Logins" method="post" id="sign_in_form">
+            <!-- Header -->
+            <div class="text-center mb-8">
+                <h3 class="text-2xl font-bold text-gray-900 mb-2">Đăng nhập</h3>
+                <p class="text-sm text-gray-500">Vui lòng điền thông tin tài khoản của bạn</p>
+            </div>
+
+            <!-- Username -->
+            <div class="mb-5">
+                <label asp-for="@Model.UserName" class="block text-sm font-medium text-gray-700 mb-2">Tên người dùng</label>
+                <input asp-for="@Model.UserName" class="input w-full border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-blue-500 focus:border-blue-500" placeholder="Nhập tên người dùng">
+                <span asp-validation-for="@Model.UserName" class="text-danger mt-1 text-sm"></span>
+            </div>
+
+            <!-- Password -->
+            <div class="mb-5">
+                <label asp-for="@Model.Password" class="block text-sm font-medium text-gray-700 mb-2">Mật khẩu</label>
+                <div class="relative flex items-center">
+                    <input asp-for="@Model.Password"
+                           type="password"
+                           id="passwordInput"
+                           class="input w-full border border-gray-300 rounded-lg px-4 py-2 pr-12 focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                           placeholder="Nhập mật khẩu">
+                    <button type="button"
+                            id="togglePassword"
+                            class="absolute right-3 top-2.5 text-gray-500 hover:text-gray-700 focus:outline-none">
+                        <i id="passwordIcon" class="ki-filled ki-eye text-xl"></i>
+                    </button>
                 </div>
-                
-                <div class="flex flex-col gap-1">
-                    <label asp-for="@Model.UserName" class="form-label font-normal text-gray-900"></label><sup>*</sup>
-                    <input asp-for="@Model.UserName" class="input" placeholder="Tên người dùng">
-                    <span asp-validation-for="@Model.UserName" class="text-danger"></span>
-                </div>
-                
-                <div class="flex flex-col gap-1">
-                    <label asp-for="@Model.Password" class="form-label font-normal text-gray-900"></label><sup>*</sup>
-                    <div class="input" data-toggle-password="true">
-                        <input asp-for="@Model.Password" class="form-control" placeholder="Mật khẩu" type="password">
-                        <button class="btn btn-icon" data-toggle-password-trigger="true" type="button">
-                            <i class="ki-filled ki-eye text-gray-500 toggle-password-active:hidden"></i>
-                            <i class="ki-filled ki-eye-slash text-gray-500 hidden toggle-password-active:block"></i>
-                        </button>
-                    </div>
-                    <span asp-validation-for="@Model.Password" class="text-danger"></span>
-                </div>
-                
-                <label class="checkbox-group">
-                    <input class="checkbox checkbox-sm" name="RememberMe" type="checkbox">
-                    <span class="checkbox-label">Remember me</span>
-                </label>
-                
-                <button type="submit" class="btn btn-primary flex justify-center grow">Đăng nhập</button>
-                
-                <div class="text-center mt-3">
-                    <a href="#" class="text-sm link">Quên mật khẩu?</a>
-                </div>
-            </form>
-        </div>
+                <span asp-validation-for="@Model.Password" class="text-danger mt-1 text-sm"></span>
+            </div>
+
+
+            <!-- Remember Me -->
+            <div class="flex items-center mb-5">
+                <input class="checkbox rounded border-gray-300 text-blue-500 focus:ring-blue-500 mr-2" name="RememberMe" type="checkbox">
+                <span class="text-sm text-gray-600">Remember me</span>
+            </div>
+
+
+            <!-- Submit Button -->
+            <button type="submit" class="btn w-full py-3 text-white font-bold text-lg rounded-lg bg-blue-500 hover:bg-blue-600 shadow-md focus:outline-none focus:ring-2 focus:ring-blue-400">
+                ĐĂNG NHẬP
+            </button>
+
+            <!-- Forgot Password -->
+            <div class="text-center mt-5">
+                <a href="#" class="text-sm text-blue-500 hover:underline">Quên mật khẩu?</a>
+            </div>
+        </form>
     </div>
+</body>
 
     <script src="~/Signin/js/core.bundle.js"></script>
     <script src="~/Signin/js/apexcharts.min.js"></script>
@@ -72,7 +136,25 @@
         }
         window.onload = handleGoogleCallback;
     </script>
-    
+<script>
+    const togglePassword = document.getElementById('togglePassword');
+    const passwordInput = document.getElementById('passwordInput');
+    const passwordIcon = document.getElementById('passwordIcon');
 
-</body>
+    togglePassword.addEventListener('click', () => {
+        const currentType = passwordInput.getAttribute('type');
+        if (currentType === 'password') {
+            passwordInput.setAttribute('type', 'text');
+            passwordIcon.classList.remove('ki-eye');
+            passwordIcon.classList.add('ki-eye-slash'); // Đổi biểu tượng sang "ẩn mật khẩu"
+        } else {
+            passwordInput.setAttribute('type', 'password');
+            passwordIcon.classList.remove('ki-eye-slash');
+            passwordIcon.classList.add('ki-eye'); // Đổi biểu tượng sang "hiện mật khẩu"
+        }
+    });
+</script>
+
+
+
 </html>

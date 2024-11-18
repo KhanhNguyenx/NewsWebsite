@@ -84,63 +84,69 @@
 
 
     <!-- Posts Table -->
-  
-        <div class="table-responsive">
-    <table class="table table-hover" id="pc-dt-simple">
-        <thead>
-            <tr>
-                        <th class="col-12 col-md-2">Title</th>
-                        <th class="col-12 col-md-2">Category</th>
-                        <th class="col-12 col-md-2">View</th>
-                        <th class="col-12 col-md-2">Like</th>
-                        <th class="col-12 col-md-2">Status</th>
-                        <th class="col-12 col-md-2">Hot</th>
-                        <th class="col-12 col-md-2">Action</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var post in Model)
-            {
-                var currentCategory = (ViewBag.CategoryList as List<NewsAPI.DTOs.CategoryDTO>)?.FirstOrDefault(c => c.Id == post.CategoryId)?.CategoryName ?? "Unknown";
-                <tr data-category="@currentCategory" data-views="@post.Views">
-                    <td>
-                        <div class="d-flex align-items-center">
-                            <div class="flex-shrink-0">
-                                <img src="images/avatar-placeholder.jpg" alt="user image" class="img-radius wid-40">
-                            </div>
-                            <div class="flex-grow-1 ms-3">
-                                <h6 class="mb-0">@post.Title</h6>
-                            </div>
-                        </div>
-                    </td>
-                    <td>@currentCategory</td>
-                    <td>@post.Views</td>
-                    <td>@post.LikeNumber</td>
-                    <td>
-                        <span class="text-@(post.Status == 1 ? "success" : "secondary")">
-                            <i class="fas fa-circle f-10 m-r-10"></i>
-                            @(post.Status == 1 ? "Active" : "Inactive")
-                        </span>
-                    </td>
-                    <td>
-                        <span class="badge text-bg-@(post.IsHot ? "success" : "secondary")">
-                            @(post.IsHot ? "Hot" : "Regular")
-                        </span>
-                    </td>
-                    <td>
-                        <a href="#" class="avtar avtar-xs btn-link-secondary">
-                            <i class="ti ti-edit f-20"></i>
-                        </a>
-                        <a href="#" class="avtar avtar-xs btn-link-secondary">
-                            <i class="ti ti-trash f-20"></i>
-                        </a>
-                    </td>
-                </tr>
-            }
-        </tbody>
 
-    </table>
-    </div>
+    <div class="table-responsive">
+        <table class="table table-hover" id="pc-dt-simple">
+            <thead>
+                <tr>
+                    <th class="col-12 col-md-2">Title</th>
+                    <th class="col-12 col-md-2">Category</th>
+                    <th class="col-12 col-md-2">View</th>
+                    <th class="col-12 col-md-2">Like</th>
+                    <th class="col-12 col-md-2">Status</th>
+                    <th class="col-12 col-md-2">Hot</th>
+                    <th class="col-12 col-md-2">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var post in Model)
+                {
+                    var currentCategory = (ViewBag.CategoryList as List<NewsAPI.DTOs.CategoryDTO>)?.FirstOrDefault(c => c.Id == post.CategoryId)?.CategoryName ?? "Unknown";
+                    <tr data-category="@currentCategory" data-views="@post.Views">
+                        <td>
+                            <div class="d-flex align-items-center">
+                                <div class="flex-shrink-0">
+                                    @{
+                                        var postImage = (ViewBag.ImageList as List<NewsAPI.DTOs.ImageDTO>)?.FirstOrDefault(img => img.PostId == post.Id);
+                                        var imagePath = postImage != null && !string.IsNullOrEmpty(postImage.ImageUrl)
+                                        ? $"/{postImage.ImageUrl}"
+                                        : "images/avatar-placeholder.jpg";
+                                    }
+
+                                    <img src="@imagePath" alt="post image" class="img-radius wid-40">
+
+                                </div>
+                                <div class="flex-grow-1 ms-3">
+                                    <h6 class="mb-0">@post.Title</h6>
+                                </div>
+                            </div>
+                        </td>
+                        <td>@currentCategory</td>
+                        <td>@post.Views</td>
+                        <td>@post.LikeNumber</td>
+                        <td>
+                            <span class="text-@(post.Status == 1 ? "success" : "secondary")">
+                                <i class="fas fa-circle f-10 m-r-10"></i>
+                                @(post.Status == 1 ? "Active" : "Inactive")
+                            </span>
+                        </td>
+                        <td>
+                            <span class="badge text-bg-@(post.IsHot ? "success" : "secondary")">
+                                @(post.IsHot ? "Hot" : "Regular")
+                            </span>
+                        </td>
+                        <td>
+                            <a href="/admin/post/upsert/@post.Id" class="avtar avtar-xs btn-link-secondary">
+                                <i class="ti ti-edit f-20"></i>
+                            </a>
+                            <a href="javascript:void(0);" data-id="@post.Id" class="avtar avtar-xs btn-link-secondary delete">
+                                <i class="ti ti-trash f-20"></i>
+                            </a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
     </div>
 
 
@@ -200,7 +206,7 @@
             }
         });
     </script>
-      
+
     <script>
         function normalizeText(text) {
             return text.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
@@ -245,8 +251,32 @@
                 }
             });
         }
-
-
     </script>
+
+    <!-- Delete Ajax -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('.delete').on('click', function () {
+                var Id = $(this).data('id'); // Lấy ID từ thuộc tính data-id
+                var confirmation = confirm('Bạn có chắc chắn muốn xóa danh mục này?');
+
+                if (confirmation) {
+                    $.ajax({
+                        url: '/Posts/UpDelete?id=' + Id, // Đường dẫn đến API xóa
+                        type: 'DELETE', // Phương thức DELETE
+                        success: function (result) {
+                            alert('Danh mục đã được xóa thành công.');
+                            location.reload(); // Tải lại trang để cập nhật danh sách
+                        },
+                        error: function (xhr, status, error) {
+                            alert('Có lỗi xảy ra: ' + xhr.responseText);
+                        }
+                    });
+                }
+            });
+        });
+    </script>
+
 </body>
 </html>

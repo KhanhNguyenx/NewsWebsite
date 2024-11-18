@@ -74,8 +74,4 @@
     </Reference>
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="DATA\Images\" />
-  </ItemGroup>
-
 </Project>

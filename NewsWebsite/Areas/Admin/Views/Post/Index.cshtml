@@ -277,6 +277,133 @@
             });
         });
     </script>
+    <script>
+        let debounceTimeout;
+
+        // Lắng nghe sự kiện gõ phím trên ô tìm kiếm
+        document.getElementById("search-input").addEventListener("keyup", function () {
+            const query = this.value.trim();
+            clearTimeout(debounceTimeout);
+
+            // Đặt debounce 300ms
+            debounceTimeout = setTimeout(() => {
+                performSearch(query);
+            }, 300);
+        });
+
+        // Hàm thực hiện tìm kiếm hoặc tải mặc định
+        async function performSearch(query) {
+            const tableBody = document.querySelector("#pc-dt-simple tbody");
+
+            // Kiểm tra nếu không có từ khóa
+            if (query.length === 0) {
+                loadDefaultPosts(); // Gọi hàm tải bài viết mặc định
+                return;
+            }
+
+            try {
+                const response = await fetch(`/posts/search?txtSearch=${encodeURIComponent(query)}`);
+                if (response.ok) {
+                    const posts = await response.json();
+                    renderTable(posts);
+                } else {
+                    tableBody.innerHTML = `<tr><td colspan="7">No posts found.</td></tr>`;
+                }
+            } catch (error) {
+                console.error("Error fetching search results:", error);
+                tableBody.innerHTML = `<tr><td colspan="7">Error occurred while searching.</td></tr>`;
+            }
+        }
+
+        // Hàm tải lại danh sách bài viết mặc định
+        async function loadDefaultPosts() {
+            const tableBody = document.querySelector("#pc-dt-simple tbody");
+
+            try {
+                const response = await fetch("/posts/getlist");
+                if (response.ok) {
+                    const posts = await response.json();
+                    renderTable(posts);
+                } else {
+                    tableBody.innerHTML = `<tr><td colspan="7">Failed to load default posts.</td></tr>`;
+                }
+            } catch (error) {
+                console.error("Error loading default posts:", error);
+                tableBody.innerHTML = `<tr><td colspan="7">Error occurred while loading default posts.</td></tr>`;
+            }
+        }
+
+        // Hàm render bảng bài viết
+        function renderTable(posts) {
+            const tableBody = document.querySelector("#pc-dt-simple tbody");
+
+            if (posts.length === 0) {
+                tableBody.innerHTML = `<tr><td colspan="7">No posts found.</td></tr>`;
+                return;
+            }
+
+            const categoryList = JSON.parse(document.getElementById("category-data").textContent);
+            const imageList = JSON.parse(document.getElementById("image-data").textContent);
+
+            const rowsHtml = posts
+                .map((post) => {
+                    const currentCategory =
+                        categoryList.find((category) => category.id === post.categoryId)?.categoryName || "Unknown";
+
+                    const postImage = imageList.find((image) => image.postId === post.id)?.imageUrl || "images/avatar-placeholder.jpg";
+
+                    return `
+                            <tr data-category="${currentCategory}" data-views="${post.views}">
+                                <td>
+                                    <div class="d-flex align-items-center">
+                                        <div class="flex-shrink-0">
+                                            <img src="/${postImage}" alt="post image" class="img-radius wid-40">
+                                        </div>
+                                        <div class="flex-grow-1 ms-3">
+                                            <h6 class="mb-0">${post.title}</h6>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>${currentCategory}</td>
+                                <td>${post.views}</td>
+                                <td>${post.likeNumber}</td>
+                                <td>
+                                    <span class="text-${post.status === 1 ? "success" : "secondary"}">
+                                        <i class="fas fa-circle f-10 m-r-10"></i>
+                                        ${post.status === 1 ? "Active" : "Inactive"}
+                                    </span>
+                                </td>
+                                <td>
+                                    <span class="badge text-bg-${post.isHot ? "success" : "secondary"}">
+                                        ${post.isHot ? "Hot" : "Regular"}
+                                    </span>
+                                </td>
+                                <td>
+                                    <a href="/admin/post/upsert/${post.id}" class="avtar avtar-xs btn-link-secondary">
+                                        <i class="ti ti-edit f-20"></i>
+                                    </a>
+                                    <a href="javascript:void(0);" data-id="${post.id}" class="avtar avtar-xs btn-link-secondary delete">
+                                        <i class="ti ti-trash f-20"></i>
+                                    </a>
+                                </td>
+                            </tr>`;
+                })
+                .join("");
+
+            tableBody.innerHTML = rowsHtml;
+        }
+    </script>
+
+    <!-- JSON data for categories -->
+    <script id="category-data" type="application/json">
+        @Html.Raw(Json.Serialize(ViewBag.CategoryList ?? new List<NewsAPI.DTOs.CategoryDTO>()))
+    </script>
+
+    <!-- JSON data for images -->
+    <script id="image-data" type="application/json">
+        @Html.Raw(Json.Serialize(ViewBag.ImageList ?? new List<NewsAPI.DTOs.ImageDTO>()))
+    </script>
+
 
 </body>
 </html>

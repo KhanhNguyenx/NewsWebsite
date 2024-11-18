@@ -92,7 +92,7 @@ namespace NewsAPI.Helpers
             {
                 option.AddFixedWindowLimiter(policyName: "Fixed", opt =>
                 {
-                    opt.PermitLimit = 5; //limited 5 request
+                    opt.PermitLimit = 30; //limited 5 request
                     opt.Window = TimeSpan.FromMinutes(1);
                     opt.QueueProcessingOrder = QueueProcessingOrder.OldestFirst;
                     opt.QueueLimit = 2; //Limit number of request in queue

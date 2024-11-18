@@ -111,9 +111,30 @@ namespace NewsWebsite.Areas.Admin.Controllers
 
 
         // Controller - Upsert Methods
+        //[HttpGet]
+        //public async Task<IActionResult> Upsert()
+        //{
+        //    List<CategoryDTO> categoryList = new List<CategoryDTO>();
+        //    using (var response = await _client.GetAsync("Categories/GetList"))
+        //    {
+        //        if (response.IsSuccessStatusCode)
+        //        {
+        //            var data = await response.Content.ReadAsStringAsync();
+        //            categoryList = JsonConvert.DeserializeObject<List<CategoryDTO>>(data);
+        //        }
+        //        else
+        //        {
+        //            TempData["ErrorMessage"] = "Failed to retrieve categories list!";
+        //        }
+        //    }
+        //    ViewBag.CategoryList = categoryList;
+        //    return View();
+        //}
+
         [HttpGet]
-        public async Task<IActionResult> Upsert()
+        public async Task<IActionResult> Upsert(int id = 0)
         {
+            // Lấy danh sách danh mục cho dropdown
             List<CategoryDTO> categoryList = new List<CategoryDTO>();
             using (var response = await _client.GetAsync("Categories/GetList"))
             {
@@ -128,9 +149,51 @@ namespace NewsWebsite.Areas.Admin.Controllers
                 }
             }
             ViewBag.CategoryList = categoryList;
-            return View();
-        }
 
+            // Nếu có id, lấy thông tin bài viết và danh sách hình ảnh
+            if (id != 0)
+            {
+                var post = new PostDTO();
+                var imageList = new List<ImageDTO>();
+
+                // Lấy thông tin bài viết
+                using (var postResponse = await _client.GetAsync($"Posts/Get?id={id}"))
+                {
+                    if (postResponse.IsSuccessStatusCode)
+                    {
+                        var postData = await postResponse.Content.ReadAsStringAsync();
+                        post = JsonConvert.DeserializeObject<PostDTO>(postData);
+                    }
+                    else
+                    {
+                        TempData["ErrorMessage"] = "Failed to retrieve post!";
+                        return RedirectToAction("Index"); // Quay lại trang danh sách nếu lỗi
+                    }
+                }
+
+                // Lấy danh sách hình ảnh
+                using (var imageResponse = await _client.GetAsync("Images/GetList"))
+                {
+                    if (imageResponse.IsSuccessStatusCode)
+                    {
+                        var imageData = await imageResponse.Content.ReadAsStringAsync();
+                        var allImages = JsonConvert.DeserializeObject<List<ImageDTO>>(imageData);
+                        imageList = allImages.Where(img => img.PostId == id).ToList();
+                    }
+                    else
+                    {
+                        TempData["ErrorMessage"] = "Failed to retrieve images!";
+                    }
+                }
+
+                // Truyền danh sách hình ảnh vào ViewBag
+                ViewBag.Images = imageList;
+
+                return View(post); // Trả về view với dữ liệu bài viết và hình ảnh
+            }
+
+            return View(); // Trả về form trống nếu tạo bài viết mới
+        }
         [HttpPost]
         public async Task<IActionResult> Upsert(PostDTO model, List<IFormFile> Images)
         {
@@ -197,69 +260,7 @@ namespace NewsWebsite.Areas.Admin.Controllers
 
 
 
-        //[HttpGet]
-        //public async Task<IActionResult> Upsert(int id = 0)
-        //{
-        //    // Lấy danh sách danh mục cho dropdown
-        //    List<CategoryDTO> categoryList = new List<CategoryDTO>();
-        //    using (var response = await _client.GetAsync("Categories/GetList"))
-        //    {
-        //        if (response.IsSuccessStatusCode)
-        //        {
-        //            var data = await response.Content.ReadAsStringAsync();
-        //            categoryList = JsonConvert.DeserializeObject<List<CategoryDTO>>(data);
-        //        }
-        //        else
-        //        {
-        //            TempData["ErrorMessage"] = "Failed to retrieve categories list!";
-        //        }
-        //    }
-        //    ViewBag.CategoryList = categoryList;
-
-        //    // Nếu có id, lấy thông tin bài viết và danh sách hình ảnh
-        //    if (id != 0)
-        //    {
-        //        var post = new PostDTO();
-        //        var imageList = new List<ImageDTO>();
-
-        //        // Lấy thông tin bài viết
-        //        using (var postResponse = await _client.GetAsync($"Posts/Get?id={id}"))
-        //        {
-        //            if (postResponse.IsSuccessStatusCode)
-        //            {
-        //                var postData = await postResponse.Content.ReadAsStringAsync();
-        //                post = JsonConvert.DeserializeObject<PostDTO>(postData);
-        //            }
-        //            else
-        //            {
-        //                TempData["ErrorMessage"] = "Failed to retrieve post!";
-        //                return RedirectToAction("Index"); // Quay lại trang danh sách nếu lỗi
-        //            }
-        //        }
-
-        //        // Lấy danh sách hình ảnh
-        //        using (var imageResponse = await _client.GetAsync("Images/GetList"))
-        //        {
-        //            if (imageResponse.IsSuccessStatusCode)
-        //            {
-        //                var imageData = await imageResponse.Content.ReadAsStringAsync();
-        //                var allImages = JsonConvert.DeserializeObject<List<ImageDTO>>(imageData);
-        //                imageList = allImages.Where(img => img.PostId == id).ToList();
-        //            }
-        //            else
-        //            {
-        //                TempData["ErrorMessage"] = "Failed to retrieve images!";
-        //            }
-        //        }
-
-        //        // Truyền danh sách hình ảnh vào ViewBag
-        //        ViewBag.Images = imageList;
-
-        //        return View(post); // Trả về view với dữ liệu bài viết và hình ảnh
-        //    }
-
-        //    return View(); // Trả về form trống nếu tạo bài viết mới
-        //}
+        
 
         //[HttpPost]
         //public async Task<IActionResult> Upsert(PostDTO model, List<IFormFile> Images)

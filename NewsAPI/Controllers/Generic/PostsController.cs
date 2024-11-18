@@ -77,7 +77,7 @@ namespace NewsAPI.Controllers
         public async Task<ActionResult<IEnumerable<PostDTO>>> Search(string txtSearch)
         {
             Expression<Func<Post, bool>> filter;
-            filter = a => a.Status != -1 && (a.Title!.Contains(txtSearch) || a.Slug!.Contains(txtSearch));
+            filter = a => (a.Title!.Contains(txtSearch) || a.Slug!.Contains(txtSearch));
             var entityList = await _genericServive.SearchAsync(filter);
             if (entityList != null)
             {

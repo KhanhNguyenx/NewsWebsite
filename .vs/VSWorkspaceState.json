@@ -5,12 +5,12 @@
     "\\NewsWebsite\\Areas",
     "\\NewsWebsite\\Areas\\Admin",
     "\\NewsWebsite\\Areas\\Admin\\Views",
-    "\\NewsWebsite\\Areas\\Admin\\Views\\Post",
     "\\NewsWebsite\\Areas\\Admin\\Views\\Shared",
-    "\\NewsWebsite\\wwwroot",
-    "\\NewsWebsite\\wwwroot\\Upsert",
-    "\\NewsWebsite\\wwwroot\\Upsert\\js"
+    "\\NewsWebsite\\Views",
+    "\\NewsWebsite\\Views\\Author",
+    "\\NewsWebsite\\Views\\Signin",
+    "\\NewsWebsite\\wwwroot"
   ],
-  "SelectedNode": "\\NewsWebsite\\Program.cs",
+  "SelectedNode": "\\NewsWebsite\\Views\\Signin\\Index.cshtml",
   "PreviewInSolutionExplorer": false
 }

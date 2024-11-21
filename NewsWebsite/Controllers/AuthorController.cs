@@ -91,6 +91,8 @@ namespace NewsWebsite.Controllers
                         //////////////////////
                         AccountDTO account = res.data!.ToObject<AccountDTO>();
                         string token = res.message;
+                        var getClaim = await _callApi.GetAsync(@"Authorize/GetClaims", token);
+                        var getRoles = getClaim.data[4].value;
                         //Lưu accessToken vào biến sesion
                         HttpContext.Session.SetString(mySetting.AccessToken, token);
 
@@ -101,7 +103,8 @@ namespace NewsWebsite.Controllers
                             new Claim(ClaimTypes.Sid, account.Id.ToString()),              // ID của người dùng
                             new Claim("AccountId", account.Id.ToString()),                 // ID của tài khoản
                             new Claim("AccessToken", token),                               // Token truy cập
-                            new Claim(ClaimTypes.NameIdentifier, account.Id.ToString())    // Identifier của người dùng
+                            new Claim(ClaimTypes.NameIdentifier, account.Id.ToString()),    // Identifier của người dùng
+                            new Claim(ClaimTypes.Role, getRoles.ToString())
                         };
 
                         // Save Cookie

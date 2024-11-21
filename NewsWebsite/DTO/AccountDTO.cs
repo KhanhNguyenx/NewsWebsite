@@ -19,6 +19,5 @@ namespace NewsWebsite.DTO
         public int Status { get; set; }
 
         public string? Notes { get; set; }
-        public virtual ICollection<RoleUserDTO> RoleUsers { get; set; } = new List<RoleUserDTO>();
     }
 }

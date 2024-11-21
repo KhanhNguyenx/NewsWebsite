@@ -72,10 +72,18 @@
                             <li class="nav-item">
                                 <a class="nav-link" href="tech-contact.html">Contact Us</a>
                             </li>
+                            @if (User.IsInRole("Admin"))
+                            {
+                                <li class="nav-item">
+                                    <a class="nav-link" href="@Url.Action("Index", "Admin")">
+                                        <i class="fa fa-cogs"></i> Admin Setting
+                                    </a>
+                                </li>
+                            }
                         </ul>
                         <ul class="navbar-nav mr-2">
                             <li class="nav-item">
-                                <a class="nav-link" href="@Url.Action("Login", "Author")"><i class="fa fa-user"></i>Login</a>
+                                <a class="nav-link" href="@Url.Action("Login", "Author")"><i class="fa fa-user"></i></a>
                             </li>
                         </ul>
                      

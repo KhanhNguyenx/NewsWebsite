@@ -14,6 +14,8 @@ using NewsAPI.DTOs;
 using Microsoft.EntityFrameworkCore;
 using NewsAPI.Models;
 using NewsAPI.Controllers.Generic;
+using NewsAPI.Models.APIHelperModels;
+using Microsoft.AspNetCore.Authorization;
 
 namespace NewsAPI.Controllers
 {
@@ -54,7 +56,17 @@ namespace NewsAPI.Controllers
 
             // Sử dụng repository để lấy tài khoản
             var account = await _userService.GetAccountByUsernameAsync(model.Username);
-
+            var user = new UserDTO
+            {
+                Id = account.Id,
+                Username = account.Username,
+                PasswordHash = account.PasswordHash,
+                Email = account.Email,
+                FullName = account.FullName,
+                IsAuthor = account.IsAuthor,
+                Status = account.Status,
+                Notes = account.Notes,
+            };
             if (account == null)
             {
                 return Unauthorized(new
@@ -83,8 +95,8 @@ namespace NewsAPI.Controllers
             return Ok(new
             {
                 success = true,
-                message = "Login successful",
-                token = token,
+                message = token,
+                data = user,
                 refreshToken = refreshToken.Token
             });
         }
@@ -174,8 +186,24 @@ namespace NewsAPI.Controllers
 
             return Ok(new { success = true, message = "Đăng ký thành công!" });
         }
-
-
+        [Authorize]
+        [HttpGet]
+        public DataResponse GetClaims()
+        {
+            if (User.Identity!.IsAuthenticated)
+            {
+                // Lấy tất cả các claims của người dùng đã đăng nhập
+                var claims = User.Claims;
+                // Duyệt qua danh sách claims và in ra các giá trị của chúng
+                var claimsList = claims.Select(c => new
+                {
+                    Type = c.Type,
+                    Value = c.Value
+                }).ToList();
+                return new DataResponse(true, claimsList);
+            }
+            return new DataResponse();
+        }
 
 
 

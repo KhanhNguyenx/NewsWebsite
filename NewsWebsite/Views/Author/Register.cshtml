@@ -8,7 +8,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Đăng nhập</title>
+    <title>Đăng Ký</title>
     <style>
         body {
             display: flex;
@@ -50,7 +50,7 @@
         }
 
         input[type="text"], input[type="password"] {
-            width: 100%;
+            width: 90%;
             padding: 10px;
             border: 1px solid #d1d5db;
             border-radius: 5px;
@@ -123,7 +123,7 @@
 </head>
 <body>
     <div class="card">
-        <h3>Đăng nhập</h3>
+        <h3>Đăng Ký</h3>
         <p>Vui lòng điền thông tin tài khoản của bạn</p>
         <form asp-action="Logins" method="post" id="sign_in_form">
             <!-- Tên người dùng -->
@@ -132,7 +132,13 @@
                 <input asp-for="@Model.UserName" class="input w-full border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-blue-500 focus:border-blue-500" placeholder="Nhập tên người dùng">
                 <span asp-validation-for="@Model.UserName" class="text-danger mt-1 text-sm"></span>
             </div>
-
+            <br />
+            <div class="mb-4">
+                <label asp-for="@Model.UserName">Gmail</label>
+                <input asp-for="@Model.UserName" class="input w-full border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-blue-500 focus:border-blue-500" placeholder="Nhập Gmail">
+                <span asp-validation-for="@Model.UserName" class="text-danger mt-1 text-sm"></span>
+            </div>
+            <br />
             <!-- Mật khẩu -->
             <div class="mb-4 relative">
                 <label asp-for="@Model.Password">Mật khẩu</label>
@@ -148,23 +154,31 @@
                 </div>
                 <span asp-validation-for="@Model.Password" class="text-danger mt-1 text-sm"></span>
             </div>
-
-
-            <!-- Ghi nhớ -->
-            <div class="mb-4">
-                <input class="checkbox rounded border-gray-300 text-blue-500 focus:ring-blue-500 mr-2" name="RememberMe" type="checkbox">
-                <span>Remember me</span>
+            <br />
+            <div class="mb-4 relative">
+                <label asp-for="@Model.Password">Mật khẩu</label>
+                <div class="relative">
+                    <input asp-for="@Model.Password"
+                           type="password"
+                           id="passwordInput"
+                           class="input w-full border border-gray-300 rounded-lg px-4 py-2 pr-12 focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                           placeholder="Nhập mật khẩu">
+                    <button type="button" id="togglePassword" class="absolute inset-y-0 right-0 flex items-center justify-center px-3">
+                        <span id="passwordIcon">👁️</span>
+                    </button>
+                </div>
+                <span asp-validation-for="@Model.Password" class="text-danger mt-1 text-sm"></span>
             </div>
-
+            <br />
             <!-- Nút đăng nhập -->
-            <button type="submit">ĐĂNG NHẬP</button>
-
-            <!-- Quên mật khẩu -->
+            <button type="submit">ĐĂNG KÝ</button>
+            <br />
             <div class="forgot-password">
-                <a href="#">Quên mật khẩu?</a>
+                <a href="@Url.Action("Login", "Author")">Nếu có tài khoản</a>
             </div>
         </form>
     </div>
+     
 
     <script>
         const togglePassword = document.getElementById('togglePassword');

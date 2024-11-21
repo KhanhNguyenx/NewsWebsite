@@ -8,9 +8,10 @@
     "\\NewsWebsite\\Areas\\Admin\\Views\\Shared",
     "\\NewsWebsite\\Views",
     "\\NewsWebsite\\Views\\Author",
+    "\\NewsWebsite\\Views\\Shared",
     "\\NewsWebsite\\Views\\Signin",
     "\\NewsWebsite\\wwwroot"
   ],
-  "SelectedNode": "\\NewsWebsite\\Views\\Signin\\Index.cshtml",
+  "SelectedNode": "\\NewsWebsite\\Views\\Shared\\_Layout.cshtml",
   "PreviewInSolutionExplorer": false
 }

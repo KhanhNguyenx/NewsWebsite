@@ -121,7 +121,7 @@
                                 <span class="font-medium text-slate-600">Category</span>
                                 <select name="CategoryId"
                                         class="form-select mt-2 w-full border rounded-lg px-3 py-2">
-                                    <option value="">Select the category</option>
+                                    <option value="" disabled>Select the category</option>
                                     @if (ViewBag.CategoryList != null)
                                     {
                                         foreach (var category in ViewBag.CategoryList)

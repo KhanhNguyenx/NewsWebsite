@@ -15,6 +15,8 @@ using System.Text;
 
 namespace NewsWebsite.Controllers
 {
+
+
     public class AuthorController : MyBaseController<AuthorController>
     {
         private readonly IConsumeApi _callApi;
@@ -32,7 +34,10 @@ namespace NewsWebsite.Controllers
 
             return RedirectToAction("Index", "Home");
         }
-
+        public IActionResult Register()
+        {
+            return View();
+        }
         [Authorize]
         public async Task<IActionResult> GetList()
         {
@@ -145,6 +150,6 @@ namespace NewsWebsite.Controllers
             return RedirectToAction("Index", "Home");
         }
 
-
+       
     }
 }

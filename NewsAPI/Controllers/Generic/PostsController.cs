@@ -9,7 +9,7 @@ using System.Linq.Expressions;
 
 namespace NewsAPI.Controllers
 {
-    [EnableRateLimiting("Fixed")]
+    //[EnableRateLimiting("Fixed")]
     [Route("[controller]/[action]"), ApiController]
     public class PostsController : ControllerBase
     {

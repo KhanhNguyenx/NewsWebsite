@@ -1,321 +1,131 @@
 ﻿
-<body>
+<section class="section first-section">
+    <div class="container-fluid">
+        <div class="masonry-blog clearfix">
+            <div class="first-slot">
+                <div class="masonry-box post-media">
+                    <img src="upload/tech_01.jpg" alt="" class="img-fluid">
+                    <div class="shadoweffect">
+                        <div class="shadow-desc">
+                            <div class="blog-meta">
+                                <span class="bg-orange"><a href="tech-category-01.html" title="">Technology</a></span>
+                                <h2><a href="@Url.Action("Index", "Details")" title="">Say hello to real handmade office furniture! Clean & beautiful design</a></h2>
+                                <small><a href="@Url.Action("Index", "Details")" title="">24 July, 2017</a></small>
+                                <small><a href="tech-author.html" title="">by Amanda</a></small>
+                            </div><!-- end meta -->
+                        </div><!-- end shadow-desc -->
+                    </div><!-- end shadow -->
+                </div><!-- end post-media -->
+            </div><!-- end first-side -->
 
-        <section class="section first-section">
-            <div class="container-fluid">
-                <div class="masonry-blog clearfix">
-                    <div class="first-slot">
-                        <div class="masonry-box post-media">
-                            <img src="upload/tech_01.jpg" alt="" class="img-fluid">
-                            <div class="shadoweffect">
-                                <div class="shadow-desc">
-                                    <div class="blog-meta">
-                                        <span class="bg-orange"><a href="tech-category-01.html" title="">Technology</a></span>
-                                        <h2><a href="@Url.Action("Index", "Details")" title="">Say hello to real handmade office furniture! Clean & beautiful design</a></h2>
-                                        <small><a href="@Url.Action("Index", "Details")" title="">24 July, 2017</a></small>
-                                        <small><a href="tech-author.html" title="">by Amanda</a></small>
-                                    </div><!-- end meta -->
-                                </div><!-- end shadow-desc -->
-                            </div><!-- end shadow -->
-                        </div><!-- end post-media -->
-                    </div><!-- end first-side -->
+            <div class="second-slot">
+                <div class="masonry-box post-media">
+                    <img src="upload/tech_02.jpg" alt="" class="img-fluid">
+                    <div class="shadoweffect">
+                        <div class="shadow-desc">
+                            <div class="blog-meta">
+                                <span class="bg-orange"><a href="tech-category-01.html" title="">Gadgets</a></span>
+                                <h2><a href="@Url.Action("Index", "Details")" title="">Do not make mistakes when choosing web hosting</a></h2>
+                                <small><a href="@Url.Action("Index", "Details")" title="">03 July, 2017</a></small>
+                                <small><a href="tech-author.html" title="">by Jessica</a></small>
+                            </div><!-- end meta -->
+                        </div><!-- end shadow-desc -->
+                    </div><!-- end shadow -->
+                </div><!-- end post-media -->
+            </div><!-- end second-side -->
 
-                    <div class="second-slot">
-                        <div class="masonry-box post-media">
-                            <img src="upload/tech_02.jpg" alt="" class="img-fluid">
-                            <div class="shadoweffect">
-                                <div class="shadow-desc">
-                                    <div class="blog-meta">
-                                        <span class="bg-orange"><a href="tech-category-01.html" title="">Gadgets</a></span>
-                                        <h2><a href="@Url.Action("Index", "Details")" title="">Do not make mistakes when choosing web hosting</a></h2>
-                                        <small><a href="@Url.Action("Index", "Details")" title="">03 July, 2017</a></small>
-                                        <small><a href="tech-author.html" title="">by Jessica</a></small>
-                                    </div><!-- end meta -->
-                                </div><!-- end shadow-desc -->
-                            </div><!-- end shadow -->
-                        </div><!-- end post-media -->
-                    </div><!-- end second-side -->
+            <div class="last-slot">
+                <div class="masonry-box post-media">
+                    <img src="upload/tech_03.jpg" alt="" class="img-fluid">
+                    <div class="shadoweffect">
+                        <div class="shadow-desc">
+                            <div class="blog-meta">
+                                <span class="bg-orange"><a href="tech-category-01.html" title="">Technology</a></span>
+                                <h2><a href="@Url.Action("Index", "Details")" title="">The most reliable Galaxy Note 8 images leaked</a></h2>
+                                <small><a href="@Url.Action("Index", "Details")" title="">01 July, 2017</a></small>
+                                <small><a href="tech-author.html" title="">by Jessica</a></small>
+                            </div><!-- end meta -->
+                        </div><!-- end shadow-desc -->
+                    </div><!-- end shadow -->
+                </div><!-- end post-media -->
+            </div><!-- end second-side -->
+        </div><!-- end masonry -->
+    </div>
+</section>
+@{
+    var imageList = ViewBag.ImageList as List<NewsAPI.DTOs.ImageDTO>;
+    var categoryList = ViewBag.CategoryList as List<NewsAPI.DTOs.CategoryDTO>;
+}
 
-                    <div class="last-slot">
-                        <div class="masonry-box post-media">
-                            <img src="upload/tech_03.jpg" alt="" class="img-fluid">
-                            <div class="shadoweffect">
-                                <div class="shadow-desc">
-                                    <div class="blog-meta">
-                                        <span class="bg-orange"><a href="tech-category-01.html" title="">Technology</a></span>
-                                        <h2><a href="@Url.Action("Index", "Details")" title="">The most reliable Galaxy Note 8 images leaked</a></h2>
-                                        <small><a href="@Url.Action("Index", "Details")" title="">01 July, 2017</a></small>
-                                        <small><a href="tech-author.html" title="">by Jessica</a></small>
-                                    </div><!-- end meta -->
-                                </div><!-- end shadow-desc -->
-                            </div><!-- end shadow -->
-                        </div><!-- end post-media -->
-                    </div><!-- end second-side -->
-                </div><!-- end masonry -->
-            </div>
-        </section>
+<section class="section">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-9 col-md-12 col-sm-12 col-xs-12">
+                <div class="page-wrapper">
+                    <div class="blog-top clearfix">
+                        <h2 class="pull-left">Recent News <a href="#"><i class="fa fa-rss"></i></a></h2>
+                    </div>
+                    @model List<NewsAPI.DTOs.PostDTO>
+                    <div class="blog-list clearfix">
+                        @foreach (var post in Model)
+                        {
+                            var currentCategory = (ViewBag.CategoryList as List<NewsAPI.DTOs.CategoryDTO>)?.FirstOrDefault(c => c.Id == post.CategoryId)?.CategoryName ?? "Unknown";
+                            <div class="blog-box row">
+                                <div class="col-md-4">
+                                    <div class="post-media">
+                                        <a href="@Url.Action("Index", "Details", new { id = post.Id })" title="">
+                                            <img src="@ImageHelper.GetImageUrl(post.Id, imageList)" alt="" class="img-fluid">
+                                            <div class="hovereffect"></div>
+                                        </a>
 
-        <section class="section">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-9 col-md-12 col-sm-12 col-xs-12">
-                        <div class="page-wrapper">
-                            <div class="blog-top clearfix">
-                                <h2 class="pull-left">Recent News <a href="#"><i class="fa fa-rss"></i></a></h2>
-                            </div><!-- end blog-top -->
+                                    </div>
+                                </div>
 
-                            <div class="blog-list clearfix">
-                                <div class="blog-box row">
-                                    <div class="col-md-4">
-                                        <div class="post-media">
-                                            <a href="@Url.Action("Index", "Details")" title="">
-                                                <img src="upload/tech_blog_01.jpg" alt="" class="img-fluid">
-                                                <div class="hovereffect"></div>
-                                            </a>
-                                        </div><!-- end media -->
-                                    </div><!-- end col -->
+                                <div class="blog-meta big-meta col-md-8">
+                                    <h2><a href="@Url.Action("Index", "Details", new { id = post.Id })" title="">@post.Title</a></h2>
+                                    <p>@TextHelper.TruncateText(post.Contents, 20)</p>
+                                    <small class="firstsmall">
+                                        <a class="bg-orange" href="#" title="">
+                                            @currentCategory
+                                        </a>
+                                    </small>
+                                    <small><a href="#" title=""><i class="fa fa-eye"></i> @post.Views</a></small>
+                                    <small><a href="#" title=""><i class="fa fa-thumbs-up"></i> @post.LikeNumber</a></small>
+                                </div>
+                            </div>
 
-                                    <div class="blog-meta big-meta col-md-8">
-                                        <h2><a href="@Url.Action("Index", "Details")" title="">Top 10 phone applications and 2017 mobile design awards</a></h2>
-                                        <p>Aenean interdum arcu blandit, vehicula magna non, placerat elit. Mauris et pharetratortor. Suspendissea sodales urna. In at augue elit. Vivamus enim nibh, maximus ac felis nec, maximus tempor odio.</p>
-                                        <small class="firstsmall"><a class="bg-orange" href="tech-category-01.html" title="">Gadgets</a></small>
-                                        <small><a href="@Url.Action("Index", "Details")" title="">21 July, 2017</a></small>
-                                        <small><a href="tech-author.html" title="">by Matilda</a></small>
-                                        <small><a href="@Url.Action("Index", "Details")" title=""><i class="fa fa-eye"></i> 1114</a></small>
-                                    </div><!-- end meta -->
-                                </div><!-- end blog-box -->
+                            <hr class="invis">
+                        }
+                    </div>
 
-                                <hr class="invis">
-
-                                <div class="blog-box row">
-                                    <div class="col-md-4">
-                                        <div class="post-media">
-                                            <a href="@Url.Action("Index", "Details")" title="">
-                                                <img src="upload/tech_blog_02.jpg" alt="" class="img-fluid">
-                                                <div class="hovereffect"></div>
-                                            </a>
-                                        </div><!-- end media -->
-                                    </div><!-- end col -->
-
-                                    <div class="blog-meta big-meta col-md-8">
-                                        <h2><a href="@Url.Action("Index", "Details")" title="">A device you can use both headphones and usb</a></h2>
-                                        <p>Aenean interdum arcu blandit, vehicula magna non, placerat elit. Mauris et pharetratortor. Suspendissea sodales urna. In at augue elit. Vivamus enim nibh, maximus ac felis nec, maximus tempor odio.</p>
-                                        <small class="firstsmall"><a class="bg-orange" href="tech-category-01.html" title="">Technology</a></small>
-                                        <small><a href="@Url.Action("Index", "Details")" title="">21 July, 2017</a></small>
-                                        <small><a href="tech-author.html" title="">by Matilda</a></small>
-                                        <small><a href="@Url.Action("Index", "Details")" title=""><i class="fa fa-eye"></i> 4412</a></small>
-                                    </div><!-- end meta -->
-                                </div><!-- end blog-box -->
-
-                                <hr class="invis">
-
-                                <div class="blog-box row">
-                                    <div class="col-md-4">
-                                        <div class="post-media">
-                                            <a href="@Url.Action("Index", "Details")" title="">
-                                                <img src="upload/tech_blog_03.jpg" alt="" class="img-fluid">
-                                                <div class="hovereffect"></div>
-                                            </a>
-                                        </div><!-- end media -->
-                                    </div><!-- end col -->
-
-                                    <div class="blog-meta big-meta col-md-8">
-                                        <h2><a href="@Url.Action("Index", "Details")" title="">Two brand new laptop models from ABC computer</a></h2>
-                                        <p>Aenean interdum arcu blandit, vehicula magna non, placerat elit. Mauris et pharetratortor. Suspendissea sodales urna. In at augue elit. Vivamus enim nibh, maximus ac felis nec, maximus tempor odio.</p>
-                                        <small class="firstsmall"><a class="bg-orange" href="tech-category-01.html" title="">Development</a></small>
-                                        <small><a href="@Url.Action("Index", "Details")" title="">20 July, 2017</a></small>
-                                        <small><a href="tech-author.html" title="">by Matilda</a></small>
-                                        <small><a href="@Url.Action("Index", "Details")" title=""><i class="fa fa-eye"></i> 2313</a></small>
-                                    </div><!-- end meta -->
-                                </div><!-- end blog-box -->
-
-                           
-
-                                <div class="blog-box row">
-                                    <div class="col-md-4">
-                                        <div class="post-media">
-                                            <a href="@Url.Action("Index", "Details")" title="">
-                                                <img src="upload/tech_blog_04.jpg" alt="" class="img-fluid">
-                                                <div class="hovereffect"></div>
-                                            </a>
-                                        </div><!-- end media -->
-                                    </div><!-- end col -->
-
-                                    <div class="blog-meta big-meta col-md-8">
-                                        <h2><a href="@Url.Action("Index", "Details")" title="">Applications for taking photos of nature in your mobile phones</a></h2>
-                                        <p>Aenean interdum arcu blandit, vehicula magna non, placerat elit. Mauris et pharetratortor. Suspendissea sodales urna. In at augue elit. Vivamus enim nibh, maximus ac felis nec, maximus tempor odio.</p>
-                                        <small class="firstsmall"><a class="bg-orange" href="tech-category-01.html" title="">Design</a></small>
-                                        <small><a href="@Url.Action("Index", "Details")" title="">19 July, 2017</a></small>
-                                        <small><a href="tech-author.html" title="">by Matilda</a></small>
-                                        <small><a href="@Url.Action("Index", "Details")" title=""><i class="fa fa-eye"></i> 4441</a></small>
-                                    </div><!-- end meta -->
-                                </div><!-- end blog-box -->
-
-                                <hr class="invis">
-
-                                <div class="blog-box row">
-                                    <div class="col-md-4">
-                                        <div class="post-media">
-                                            <a href="@Url.Action("Index", "Details")" title="">
-                                                <img src="upload/tech_blog_05.jpg" alt="" class="img-fluid">
-                                                <div class="hovereffect"></div>
-                                            </a>
-                                        </div><!-- end media -->
-                                    </div><!-- end col -->
-
-                                    <div class="blog-meta big-meta col-md-8">
-                                        <h2><a href="@Url.Action("Index", "Details")" title="">Say hello to colored strap models in smart hours</a></h2>
-                                        <p>Aenean interdum arcu blandit, vehicula magna non, placerat elit. Mauris et pharetratortor. Suspendissea sodales urna. In at augue elit. Vivamus enim nibh, maximus ac felis nec, maximus tempor odio.</p>
-                                        <small class="firstsmall"><a class="bg-orange" href="tech-category-01.html" title="">Materials</a></small>
-                                        <small><a href="@Url.Action("Index", "Details")" title="">18 July, 2017</a></small>
-                                        <small><a href="tech-author.html" title="">by Matilda</a></small>
-                                        <small><a href="@Url.Action("Index", "Details")" title=""><i class="fa fa-eye"></i> 33312</a></small>
-                                    </div><!-- end meta -->
-                                </div><!-- end blog-box -->
-
-                                <hr class="invis">
-
-                                <div class="blog-box row">
-                                    <div class="col-md-4">
-                                        <div class="post-media">
-                                            <a href="@Url.Action("Index", "Details")" title="">
-                                                <img src="upload/tech_blog_06.jpg" alt="" class="img-fluid">
-                                                <div class="hovereffect"></div>
-                                            </a>
-                                        </div><!-- end media -->
-                                    </div><!-- end col -->
-
-                                    <div class="blog-meta big-meta col-md-8">
-                                        <h2><a href="@Url.Action("Index", "Details")" title="">How about evaluating your old mobile phones in different ways?</a></h2>
-                                        <p>Aenean interdum arcu blandit, vehicula magna non, placerat elit. Mauris et pharetratortor. Suspendissea sodales urna. In at augue elit. Vivamus enim nibh, maximus ac felis nec, maximus tempor odio.</p>
-                                        <small class="firstsmall"><a class="bg-orange" href="tech-category-01.html" title="">Gadgets</a></small>
-                                        <small><a href="@Url.Action("Index", "Details")" title="">17 July, 2017</a></small>
-                                        <small><a href="tech-author.html" title="">by Matilda</a></small>
-                                        <small><a href="@Url.Action("Index", "Details")" title=""><i class="fa fa-eye"></i> 4440</a></small>
-                                    </div><!-- end meta -->
-                                </div><!-- end blog-box -->
-
-                                <hr class="invis">
-
-                                <div class="blog-box row">
-                                    <div class="col-md-4">
-                                        <div class="post-media">
-                                            <a href="@Url.Action("Index", "Details")" title="">
-                                                <img src="upload/tech_blog_07.jpg" alt="" class="img-fluid">
-                                                <div class="hovereffect"></div>
-                                            </a>
-                                        </div><!-- end media -->
-                                    </div><!-- end col -->
-
-                                    <div class="blog-meta big-meta col-md-8">
-                                        <h2><a href="@Url.Action("Index", "Details")" title="">Drinking coffee at the computer rests the spirit</a></h2>
-                                        <p>Aenean interdum arcu blandit, vehicula magna non, placerat elit. Mauris et pharetratortor. Suspendissea sodales urna. In at augue elit. Vivamus enim nibh, maximus ac felis nec, maximus tempor odio.</p>
-                                        <small class="firstsmall"><a class="bg-orange" href="tech-category-01.html" title="">Technology</a></small>
-                                        <small><a href="@Url.Action("Index", "Details")" title="">16 July, 2017</a></small>
-                                        <small><a href="tech-author.html" title="">by Matilda</a></small>
-                                        <small><a href="@Url.Action("Index", "Details")" title=""><i class="fa fa-eye"></i> 4412</a></small>
-                                    </div><!-- end meta -->
-                                </div><!-- end blog-box -->
-
-                                <hr class="invis">
-
-                                <div class="blog-box row">
-                                    <div class="col-md-4">
-                                        <div class="post-media">
-                                            <a href="@Url.Action("Index", "Details")" title="">
-                                                <img src="upload/tech_blog_08.jpg" alt="" class="img-fluid">
-                                                <div class="hovereffect"></div>
-                                            </a>
-                                        </div><!-- end media -->
-                                    </div><!-- end col -->
-
-                                    <div class="blog-meta big-meta col-md-8">
-                                        <h2><a href="@Url.Action("Index", "Details")" title="">If you are considering buying a new safe for your mobile phone, be sure to read this article</a></h2>
-                                        <p>Aenean interdum arcu blandit, vehicula magna non, placerat elit. Mauris et pharetratortor. Suspendissea sodales urna. In at augue elit. Vivamus enim nibh, maximus ac felis nec, maximus tempor odio.</p>
-                                        <small class="firstsmall"><a class="bg-orange" href="tech-category-01.html" title="">Reviews</a></small>
-                                        <small><a href="@Url.Action("Index", "Details")" title="">15 July, 2017</a></small>
-                                        <small><a href="tech-author.html" title="">by Matilda</a></small>
-                                        <small><a href="@Url.Action("Index", "Details")" title=""><i class="fa fa-eye"></i> 44123</a></small>
-                                    </div><!-- end meta -->
-                                </div><!-- end blog-box -->
-
-                                <hr class="invis">
-
-                                <div class="blog-box row">
-                                    <div class="col-md-4">
-                                        <div class="post-media">
-                                            <a href="@Url.Action("Index", "Details")" title="">
-                                                <img src="upload/tech_blog_09.jpg" alt="" class="img-fluid">
-                                                <div class="hovereffect"></div>
-                                            </a>
-                                        </div><!-- end media -->
-                                    </div><!-- end col -->
-
-                                    <div class="blog-meta big-meta col-md-8">
-                                        <h2><a href="@Url.Action("Index", "Details")" title="">Enjoy a summer with a colorful headset</a></h2>
-                                        <p>Aenean interdum arcu blandit, vehicula magna non, placerat elit. Mauris et pharetratortor. Suspendissea sodales urna. In at augue elit. Vivamus enim nibh, maximus ac felis nec, maximus tempor odio.</p>
-                                        <small class="firstsmall"><a class="bg-orange" href="tech-category-01.html" title="">Technology</a></small>
-                                        <small><a href="@Url.Action("Index", "Details")" title="">14 July, 2017</a></small>
-                                        <small><a href="tech-author.html" title="">by Matilda</a></small>
-                                        <small><a href="@Url.Action("Index", "Details")" title=""><i class="fa fa-eye"></i> 2214</a></small>
-                                    </div><!-- end meta -->
-                                </div><!-- end blog-box -->
-
-                                <hr class="invis">
-
-                                <div class="blog-box row">
-                                    <div class="col-md-4">
-                                        <div class="post-media">
-                                            <a href="@Url.Action("Index", "Details")" title="">
-                                                <img src="upload/tech_blog_10.jpg" alt="" class="img-fluid">
-                                                <div class="hovereffect"></div>
-                                            </a>
-                                        </div><!-- end media -->
-                                    </div><!-- end col -->
-
-                                    <div class="blog-meta big-meta col-md-8">
-                                        <h2><a href="@Url.Action("Index", "Details")" title="">Google has developed a brand new algorithm. Forget all your knowledge!</a></h2>
-                                        <p>Aenean interdum arcu blandit, vehicula magna non, placerat elit. Mauris et pharetratortor. Suspendissea sodales urna. In at augue elit. Vivamus enim nibh, maximus ac felis nec, maximus tempor odio.</p>
-                                        <small class="firstsmall"><a class="bg-orange" href="tech-category-01.html" title="">Gadgets</a></small>
-                                        <small><a href="@Url.Action("Index", "Details")" title="">13 July, 2017</a></small>
-                                        <small><a href="tech-author.html" title="">by Matilda</a></small>
-                                        <small><a href="@Url.Action("Index", "Details")" title=""><i class="fa fa-eye"></i> 3331</a></small>
-                                    </div><!-- end meta -->
-                                </div><!-- end blog-box -->
-                            </div><!-- end blog-list -->
-                        </div><!-- end page-wrapper -->
-
-                        <hr class="invis">
-
-                        <div class="row">
-                            <div class="col-md-12">
-                                <nav aria-label="Page navigation">
-                                    <ul class="pagination justify-content-start">
-                                        <li class="page-item"><a class="page-link" href="#">1</a></li>
-                                        <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                        <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                        <li class="page-item">
-                                            <a class="page-link" href="#">Next</a>
+                    <!-- Pagination -->
+                    <div class="row">
+                        <div class="col-md-12">
+                            <nav aria-label="Page navigation">
+                                <ul class="pagination justify-content-start">
+                                    @for (int i = 1; i <= ViewBag.TotalPages; i++)
+                                    {
+                                        <li class="page-item @(i == ViewBag.CurrentPage ? "active" : "")">
+                                            <a class="page-link" href="@Url.Action("Index", new { pageNumber = i, pageSize = ViewBag.PageSize })">@i</a>
                                         </li>
-                                    </ul>
-                                </nav>
-                            </div><!-- end col -->
-                        </div><!-- end row -->
-                    </div><!-- end col -->
+                                    }
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 
 
-                </div><!-- end row -->
-            </div><!-- end container -->
-        </section>
 
-        <div class="dmtop">Scroll to Top</div>
 
-    </div><!-- end wrapper -->
-    <!-- Core JavaScript
-    ================================================== -->
-    <script src="js/jquery.min.js"></script>
-    <script src="js/tether.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-    <script src="js/custom.js"></script>
-
-</body>
+<!-- end wrapper -->
+<!-- Core JavaScript
+================================================== -->
+<script src="js/jquery.min.js"></script>
+<script src="js/tether.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/custom.js"></script>

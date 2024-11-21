@@ -82,6 +82,21 @@
                                            placeholder="Enter Post Slug"
                                            value="@Model?.Slug" />
                                 </label>
+                                @if (ViewBag.Images != null && ViewBag.Images.Count > 0)
+                                {
+                                    <div class="mt-4">
+                                        <span class="font-medium text-slate-600">Current Images</span>
+                                        <div class="grid grid-cols-3 gap-4 mt-2">
+                                            @foreach (var image in ViewBag.Images)
+                                            {
+                                                <div class="relative">
+                                                    <img src="@image.ImageUrl" alt="@image.Caption" class="w-full h-32 object-cover rounded-md" />
+                                                    <button type="button" class="absolute top-2 right-2 bg-red-500 text-white px-2 py-1 rounded-full">X</button>
+                                                </div>
+                                            }
+                                        </div>
+                                    </div>
+                                }
                                 <label class="block">
                                     <span class="font-medium text-slate-600">Post Content</span>
                                     <textarea name="Contents"
@@ -106,17 +121,14 @@
                                 <span class="font-medium text-slate-600">Category</span>
                                 <select name="CategoryId"
                                         class="form-select mt-2 w-full border rounded-lg px-3 py-2">
-                                    <option value="">Select the category</option>
+                                    <option value="" disabled>Select the category</option>
                                     @if (ViewBag.CategoryList != null)
                                     {
                                         foreach (var category in ViewBag.CategoryList)
                                         {
-
-                                            <option value="@category.Id" selected="@Model.CategoryId">
+                                            <!option value="@category.Id" @(category.Id == Model?.CategoryId ? "selected" : "")>
                                                 @category.CategoryName
-                                            </option>
-
-
+                                            </!option>
                                         }
                                     }
                                     else

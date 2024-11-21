@@ -1,22 +1,133 @@
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
+using NewsAPI.DTOs;
 using NewsWebsite.Models;
+using Newtonsoft.Json;
 using System.Diagnostics;
 
 namespace NewsWebsite.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
-
-        public HomeController(ILogger<HomeController> logger)
+        Uri baseAddress = new Uri("https://localhost:44358");
+        private readonly HttpClient _client;
+        public HomeController()
         {
-            _logger = logger;
+            _client = new HttpClient();
+            _client.BaseAddress = baseAddress;
+        }
+        //[HttpGet]
+        //public async Task<IActionResult> Index()
+        //{
+        //    List<PostDTO> postList = new List<PostDTO>();
+        //    List<CategoryDTO> categoryList = new List<CategoryDTO>();
+        //    List<ImageDTO> imageList = new List<ImageDTO>();
+
+        //    // Fetch the list of posts from the API
+        //    using (var postResponse = await _client.GetAsync("Posts/GetList"))
+        //    {
+        //        if (postResponse.IsSuccessStatusCode)
+        //        {
+        //            var postData = await postResponse.Content.ReadAsStringAsync();
+        //            postList = JsonConvert.DeserializeObject<List<PostDTO>>(postData);
+        //        }
+        //        else
+        //        {
+        //            TempData["ErrorMessage"] = "Failed to retrieve posts list!";
+        //        }
+        //    }
+
+        //    // Fetch the list of categories from the API
+        //    using (var categoryResponse = await _client.GetAsync("Categories/GetList"))
+        //    {
+        //        if (categoryResponse.IsSuccessStatusCode)
+        //        {
+        //            var categoryData = await categoryResponse.Content.ReadAsStringAsync();
+        //            categoryList = JsonConvert.DeserializeObject<List<CategoryDTO>>(categoryData);
+        //        }
+        //        else
+        //        {
+        //            TempData["ErrorMessage"] = "Failed to retrieve categories list!";
+        //        }
+        //    }
+
+        //    // Fetch the list of images from the API
+        //    using (var imageResponse = await _client.GetAsync("Images/GetList"))
+        //    {
+        //        if (imageResponse.IsSuccessStatusCode)
+        //        {
+        //            var imageData = await imageResponse.Content.ReadAsStringAsync();
+        //            imageList = JsonConvert.DeserializeObject<List<ImageDTO>>(imageData);
+        //        }
+        //        else
+        //        {
+        //            TempData["ErrorMessage"] = "Failed to retrieve images list!";
+        //        }
+        //    }
+
+        //    // Đóng gói dữ liệu để truyền xuống View
+        //    ViewBag.PostList = postList;
+        //    ViewBag.CategoryList = categoryList;
+        //    ViewBag.ImageList = imageList;
+
+        //    return View();
+        //}
+        [HttpGet]
+        public async Task<IActionResult> Index(int pageNumber = 1, int pageSize = 5)
+        {
+            List<PostDTO> postList = new List<PostDTO>();
+            List<CategoryDTO> categoryList = new List<CategoryDTO>();
+            List<ImageDTO> imageList = new List<ImageDTO>();
+            int totalRecords = 0;
+
+            // Fetch the paged list of posts from the API
+            using (var postResponse = await _client.GetAsync($"Posts/GetPagedProducts?pageNumber={pageNumber}&pageSize={pageSize}"))
+            {
+                if (postResponse.IsSuccessStatusCode)
+                {
+                    var postData = await postResponse.Content.ReadAsStringAsync();
+                    var pagedResult = JsonConvert.DeserializeObject<PagedResult<PostDTO>>(postData);
+
+                    // Gán giá trị từ pagedResult
+                    postList = pagedResult?.Records ?? new List<PostDTO>();
+                    totalRecords = pagedResult?.TotalRecords ?? 0;
+                }
+                else
+                {
+                    TempData["ErrorMessage"] = "Failed to retrieve posts list!";
+                }
+            }
+
+            // Fetch the list of categories from the API
+            using (var categoryResponse = await _client.GetAsync("Categories/GetList"))
+            {
+                if (categoryResponse.IsSuccessStatusCode)
+                {
+                    var categoryData = await categoryResponse.Content.ReadAsStringAsync();
+                    categoryList = JsonConvert.DeserializeObject<List<CategoryDTO>>(categoryData);
+                    ViewBag.CategoryList = categoryList;
+                }
+            }
+
+            // Fetch the list of images from the API
+            using (var imageResponse = await _client.GetAsync("Images/GetList"))
+            {
+                if (imageResponse.IsSuccessStatusCode)
+                {
+                    var imageData = await imageResponse.Content.ReadAsStringAsync();
+                    imageList = JsonConvert.DeserializeObject<List<ImageDTO>>(imageData);
+                    ViewBag.ImageList = imageList;
+                }
+            }
+
+            // Calculate total pages for pagination
+            int totalPages = (int)Math.Ceiling((double)totalRecords / pageSize);
+            ViewBag.TotalPages = totalPages;
+            ViewBag.CurrentPage = pageNumber;
+
+            // Pass the paged list of posts to the view
+            return View(postList);
         }
 
-        public IActionResult Index()
-        {
-            return View();
-        }
 
         public IActionResult Privacy()
         {

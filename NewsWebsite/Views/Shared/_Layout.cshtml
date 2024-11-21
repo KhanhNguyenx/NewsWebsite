@@ -52,42 +52,55 @@
                     </button>
                     <a class="navbar-brand" href="tech-index.html"><img src="images/version/tech-logo.png" alt=""></a>
                     <div class="collapse navbar-collapse" id="navbarCollapse">
-                        <ul class="navbar-nav mr-auto">
+                        <ul class="navbar-nav mr-auto" id="categories-menu">
                             <li class="nav-item">
-                                <a class="nav-link" href="   @Url.Action("Index", "Home")">Home</a>
-                            </li>
-                            <li class="nav-item dropdown has-submenu menu-large hidden-md-down hidden-sm-down hidden-xs-down">
-                                <a class="nav-link" href="#" id="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">News</a>
-                              
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="tech-category-01.html">Gadgets</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="tech-category-02.html">Videos</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="tech-category-03.html">Reviews</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="tech-contact.html">Contact Us</a>
+                                <a class="nav-link" href="@Url.Action("Index", "Home")">Home</a>
                             </li>
                         </ul>
+
                         <ul class="navbar-nav mr-2">
                             <li class="nav-item">
                                 <a class="nav-link" href="@Url.Action("Login", "Author")"><i class="fa fa-user"></i>Login</a>
                             </li>
                         </ul>
-                     
                     </div>
+
                 </nav>
             </div><!-- end container-fluid -->
         </header><!-- end market-header -->
-
+    </div>
     @RenderBody();
 
-  
 
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            // Gọi API để lấy danh sách categories
+            $.ajax({
+                url: '/Categories/Getlist', // Đường dẫn API
+                method: 'GET',
+                success: function (data) {
+                    console.log('Dữ liệu API trả về:', data); // Log dữ liệu API để kiểm tra
+
+                    // Lọc danh mục có status = 1
+                    const activeCategories = data.filter(category => category.status === 1);
+
+                    // Duyệt qua các danh mục đã lọc và chèn từng mục vào HTML
+                    activeCategories.forEach(category => {
+                        $('#categories-menu').append(`
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">${category.categoryName}</a>
+                        </li>
+                        `);
+                    });
+                },
+                error: function (xhr, status, error) {
+                    console.error('Lỗi khi gọi API:', error);
+                    $('#categories-menu').append('<li class="nav-item"><a class="nav-link">Error loading categories</a></li>');
+                }
+            });
+        });
+    </script>
     <!-- JS here -->
     <script src="~/js/site.js"></script>
     <!-- All JS Custom Plugins Link Here here -->
@@ -111,7 +124,7 @@
 
     <!-- Breaking New Pluging -->
     <script src="./assets/js/jquery.ticker.js"></script>
-    <script src="./assets/js/site.js"></script>
+    @* <script src="./assets/js/site.js"></script> *@
 
     <!-- Scrollup, nice-select, sticky -->
     <script src="./assets/js/jquery.scrollUp.min.js"></script>
@@ -119,7 +132,7 @@
     <script src="./assets/js/jquery.sticky.js"></script>
 
     <!-- contact js -->
-    <script src="./assets/js/contact.js"></script>
+    @* <script src="./assets/js/contact.js"></script> *@
     <script src="./assets/js/jquery.form.js"></script>
     <script src="./assets/js/jquery.validate.min.js"></script>
     <script src="./assets/js/mail-script.js"></script>

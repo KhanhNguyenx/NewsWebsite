@@ -80,7 +80,6 @@ else
 }
 app.UseStaticFiles();
 app.UseHttpsRedirection();
-app.UseStaticFiles();
 
 app.UseRouting();
 app.UseAuthentication();

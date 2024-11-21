@@ -14,5 +14,4 @@ public partial class CategoryDTO
     public int ParentCategoryId { get; set; }
 
     public int Status { get; set; }
-
 }

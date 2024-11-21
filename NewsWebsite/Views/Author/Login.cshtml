@@ -1,160 +1,178 @@
 ﻿@model NewsWebsite.Helpers.LoginM
 @{
     ViewData["Title"] = "Đăng nhập";
-}
-@{
     Layout = null;
 }
 <!DOCTYPE html>
-<html class="h-full light" data-theme="true" data-theme-mode="light" lang="en">
+<html lang="en" class="h-full bg-gray-100">
 <head>
-    <title>Metronic - Tailwind CSS Sign In</title>
-    <meta charset="utf-8">
-    <meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport">
-    <link href="~/Signin/css/styles.bundle.css" rel="stylesheet">
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-52YZ3XGZJ6"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag() { dataLayer.push(arguments); }
-        gtag('js', new Date());
-        gtag('config', 'G-52YZ3XGZJ6');
-    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đăng nhập</title>
     <style>
         body {
-            display: flex; /* Sử dụng Flexbox */
-            align-items: center; /* Căn giữa theo chiều dọc */
-            justify-content: center; /* Căn giữa theo chiều ngang */
-            height: 100vh; /* Chiều cao toàn màn hình */
-            margin: 0; /* Xóa khoảng cách mặc định */
-            background-color: #f3f4f6; /* Màu nền */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f3f4f6;
         }
 
         .card {
-            background: #ffffff; /* Màu trắng cho ô đăng nhập */
-            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1); /* Đổ bóng */
-            border-radius: 10px; /* Bo góc */
-            width: 400px; /* Chiều rộng ô */
-            padding: 20px; /* Khoảng cách bên trong */
+            background: #ffffff;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            width: 400px;
+            padding: 20px;
         }
 
-        input {
-            width: 70%; /* Input chiếm toàn bộ chiều ngang */
-            padding: 10px; /* Khoảng cách nội dung */
-            border: 1px solid #d1d5db; /* Viền xám */
-            border-radius: 5px; /* Bo góc */
+        h3 {
+            margin: 0;
+            font-size: 24px;
+            color: #333;
+            text-align: center;
+        }
+
+        p {
+            font-size: 14px;
+            text-align: center;
+            color: #666;
+            margin-bottom: 20px;
+        }
+
+        label {
+            font-size: 14px;
+            color: #333;
+            margin-bottom: 8px;
+            display: block;
+        }
+
+        input[type="text"], input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #d1d5db;
+            border-radius: 5px;
             font-size: 14px;
             outline: none;
+            transition: border-color 0.3s ease;
         }
 
-            input:focus {
-                border-color: #3b82f6; /* Màu viền khi focus */
-                box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.3); /* Hiệu ứng tập trung */
+            input[type="text"]:focus, input[type="password"]:focus {
+                border-color: #2563eb;
+                box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.3);
             }
 
-        button {
-            width: 100%; /* Nút chiếm toàn bộ chiều ngang */
-            padding: 12px; /* Khoảng cách nội dung */
-            background-color: #2563eb; /* Màu xanh */
-            color: white; /* Màu chữ */
-            border: none; /* Không viền */
-            border-radius: 5px; /* Bo góc */
-            font-size: 16px; /* Kích thước chữ */
+        .relative {
+            position: relative;
+        }
+
+            .relative button {
+                position: absolute;
+                right: 10px;
+                top: 50%;
+                transform: translateY(-50%);
+                background: none;
+                border: none;
+                cursor: pointer;
+                font-size: 16px;
+            }
+
+        .checkbox {
+            margin-right: 8px;
+        }
+
+            .checkbox + span {
+                font-size: 14px;
+                color: #666;
+            }
+
+        button[type="submit"] {
+            width: 100%;
+            padding: 12px;
+            background-color: #2563eb;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            font-weight: bold;
             cursor: pointer;
+            transition: background-color 0.3s ease;
         }
 
-            button:hover {
-                background-color: #1d4ed8; /* Màu khi hover */
+            button[type="submit"]:hover {
+                background-color: #1d4ed8;
             }
 
+        .forgot-password {
+            text-align: center;
+            margin-top: 15px;
+        }
+
+            .forgot-password a {
+                font-size: 14px;
+                color: #2563eb;
+                text-decoration: none;
+            }
+
+                .forgot-password a:hover {
+                    text-decoration: underline;
+                }
     </style>
 </head>
-<body class="antialiased h-screen flex items-center justify-center bg-gray-100 dark:bg-gray-800">
-    <div class="card w-[400px] shadow-xl rounded-lg bg-white p-8">
+<body>
+    <div class="card">
+        <h3>Đăng nhập</h3>
+        <p>Vui lòng điền thông tin tài khoản của bạn</p>
         <form asp-action="Logins" method="post" id="sign_in_form">
-            <!-- Header -->
-            <div class="text-center mb-8">
-                <h3 class="text-2xl font-bold text-gray-900 mb-2">Đăng nhập</h3>
-                <p class="text-sm text-gray-500">Vui lòng điền thông tin tài khoản của bạn</p>
-            </div>
-
-            <!-- Username -->
-            <div class="mb-5">
-                <label asp-for="@Model.UserName" class="block text-sm font-medium text-gray-700 mb-2">Tên người dùng</label>
+            <!-- Tên người dùng -->
+            <div class="mb-4">
+                <label asp-for="@Model.UserName">Tên người dùng</label>
                 <input asp-for="@Model.UserName" class="input w-full border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-blue-500 focus:border-blue-500" placeholder="Nhập tên người dùng">
                 <span asp-validation-for="@Model.UserName" class="text-danger mt-1 text-sm"></span>
             </div>
 
-            <!-- Password -->
-            <div class="mb-5">
-                <label asp-for="@Model.Password" class="block text-sm font-medium text-gray-700 mb-2">Mật khẩu</label>
-                <div class="relative flex items-center">
-                    <input asp-for="@Model.Password"
-                           type="password"
-                           id="passwordInput"
-                           class="input w-full border border-gray-300 rounded-lg px-4 py-2 pr-12 focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-                           placeholder="Nhập mật khẩu">
-                    <button type="button"
-                            id="togglePassword"
-                            class="absolute right-3 top-2.5 text-gray-500 hover:text-gray-700 focus:outline-none">
-                        <i id="passwordIcon" class="ki-filled ki-eye text-xl"></i>
-                    </button>
-                </div>
+            <!-- Mật khẩu -->
+            <div class="mb-4 relative">
+                <label asp-for="@Model.Password">Mật khẩu</label>
+                <input asp-for="@Model.Password"
+                       type="password"
+                       id="passwordInput"
+                       class="input w-full border border-gray-300 rounded-lg px-4 py-2 pr-12 focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                       placeholder="Nhập mật khẩu">
+                <button type="button" id="togglePassword">
+                    <span id="passwordIcon">👁️</span>
+                </button>
                 <span asp-validation-for="@Model.Password" class="text-danger mt-1 text-sm"></span>
             </div>
 
-
-            <!-- Remember Me -->
-            <div class="flex items-center mb-5">
+            <!-- Ghi nhớ -->
+            <div class="mb-4">
                 <input class="checkbox rounded border-gray-300 text-blue-500 focus:ring-blue-500 mr-2" name="RememberMe" type="checkbox">
-                <span class="text-sm text-gray-600">Remember me</span>
+                <span>Remember me</span>
             </div>
 
+            <!-- Nút đăng nhập -->
+            <button type="submit">ĐĂNG NHẬP</button>
 
-            <!-- Submit Button -->
-            <button type="submit" class="btn w-full py-3 text-white font-bold text-lg rounded-lg bg-blue-500 hover:bg-blue-600 shadow-md focus:outline-none focus:ring-2 focus:ring-blue-400">
-                ĐĂNG NHẬP
-            </button>
-
-            <!-- Forgot Password -->
-            <div class="text-center mt-5">
-                <a href="#" class="text-sm text-blue-500 hover:underline">Quên mật khẩu?</a>
+            <!-- Quên mật khẩu -->
+            <div class="forgot-password">
+                <a href="#">Quên mật khẩu?</a>
             </div>
         </form>
     </div>
-</body>
 
-    <script src="~/Signin/js/core.bundle.js"></script>
-    <script src="~/Signin/js/apexcharts.min.js"></script>
     <script>
-        async function handleGoogleCallback() {
-            const params = new URLSearchParams(window.location.search);
-            const token = params.get('token');
-            if (token) {
-                localStorage.setItem('jwt', token);
-                window.location.href = "/dashboard";
-            }
-        }
-        window.onload = handleGoogleCallback;
+        const togglePassword = document.getElementById('togglePassword');
+        const passwordInput = document.getElementById('passwordInput');
+        const passwordIcon = document.getElementById('passwordIcon');
+
+        togglePassword.addEventListener('click', () => {
+            const isPassword = passwordInput.type === 'password';
+            passwordInput.type = isPassword ? 'text' : 'password';
+            passwordIcon.textContent = isPassword ? '🙈' : '👁️'; // Đổi icon
+        });
     </script>
-<script>
-    const togglePassword = document.getElementById('togglePassword');
-    const passwordInput = document.getElementById('passwordInput');
-    const passwordIcon = document.getElementById('passwordIcon');
-
-    togglePassword.addEventListener('click', () => {
-        const currentType = passwordInput.getAttribute('type');
-        if (currentType === 'password') {
-            passwordInput.setAttribute('type', 'text');
-            passwordIcon.classList.remove('ki-eye');
-            passwordIcon.classList.add('ki-eye-slash'); // Đổi biểu tượng sang "ẩn mật khẩu"
-        } else {
-            passwordInput.setAttribute('type', 'password');
-            passwordIcon.classList.remove('ki-eye-slash');
-            passwordIcon.classList.add('ki-eye'); // Đổi biểu tượng sang "hiện mật khẩu"
-        }
-    });
-</script>
-
-
-
+</body>
 </html>

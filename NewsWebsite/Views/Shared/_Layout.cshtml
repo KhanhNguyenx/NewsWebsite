@@ -107,15 +107,27 @@
                             }
                         </ul>
                         <ul class="navbar-nav mr-2">
-                            <li class="nav-item">
-                                <a class="nav-link" href="@Url.Action("Register", "Author")"></i>register</a>
-                            </li>
+                            @if (User.Identity.IsAuthenticated)
+                            {
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        Hello, @User.Identity.Name
+                                    </a>
+                                    <div class="dropdown-menu" aria-labelledby="userDropdown">
+                                        <a class="dropdown-item" href="@Url.Action("Profile", "Author")">Profile</a>
+                                        <a class="dropdown-item" href="@Url.Action("Logout", "Author")">Logout</a>
+                                    </div>
+                                </li>
+                            }
+                            else
+                            {
+                                <li class="nav-item">
+                                    <a class="nav-link" href="@Url.Action("Login", "Author")"><i class="fa fa-user"></i> Login</a>
+                                </li>
+                            }
                         </ul>
-                        <ul class="navbar-nav mr-2">
-                            <li class="nav-item">
-                                <a class="nav-link" href="@Url.Action("Login", "Author")"><i class="fa fa-user"></i></a>
-                            </li>
-                        </ul>
+
+                     
                     </div>
                     <div class="relative">
                         <button class="btn-avatar rounded-full overflow-hidden w-12 h-12">

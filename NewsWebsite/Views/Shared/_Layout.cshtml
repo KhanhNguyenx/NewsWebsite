@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>404 NotFound</title>
+    <title>404 NotFound News</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="manifest" href="site.webmanifest">
@@ -107,29 +107,29 @@
                             }
                         </ul>
                         @* <ul class="navbar-nav mr-2">
-                            @if (User.Identity.IsAuthenticated)
-                            {
-                                <li class="nav-item dropdown">
-                                    <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        Hello, @User.Identity.Name
-                                    </a>
-                                    <div class="dropdown-menu" aria-labelledby="userDropdown">
-                                        <a class="dropdown-item" href="@Url.Action("Profile", "Author")">Profile</a>
-                                        <a class="dropdown-item" href="@Url.Action("Logout", "Author")">Logout</a>
-                                    </div>
-                                </li>
-                            }
-                            else
-                            {
-                                <li class="nav-item">
-                                    <a class="nav-link" href="@Url.Action("Login", "Author")"><i class="fa fa-user"></i></a>
-                                </li>
-                            }
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                        <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Hello, @User.Identity.Name
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="userDropdown">
+                        <a class="dropdown-item" href="@Url.Action("Profile", "Author")">Profile</a>
+                        <a class="dropdown-item" href="@Url.Action("Logout", "Author")">Logout</a>
+                        </div>
+                        </li>
+                        }
+                        else
+                        {
+                        <li class="nav-item">
+                        <a class="nav-link" href="@Url.Action("Login", "Author")"><i class="fa fa-user"></i></a>
+                        </li>
+                        }
                         </ul> *@
 
                     </div>
                     <div class="relative">
-                        @if(User.Identity.IsAuthenticated)
+                        @if (User.Identity.IsAuthenticated)
                         {
                             <button class="btn-avatar rounded-full overflow-hidden w-12 h-12">
                                 <img src="/data/images/614b64d5-92c4-4b48-ae4c-29e33255f953.jpg" alt="avatar" class="w-full h-full object-cover">
@@ -178,9 +178,9 @@
                     // Duyệt qua các danh mục đã lọc và chèn từng mục vào HTML
                     activeCategories.forEach(category => {
                         $('#categories-menu').append(
-                            <li class="nav-item">
+                            `<li class="nav-item">
                                 <a class="nav-link" href="#">${category.categoryName}</a>
-                            </li>
+                            </li>`
                         );
                     });
                 },
@@ -190,25 +190,30 @@
                 }
             });
         });
-        // Lấy avatar và dropdown menu
+    </script>
+    <script>
+        $(document).ready(function() {
         const avatarBtn = document.querySelector('.btn-avatar'); // Nút avatar
         const dropdownMenu = document.querySelector('.dropdown-menu'); // Menu cần mở
+        if (avatarBtn && dropdownMenu) {
+                    // Mở menu khi nhấn vào avatar
+            avatarBtn.addEventListener('click', (e) => {
+                e.stopPropagation(); // Ngăn sự kiện lan ra ngoài
+                dropdownMenu.classList.toggle('show'); // Hiển thị hoặc ẩn menu
+            });
 
-        // Mở menu khi nhấn vào avatar
-        avatarBtn.addEventListener('click', (e) => {
-            e.stopPropagation(); // Ngăn sự kiện lan ra ngoài
-            dropdownMenu.classList.toggle('show'); // Hiển thị hoặc ẩn menu
-        });
-
-        // Ẩn menu khi nhấn ra ngoài
-        document.addEventListener('click', () => {
-            dropdownMenu.classList.remove('show'); // Ẩn menu
-        });
+                // Ẩn menu khi nhấn ra ngoài
+                    document.addEventListener('click', () => {
+                        dropdownMenu.classList.remove('show'); // Ẩn menu
+                    });
+                }
+            });
 
     </script>
+
     <!-- JS here -->
-    <script src="~/js/site.js"></script>
-    <!-- All JS Custom Plugins Link Here here -->
+    @*     <script src="~/js/site.js"></script>
+    *@    <!-- All JS Custom Plugins Link Here here -->
     <script src="./assets/js/vendor/modernizr-3.5.0.min.js"></script>
     <!-- Jquery, Popper, Bootstrap -->
     <script src="./assets/js/vendor/jquery-1.12.4.min.js"></script>
@@ -228,20 +233,20 @@
     <script src="./assets/js/jquery.magnific-popup.js"></script>
 
     <!-- Breaking New Pluging -->
-     <script src="./assets/js/jquery.ticker.js"></script>
-     <script src="./assets/js/site.js"></script>
-
+    <script src="./assets/js/jquery.ticker.js"></script>
+    @*      <script src="./assets/js/site.js"></script>
+    *@
     <!-- Scrollup, nice-select, sticky -->
-    <script src="./assets/js/jquery.scrollUp.min.js"></script> 
-     <script src="./assets/js/jquery.nice-select.min.js"></script>
+    <script src="./assets/js/jquery.scrollUp.min.js"></script>
+    <script src="./assets/js/jquery.nice-select.min.js"></script>
     <script src="./assets/js/jquery.sticky.js"></script>
 
     <!-- Jquery Plugins, main Jquery -->
     <script src="./assets/js/plugins.js"></script>
-     <script src="./assets/js/main.js"></script> 
+    @* <script src="./assets/js/main.js"></script>  *@
 
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    @*     <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    *@    @* <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script> *@
     <script src="~/js/site.js" asp-append-version="true"></script>
     <script src="js/jquery.min.js"></script>
     <script src="js/tether.min.js"></script>

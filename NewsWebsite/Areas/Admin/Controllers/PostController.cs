@@ -74,28 +74,6 @@ namespace NewsWebsite.Areas.Admin.Controllers
             return View(postList);
         }
 
-
-        // Controller - Upsert Methods
-        //[HttpGet]
-        //public async Task<IActionResult> Upsert()
-        //{
-        //    List<CategoryDTO> categoryList = new List<CategoryDTO>();
-        //    using (var response = await _client.GetAsync("Categories/GetList"))
-        //    {
-        //        if (response.IsSuccessStatusCode)
-        //        {
-        //            var data = await response.Content.ReadAsStringAsync();
-        //            categoryList = JsonConvert.DeserializeObject<List<CategoryDTO>>(data);
-        //        }
-        //        else
-        //        {
-        //            TempData["ErrorMessage"] = "Failed to retrieve categories list!";
-        //        }
-        //    }
-        //    ViewBag.CategoryList = categoryList;
-        //    return View();
-        //}
-
         [HttpGet]
         public async Task<IActionResult> Upsert(int id = 0)
         {
@@ -110,19 +88,13 @@ namespace NewsWebsite.Areas.Admin.Controllers
                     TempData["ErrorMessage"] = "Failed to retrieve post!";
                     return RedirectToAction("Index");
                 }
-
-                // Giải mã nội dung bài viết để hiển thị đúng trên CKEditor
-                //post.Contents = HttpUtility.HtmlDecode(post.Contents);
                 var imageList = await GetImagesByPostId(id);
                 ViewBag.Images = imageList;
-
                 return View(post);
             }
 
             return View(); // Tạo bài viết mới
         }
-
-
         [HttpPost]
         public async Task<IActionResult> Upsert(PostDTO model, List<IFormFile> Images)
         {
@@ -164,8 +136,6 @@ namespace NewsWebsite.Areas.Admin.Controllers
             TempData["SuccessMessage"] = isCreate ? "Post created successfully!" : "Post updated successfully!";
             return RedirectToAction("Index");
         }
-
-
         // Phương thức phụ để lấy danh sách danh mục
         private async Task<List<CategoryDTO>> GetCategoryList()
         {
@@ -253,105 +223,5 @@ namespace NewsWebsite.Areas.Admin.Controllers
                 }
             }
         }
-
-
-
-
-
-        //[HttpPost]
-        //public async Task<IActionResult> Upsert(PostDTO model, List<IFormFile> Images)
-        //{
-        //    if (!ModelState.IsValid)
-        //    {
-        //        // Re-populate danh sách danh mục nếu có lỗi
-        //        await PopulateCategoryList();
-        //        return View(model);
-        //    }
-
-        //    if (model.Id == 0) // Tạo bài viết mới
-        //    {
-        //        using (var response = await _client.PostAsJsonAsync("Posts/Create", model))
-        //        {
-        //            if (!response.IsSuccessStatusCode)
-        //            {
-        //                TempData["ErrorMessage"] = "Failed to create post!";
-        //                await PopulateCategoryList();
-        //                return View(model);
-        //            }
-
-        //            var createdPost = await response.Content.ReadFromJsonAsync<PostDTO>();
-
-        //            // Lưu ảnh sau khi tạo bài viết
-        //            await SaveImages(createdPost.Id, Images);
-        //        }
-        //    }
-        //    else // Cập nhật bài viết
-        //    {
-        //        using (var response = await _client.PutAsJsonAsync("Posts/Update", model))
-        //        {
-        //            if (!response.IsSuccessStatusCode)
-        //            {
-        //                TempData["ErrorMessage"] = "Failed to update post!";
-        //                await PopulateCategoryList();
-        //                return View(model);
-        //            }
-
-        //            // Lưu ảnh sau khi cập nhật bài viết
-        //            await SaveImages(model.Id, Images);
-        //        }
-        //    }
-
-        //    TempData["SuccessMessage"] = model.Id == 0 ? "Post created successfully!" : "Post updated successfully!";
-        //    return RedirectToAction("Index"); // Hoặc điều hướng tới view khác khi thành công
-        //}
-
-        //private async Task SaveImages(int postId, List<IFormFile> Images)
-        //{
-        //    var uploadPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "DATA", "Images");
-        //    Directory.CreateDirectory(uploadPath); // Tạo thư mục nếu chưa tồn tại
-
-        //    foreach (var image in Images)
-        //    {
-        //        // Tạo tên file duy nhất
-        //        var fileName = Guid.NewGuid() + Path.GetExtension(image.FileName);
-        //        var filePath = Path.Combine(uploadPath, fileName);
-
-        //        using (var stream = new FileStream(filePath, FileMode.Create))
-        //        {
-        //            await image.CopyToAsync(stream);
-        //        }
-
-        //        // Gửi yêu cầu tạo ảnh đến API
-        //        var imageDTO = new ImageDTO
-        //        {
-        //            PostId = postId,
-        //            ImageUrl = Path.Combine("DATA", "Images", fileName),
-        //            Caption = string.Empty,
-        //            Status = 1
-        //        };
-
-        //        using (var imageResponse = await _client.PostAsJsonAsync("Images/Create", imageDTO))
-        //        {
-        //            if (!imageResponse.IsSuccessStatusCode)
-        //            {
-        //                TempData["ErrorMessage"] = "Failed to save some images!";
-        //            }
-        //        }
-        //    }
-        //}
-
-        //private async Task PopulateCategoryList()
-        //{
-        //    List<CategoryDTO> categoryList = new List<CategoryDTO>();
-        //    using (var response = await _client.GetAsync("Categories/GetList"))
-        //    {
-        //        if (response.IsSuccessStatusCode)
-        //        {
-        //            var data = await response.Content.ReadAsStringAsync();
-        //            categoryList = JsonConvert.DeserializeObject<List<CategoryDTO>>(data);
-        //        }
-        //    }
-        //    ViewBag.CategoryList = categoryList;
-        //}
     }
 }

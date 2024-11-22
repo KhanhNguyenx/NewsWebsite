@@ -12,7 +12,7 @@
                             <div class="blog-title-area text-center">
                                 <ol class="breadcrumb hidden-xs-down">
                                     <li class="breadcrumb-item"><a href="@Url.Action(" Index", "Home" )">Home</a></li>
-                                    <li class="breadcrumb-item"><a href="@Url.Action(" Category", "Posts" , new { id=Model.CategoryId })">@categories?.FirstOrDefault(c => c.Id == Model.CategoryId)?.CategoryName ?? "Uncategorized"</a></li>
+                                    <li class="breadcrumb-item"><a href="@Url.Action(" Category", "Posts" , new { id=Model.CategoryId })">@categories?.FirstOrDefault(c => c.Id == Model.CategoryId)?.CategoryName</a></li>
                                     <li class="breadcrumb-item active">@Model.Title</li>
                                 </ol>
 
@@ -40,7 +40,7 @@
 
                             <div class="single-post-media">
                                 @{
-                                    var mainImage = images?.FirstOrDefault(img => img.PostId == Model.Id)?.ImageUrl ?? "upload/default-image.jpg";
+                                    var mainImage = images?.FirstOrDefault(img => img.PostId == Model.Id)?.ImageUrl ?? "DATA/Images/default.jpg";
                                 }
                                 <img src="@mainImage" alt="" class="img-fluid">
                             </div><!-- end media -->

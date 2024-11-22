@@ -106,7 +106,7 @@
                                 </li>
                             }
                         </ul>
-                        <ul class="navbar-nav mr-2">
+                        @* <ul class="navbar-nav mr-2">
                             @if (User.Identity.IsAuthenticated)
                             {
                                 <li class="nav-item dropdown">
@@ -122,28 +122,35 @@
                             else
                             {
                                 <li class="nav-item">
-                                    <a class="nav-link" href="@Url.Action("Login", "Author")"><i class="fa fa-user"></i> Login</a>
+                                    <a class="nav-link" href="@Url.Action("Login", "Author")"><i class="fa fa-user"></i></a>
                                 </li>
                             }
-                        </ul>
+                        </ul> *@
 
                      
                     </div>
                     <div class="relative">
-                        <button class="btn-avatar rounded-full overflow-hidden w-12 h-12">
-                            <img src="/data/images/614b64d5-92c4-4b48-ae4c-29e33255f953.jpg" alt="avatar" class="w-full h-full object-cover">
-                        </button>
-                        <div class="dropdown-menu">
-                            <div class="p-4">
-                                
-                                <a href="mailto:c.fisher@gmail.com" class="text-xs text-gray-600">c.fisher@gmail.com</a>
+                        @if(User.Identity.IsAuthenticated)
+                        {
+                            <button class="btn-avatar rounded-full overflow-hidden w-12 h-12">
+                                <img src="/data/images/614b64d5-92c4-4b48-ae4c-29e33255f953.jpg" alt="avatar" class="w-full h-full object-cover">
+                            </button>
+                            <div class="dropdown-menu">
+                                <div class="p-4">
+
+                                    <a @* href="mailto:c.fisher@gmail.com" *@ class="text-xs text-gray-600">Hello, @User.Identity.Name</a>
+                                </div>
+                                <div class="border-t my-2"></div>
+
+                                <a class="block px-4 py-2 text-sm" href="Author/Profile">Settings</a>
+                                <div class="border-t my-2"></div>
+                                <a class="block px-4 py-2 text-sm text-red-600" href="@Url.Action("Logout", "Author")">Log Out</a>
                             </div>
-                            <div class="border-t my-2"></div>
-                         
-                            <a class="block px-4 py-2 text-sm" href="#">Settings</a>
-                            <div class="border-t my-2"></div>
-                            <a class="block px-4 py-2 text-sm text-red-600" href="#">Log Out</a>
-                        </div>
+                        }
+                        else
+                        {
+                            <a class="nav-link" href="@Url.Action("Login", "Author")"><i class="fa fa-user"></i></a>
+                        }
                     </div>
 
 

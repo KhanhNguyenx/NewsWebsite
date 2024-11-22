@@ -39,17 +39,16 @@ public partial class NewsWebDbContext : DbContext
     public virtual DbSet<UserPost> UserPosts { get; set; }
 
     public virtual DbSet<UserProfile> UserProfiles { get; set; }
+
+    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
+        => optionsBuilder.UseSqlServer("Data Source=localhost;Initial Catalog=NewsWebsite;Persist Security Info=True;User ID=sa;Password=123456;TrustServerCertificate=True;");
+
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<Category>(entity =>
         {
             entity.HasKey(e => e.Id).HasName("PK_Category");
-
-            entity.ToTable(tb =>
-                {
-                    tb.HasTrigger("trg_Categories_Log");
-                    tb.HasTrigger("trg_SetDefaultIdForCategories");
-                });
 
             entity.Property(e => e.Id)
                 .ValueGeneratedNever()
@@ -120,12 +119,6 @@ public partial class NewsWebDbContext : DbContext
         {
             entity.HasKey(e => e.Id).HasName("PK_Id_Log");
 
-            entity.ToTable(tb =>
-                {
-                    tb.HasTrigger("trg_Logs_PreventDelete");
-                    tb.HasTrigger("trg_Logs_PreventUpdate");
-                });
-
             entity.Property(e => e.Id)
                 .HasMaxLength(100)
                 .IsUnicode(false)
@@ -144,13 +137,12 @@ public partial class NewsWebDbContext : DbContext
         {
             entity.HasKey(e => e.Id).HasName("PK_Id_Post");
 
-            entity.HasIndex(e => e.Slug, "UQ__Posts__BC7B5FB6A4612F8E").IsUnique();
+            entity.HasIndex(e => e.Slug, "UQ__Posts__BC7B5FB6A923B680").IsUnique();
 
             entity.Property(e => e.Id)
                 .ValueGeneratedNever()
                 .HasColumnName("id");
             entity.Property(e => e.CategoryId).HasColumnName("CategoryID");
-            entity.Property(e => e.Contents).HasColumnType("text");
             entity.Property(e => e.Slug).HasMaxLength(200);
             entity.Property(e => e.Title).HasMaxLength(200);
 
@@ -162,7 +154,7 @@ public partial class NewsWebDbContext : DbContext
 
         modelBuilder.Entity<RefreshToken>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__RefreshT__3214EC07204EED4F");
+            entity.HasKey(e => e.Id).HasName("PK__RefreshT__3214EC0747D7B14B");
 
             entity.Property(e => e.Created).HasColumnType("datetime");
             entity.Property(e => e.Expires).HasColumnType("datetime");
@@ -231,11 +223,9 @@ public partial class NewsWebDbContext : DbContext
         {
             entity.HasKey(e => e.Id).HasName("PK_Id_Users");
 
-            entity.ToTable(tb => tb.HasTrigger("trg_Users_Log"));
+            entity.HasIndex(e => e.Username, "UQ__Users__536C85E4C9602F3F").IsUnique();
 
-            entity.HasIndex(e => e.Username, "UQ__Users__536C85E4D6EC4BA0").IsUnique();
-
-            entity.HasIndex(e => e.Email, "UQ__Users__A9D105344FD296ED").IsUnique();
+            entity.HasIndex(e => e.Email, "UQ__Users__A9D1053415C8ACFC").IsUnique();
 
             entity.Property(e => e.Id)
                 .ValueGeneratedNever()

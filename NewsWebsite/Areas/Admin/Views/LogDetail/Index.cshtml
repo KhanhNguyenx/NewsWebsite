@@ -1,0 +1,105 @@
+﻿<div class="container">
+    <div class="row align-items-center">
+        <div class="col-md-6">
+            <div class="mb-3">
+                <h5 class="card-title">Category List <span class="text-muted fw-normal ms-2">(834)</span></h5>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="d-flex flex-wrap align-items-center justify-content-end gap-2 mb-3">
+                <div>
+                    <a href="/admin/category/upsert" data-bs-toggle="modal" data-bs-target=".add-new" class="btn btn-primary"><i class="bx bx-plus me-1"></i> Add New</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="">
+                <div class="table-responsive">
+                    <table class="table project-list-table table-nowrap align-middle table-borderless">
+                        <thead>
+                            <tr>
+                                <th scope="col" class="ps-4" style="width: 50px;">
+                                    <div class="form-check font-size-16"><input type="checkbox" class="form-check-input" id="contacusercheck" /><label class="form-check-label" for="contacusercheck"></label></div>
+                                </th>
+                                <th scope="col">User Edit</th>
+                                <th scope="col">Action</th>
+                                <th scope="col">Date</th>
+                                <th scope="col">Details</th>
+                                <th scope="col" style="width: 200px;">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @model IEnumerable<NewsAPI.Models.Log>
+                            @{
+                                var categories = Model.ToList(); // Chuyển model thành danh sách
+                            }
+
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <th scope="row" class="ps-4">
+                                        <div class="form-check font-size-16">
+                                            <input type="checkbox" class="form-check-input" id="contacusercheck@item.Id" />
+                                            <label class="form-check-label" for="contacusercheck@item.Id"></label>
+                                        </div>
+                                    </th>
+                                    <td>@Html.DisplayFor(modelItem => item.UserId)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.Action)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.ActionDate)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.Details)</td>
+                                    @* <td>@Html.DisplayFor(modelItem => item.ParentCategoryId)</td> *@
+
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row g-0 align-items-center pb-4">
+        <div class="col-sm-6">
+            <div><p class="mb-sm-0">Showing 1 to 10 of 57 entries</p></div>
+        </div>
+        <div class="col-sm-6">
+            <div class="float-sm-end">
+                <ul class="pagination mb-sm-0">
+                    <li class="page-item disabled">
+                        <a href="#" class="page-link"><i class="mdi mdi-chevron-left"></i></a>
+                    </li>
+                    <li class="page-item active"><a href="#" class="page-link">1</a></li>
+                    <li class="page-item"><a href="#" class="page-link">2</a></li>
+                    <li class="page-item">
+                        <a href="#" class="page-link"><i class="mdi mdi-chevron-right"></i></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $('.delete-category').on('click', function () {
+            var categoryId = $(this).data('id'); // Lấy ID từ thuộc tính data-id
+            var confirmation = confirm('Bạn có chắc chắn muốn xóa danh mục này?');
+
+            if (confirmation) {
+                $.ajax({
+                    url: '/Categories/UpDelete?id=' + categoryId, // Đường dẫn đến API xóa
+                    type: 'DELETE', // Phương thức DELETE
+                    success: function (result) {
+                        alert('Danh mục đã được xóa thành công.');
+                        location.reload(); // Tải lại trang để cập nhật danh sách
+                    },
+                    error: function (xhr, status, error) {
+                        alert('Có lỗi xảy ra: ' + xhr.responseText);
+                    }
+                });
+            }
+        });
+    });
+</script>
+

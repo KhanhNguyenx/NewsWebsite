@@ -118,7 +118,7 @@
 
                                 </div>
                                 <div class="flex-grow-1 ms-3">
-                                    <h6 class="mb-0">@TextHelper.TruncateText(post.Contents, 10)</h6>
+                                    <h6 class="mb-0">@TextHelper.TruncateText(post.Title, 15)</h6>
                                 </div>
                             </div>
                         </td>
@@ -354,40 +354,40 @@
                     const postImage = imageList.find((image) => image.postId === post.id)?.imageUrl || "images/avatar-placeholder.jpg";
 
                     return `
-                            <tr data-category="${currentCategory}" data-views="${post.views}">
-                                <td>
-                                    <div class="d-flex align-items-center">
-                                        <div class="flex-shrink-0">
-                                            <img src="/${postImage}" alt="post image" class="img-radius wid-40">
-                                        </div>
-                                        <div class="flex-grow-1 ms-3">
-                                            <h6 class="mb-0">${post.title}</h6>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td>${currentCategory}</td>
-                                <td>${post.views}</td>
-                                <td>${post.likeNumber}</td>
-                                <td>
-                                    <span class="text-${post.status === 1 ? "success" : "secondary"}">
-                                        <i class="fas fa-circle f-10 m-r-10"></i>
-                                        ${post.status === 1 ? "Active" : "Inactive"}
-                                    </span>
-                                </td>
-                                <td>
-                                    <span class="badge text-bg-${post.isHot ? "success" : "secondary"}">
-                                        ${post.isHot ? "Hot" : "Regular"}
-                                    </span>
-                                </td>
-                                <td>
-                                    <a href="/admin/post/upsert/${post.id}" class="avtar avtar-xs btn-link-secondary">
-                                        <i class="ti ti-edit f-20"></i>
-                                    </a>
-                                    <a href="javascript:void(0);" data-id="${post.id}" class="avtar avtar-xs btn-link-secondary delete">
-                                        <i class="ti ti-trash f-20"></i>
-                                    </a>
-                                </td>
-                            </tr>`;
+                                    <tr data-category="${currentCategory}" data-views="${post.views}">
+                                        <td>
+                                            <div class="d-flex align-items-center">
+                                                <div class="flex-shrink-0">
+                                                    <img src="/${postImage}" alt="post image" class="img-radius wid-40">
+                                                </div>
+                                                <div class="flex-grow-1 ms-3">
+                                                    <h6 class="mb-0">${post.title}</h6>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td>${currentCategory}</td>
+                                        <td>${post.views}</td>
+                                        <td>${post.likeNumber}</td>
+                                        <td>
+                                            <span class="text-${post.status === 1 ? "success" : "secondary"}">
+                                                <i class="fas fa-circle f-10 m-r-10"></i>
+                                                ${post.status === 1 ? "Active" : "Inactive"}
+                                            </span>
+                                        </td>
+                                        <td>
+                                            <span class="badge text-bg-${post.isHot ? "success" : "secondary"}">
+                                                ${post.isHot ? "Hot" : "Regular"}
+                                            </span>
+                                        </td>
+                                        <td>
+                                            <a href="/admin/post/upsert/${post.id}" class="avtar avtar-xs btn-link-secondary">
+                                                <i class="ti ti-edit f-20"></i>
+                                            </a>
+                                            <a href="javascript:void(0);" data-id="${post.id}" class="avtar avtar-xs btn-link-secondary delete">
+                                                <i class="ti ti-trash f-20"></i>
+                                            </a>
+                                        </td>
+                                    </tr>`;
                 })
                 .join("");
 

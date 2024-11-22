@@ -88,13 +88,23 @@ app.UseMiddleware<CheckCookieExpirationMiddleware>();
 app.UseSession();
 
 app.MapControllerRoute(
+    name: "PostDetails",
+    pattern: "{slug}.html",
+    defaults: new { controller = "Posts", action = "Details" },
+    constraints: new { slug = @"[\w\-]+" } // Ràng buộc chỉ chấp nhận các ký tự, số và dấu gạch ngang
+);
+app.MapControllerRoute(
+    name: "PostSlug",
+    pattern: "posts/{slug}",
+    defaults: new { controller = "Posts", action = "Details" }
+);
+app.MapControllerRoute(
     name: "areas",
     pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}");
 
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
-
 
 
 app.MapRazorPages();

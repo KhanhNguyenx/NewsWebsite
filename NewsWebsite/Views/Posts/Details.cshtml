@@ -1,0 +1,85 @@
+﻿@using NewsAPI.DTOs
+    @{
+        var images = ViewBag.ImageList as List<ImageDTO> ?? new List<ImageDTO>();
+        var categories = ViewBag.CategoryList as List<CategoryDTO>;
+    }
+    <div id="wrapper">
+        <section class="section single-wrapper">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-9 col-md-12 col-sm-12 col-xs-12">
+                        <div class="page-wrapper">
+                            <div class="blog-title-area text-center">
+                                <ol class="breadcrumb hidden-xs-down">
+                                    <li class="breadcrumb-item"><a href="@Url.Action(" Index", "Home" )">Home</a></li>
+                                    <li class="breadcrumb-item"><a href="@Url.Action(" Category", "Posts" , new { id=Model.CategoryId })">@categories?.FirstOrDefault(c => c.Id == Model.CategoryId)?.CategoryName ?? "Uncategorized"</a></li>
+                                    <li class="breadcrumb-item active">@Model.Title</li>
+                                </ol>
+
+                                <span class="color-orange">
+                                    <a href="@Url.Action(" Category", "Posts" , new { id=Model.CategoryId })" title="">
+                                        @categories?.FirstOrDefault(c => c.Id == Model.CategoryId)?.CategoryName ?? "Uncategorized"
+                                    </a>
+                                </span>
+
+                                <h3>@Model.Title</h3>
+
+                                <div class="blog-meta big-meta">
+                                    <small><a href="#" title=""><i class="fa fa-eye"></i> @Model.Views</a></small>
+                                    <small><a href="#" title=""><i class="fa fa-thumbs-up"></i> @Model.LikeNumber</a></small>
+                                </div><!-- end meta -->
+
+                                <div class="post-sharing">
+                                    <ul class="list-inline">
+                                        <li><a href="#" class="fb-button btn btn-primary"><i class="fa fa-facebook"></i> <span class="down-mobile">Share on Facebook</span></a></li>
+                                        <li><a href="#" class="tw-button btn btn-primary"><i class="fa fa-twitter"></i> <span class="down-mobile">Tweet on Twitter</span></a></li>
+                                        <li><a href="#" class="gp-button btn btn-primary"><i class="fa fa-google-plus"></i></a></li>
+                                    </ul>
+                                </div><!-- end post-sharing -->
+                            </div><!-- end title -->
+
+                            <div class="single-post-media">
+                                @{
+                                    var mainImage = images?.FirstOrDefault(img => img.PostId == Model.Id)?.ImageUrl ?? "upload/default-image.jpg";
+                                }
+                                <img src="@mainImage" alt="" class="img-fluid">
+                            </div><!-- end media -->
+
+                            <div class="blog-content">
+                                <div class="pp">
+                                    @Html.Raw(Model.Contents)
+                                </div><!-- end pp -->
+                            </div><!-- end content -->
+
+                            <div class="blog-title-area">
+
+                                <div class="post-sharing">
+                                    <ul class="list-inline">
+                                        <li><a href="#" class="fb-button btn btn-primary"><i class="fa fa-facebook"></i> <span class="down-mobile">Share on Facebook</span></a></li>
+                                        <li><a href="#" class="tw-button btn btn-primary"><i class="fa fa-twitter"></i> <span class="down-mobile">Tweet on Twitter</span></a></li>
+                                        <li><a href="#" class="gp-button btn btn-primary"><i class="fa fa-google-plus"></i></a></li>
+                                    </ul>
+                                </div><!-- end post-sharing -->
+                            </div><!-- end title -->
+
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="banner-spot clearfix">
+                                        <div class="banner-img">
+                                            <img src="upload/banner_01.jpg" alt="" class="img-fluid">
+                                        </div><!-- end banner-img -->
+                                    </div><!-- end banner -->
+                                </div><!-- end col -->
+                            </div><!-- end row -->
+
+                            <hr class="invis1">
+
+                            <!-- Add more sections as needed -->
+
+                        </div><!-- end page-wrapper -->
+                    </div><!-- end col -->
+
+                </div><!-- end row -->
+            </div><!-- end container -->
+        </section>
+    </div><!-- end wrapper -->

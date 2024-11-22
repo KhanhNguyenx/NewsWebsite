@@ -147,7 +147,7 @@ namespace NewsWebsite.Controllers
             }
             await this.HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
             this.HttpContext.Session.Clear();
-            return RedirectToAction("Login");
+            return RedirectToAction("Index", "Home");
         }
 
        

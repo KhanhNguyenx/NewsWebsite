@@ -102,7 +102,7 @@
                                     <textarea name="Contents"
                                               id="editor"
                                               class="form-input mt-2 w-full border rounded-lg px-3 py-2"
-                                              placeholder="Enter Post Content">@Model?.Contents</textarea>
+                                              placeholder="Enter Post Content">@Html.Raw(Model?.Contents)</textarea>
                                 </label>
                                 <label class="block">
                                     <span class="font-medium text-slate-600 dark:text-navy-100">Post Images</span>

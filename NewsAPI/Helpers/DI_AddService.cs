@@ -121,6 +121,7 @@ namespace NewsAPI.Helpers
             Services.AddAutoMapper(typeof(AutoMapperProfile).Assembly);
             Services.AddScoped<IAppSettingService, AppSettingService>();
             Services.AddScoped<IUserService, UserService>();
+            Services.AddScoped<ILogService, LogService>();
             Services.AddScoped<UsersController>();
             Services.AddScoped<RoleUsersController>();
             Services.AddScoped<IRefreshTokenService, RefreshTokenService>();

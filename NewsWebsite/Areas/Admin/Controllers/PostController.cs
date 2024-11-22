@@ -1,11 +1,14 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using NewsAPI.DTOs;
 using Newtonsoft.Json;
 using System.Net.Http;
+using System.Web;
 
 namespace NewsWebsite.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    //[Authorize(Roles = "Admin")]
     public class PostController : Controller
     {
         Uri baseAddress = new Uri("https://localhost:44358");
@@ -108,6 +111,8 @@ namespace NewsWebsite.Areas.Admin.Controllers
                     return RedirectToAction("Index");
                 }
 
+                // Giải mã nội dung bài viết để hiển thị đúng trên CKEditor
+                //post.Contents = HttpUtility.HtmlDecode(post.Contents);
                 var imageList = await GetImagesByPostId(id);
                 ViewBag.Images = imageList;
 
@@ -117,10 +122,10 @@ namespace NewsWebsite.Areas.Admin.Controllers
             return View(); // Tạo bài viết mới
         }
 
+
         [HttpPost]
         public async Task<IActionResult> Upsert(PostDTO model, List<IFormFile> Images)
         {
-            // Kiểm tra trạng thái Model
             if (!ModelState.IsValid)
             {
                 ViewBag.CategoryList = await GetCategoryList();
@@ -128,6 +133,9 @@ namespace NewsWebsite.Areas.Admin.Controllers
             }
 
             bool isCreate = model.Id == 0; // Xác định là tạo mới hay cập nhật
+
+            // Mã hóa nội dung bài viết trước khi gửi đến API
+            //model.Contents = HttpUtility.HtmlEncode(model.Contents);
 
             HttpResponseMessage response;
             if (isCreate)
@@ -156,6 +164,7 @@ namespace NewsWebsite.Areas.Admin.Controllers
             TempData["SuccessMessage"] = isCreate ? "Post created successfully!" : "Post updated successfully!";
             return RedirectToAction("Index");
         }
+
 
         // Phương thức phụ để lấy danh sách danh mục
         private async Task<List<CategoryDTO>> GetCategoryList()

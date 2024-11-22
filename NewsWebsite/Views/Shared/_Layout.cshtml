@@ -36,7 +36,48 @@
 
     <!-- Colors for this template -->
     <link href="css/colors.css" rel="stylesheet">
+    <style>
+        /* Mặc định menu bị ẩn */
+        .dropdown-menu {
+            position: absolute;
+            top: 100%; /* Đặt menu ngay dưới nút */
+            left: 95%; /* Canh giữa với nút */
+            transform: translateX(-50%); /* Đưa menu về giữa */
 
+            width: 200px; /* Chiều rộng menu */
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+            z-index: 1000; /* Đảm bảo menu nằm trên các thành phần khác */
+            display: none; /* Mặc định ẩn */
+        }
+
+            .dropdown-menu.show {
+                display: block; /* Hiển thị menu */
+            }
+
+        .parent-container {
+            overflow: visible; /* Cho phép menu hiển thị đầy đủ */
+            position: relative; /* Cần thiết để căn chỉnh menu */
+        }
+
+        .btn-avatar {
+            width: 48px; /* Tương đương w-12 */
+            height: 48px; /* Tương đương h-12 */
+            border-radius: 50%; /* Bo tròn hoàn toàn */
+            overflow: hidden; /* Ẩn phần hình ảnh vượt ra ngoài */
+            display: inline-block;
+            padding: 0; /* Loại bỏ khoảng cách mặc định */
+        }
+
+            .btn-avatar img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover; /* Lấp đầy và giữ tỷ lệ */
+                display: block; /* Loại bỏ khoảng cách mặc định của ảnh */
+            }
+
+    </style>
     <!-- Version Tech CSS for this template -->
     <link href="css/version/tech.css" rel="stylesheet">
     <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
@@ -76,6 +117,25 @@
                             </li>
                         </ul>
                     </div>
+                    <div class="relative">
+                        <button class="btn-avatar rounded-full overflow-hidden w-12 h-12">
+                            <img src="/data/images/614b64d5-92c4-4b48-ae4c-29e33255f953.jpg" alt="avatar" class="w-full h-full object-cover">
+                        </button>
+                        <div class="dropdown-menu">
+                            <div class="p-4">
+                                
+                                <a href="mailto:c.fisher@gmail.com" class="text-xs text-gray-600">c.fisher@gmail.com</a>
+                            </div>
+                            <div class="border-t my-2"></div>
+                         
+                            <a class="block px-4 py-2 text-sm" href="#">Settings</a>
+                            <div class="border-t my-2"></div>
+                            <a class="block px-4 py-2 text-sm text-red-600" href="#">Log Out</a>
+                        </div>
+                    </div>
+
+
+
 
                 </nav>
             </div><!-- end container-fluid -->
@@ -112,6 +172,21 @@
                 }
             });
         });
+        // Lấy avatar và dropdown menu
+        const avatarBtn = document.querySelector('.btn-avatar'); // Nút avatar
+        const dropdownMenu = document.querySelector('.dropdown-menu'); // Menu cần mở
+
+        // Mở menu khi nhấn vào avatar
+        avatarBtn.addEventListener('click', (e) => {
+            e.stopPropagation(); // Ngăn sự kiện lan ra ngoài
+            dropdownMenu.classList.toggle('show'); // Hiển thị hoặc ẩn menu
+        });
+
+        // Ẩn menu khi nhấn ra ngoài
+        document.addEventListener('click', () => {
+            dropdownMenu.classList.remove('show'); // Ẩn menu
+        });
+
     </script>
     <!-- JS here -->
     <script src="~/js/site.js"></script>

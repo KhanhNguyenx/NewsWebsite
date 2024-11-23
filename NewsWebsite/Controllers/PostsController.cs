@@ -94,12 +94,11 @@ namespace NewsWebsite.Controllers
                 return RedirectToAction("Index");
             }
             List<PostDTO> postList = new();
-            List<CategoryDTO> categoryList = new();
             List<ImageDTO> imageList = new();
 
             try
             {
-                // Use Posts/GetList API to retrieve all posts
+                // Use Posts/GetList API to retrieve all posts and filter by categoryId
                 using (var postResponse = await _client.GetAsync("Posts/GetList"))
                 {
                     if (postResponse.IsSuccessStatusCode)
@@ -117,7 +116,7 @@ namespace NewsWebsite.Controllers
                     }
                 }
 
-                // Fetch the list of images
+                // Fetch the list of all images and filter based on postList
                 using (var imageResponse = await _client.GetAsync("Images/GetList"))
                 {
                     if (imageResponse.IsSuccessStatusCode)
@@ -129,16 +128,6 @@ namespace NewsWebsite.Controllers
                         imageList = allImages.Where(image => postList.Any(post => post.Id == image.PostId) && image.Status == 1).ToList();
                     }
                 }
-
-                // Fetch the list of categories
-                using (var categoryResponse = await _client.GetAsync("Categories/GetList"))
-                {
-                    if (categoryResponse.IsSuccessStatusCode)
-                    {
-                        var categoryData = await categoryResponse.Content.ReadAsStringAsync();
-                        categoryList = JsonConvert.DeserializeObject<List<CategoryDTO>>(categoryData);
-                    }
-                }
             }
             catch (Exception)
             {
@@ -146,17 +135,16 @@ namespace NewsWebsite.Controllers
                 return RedirectToAction("Index");
             }
 
-            if (postList == null || !postList.Any())
+            if (!postList.Any())
             {
                 TempData["ErrorMessage"] = "No posts found for the specified category.";
-                return RedirectToAction("Index");
             }
 
             // Pass the data to the view
-            ViewBag.CategoryList = categoryList;
+            ViewBag.PostList = postList;
             ViewBag.ImageList = imageList;
-            return View(postList);
-        }
 
+            return View();
+        }
     }
 }

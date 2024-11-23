@@ -56,17 +56,7 @@ namespace NewsAPI.Controllers
 
             // Sử dụng repository để lấy tài khoản
             var account = await _userService.GetAccountByUsernameAsync(model.Username);
-            var user = new UserDTO
-            {
-                Id = account.Id,
-                Username = account.Username,
-                PasswordHash = account.PasswordHash,
-                Email = account.Email,
-                FullName = account.FullName,
-                IsAuthor = account.IsAuthor,
-                Status = account.Status,
-                Notes = account.Notes,
-            };
+            
             if (account == null)
             {
                 return Unauthorized(new
@@ -85,7 +75,17 @@ namespace NewsAPI.Controllers
                     message = "Invalid username or password"
                 });
             }
-
+            var user = new UserDTO
+            {
+                Id = account.Id,
+                Username = account.Username,
+                PasswordHash = account.PasswordHash,
+                Email = account.Email,
+                FullName = account.FullName,
+                IsAuthor = account.IsAuthor,
+                Status = account.Status,
+                Notes = account.Notes,
+            };
             // Tạo token qua repository
             var token = await _userService.GenerateAccessTokenAsync(account);
 

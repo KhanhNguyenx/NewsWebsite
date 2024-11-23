@@ -133,55 +133,55 @@ namespace NewsWebsite.Controllers
             return View(); // Redirect($"/error/404");
         }
 
-        [AllowAnonymous]
-        public IActionResult Register()
-        {
-            return View();
-        }
+        //[AllowAnonymous]
+        //public IActionResult Register()
+        //{
+        //    return View();
+        //}
 
 
-        [HttpPost]
-        [AllowAnonymous]
-        public async Task<IActionResult> Registers(RegisterM registerModel)
-        {
-            if (!ModelState.IsValid)
-            {
-                return View(registerModel); // Trả về form nếu model không hợp lệ
-            }
+        //[HttpPost]
+        //[AllowAnonymous]
+        //public async Task<IActionResult> Registers(RegisterM registerModel)
+        //{
+        //    if (!ModelState.IsValid)
+        //    {
+        //        return View(registerModel); // Trả về form nếu model không hợp lệ
+        //    }
 
-            ResponseData res = new ResponseData();
-            try
-            {
-                // Chuẩn bị dữ liệu cho API đăng ký
-                Dictionary<string, dynamic> dictParss = new Dictionary<string, dynamic>
-        {
-            {"username", registerModel.UserName },
-            {"passwordHash", registerModel.Password },
-            {"email", registerModel.Email }
-        };
+        //    ResponseData res = new ResponseData();
+        //    try
+        //    {
+        //        // Chuẩn bị dữ liệu cho API đăng ký
+        //        Dictionary<string, dynamic> dictParss = new Dictionary<string, dynamic>
+        //{
+        //    {"username", registerModel.UserName },
+        //    {"passwordHash", registerModel.Password },
+        //    {"email", registerModel.Email }
+        //};
 
-                // Gửi yêu cầu tới API "Authorize/Register"
-                res = await _callApi.PostAsync("Authorize/Register", dictParss);
+        //        // Gửi yêu cầu tới API "Authorize/Register"
+        //        res = await _callApi.PostAsync("Authorize/Register", dictParss);
 
-                if (res.success)
-                {
-                    // Nếu đăng ký thành công, chuyển hướng tới trang login
-                    TempData["SuccessMessage"] = "Đăng ký thành công. Vui lòng đăng nhập.";
-                    //return RedirectToAction("Login");
-                }
-                else
-                {
-                    // Nếu API trả về lỗi
-                    ModelState.AddModelError("", res.message);
-                }
-            }
-            catch (Exception ex)
-            {
-                ModelState.AddModelError("", $"Đã xảy ra lỗi: {ex.Message}");
-            }
+        //        if (res.success)
+        //        {
+        //            // Nếu đăng ký thành công, chuyển hướng tới trang login
+        //            TempData["SuccessMessage"] = "Đăng ký thành công. Vui lòng đăng nhập.";
+        //            //return RedirectToAction("Login");
+        //        }
+        //        else
+        //        {
+        //            // Nếu API trả về lỗi
+        //            ModelState.AddModelError("", res.message);
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        ModelState.AddModelError("", $"Đã xảy ra lỗi: {ex.Message}");
+        //    }
 
-            return View(registerModel);
-        }
+        //    return View(registerModel);
+        //}
 
         [AllowAnonymous]
         public async Task<ActionResult> Logout()

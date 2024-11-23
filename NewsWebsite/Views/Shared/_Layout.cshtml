@@ -97,14 +97,7 @@
                             <li class="nav-item">
                                 <a class="nav-link" href="@Url.Action("Index", "Home")">Home</a>
                             </li>
-                            @if (User.IsInRole("Admin"))
-                            {
-                                <li class="nav-item">
-                                    <a class="nav-link" href="@Url.Action("Index", "Admin")">
-                                        <i class="fa fa-cogs"></i> Admin Setting
-                                    </a>
-                                </li>
-                            }
+                            
                         </ul>
                         @* <ul class="navbar-nav mr-2">
                             @if (User.Identity.IsAuthenticated)
@@ -141,7 +134,12 @@
                                     <a @* href="mailto:c.fisher@gmail.com" *@ class="text-xs text-gray-600">Hello, @User.Identity.Name</a>
                                 </div>
                                 <div class="border-t my-2"></div>
-
+                                @if (User.IsInRole("Admin"))
+                                {
+                                        <a class="nav-link" href="@Url.Action("Index", "Admin")">
+                                            <i class="fa fa-cogs"></i> Admin Setting
+                                        </a>
+                                }
                                 <a class="block px-4 py-2 text-sm" href="Author/Profile">Settings</a>
                                 <div class="border-t my-2"></div>
                                 <a class="block px-4 py-2 text-sm text-red-600" href="@Url.Action("Logout", "Author")">Log Out</a>

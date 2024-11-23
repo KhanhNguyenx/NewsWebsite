@@ -162,5 +162,26 @@ namespace NewsAPI.Controllers
             };
             return Ok(result);
         }
+
+        [HttpGet("{slug}")]
+        public async Task<ActionResult<PostDTO>> GetBySlug(string slug)
+        {
+            // Sử dụng biểu thức để tìm bài viết theo slug
+            Expression<Func<Post, bool>> filter = p => p.Slug == slug;
+
+            // Tìm bài viết đầu tiên thỏa mãn điều kiện
+            var entity = (await _genericServive.SearchAsync(filter)).FirstOrDefault();
+
+            if (entity != null)
+            {
+                // Map từ entity sang DTO
+                var dto = _mapper.Map<PostDTO>(entity);
+                return Ok(dto);
+            }
+            else
+            {
+                return NotFound($"No post found with slug: {slug}");
+            }
+        }
     }
 }

@@ -31,10 +31,10 @@ app.UseHttpsRedirection();
 app.UseHsts(); //Browser only use Https
 app.UseRouting();
 
-//CORS single
-app.UseCors("Policy1");
-//CORS all
-app.UseCors();
+////CORS single
+//app.UseCors("Policy1");
+////CORS all
+//app.UseCors();
 //app.UseCors("AllowAll");
 app.UseRateLimiter();
 app.MapControllers();

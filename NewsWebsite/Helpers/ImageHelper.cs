@@ -22,7 +22,7 @@ namespace NewsWebsite.Helpers
 
             if (image != null && !string.IsNullOrEmpty(image.ImageUrl))
             {
-                return $"/DATA/Images/{image.ImageUrl}";
+                return $"{image.ImageUrl}";
             }
 
             return "/DATA/Images/default.jpg"; // Fallback to default image

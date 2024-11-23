@@ -20,7 +20,7 @@ namespace NewsWebsite.Controllers
             if (string.IsNullOrEmpty(slug))
             {
                 TempData["ErrorMessage"] = "Slug is missing.";
-                return RedirectToAction("Index"); // Redirect to the index page if slug is null
+                return RedirectToAction("Index");
             }
 
             PostDTO post = null;
@@ -30,38 +30,44 @@ namespace NewsWebsite.Controllers
             try
             {
                 // Use Posts/Search API to find post by slug
-                var searchResponse = await _client.GetAsync($"Posts/Search?txtSearch={slug}");
-                if (searchResponse.IsSuccessStatusCode)
+                using (var searchResponse = await _client.GetAsync($"Posts/Search?txtSearch={slug}"))
                 {
-                    var searchData = await searchResponse.Content.ReadAsStringAsync();
-                    var searchResults = JsonConvert.DeserializeObject<List<PostDTO>>(searchData);
+                    if (searchResponse.IsSuccessStatusCode)
+                    {
+                        var searchData = await searchResponse.Content.ReadAsStringAsync();
+                        var searchResults = JsonConvert.DeserializeObject<List<PostDTO>>(searchData);
 
-                    // Expecting only one result with the matching slug
-                    post = searchResults.FirstOrDefault();
-                }
-                else
-                {
-                    TempData["ErrorMessage"] = "Failed to retrieve post details.";
-                    return RedirectToAction("Index");
+                        // Expecting only one result with the matching slug
+                        post = searchResults.FirstOrDefault();
+                    }
+                    else
+                    {
+                        TempData["ErrorMessage"] = "Failed to retrieve post details.";
+                        return RedirectToAction("Index");
+                    }
                 }
 
                 // Fetch the list of categories
-                var categoryResponse = await _client.GetAsync("Categories/GetList");
-                if (categoryResponse.IsSuccessStatusCode)
+                using (var categoryResponse = await _client.GetAsync("Categories/GetList"))
                 {
-                    var categoryData = await categoryResponse.Content.ReadAsStringAsync();
-                    categoryList = JsonConvert.DeserializeObject<List<CategoryDTO>>(categoryData);
+                    if (categoryResponse.IsSuccessStatusCode)
+                    {
+                        var categoryData = await categoryResponse.Content.ReadAsStringAsync();
+                        categoryList = JsonConvert.DeserializeObject<List<CategoryDTO>>(categoryData);
+                    }
                 }
 
                 // Fetch the list of images
-                var imageResponse = await _client.GetAsync("Images/GetList");
-                if (imageResponse.IsSuccessStatusCode)
+                using (var imageResponse = await _client.GetAsync("Images/GetList"))
                 {
-                    var imageData = await imageResponse.Content.ReadAsStringAsync();
-                    imageList = JsonConvert.DeserializeObject<List<ImageDTO>>(imageData);
+                    if (imageResponse.IsSuccessStatusCode)
+                    {
+                        var imageData = await imageResponse.Content.ReadAsStringAsync();
+                        imageList = JsonConvert.DeserializeObject<List<ImageDTO>>(imageData);
+                    }
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 TempData["ErrorMessage"] = "An error occurred while retrieving data.";
                 return RedirectToAction("Index");
@@ -77,6 +83,79 @@ namespace NewsWebsite.Controllers
             ViewBag.CategoryList = categoryList;
             ViewBag.ImageList = imageList;
             return View(post);
+        }
+
+        [HttpGet("Category/{id}")]
+        public async Task<IActionResult> PostsByCategory(int id)
+        {
+            if (id <= 0)
+            {
+                TempData["ErrorMessage"] = "Invalid Category ID.";
+                return RedirectToAction("Index");
+            }
+            List<PostDTO> postList = new();
+            List<CategoryDTO> categoryList = new();
+            List<ImageDTO> imageList = new();
+
+            try
+            {
+                // Use Posts/GetList API to retrieve all posts
+                using (var postResponse = await _client.GetAsync("Posts/GetList"))
+                {
+                    if (postResponse.IsSuccessStatusCode)
+                    {
+                        var postData = await postResponse.Content.ReadAsStringAsync();
+                        var allPosts = JsonConvert.DeserializeObject<List<PostDTO>>(postData);
+
+                        // Filter posts by categoryId
+                        postList = allPosts.Where(post => post.CategoryId == id && post.Status == 1).ToList();
+                    }
+                    else
+                    {
+                        TempData["ErrorMessage"] = "Failed to retrieve posts for the specified category.";
+                        return RedirectToAction("Index");
+                    }
+                }
+
+                // Fetch the list of images
+                using (var imageResponse = await _client.GetAsync("Images/GetList"))
+                {
+                    if (imageResponse.IsSuccessStatusCode)
+                    {
+                        var imageData = await imageResponse.Content.ReadAsStringAsync();
+                        var allImages = JsonConvert.DeserializeObject<List<ImageDTO>>(imageData);
+
+                        // Filter images based on PostId in postList
+                        imageList = allImages.Where(image => postList.Any(post => post.Id == image.PostId) && image.Status == 1).ToList();
+                    }
+                }
+
+                // Fetch the list of categories
+                using (var categoryResponse = await _client.GetAsync("Categories/GetList"))
+                {
+                    if (categoryResponse.IsSuccessStatusCode)
+                    {
+                        var categoryData = await categoryResponse.Content.ReadAsStringAsync();
+                        categoryList = JsonConvert.DeserializeObject<List<CategoryDTO>>(categoryData);
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                TempData["ErrorMessage"] = "An error occurred while retrieving data.";
+                return RedirectToAction("Index");
+            }
+
+            if (postList == null || !postList.Any())
+            {
+                TempData["ErrorMessage"] = "No posts found for the specified category.";
+                return RedirectToAction("Index");
+            }
+
+            // Pass the data to the view
+            ViewBag.CategoryList = categoryList;
+            ViewBag.ImageList = imageList;
+            return View(postList);
         }
 
     }

@@ -93,11 +93,20 @@ app.MapControllerRoute(
     defaults: new { controller = "Posts", action = "Details" },
     constraints: new { slug = @"[\w\-]+" } // Ràng buộc chỉ chấp nhận các ký tự, số và dấu gạch ngang
 );
+
 app.MapControllerRoute(
     name: "PostSlug",
     pattern: "posts/{slug}",
     defaults: new { controller = "Posts", action = "Details" }
 );
+
+app.MapControllerRoute(
+    name: "PostsByCategory",
+    pattern: "Posts/Category/{id}",
+    defaults: new { controller = "Posts", action = "PostsByCategory" },
+    constraints: new { id = @"\d+" } // Ràng buộc chỉ chấp nhận số
+);
+
 app.MapControllerRoute(
     name: "areas",
     pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}");

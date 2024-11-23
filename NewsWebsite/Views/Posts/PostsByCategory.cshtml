@@ -1,0 +1,102 @@
+﻿@using NewsAPI.DTOs
+<div id="wrapper">
+    <div class="page-title lb single-wrapper">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12">
+                    <h2><i class="fa fa-star bg-orange"></i> Category Posts <small class="hidden-xs-down hidden-sm-down">Danh sách các bài viết trong danh mục.</small></h2>
+                </div><!-- end col -->
+            </div><!-- end row -->
+        </div><!-- end container -->
+    </div><!-- end page-title -->
+
+    <section class="section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-9 col-md-12 col-sm-12 col-xs-12">
+                    <div class="page-wrapper">
+                        <div class="blog-list clearfix">
+                            @if (ViewBag.PostList != null && ViewBag.PostList.Count > 0)
+
+                            {
+                                @foreach (var post in ViewBag.PostList)
+
+                                {
+
+                                    // Ép kiểu ViewBag.ImageList thành List<ImageDTO>
+
+                                    var imageList = ViewBag.ImageList as List<ImageDTO>;
+
+                                    // Lấy ảnh đầu tiên của bài viết dựa vào PostId
+
+                                    var postImage = imageList?.FirstOrDefault(img => img.PostId == post.Id);
+
+                                    var imageUrl = postImage != null ? postImage.ImageUrl : "DATA/Images/default.jpg";
+
+
+
+                                    // Ép kiểu ViewBag.CategoryList thành List<CategoryDTO>
+
+                                    var categoryList = ViewBag.CategoryList as List<CategoryDTO>;
+
+                                    // Lấy tên danh mục dựa vào CategoryId của bài viết
+
+                                    var category = categoryList?.FirstOrDefault(cat => cat.Id == post.CategoryId);
+
+                                    var categoryName = category != null ? category.CategoryName : "Unknown Category";
+
+                                    <div class="blog-box row">
+                                        <div class="col-md-4">
+                                            <div class="post-media">
+                                                <a href="@Url.Action("Details", "Posts", new { slug = post.Slug })" title="@post.Title">
+                                                    <img src="@imageUrl" alt="@post.Title" class="img-fluid">
+                                                    <div class="hovereffect"></div>
+                                                </a>
+                                            </div><!-- end media -->
+                                        </div><!-- end col -->
+
+                                        <div class="blog-meta big-meta col-md-8">
+                                            <h4><a href="@Url.Action("Details", "Posts", new { slug = post.Slug })" title="@post.Title">@post.Title</a></h4>
+                                            <p>@TextHelper.TruncateText(post.Contents, 20)</p> <!-- Giới hạn nội dung để hiển thị preview -->
+                                            <small class="firstsmall"><a class="bg-orange" href="#" title="">@categoryName</a></small>
+                                            <small><a href="#" title="">by Admin</a></small>
+                                            <small><a href="#" title=""><i class="fa fa-eye"></i> @post.Views</a></small>
+                                        </div><!-- end meta -->
+                                    </div>
+
+                                    <!-- end blog-box -->
+
+                                    <hr class="invis">
+                                }
+                            }
+
+                            else
+
+                            {
+                                <p>No posts available in this category.</p>
+                            }
+                        </div><!-- end blog-list -->
+                    </div><!-- end page-wrapper -->
+
+                    <hr class="invis">
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <nav aria-label="Page navigation">
+                                <ul class="pagination justify-content-start">
+                                    <li class="page-item"><a class="page-link" href="#">1</a></li>
+                                    <li class="page-item"><a class="page-link" href="#">2</a></li>
+                                    <li class="page-item"><a class="page-link" href="#">3</a></li>
+                                    <li class="page-item">
+                                        <a class="page-link" href="#">Next</a>
+                                    </li>
+                                </ul>
+                            </nav>
+                        </div><!-- end col -->
+                    </div><!-- end row -->
+                </div><!-- end col -->
+
+            </div><!-- end row -->
+        </div><!-- end container -->
+    </section>
+</div><!-- end wrapper -->

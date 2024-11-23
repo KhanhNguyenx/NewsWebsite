@@ -179,8 +179,8 @@
                     activeCategories.forEach(category => {
                         $('#categories-menu').append(
                             `<li class="nav-item">
-                                <a class="nav-link" href="#">${category.categoryName}</a>
-                            </li>`
+                                    <a class="nav-link" href="/${category.id}">${category.categoryName}</a>
+                                </li>`
                         );
                     });
                 },
@@ -192,22 +192,22 @@
         });
     </script>
     <script>
-        $(document).ready(function() {
-        const avatarBtn = document.querySelector('.btn-avatar'); // Nút avatar
-        const dropdownMenu = document.querySelector('.dropdown-menu'); // Menu cần mở
-        if (avatarBtn && dropdownMenu) {
-                    // Mở menu khi nhấn vào avatar
-            avatarBtn.addEventListener('click', (e) => {
-                e.stopPropagation(); // Ngăn sự kiện lan ra ngoài
-                dropdownMenu.classList.toggle('show'); // Hiển thị hoặc ẩn menu
-            });
+        $(document).ready(function () {
+            const avatarBtn = document.querySelector('.btn-avatar'); // Nút avatar
+            const dropdownMenu = document.querySelector('.dropdown-menu'); // Menu cần mở
+            if (avatarBtn && dropdownMenu) {
+                // Mở menu khi nhấn vào avatar
+                avatarBtn.addEventListener('click', (e) => {
+                    e.stopPropagation(); // Ngăn sự kiện lan ra ngoài
+                    dropdownMenu.classList.toggle('show'); // Hiển thị hoặc ẩn menu
+                });
 
                 // Ẩn menu khi nhấn ra ngoài
-                    document.addEventListener('click', () => {
-                        dropdownMenu.classList.remove('show'); // Ẩn menu
-                    });
-                }
-            });
+                document.addEventListener('click', () => {
+                    dropdownMenu.classList.remove('show'); // Ẩn menu
+                });
+            }
+        });
 
     </script>
 

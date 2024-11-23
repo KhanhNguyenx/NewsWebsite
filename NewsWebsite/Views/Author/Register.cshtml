@@ -1,6 +1,6 @@
-﻿@model NewsWebsite.Helpers.LoginM
+﻿@model NewsWebsite.Helpers.RegisterM
 @{
-    ViewData["Title"] = "Đăng nhập";
+    ViewData["Title"] = "Đăng ký";
     Layout = null;
 }
 <!DOCTYPE html>
@@ -125,7 +125,7 @@
     <div class="card">
         <h3>Đăng Ký</h3>
         <p>Vui lòng điền thông tin tài khoản của bạn</p>
-        <form asp-action="Logins" method="post" id="sign_in_form">
+        <form asp-action="Registers" method="post" id="sign_in_form">
             <!-- Tên người dùng -->
             <div class="mb-4">
                 <label asp-for="@Model.UserName">Tên người dùng</label>
@@ -134,9 +134,9 @@
             </div>
             <br />
             <div class="mb-4">
-                <label asp-for="@Model.UserName">Gmail</label>
-                <input asp-for="@Model.UserName" class="input w-full border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-blue-500 focus:border-blue-500" placeholder="Nhập Gmail">
-                <span asp-validation-for="@Model.UserName" class="text-danger mt-1 text-sm"></span>
+                <label asp-for="@Model.Email">Gmail</label>
+                <input asp-for="@Model.Email" class="input w-full border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-blue-500 focus:border-blue-500" placeholder="Nhập Gmail">
+                <span asp-validation-for="@Model.Email" class="text-danger mt-1 text-sm"></span>
             </div>
             <br />
             <!-- Mật khẩu -->
@@ -156,9 +156,9 @@
             </div>
             <br />
             <div class="mb-4 relative">
-                <label asp-for="@Model.Password">Mật khẩu</label>
+                <label asp-for="@Model.ConfirmPassword">Mật khẩu</label>
                 <div class="relative">
-                    <input asp-for="@Model.Password"
+                    <input asp-for="@Model.ConfirmPassword"
                            type="password"
                            id="passwordInput"
                            class="input w-full border border-gray-300 rounded-lg px-4 py-2 pr-12 focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
@@ -167,7 +167,7 @@
                         <span id="passwordIcon">👁️</span>
                     </button>
                 </div>
-                <span asp-validation-for="@Model.Password" class="text-danger mt-1 text-sm"></span>
+                <span asp-validation-for="@Model.ConfirmPassword" class="text-danger mt-1 text-sm"></span>
             </div>
             <br />
             <!-- Nút đăng nhập -->

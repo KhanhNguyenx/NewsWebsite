@@ -139,6 +139,12 @@ namespace NewsAPI.Controllers
                 PasswordHash = model.PasswordHash,
                 Email = model.Email,
                 FullName =model.Username,
+                Status = model.Status
+            };
+            var user = new UserDTO
+            {
+                Username = model.Username,
+                PasswordHash = model.PasswordHash
             };
 
             try
@@ -184,7 +190,7 @@ namespace NewsAPI.Controllers
                 return BadRequest(new { success = false, message = "Lỗi không xác định: " + ex.Message });
             }
 
-            return Ok(new { success = true, message = "Đăng ký thành công!" });
+            return Ok(new { success = true, data = user });
         }
         [Authorize]
         [HttpGet]

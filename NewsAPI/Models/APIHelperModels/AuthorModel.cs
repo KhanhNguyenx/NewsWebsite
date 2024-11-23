@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 
 namespace NewsAPI.Models
 {
@@ -27,6 +28,7 @@ namespace NewsAPI.Models
         [MaxLength(30)]
         public string Fullname { get; set; }
         public bool IsAuthor { get; set; }= false;
+        [DefaultValue(1)]
         public int Status { get; set; } = 1;
     }
 }

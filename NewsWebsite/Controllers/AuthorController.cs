@@ -12,6 +12,7 @@ using System.Xml.Linq;
 using NewsAPI.DTOs;
 using Newtonsoft.Json;
 using System.Text;
+using Microsoft.Win32;
 
 namespace NewsWebsite.Controllers
 {
@@ -34,10 +35,6 @@ namespace NewsWebsite.Controllers
 
             return RedirectToAction("Index", "Home");
         }
-        public IActionResult Register()
-        {
-            return View();
-        }
         [Authorize]
         public async Task<IActionResult> GetList()
         {
@@ -57,8 +54,8 @@ namespace NewsWebsite.Controllers
         [AllowAnonymous]
         public IActionResult Login()
         {
-            if (User.Identity != null && User.Identity.IsAuthenticated)
-                return RedirectToAction("GetList");
+            //if (User.Identity != null && User.Identity.IsAuthenticated)
+            //    return RedirectToAction("GetList");
 
             return View();
         }
@@ -134,6 +131,56 @@ namespace NewsWebsite.Controllers
 
             }
             return View(); // Redirect($"/error/404");
+        }
+
+        [AllowAnonymous]
+        public IActionResult Register()
+        {
+            return View();
+        }
+
+
+        [HttpPost]
+        [AllowAnonymous]
+        public async Task<IActionResult> Registers(RegisterM registerModel)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(registerModel); // Trả về form nếu model không hợp lệ
+            }
+
+            ResponseData res = new ResponseData();
+            try
+            {
+                // Chuẩn bị dữ liệu cho API đăng ký
+                Dictionary<string, dynamic> dictParss = new Dictionary<string, dynamic>
+        {
+            {"username", registerModel.UserName },
+            {"passwordHash", registerModel.Password },
+            {"email", registerModel.Email }
+        };
+
+                // Gửi yêu cầu tới API "Authorize/Register"
+                res = await _callApi.PostAsync("Authorize/Register", dictParss);
+
+                if (res.success)
+                {
+                    // Nếu đăng ký thành công, chuyển hướng tới trang login
+                    TempData["SuccessMessage"] = "Đăng ký thành công. Vui lòng đăng nhập.";
+                    //return RedirectToAction("Login");
+                }
+                else
+                {
+                    // Nếu API trả về lỗi
+                    ModelState.AddModelError("", res.message);
+                }
+            }
+            catch (Exception ex)
+            {
+                ModelState.AddModelError("", $"Đã xảy ra lỗi: {ex.Message}");
+            }
+
+            return View(registerModel);
         }
 
         [AllowAnonymous]

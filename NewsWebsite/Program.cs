@@ -102,7 +102,7 @@ app.MapControllerRoute(
 
 app.MapControllerRoute(
     name: "PostsByCategory",
-    pattern: "Posts/Category/{id}",
+    pattern: "Category/{id}",
     defaults: new { controller = "Posts", action = "PostsByCategory" },
     constraints: new { id = @"\d+" } // Ràng buộc chỉ chấp nhận số
 );

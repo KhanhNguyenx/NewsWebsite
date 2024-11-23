@@ -18,7 +18,7 @@
 
                                 <span class="color-orange">
                                     <a href="@Url.Action(" Category", "Posts" , new { id=Model.CategoryId })" title="">
-                                        @categories?.FirstOrDefault(c => c.Id == Model.CategoryId)?.CategoryName ?? "Uncategorized"
+                                        @categories?.FirstOrDefault(c => c.Id == Model.CategoryId)?.CategoryName
                                     </a>
                                 </span>
 

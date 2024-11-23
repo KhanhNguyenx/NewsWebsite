@@ -14,6 +14,7 @@ using Microsoft.AspNetCore.Authorization;
 using EncrypDecryp;
 using System.Security.Cryptography;
 using NewsAPI.Services.SimpleService;
+using NewsAPI.Models.APIHelperModels;
 
 namespace NewsAPI.Controllers.Generic
 {
@@ -69,19 +70,29 @@ namespace NewsAPI.Controllers.Generic
             return NoContent();
         }
         [HttpGet]
-        [Authorize("RequireAdminRole")]
-        public async Task<ActionResult<IEnumerable<UserDTO>>> GetList()
+        //[Authorize("RequireAdminRole")]
+        public async Task<ActionResult<DataResponse>> GetList()
         {
             var entityList = await _userService.GetListAsync();
             if (entityList != null)
             {
                 var dtoList = new List<UserDTO>();
                 _mapper.Map(entityList, dtoList);
-                return Ok(dtoList);
+
+                var response = new DataResponse
+                {
+                    Success = true,
+                    Message = "Data fetched successfully",
+                    Data = dtoList
+                };
+                return Ok(response);
             }
             else
+            {
                 return NoContent();
+            }
         }
+
 
         [HttpGet]
         public async Task<ActionResult<IEnumerable<UserDTO>>> Search(string txtSearch)

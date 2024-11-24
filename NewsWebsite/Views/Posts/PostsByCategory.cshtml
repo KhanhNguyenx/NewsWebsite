@@ -1,18 +1,60 @@
-﻿@using NewsAPI.DTOs
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Basic -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
+    <!-- Mobile Metas -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Site Metas -->
+    <title>Posts By Category</title>
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <!-- Site Icons -->
+    <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon" />
+    <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+
+    <!-- Design fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" rel="stylesheet">
+
+    <!-- Bootstrap core CSS -->
+    <link href="~/css/bootstrap.css" rel="stylesheet" asp-append-version="true">
+
+    <!-- FontAwesome Icons core CSS -->
+    <link href="~/css/font-awesome.min.css" rel="stylesheet" asp-append-version="true">
+
+    <!-- Custom styles for this template -->
+    <link href="~/style.css" rel="stylesheet" asp-append-version="true">
+
+    <!-- Responsive styles for this template -->
+    <link href="~/css/responsive.css" rel="stylesheet" asp-append-version="true">
+
+    <!-- Colors for this template -->
+    <link href="~/css/colors.css" rel="stylesheet" asp-append-version="true">
+
+    <!-- Version Tech CSS for this template -->
+    <link href="~/css/version/tech.css" rel="stylesheet" asp-append-version="true">
+
+</head>
+<body>
+    @using NewsAPI.DTOs
     <div id="wrapper">
         <div class="page-title lb single-wrapper">
             <div class="container">
                 <div class="row">
                     <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12">
-                        <h2><i class="fa fa-star bg-orange"></i> Reviews <small class="hidden-xs-down hidden-sm-down">Nulla felis eros, varius sit amet volutpat non. </small></h2>
-                    </div><!-- end col -->
-                    <div class="col-lg-4 col-md-4 col-sm-12 hidden-xs-down hidden-sm-down">
-                        <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="#">Home</a></li>
-                            <li class="breadcrumb-item"><a href="#">Blog</a></li>
-                            <li class="breadcrumb-item active">Reviews</li>
-                        </ol>
+                        <h2>
+                            <i class="fa fa-star bg-orange"></i>
+                            @{
+                                var category = (ViewBag.CategoryList as List<CategoryDTO>)?.FirstOrDefault(cat => cat.Id == Convert.ToInt32(ViewContext.RouteData.Values["id"]));
+                                <text>@(category?.CategoryName ?? "Unknown Category")</text>
+                                <small class="hidden-xs-down hidden-sm-down">@category?.Description ?? "No description available."</small>
+                            }
+                        </h2>
                     </div><!-- end col -->
                 </div><!-- end row -->
             </div><!-- end container -->
@@ -26,7 +68,8 @@
                             <div class="blog-list clearfix">
                                 @if (ViewBag.PostList != null && ViewBag.PostList.Count > 0)
                                 {
-                                    var imageList = ViewBag.ImageList as List<ImageDTO>;
+                                    var imageList = ViewBag.ImageList as List<ImageDTO>
+                                    ;
                                     foreach (var post in ViewBag.PostList)
                                     {
                                         // Lấy ảnh đầu tiên của bài viết dựa vào PostId
@@ -36,8 +79,8 @@
                                         <div class="blog-box row">
                                             <div class="col-md-4">
                                                 <div class="post-media">
-                                                <a href="@Url.Action("Details", "Posts", new { slug = post.Slug })" title="">
-                                                    @post.Title
+                                                    <a href="@Url.Action("Details", "Posts", new { slug = post.Slug })" title="">
+                                                        @post.Title
                                                         <img src="@imageUrl" alt="@post.Title" class="img-fluid">
                                                         <div class="hovereffect"></div>
                                                     </a>
@@ -45,11 +88,11 @@
                                             </div><!-- end col -->
 
                                             <div class="blog-meta big-meta col-md-8">
-                                            <h4><a href="@Url.Action("Details", "Posts", new { slug = post.Slug })" title="">@post.Title</a></h4>
+                                                <h2><a href="@Url.Action("Details", "Posts", new { slug = post.Slug })" title="">@post.Title</a></h2>
                                                 <p>@TextHelper.TruncateText(post.Contents, 20)</p> <!-- Giới hạn nội dung để hiển thị preview -->
-                                                <small class="firstsmall"><a class="bg-orange" href="#" title="">Category ID: @post.CategoryId</a></small>
                                                 <small><a href="#" title="">by Admin</a></small>
                                                 <small><a href="#" title=""><i class="fa fa-eye"></i> @post.Views</a></small>
+                                                <small><a href="#" title=""><i class="fa fa-thumbs-up"></i> @post.LikeNumber</a></small>
                                             </div><!-- end meta -->
                                         </div>
 
@@ -88,3 +131,13 @@
 
 
     </div><!-- end wrapper -->
+    <!-- Core JavaScript
+    ================================================== -->
+    <script src="~/js/jquery.min.js" asp-append-version="true"></script>
+    <script src="~/js/tether.min.js" asp-append-version="true"></script>
+    <script src="~/js/bootstrap.min.js" asp-append-version="true"></script>
+    <script src="~/js/custom.js" asp-append-version="true"></script>
+
+
+</body>
+</html>

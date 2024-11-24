@@ -152,6 +152,8 @@
             </div><!-- end container-fluid -->
         </header><!-- end market-header -->
         @RenderBody();
+        @RenderSection("Scripts", required: false)
+
         <footer class="footer">
             <div class="container">
                 <div class="row">
@@ -237,8 +239,8 @@
                     activeCategories.forEach(category => {
                         $('#categories-menu').append(
                             `<li class="nav-item">
-                                <a class="nav-link" href="/category/${category.id}">${category.categoryName}</a>
-                            </li>`
+                                        <a class="nav-link" href="/category/${category.id}">${category.categoryName}</a>
+                                    </li>`
                         );
                     });
                 },

@@ -50,6 +50,10 @@ namespace NewsWebsite.Areas.Admin.Controllers
             }
             return RedirectToAction("Login");
         }
-
+        [HttpGet]
+        public IActionResult Upsert()
+        {
+            return View();
+        }
     }
 }

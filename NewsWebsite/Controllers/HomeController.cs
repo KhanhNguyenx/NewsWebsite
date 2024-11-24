@@ -118,12 +118,30 @@ namespace NewsWebsite.Controllers
                     ViewBag.ImageList = imageList;
                 }
             }
+            
+            // Fetch the list of posts from the API
+            using (var postResponse = await _client.GetAsync("Posts/GetList"))
+            {
+                if (postResponse.IsSuccessStatusCode)
+                {
+                    var postData = await postResponse.Content.ReadAsStringAsync();
+                    postList = JsonConvert.DeserializeObject<List<PostDTO>>(postData);
+                }
+            }
+
+            // Lọc ra 3 bài viết có số lượt xem cao nhất
+            var popularPosts = postList.OrderByDescending(p => p.Views).Take(3).ToList();
+            ViewBag.PopularPosts = popularPosts;
+
+            // Lọc ra 3 bài viết có số lượt xem cao nhất
+            var topLikedPosts = postList.OrderByDescending(p => p.LikeNumber).Take(3).ToList();
+            ViewBag.topLikedPosts = topLikedPosts;
+
 
             // Calculate total pages for pagination
             int totalPages = (int)Math.Ceiling((double)totalRecords / pageSize);
             ViewBag.TotalPages = totalPages;
             ViewBag.CurrentPage = pageNumber;
-
             // Pass the paged list of posts to the view
             return View(postList);
         }

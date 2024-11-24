@@ -69,32 +69,49 @@
                         <h2 class="widget-title">Popular Posts</h2>
                         <div class="blog-list-widget">
                             <div class="list-group">
-                                <a href="tech-single.html" class="list-group-item list-group-item-action flex-column align-items-start">
-                                    <div class="w-100 justify-content-between">
-                                        <img src="upload/tech_blog_08.jpg" alt="" class="img-fluid float-left">
-                                        <h5 class="mb-1">5 Beautiful buildings you need..</h5>
-                                        <small>12 Jan, 2016</small>
-                                    </div>
-                                </a>
-
-                                <a href="tech-single.html" class="list-group-item list-group-item-action flex-column align-items-start">
-                                    <div class="w-100 justify-content-between">
-                                        <img src="upload/tech_blog_01.jpg" alt="" class="img-fluid float-left">
-                                        <h5 class="mb-1">Let's make an introduction for..</h5>
-                                        <small>11 Jan, 2016</small>
-                                    </div>
-                                </a>
-
-                                <a href="tech-single.html" class="list-group-item list-group-item-action flex-column align-items-start">
-                                    <div class="w-100 last-item justify-content-between">
-                                        <img src="upload/tech_blog_03.jpg" alt="" class="img-fluid float-left">
-                                        <h5 class="mb-1">Did you see the most beautiful..</h5>
-                                        <small>07 Jan, 2016</small>
-                                    </div>
-                                </a>
+                                @if (ViewBag.PopularPosts != null)
+                                {
+                                    foreach (var post in ViewBag.PopularPosts)
+                                    {
+                                        <a href="@Url.Action("Details", "Posts", new { slug = post.Slug })" class="list-group-item list-group-item-action flex-column align-items-start">
+                                            <div class="w-100 justify-content-between">
+                                                <img src="@ImageHelper.GetImageUrl(post.Id, imageList)" alt="Popular Post Image" class="img-fluid float-left" style="width: 100px; height: 100px;">
+                                                <h5 class="mb-1">@post.Title</h5>
+                                            </div>
+                                        </a>
+                                    }
+                                }
+                                else
+                                {
+                                    <p>No popular posts available.</p>
+                                }
                             </div>
-                        </div><!-- end blog-list -->
-                    </div><!-- end widget -->
+                        </div>
+                    </div>
+
+                    <div class="widget">
+                        <h2 class="widget-title">Top Liked Posts</h2>
+                        <div class="blog-list-widget">
+                            <div class="list-group">
+                                @if (ViewBag.PopularPosts != null)
+                                {
+                                    foreach (var post in ViewBag.topLikedPosts)
+                                    {
+                                        <a href="@Url.Action("Details", "Posts", new { slug = post.Slug })" class="list-group-item list-group-item-action flex-column align-items-start">
+                                            <div class="w-100 justify-content-between">
+                                                <img src="@ImageHelper.GetImageUrl(post.Id, imageList)" alt="Popular Post Image" class="img-fluid float-left" style="width: 100px; height: 100px;">
+                                                <h5 class="mb-1">@post.Title</h5>
+                                            </div>
+                                        </a>
+                                    }
+                                }
+                                else
+                                {
+                                    <p>No posts available.</p>
+                                }
+                            </div>
+                        </div>
+                    </div>
 
                     <div class="widget">
                         <h2 class="widget-title">Recent Reviews</h2>

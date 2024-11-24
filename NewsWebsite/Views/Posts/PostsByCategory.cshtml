@@ -45,7 +45,7 @@
                                             </div><!-- end col -->
 
                                             <div class="blog-meta big-meta col-md-8">
-                                                <h4><a href="@Url.Action(" Details", "Posts" , new { slug=post.Slug })" title="@post.Title">@post.Title</a></h4>
+                                            <h4><a href="@Url.Action("Details", "Posts", new { slug = post.Slug })" title="">@post.Title</a></h4>
                                                 <p>@TextHelper.TruncateText(post.Contents, 20)</p> <!-- Giới hạn nội dung để hiển thị preview -->
                                                 <small class="firstsmall"><a class="bg-orange" href="#" title="">Category ID: @post.CategoryId</a></small>
                                                 <small><a href="#" title="">by Admin</a></small>

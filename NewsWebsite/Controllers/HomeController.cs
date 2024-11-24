@@ -74,9 +74,10 @@ namespace NewsWebsite.Controllers
         [HttpGet]
         public async Task<IActionResult> Index(int pageNumber = 1, int pageSize = 5)
         {
-            List<PostDTO> postList = new List<PostDTO>();
+            List<PostDTO> pagedPostList = new List<PostDTO>();
             List<CategoryDTO> categoryList = new List<CategoryDTO>();
             List<ImageDTO> imageList = new List<ImageDTO>();
+            List<PostDTO> allPosts = new List<PostDTO>();
             int totalRecords = 0;
 
             // Fetch the paged list of posts from the API
@@ -88,12 +89,12 @@ namespace NewsWebsite.Controllers
                     var pagedResult = JsonConvert.DeserializeObject<PagedResult<PostDTO>>(postData);
 
                     // Gán giá trị từ pagedResult
-                    postList = pagedResult?.Records ?? new List<PostDTO>();
+                    pagedPostList = pagedResult?.Records ?? new List<PostDTO>();
                     totalRecords = pagedResult?.TotalRecords ?? 0;
                 }
                 else
                 {
-                    TempData["ErrorMessage"] = "Failed to retrieve posts list!";
+                    TempData["ErrorMessage"] = "Failed to retrieve paged posts list!";
                 }
             }
 
@@ -118,33 +119,38 @@ namespace NewsWebsite.Controllers
                     ViewBag.ImageList = imageList;
                 }
             }
-            
-            // Fetch the list of posts from the API
+
+            // Fetch the list of all posts from the API
             using (var postResponse = await _client.GetAsync("Posts/GetList"))
             {
                 if (postResponse.IsSuccessStatusCode)
                 {
                     var postData = await postResponse.Content.ReadAsStringAsync();
-                    postList = JsonConvert.DeserializeObject<List<PostDTO>>(postData);
+                    allPosts = JsonConvert.DeserializeObject<List<PostDTO>>(postData);
+                }
+                else
+                {
+                    TempData["ErrorMessage"] = "Failed to retrieve posts list!";
                 }
             }
 
             // Lọc ra 3 bài viết có số lượt xem cao nhất
-            var popularPosts = postList.OrderByDescending(p => p.Views).Take(3).ToList();
+            var popularPosts = allPosts.OrderByDescending(p => p.Views).Take(3).ToList();
             ViewBag.PopularPosts = popularPosts;
 
-            // Lọc ra 3 bài viết có số lượt xem cao nhất
-            var topLikedPosts = postList.OrderByDescending(p => p.LikeNumber).Take(3).ToList();
-            ViewBag.topLikedPosts = topLikedPosts;
-
+            // Lọc ra 3 bài viết có số lượt thích cao nhất
+            var topLikedPosts = allPosts.OrderByDescending(p => p.LikeNumber).Take(3).ToList();
+            ViewBag.TopLikedPosts = topLikedPosts;
 
             // Calculate total pages for pagination
             int totalPages = (int)Math.Ceiling((double)totalRecords / pageSize);
             ViewBag.TotalPages = totalPages;
             ViewBag.CurrentPage = pageNumber;
+
             // Pass the paged list of posts to the view
-            return View(postList);
+            return View(pagedPostList);
         }
+
 
 
         public IActionResult Privacy()

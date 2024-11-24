@@ -21,6 +21,7 @@ namespace NewsWebsite.Areas.Admin.Controllers
         }
 
         [Authorize]
+        [HttpGet]
         public async Task<IActionResult> Index()
         {
             if (User.Identity != null && User.Identity.IsAuthenticated)
@@ -35,6 +36,7 @@ namespace NewsWebsite.Areas.Admin.Controllers
             }
             return RedirectToAction("Login");
         }
+        [HttpGet]
         public async Task<IActionResult> Details(string id)
         {
             if (User.Identity != null && User.Identity.IsAuthenticated)
@@ -48,5 +50,6 @@ namespace NewsWebsite.Areas.Admin.Controllers
             }
             return RedirectToAction("Login");
         }
+
     }
 }

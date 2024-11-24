@@ -133,55 +133,106 @@ namespace NewsWebsite.Controllers
             return View(); // Redirect($"/error/404");
         }
 
-        //[AllowAnonymous]
-        //public IActionResult Register()
-        //{
-        //    return View();
-        //}
+        [AllowAnonymous]
+        public IActionResult Register()
+        {
+            return View();
+        }
 
 
-        //[HttpPost]
-        //[AllowAnonymous]
-        //public async Task<IActionResult> Registers(RegisterM registerModel)
-        //{
-        //    if (!ModelState.IsValid)
-        //    {
-        //        return View(registerModel); // Trả về form nếu model không hợp lệ
-        //    }
+        [HttpPost]
+        [AllowAnonymous]
+        public async Task<IActionResult> Registers(RegisterM registerModel)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(registerModel); // Trả về form nếu model không hợp lệ
+            }
 
-        //    ResponseData res = new ResponseData();
-        //    try
-        //    {
-        //        // Chuẩn bị dữ liệu cho API đăng ký
-        //        Dictionary<string, dynamic> dictParss = new Dictionary<string, dynamic>
-        //{
-        //    {"username", registerModel.UserName },
-        //    {"passwordHash", registerModel.Password },
-        //    {"email", registerModel.Email }
-        //};
+            ResponseData res = new ResponseData();
+            try
+            {
+                // Chuẩn bị dữ liệu cho API đăng ký
+                Dictionary<string, dynamic> dictParss = new Dictionary<string, dynamic>
+        {
+            {"username", registerModel.UserName },
+            {"passwordHash", registerModel.Password },
+            {"email", registerModel.Email },
+                    {"fullname", registerModel.Fullname },
+                    {"isAuthor",registerModel.IsAuthor },
+                    {"status", registerModel.Status }
+        };
 
-        //        // Gửi yêu cầu tới API "Authorize/Register"
-        //        res = await _callApi.PostAsync("Authorize/Register", dictParss);
+                // Gửi yêu cầu tới API "Authorize/Register"
+                res = await _callApi.PostAsync("Authorize/Register", dictParss);
 
-        //        if (res.success)
-        //        {
-        //            // Nếu đăng ký thành công, chuyển hướng tới trang login
-        //            TempData["SuccessMessage"] = "Đăng ký thành công. Vui lòng đăng nhập.";
-        //            //return RedirectToAction("Login");
-        //        }
-        //        else
-        //        {
-        //            // Nếu API trả về lỗi
-        //            ModelState.AddModelError("", res.message);
-        //        }
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        ModelState.AddModelError("", $"Đã xảy ra lỗi: {ex.Message}");
-        //    }
+                if (res.success)
+                {
+                    ResponseData ress = new ResponseData();
+                    // Nếu đăng ký thành công, tự động đăng nhập vào hệ thống ngay
+                    Dictionary<string, dynamic> loginDict = new Dictionary<string, dynamic>
+            {
+                {"username", registerModel.UserName},
+                {"passwordHash", registerModel.Password}
+            };
 
-        //    return View(registerModel);
-        //}
+                    // Gửi yêu cầu đăng nhập tới API "Authorize/Login"
+                    ress = await _callApi.PostAsync("Authorize/Login", loginDict);
+
+                    if (res.success && ress.data != null)
+                    {
+                        AccountDTO account = ress.data.ToObject<AccountDTO>();
+                        string token = ress.message;
+                        var getClaim = await _callApi.GetAsync(@"Authorize/GetClaims", token);
+                        var getRoles = getClaim.data[4].value;
+
+                        // Lưu accessToken vào biến session
+                        HttpContext.Session.SetString(mySetting.AccessToken, token);
+
+                        var claims = new List<Claim>
+                {
+                    new Claim(ClaimTypes.Email, account.Email),                    // Email của người dùng
+                    new Claim(ClaimTypes.Name, account.Username),                  // Tên người dùng
+                    new Claim(ClaimTypes.Sid, account.Id.ToString()),              // ID của người dùng
+                    new Claim("AccountId", account.Id.ToString()),                 // ID của tài khoản
+                    new Claim("AccessToken", token),                               // Token truy cập
+                    new Claim(ClaimTypes.NameIdentifier, account.Id.ToString()),    // Identifier của người dùng
+                    new Claim(ClaimTypes.Role, getRoles.ToString())                // Vai trò của người dùng
+                };
+
+                        // Tạo claims identity và lưu cookie
+                        var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
+                        var claimsPrincipal = new ClaimsPrincipal(claimsIdentity);
+
+                        await HttpContext.SignInAsync(claimsPrincipal, new AuthenticationProperties
+                        {
+                            ExpiresUtc = DateTime.UtcNow.AddMinutes(60),
+                            IsPersistent = true,
+                            AllowRefresh = true
+                        });
+
+                        // Chuyển hướng tới trang chủ sau khi đăng nhập thành công
+                        return RedirectToAction("Index", "Home");
+                    }
+                    else
+                    {
+                        // Nếu đăng nhập không thành công, thông báo lỗi
+                        ModelState.AddModelError("", "Đăng nhập thất bại.");
+                    }
+                }
+                else
+                {
+                    // Nếu API trả về lỗi
+                    ModelState.AddModelError("", res.message);
+                }
+            }
+            catch (Exception ex)
+            {
+                ModelState.AddModelError("", $"Đã xảy ra lỗi: {ex.Message}");
+            }
+
+            return View(registerModel);
+        }
 
         [AllowAnonymous]
         public async Task<ActionResult> Logout()

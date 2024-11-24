@@ -35,6 +35,18 @@ namespace NewsWebsite.Areas.Admin.Controllers
             }
             return RedirectToAction("Login");
         }
-
+        public async Task<IActionResult> Details(string id)
+        {
+            if (User.Identity != null && User.Identity.IsAuthenticated)
+            {
+                var res = await _callApi.GetAsync($"Users/GetById/{id}", _accessToken);
+                if (res.success && res.data != null)
+                {
+                    var resList = res.data!.ToObject<UserRoleOutDTO>();
+                    return View(resList);
+                }
+            }
+            return RedirectToAction("Login");
+        }
     }
 }

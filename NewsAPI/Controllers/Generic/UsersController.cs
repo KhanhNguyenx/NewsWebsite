@@ -76,14 +76,12 @@ namespace NewsAPI.Controllers.Generic
             var entityList = await _userService.GetListAsync();
             if (entityList != null)
             {
-                var dtoList = new List<UserDTO>();
-                _mapper.Map(entityList, dtoList);
 
                 var response = new DataResponse
                 {
                     Success = true,
                     Message = "Data fetched successfully",
-                    Data = dtoList
+                    Data = entityList
                 };
                 return Ok(response);
             }

@@ -1,4 +1,4 @@
-﻿@model List<NewsAPI.DTOs.UserDTO>
+﻿@model List<NewsAPI.DTOs.UserRoleOutDTO>
 @{
     ViewData["Title"] = "User List";
 }
@@ -193,29 +193,30 @@
                                                 </td>
                                                 <td>
                                                     <div class="flex flex-wrap gap-2.5 mb-2">
-                                                        <span class="badge badge-sm badge-light badge-outline">
-                                                            Chat
-                                                        </span>
-                                                        <span class="badge badge-sm badge-light badge-outline">
-                                                            Tester
-                                                        </span>
+                                                        @foreach(var role in user.Roles)
+                                                        {
+                                                            <span class="badge badge-sm badge-light badge-outline">
+                                                                @role
+                                                            </span>
+                                                        }
+                                                        
                                                     </div>
                                                 </td>
                                                 <td>
                                                     <div class="flex items-center gap-1.5">
-                                                        <img alt="flag" class="h-4 rounded-full" src="images/malaysia.svg">
+                                                        @* <img alt="flag" class="h-4 rounded-full"> *@
                                                         <span class="leading-none text-gray-800 font-normal">
-                                                            Malaysia
+                                                            @user.Email
                                                         </span>
                                                     </div>
                                                 </td>
                                                 <td>
                                                     <span class="badge badge-sm badge-outline badge-warning">
-                                                        Pending
+                                                        @(user.IsAuthor ? "Active" : "Inactive")
                                                     </span>
                                                 </td>
                                                 <td class="text-gray-800 font-normal">
-                                                    -
+                                                    @(user.Status == 1 ? "Active" : "Inactive")
                                                 </td>
                                                 <td class="w-[60px]">
                                                     <div class="menu" data-menu="true">

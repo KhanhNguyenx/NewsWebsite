@@ -29,7 +29,7 @@ namespace NewsWebsite.Areas.Admin.Controllers
                 var res = await _callApi.GetAsync(@"Users/GetList", _accessToken);
                 if (res.success && res.data != null)
                 {
-                    var resList = res.data!.ToObject<List<UserDTO>>();
+                    var resList = res.data!.ToObject<List<UserRoleOutDTO>>();
                     return View(resList);
                 }
             }

@@ -92,7 +92,7 @@
                     <div class="collapse navbar-collapse" id="navbarCollapse">
                         <ul class="navbar-nav mr-auto" id="categories-menu">
                             <li class="nav-item">
-                                <a class="nav-link" href="@Url.Action("Index", "Home" )">Home</a>
+                                <a class="nav-link" href="Home/Index">Home</a>
                             </li>
                         </ul>
                     </div>
@@ -129,18 +129,23 @@
                                 <div class="border-t my-2"></div>
                                 @if (User.IsInRole("Admin"))
                                 {
-                                    <a class="nav-link" href="@Url.Action(" Index", "Admin" )">
+                                    <a class="nav-link" href="Admin/Index">
                                         <i class="fa fa-cogs"></i> Admin Setting
                                     </a>
                                 }
                                 <a class="block px-4 py-2 text-sm" href="Author/Profile">Settings</a>
                                 <div class="border-t my-2"></div>
-                                <a class="block px-4 py-2 text-sm text-red-600" href="@Url.Action(" Logout", "Author" )">Log Out</a>
+                                <a class="block px-4 py-2 text-sm text-red-600" href="Author/Logout">Log Out</a>
                             </div>
                         }
                         else
                         {
-                            <a class="nav-link" href="@Url.Action(" Login", "Author" )">Login</a>
+                            <div style="display: flex; align-items: center;">
+                                <a class="nav-link" href="Author/Register">Register</a>
+                                <span> / </span>
+                                <a class="nav-link" href="Author/Login">Login</a>
+                            </div>
+
                         }
                     </div>
                 </nav>

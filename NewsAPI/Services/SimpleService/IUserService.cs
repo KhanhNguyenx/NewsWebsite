@@ -2,6 +2,7 @@
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using NewsAPI.Data;
+using NewsAPI.DTOs;
 using NewsAPI.Models;
 using System;
 using System.IdentityModel.Tokens.Jwt;
@@ -13,6 +14,7 @@ namespace NewsAPI.Services.SimpleService
 {
     public interface IUserService :IService<User>
     {
+        Task<IEnumerable<UserRoleOutDTO>> GetListAsync();
         Task<User> GetAccountByUsernameAsync(string username);
         Task<string> GenerateAccessTokenAsync(User account);
         Task<bool> VerifyPasswordAsync(User account, string password);
@@ -39,9 +41,25 @@ namespace NewsAPI.Services.SimpleService
             }
         }
 
-        public async Task<IEnumerable<User>> GetListAsync()
+        public async Task<IEnumerable<UserRoleOutDTO>> GetListAsync()
         {
-            return await _dbConTect.Users.ToListAsync();
+            var usersWithRoles = await _dbConTect.Users
+        .Select(user => new UserRoleOutDTO
+        {
+            Id = user.Id,
+            Username = user.Username,
+            PasswordHash =user.PasswordHash,
+            Email = user.Email,
+            FullName = user.FullName,
+            Roles = user.RoleUsers
+                      .Select(ru => ru.Role.Name)
+                      .ToList(),
+            IsAuthor = user.IsAuthor,
+            Status =user.Status,
+            Notes=user.Notes
+        }).ToListAsync();
+
+            return usersWithRoles;
         }
 
         public async Task<IEnumerable<User>> SearchAsync(Expression<Func<User, bool>> expression, bool useDTO = true)

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using NewsAPI.Models;
+using System;
 using System.Collections.Generic;
 
 namespace NewsAPI.DTOs;

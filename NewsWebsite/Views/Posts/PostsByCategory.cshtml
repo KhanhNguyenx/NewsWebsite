@@ -81,7 +81,7 @@
                                                 <div class="post-media">
                                                     <a href="@Url.Action("Details", "Posts", new { slug = post.Slug })" title="">
                                                         @post.Title
-                                                        <img src="@imageUrl" alt="@post.Title" class="img-fluid">
+                                                        <img src="../@ImageHelper.GetImageUrl(post.Id, imageList)" alt="" class="img-fluid">
                                                         <div class="hovereffect"></div>
                                                     </a>
                                                 </div><!-- end media -->

@@ -119,6 +119,27 @@
                 .forgot-password a:hover {
                     text-decoration: underline;
                 }
+
+        input[type="email"], input[type="text"], input[type="password"] {
+            width: 90%;
+            padding: 10px;
+            border: 1px solid #d1d5db;
+            border-radius: 5px;
+            font-size: 14px;
+            outline: none;
+            transition: border-color 0.3s ease;
+        }
+
+            input[type="email"]:focus, input[type="text"]:focus, input[type="password"]:focus {
+                border-color: #2563eb;
+                box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.3);
+            }
+
+        .input[type="email"] {
+            width: 90% !important; /* Dùng !important để ưu tiên */
+            padding: 10px !important;
+        }
+
     </style>
 </head>
 <body>
@@ -135,9 +156,13 @@
             <br />
             <div class="mb-4">
                 <label asp-for="@Model.Email">Gmail</label>
-                <input asp-for="@Model.Email" class="input w-full border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-blue-500 focus:border-blue-500" placeholder="Nhập gmail">
+                <input asp-for="@Model.Email"
+                       type="email"
+                       class="input w-full border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                       placeholder="Nhập Gmail">
                 <span asp-validation-for="@Model.Email" class="text-danger mt-1 text-sm"></span>
             </div>
+
             <br />
             <!-- Mật khẩu -->
             <div class="mb-4 relative">
@@ -148,23 +173,23 @@
                            id="passwordInput"
                            class="input w-full border border-gray-300 rounded-lg px-4 py-2 pr-12 focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                            placeholder="Nhập mật khẩu">
-                    <button type="button" id="togglePassword" class="absolute inset-y-0 right-0 flex items-center justify-center px-3">
-                        <span id="passwordIcon">👁️</span>
+                    <button type="button" id="togglePassword1" class="absolute inset-y-0 right-0 flex items-center justify-center px-3">
+                        <span id="passwordIcon1">👁️</span>
                     </button>
                 </div>
                 <span asp-validation-for="@Model.Password" class="text-danger mt-1 text-sm"></span>
             </div>
             <br />
             <div class="mb-4 relative">
-                <label asp-for="@Model.ConfirmPassword">Mật khẩu</label>
+                <label asp-for="@Model.ConfirmPassword">Nhập lại mật khẩu</label>
                 <div class="relative">
                     <input asp-for="@Model.ConfirmPassword"
                            type="password"
-                           id="passwordInput"
+                           id="confirmPasswordInput"
                            class="input w-full border border-gray-300 rounded-lg px-4 py-2 pr-12 focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-                           placeholder="Nhập mật khẩu">
-                    <button type="button" id="togglePassword" class="absolute inset-y-0 right-0 flex items-center justify-center px-3">
-                        <span id="passwordIcon">👁️</span>
+                           placeholder="Nhập lại mật khẩu">
+                    <button type="button" id="togglePassword2" class="absolute inset-y-0 right-0 flex items-center justify-center px-3">
+                        <span id="passwordIcon2">👁️</span>
                     </button>
                 </div>
                 <span asp-validation-for="@Model.ConfirmPassword" class="text-danger mt-1 text-sm"></span>
@@ -181,15 +206,28 @@
      
 
     <script>
-        const togglePassword = document.getElementById('togglePassword');
+        // Xử lý hiển thị mật khẩu cho trường "Mật khẩu"
+        const togglePassword1 = document.getElementById('togglePassword1');
         const passwordInput = document.getElementById('passwordInput');
-        const passwordIcon = document.getElementById('passwordIcon');
+        const passwordIcon1 = document.getElementById('passwordIcon1');
 
-        togglePassword.addEventListener('click', () => {
+        togglePassword1.addEventListener('click', () => {
             const isPassword = passwordInput.type === 'password';
             passwordInput.type = isPassword ? 'text' : 'password';
-            passwordIcon.textContent = isPassword ? '🙈' : '👁️'; // Đổi icon
+            passwordIcon1.textContent = isPassword ? '🙈' : '👁️';
         });
+
+        // Xử lý hiển thị mật khẩu cho trường "Nhập lại mật khẩu"
+        const togglePassword2 = document.getElementById('togglePassword2');
+        const confirmPasswordInput = document.getElementById('confirmPasswordInput');
+        const passwordIcon2 = document.getElementById('passwordIcon2');
+
+        togglePassword2.addEventListener('click', () => {
+            const isPassword = confirmPasswordInput.type === 'password';
+            confirmPasswordInput.type = isPassword ? 'text' : 'password';
+            passwordIcon2.textContent = isPassword ? '🙈' : '👁️';
+        });
+
     </script>
 </body>
 </html>

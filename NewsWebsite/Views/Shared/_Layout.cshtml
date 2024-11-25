@@ -78,6 +78,48 @@
                 object-fit: cover;
                 display: block;
             }
+
+        .search-container {
+            position: relative;
+            width: 300px; /* Độ rộng của khung tìm kiếm */
+            margin: 20px auto; /* Căn giữa */
+        }
+
+        #search-box {
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+
+        .search-results {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            width: 100%;
+            max-height: 200px; /* Giới hạn chiều cao */
+            overflow-y: auto; /* Thêm scroll nếu vượt quá */
+            background: white;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            display: none; /* Ẩn mặc định */
+            z-index: 1000;
+        }
+
+        .search-result-item {
+            padding: 10px;
+            cursor: pointer;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+            .search-result-item:hover {
+                background-color: #f0f0f0;
+            }
+
+
     </style>
 </head>
 <body>
@@ -117,14 +159,11 @@
                     </li>
                     }
                     </ul> *@
-                    <div style="margin-right: 10px;">
-                        <input type="text"
-                               id="search-input"
-                               class="form-control"
-                               placeholder="Search posts by title"
-                               style="width: 400px;" />
-                        <button id="search-btn" class="btn btn-primary ml-2">Search</button>
+                    <div class="search-container">
+                        <input type="text" id="search-box" placeholder="Tìm kiếm..." oninput="searchFunction()" />
+                        <div class="search-results" id="results-box"></div>
                     </div>
+
 
                     <div id="search-results"></div>
                     <div class="relative">
@@ -284,38 +323,29 @@
     <script src="~/js/bootstrap.min.js"></script>
     <script src="~/js/custom.js"></script>
     <script>
-        $(document).ready(function () {
-            // Xử lý khi người dùng nhấn nút "Search"
-            $('#search-btn').click(function () {
-                const query = $('#search-input').val().trim();
+        function searchFunction() {
+            const searchBox = document.getElementById("search-box");
+            const resultsBox = document.getElementById("results-box");
 
-                if (!query) {
-                    alert("Please enter a search query.");
-                    return;
+            const query = searchBox.value.trim();
+            if (query) {
+                // Giả sử kết quả tìm kiếm được tạo động
+                const results = ["Kết quả 1", "Kết quả 2", "Kết quả 3", "Kết quả 4"]
+                    .filter(item => item.toLowerCase().includes(query.toLowerCase()));
+
+                if (results.length > 0) {
+                    resultsBox.innerHTML = results
+                        .map(item => `<div class="search-result-item">${item}</div>`)
+                        .join("");
+                    resultsBox.style.display = "block";
+                } else {
+                    resultsBox.innerHTML = `<div class="search-result-item">Không có kết quả</div>`;
+                    resultsBox.style.display = "block";
                 }
-
-                // Gọi AJAX để lấy kết quả tìm kiếm
-                $.ajax({
-                    url: `/Posts/Search?query=${encodeURIComponent(query)}`, // Đường dẫn đến action xử lý tìm kiếm
-                    method: 'GET',
-                    success: function (data) {
-                        // Hiển thị kết quả trong phần tử #search-results
-                        $('#search-results').html(data);
-                    },
-                    error: function (xhr, status, error) {
-                        console.error('Error occurred while searching:', error);
-                        $('#search-results').html('<p>Error occurred while searching. Please try again.</p>');
-                    }
-                });
-            });
-
-            // Tìm kiếm khi nhấn Enter
-            $('#search-input').keypress(function (e) {
-                if (e.which === 13) { // 13 là mã phím Enter
-                    $('#search-btn').click();
-                }
-            });
-        });
+            } else {
+                resultsBox.style.display = "none";
+            }
+        }
 
     </script>
 </body>

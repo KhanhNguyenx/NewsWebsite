@@ -76,7 +76,7 @@
         <!-- Sidebar -->
         <div class="sidebar dark:bg-coal-600 bg-light border-r border-r-gray-200 dark:border-r-coal-100 fixed top-0 bottom-0 z-20 hidden lg:flex flex-col items-stretch shrink-0" data-drawer="true" data-drawer-class="drawer drawer-start top-0 bottom-0" data-drawer-enable="true|lg:false" id="sidebar">
             <div class="sidebar-header hidden lg:flex items-center relative justify-between px-3 lg:px-6 shrink-0" id="sidebar_header">
-                <a class="dark:hidden" href="~/adminAsset/metronic/tailwind/demo1/">
+                <a class="dark:hidden" href="">
                     <img class="default-logo min-h-[22px] max-w-none" src="~/adminAsset/images/default-logo.svg">
                     <img class="small-logo min-h-[22px] max-w-none" src="~/adminAsset/images/mini-logo.svg">
                 </a>
@@ -87,8 +87,21 @@
             </div>
             <div class="sidebar-content flex grow shrink-0 py-5 pr-2" id="sidebar_content">
                 <div class="scrollable-y-hover grow shrink-0 flex pl-2 lg:pl-5 pr-1 lg:pr-3" data-scrollable="true" data-scrollable-dependencies="#sidebar_header" data-scrollable-height="auto" data-scrollable-offset="0px" data-scrollable-wrappers="#sidebar_content" id="sidebar_scrollable">
+                   
                     <!-- Sidebar Menu -->
                     <div class="menu flex flex-col grow gap-0.5" data-menu="true" data-menu-accordion-expand-all="false" id="sidebar_menu">
+                         <div class="" data-menu-item-toggle="accordion" data-menu-item-trigger="click">
+                        <div class="menu-link flex items-center grow cursor-pointer  gap-[10px] pl-[10px] pr-[10px] py-[6px]" tabindex="0">
+                            <span class="menu-icon items-start text-gray-500 dark:text-gray-400 w-[20px]">
+                                <i class="ki-filled ki-home text-lg">
+                                </i>
+                            </span>
+                                <span class="menu-title text-sm font-medium text-gray-800 menu-item-active:text-primary menu-link-hover:!text-primary" onclick="window.location.href='https://localhost:7038/'">
+                                Home 
+                            </span>
+
+                        </div>
+                    </div>
                         <div class="menu-item here show" data-menu-item-toggle="accordion" data-menu-item-trigger="click">
                         </div>
                         <div class="menu-item pt-2.25 pb-px">
@@ -360,7 +373,7 @@
                                     <i class="ki-filled ki-pencil text-lg">
                                     </i>
                                 </span>
-                                <span class="menu-title text-sm font-medium text-gray-800 menu-item-active:text-primary menu-link-hover:!text-primary" href="@Url.Action("Index", "Post")">
+                                <span class="menu-title text-sm font-medium text-gray-800 menu-item-active:text-primary menu-link-hover:!text-primary" onclick="window.location.href='Post'">
                                     Post
                                 </span>
                                
@@ -372,187 +385,12 @@
                                     <i class="ki-filled ki-book-square text-lg">
                                     </i>
                                 </span>
-                                <span class="menu-title text-sm font-medium text-gray-800 menu-item-active:text-primary menu-link-hover:!text-primary">
+                                <span class="menu-title text-sm font-medium text-gray-800 menu-item-active:text-primary menu-link-hover:!text-primary" onclick="window.location.href='Category'">
                                     Category
                                 </span>
                                 
                             </div>
-                            <div class="menu-accordion gap-0.5 pl-[10px] relative before:absolute before:left-[20px] before:top-0 before:bottom-0 before:border-l before:border-gray-200">
-                                <div class="menu-item">
-                                    <a class="menu-link border border-transparent items-center grow menu-item-active:bg-secondary-active dark:menu-item-active:bg-coal-300 dark:menu-item-active:border-gray-100 menu-item-active:rounded-lg hover:bg-secondary-active dark:hover:bg-coal-300 dark:hover:border-gray-100 hover:rounded-lg gap-[14px] pl-[10px] pr-[10px] py-[8px]" href="/metronic/tailwind/demo1/network/get-started" tabindex="0">
-                                        <span class="menu-bullet flex w-[6px] relative before:absolute before:top-0 before:size-[6px] before:rounded-full before:-translate-x-1/2 before:-translate-y-1/2 menu-item-active:before:bg-primary menu-item-hover:before:bg-primary">
-                                        </span>
-                                        <span class="menu-title text-2sm font-normal text-gray-800 menu-item-active:text-primary menu-item-active:font-semibold menu-link-hover:!text-primary">
-                                            Get Started
-                                        </span>
-                                    </a>
-                                </div>
-                                <div class="menu-item" data-menu-item-toggle="accordion" data-menu-item-trigger="click">
-                                    <div class="menu-link border border-transparent grow cursor-pointer gap-[14px] pl-[10px] pr-[10px] py-[8px]" tabindex="0">
-                                        <span class="menu-bullet flex w-[6px] relative before:absolute before:top-0 before:size-[6px] before:rounded-full before:-translate-x-1/2 before:-translate-y-1/2 menu-item-active:before:bg-primary menu-item-hover:before:bg-primary">
-                                        </span>
-                                        <span class="menu-title text-2sm font-normal mr-1 text-gray-800 menu-item-active:text-primary menu-item-active:font-medium menu-link-hover:!text-primary">
-                                            User Cards
-                                        </span>
-                                        
-                                    </div>
-                                    <div class="menu-accordion gap-0.5 relative before:absolute before:left-[32px] pl-[22px] before:top-0 before:bottom-0 before:border-l before:border-gray-200">
-                                        <div class="menu-item">
-                                            <a class="menu-link border border-transparent items-center grow menu-item-active:bg-secondary-active dark:menu-item-active:bg-coal-300 dark:menu-item-active:border-gray-100 menu-item-active:rounded-lg hover:bg-secondary-active dark:hover:bg-coal-300 dark:hover:border-gray-100 hover:rounded-lg gap-[5px] pl-[10px] pr-[10px] py-[8px]" href="/metronic/tailwind/demo1/network/user-cards/mini-cards" tabindex="0">
-                                                <span class="menu-bullet flex w-[6px] relative before:absolute before:top-0 before:size-[6px] before:rounded-full before:-translate-x-1/2 before:-translate-y-1/2 menu-item-active:before:bg-primary menu-item-hover:before:bg-primary">
-                                                </span>
-                                                <span class="menu-title text-2sm font-normal text-gray-800 menu-item-active:text-primary menu-item-active:font-semibold menu-link-hover:!text-primary">
-                                                    Mini Cards
-                                                </span>
-                                            </a>
-                                        </div>
-                                        <div class="menu-item">
-                                            <a class="menu-link border border-transparent items-center grow menu-item-active:bg-secondary-active dark:menu-item-active:bg-coal-300 dark:menu-item-active:border-gray-100 menu-item-active:rounded-lg hover:bg-secondary-active dark:hover:bg-coal-300 dark:hover:border-gray-100 hover:rounded-lg gap-[5px] pl-[10px] pr-[10px] py-[8px]" href="/metronic/tailwind/demo1/network/user-cards/team-crew" tabindex="0">
-                                                <span class="menu-bullet flex w-[6px] relative before:absolute before:top-0 before:size-[6px] before:rounded-full before:-translate-x-1/2 before:-translate-y-1/2 menu-item-active:before:bg-primary menu-item-hover:before:bg-primary">
-                                                </span>
-                                                <span class="menu-title text-2sm font-normal text-gray-800 menu-item-active:text-primary menu-item-active:font-semibold menu-link-hover:!text-primary">
-                                                    Team Crew
-                                                </span>
-                                            </a>
-                                        </div>
-                                        <div class="menu-item">
-                                            <a class="menu-link border border-transparent items-center grow menu-item-active:bg-secondary-active dark:menu-item-active:bg-coal-300 dark:menu-item-active:border-gray-100 menu-item-active:rounded-lg hover:bg-secondary-active dark:hover:bg-coal-300 dark:hover:border-gray-100 hover:rounded-lg gap-[5px] pl-[10px] pr-[10px] py-[8px]" href="/metronic/tailwind/demo1/network/user-cards/author" tabindex="0">
-                                                <span class="menu-bullet flex w-[6px] relative before:absolute before:top-0 before:size-[6px] before:rounded-full before:-translate-x-1/2 before:-translate-y-1/2 menu-item-active:before:bg-primary menu-item-hover:before:bg-primary">
-                                                </span>
-                                                <span class="menu-title text-2sm font-normal text-gray-800 menu-item-active:text-primary menu-item-active:font-semibold menu-link-hover:!text-primary">
-                                                    Author
-                                                </span>
-                                            </a>
-                                        </div>
-                                        <div class="menu-item">
-                                            <a class="menu-link border border-transparent items-center grow menu-item-active:bg-secondary-active dark:menu-item-active:bg-coal-300 dark:menu-item-active:border-gray-100 menu-item-active:rounded-lg hover:bg-secondary-active dark:hover:bg-coal-300 dark:hover:border-gray-100 hover:rounded-lg gap-[5px] pl-[10px] pr-[10px] py-[8px]" href="/metronic/tailwind/demo1/network/user-cards/nft" tabindex="0">
-                                                <span class="menu-bullet flex w-[6px] relative before:absolute before:top-0 before:size-[6px] before:rounded-full before:-translate-x-1/2 before:-translate-y-1/2 menu-item-active:before:bg-primary menu-item-hover:before:bg-primary">
-                                                </span>
-                                                <span class="menu-title text-2sm font-normal text-gray-800 menu-item-active:text-primary menu-item-active:font-semibold menu-link-hover:!text-primary">
-                                                    NFT
-                                                </span>
-                                            </a>
-                                        </div>
-                                        <div class="menu-item">
-                                            <a class="menu-link border border-transparent items-center grow menu-item-active:bg-secondary-active dark:menu-item-active:bg-coal-300 dark:menu-item-active:border-gray-100 menu-item-active:rounded-lg hover:bg-secondary-active dark:hover:bg-coal-300 dark:hover:border-gray-100 hover:rounded-lg gap-[5px] pl-[10px] pr-[10px] py-[8px]" href="/metronic/tailwind/demo1/network/user-cards/social" tabindex="0">
-                                                <span class="menu-bullet flex w-[6px] relative before:absolute before:top-0 before:size-[6px] before:rounded-full before:-translate-x-1/2 before:-translate-y-1/2 menu-item-active:before:bg-primary menu-item-hover:before:bg-primary">
-                                                </span>
-                                                <span class="menu-title text-2sm font-normal text-gray-800 menu-item-active:text-primary menu-item-active:font-semibold menu-link-hover:!text-primary">
-                                                    Social
-                                                </span>
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="menu-item" data-menu-item-toggle="accordion" data-menu-item-trigger="click">
-                                    <div class="menu-link border border-transparent grow cursor-pointer gap-[14px] pl-[10px] pr-[10px] py-[8px]" tabindex="0">
-                                        <span class="menu-bullet flex w-[6px] relative before:absolute before:top-0 before:size-[6px] before:rounded-full before:-translate-x-1/2 before:-translate-y-1/2 menu-item-active:before:bg-primary menu-item-hover:before:bg-primary">
-                                        </span>
-                                        <span class="menu-title text-2sm font-normal mr-1 text-gray-800 menu-item-active:text-primary menu-item-active:font-medium menu-link-hover:!text-primary">
-                                            User Table
-                                        </span>
-                                       
-                                    </div>
-                                    <div class="menu-accordion gap-0.5 relative before:absolute before:left-[32px] pl-[22px] before:top-0 before:bottom-0 before:border-l before:border-gray-200">
-                                        <div class="menu-item">
-                                            <a class="menu-link border border-transparent items-center grow menu-item-active:bg-secondary-active dark:menu-item-active:bg-coal-300 dark:menu-item-active:border-gray-100 menu-item-active:rounded-lg hover:bg-secondary-active dark:hover:bg-coal-300 dark:hover:border-gray-100 hover:rounded-lg gap-[5px] pl-[10px] pr-[10px] py-[8px]" href="/metronic/tailwind/demo1/network/user-table/team-crew" tabindex="0">
-                                                <span class="menu-bullet flex w-[6px] relative before:absolute before:top-0 before:size-[6px] before:rounded-full before:-translate-x-1/2 before:-translate-y-1/2 menu-item-active:before:bg-primary menu-item-hover:before:bg-primary">
-                                                </span>
-                                                <span class="menu-title text-2sm font-normal text-gray-800 menu-item-active:text-primary menu-item-active:font-semibold menu-link-hover:!text-primary">
-                                                    Team Crew
-                                                </span>
-                                            </a>
-                                        </div>
-                                        <div class="menu-item">
-                                            <a class="menu-link border border-transparent items-center grow menu-item-active:bg-secondary-active dark:menu-item-active:bg-coal-300 dark:menu-item-active:border-gray-100 menu-item-active:rounded-lg hover:bg-secondary-active dark:hover:bg-coal-300 dark:hover:border-gray-100 hover:rounded-lg gap-[5px] pl-[10px] pr-[10px] py-[8px]" href="/metronic/tailwind/demo1/network/user-table/app-roster" tabindex="0">
-                                                <span class="menu-bullet flex w-[6px] relative before:absolute before:top-0 before:size-[6px] before:rounded-full before:-translate-x-1/2 before:-translate-y-1/2 menu-item-active:before:bg-primary menu-item-hover:before:bg-primary">
-                                                </span>
-                                                <span class="menu-title text-2sm font-normal text-gray-800 menu-item-active:text-primary menu-item-active:font-semibold menu-link-hover:!text-primary">
-                                                    App Roster
-                                                </span>
-                                            </a>
-                                        </div>
-                                        <div class="menu-item">
-                                            <a class="menu-link border border-transparent items-center grow menu-item-active:bg-secondary-active dark:menu-item-active:bg-coal-300 dark:menu-item-active:border-gray-100 menu-item-active:rounded-lg hover:bg-secondary-active dark:hover:bg-coal-300 dark:hover:border-gray-100 hover:rounded-lg gap-[5px] pl-[10px] pr-[10px] py-[8px]" href="/metronic/tailwind/demo1/network/user-table/market-authors" tabindex="0">
-                                                <span class="menu-bullet flex w-[6px] relative before:absolute before:top-0 before:size-[6px] before:rounded-full before:-translate-x-1/2 before:-translate-y-1/2 menu-item-active:before:bg-primary menu-item-hover:before:bg-primary">
-                                                </span>
-                                                <span class="menu-title text-2sm font-normal text-gray-800 menu-item-active:text-primary menu-item-active:font-semibold menu-link-hover:!text-primary">
-                                                    Market Authors
-                                                </span>
-                                            </a>
-                                        </div>
-                                        <div class="menu-item">
-                                            <a class="menu-link border border-transparent items-center grow menu-item-active:bg-secondary-active dark:menu-item-active:bg-coal-300 dark:menu-item-active:border-gray-100 menu-item-active:rounded-lg hover:bg-secondary-active dark:hover:bg-coal-300 dark:hover:border-gray-100 hover:rounded-lg gap-[5px] pl-[10px] pr-[10px] py-[8px]" href="/metronic/tailwind/demo1/network/user-table/saas-users" tabindex="0">
-                                                <span class="menu-bullet flex w-[6px] relative before:absolute before:top-0 before:size-[6px] before:rounded-full before:-translate-x-1/2 before:-translate-y-1/2 menu-item-active:before:bg-primary menu-item-hover:before:bg-primary">
-                                                </span>
-                                                <span class="menu-title text-2sm font-normal text-gray-800 menu-item-active:text-primary menu-item-active:font-semibold menu-link-hover:!text-primary">
-                                                    SaaS Users
-                                                </span>
-                                            </a>
-                                        </div>
-                                        <div class="menu-item">
-                                            <a class="menu-link border border-transparent items-center grow menu-item-active:bg-secondary-active dark:menu-item-active:bg-coal-300 dark:menu-item-active:border-gray-100 menu-item-active:rounded-lg hover:bg-secondary-active dark:hover:bg-coal-300 dark:hover:border-gray-100 hover:rounded-lg gap-[5px] pl-[10px] pr-[10px] py-[8px]" href="/metronic/tailwind/demo1/network/user-table/store-clients" tabindex="0">
-                                                <span class="menu-bullet flex w-[6px] relative before:absolute before:top-0 before:size-[6px] before:rounded-full before:-translate-x-1/2 before:-translate-y-1/2 menu-item-active:before:bg-primary menu-item-hover:before:bg-primary">
-                                                </span>
-                                                <span class="menu-title text-2sm font-normal text-gray-800 menu-item-active:text-primary menu-item-active:font-semibold menu-link-hover:!text-primary">
-                                                    Store Clients
-                                                </span>
-                                            </a>
-                                        </div>
-                                        <div class="menu-item">
-                                            <a class="menu-link border border-transparent items-center grow menu-item-active:bg-secondary-active dark:menu-item-active:bg-coal-300 dark:menu-item-active:border-gray-100 menu-item-active:rounded-lg hover:bg-secondary-active dark:hover:bg-coal-300 dark:hover:border-gray-100 hover:rounded-lg gap-[5px] pl-[10px] pr-[10px] py-[8px]" href="/metronic/tailwind/demo1/network/user-table/visitors" tabindex="0">
-                                                <span class="menu-bullet flex w-[6px] relative before:absolute before:top-0 before:size-[6px] before:rounded-full before:-translate-x-1/2 before:-translate-y-1/2 menu-item-active:before:bg-primary menu-item-hover:before:bg-primary">
-                                                </span>
-                                                <span class="menu-title text-2sm font-normal text-gray-800 menu-item-active:text-primary menu-item-active:font-semibold menu-link-hover:!text-primary">
-                                                    Visitors
-                                                </span>
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="menu-item">
-                                    <div class="menu-label border border-transparent items-center grow gap-[14px] pl-[10px] pr-[10px] py-[8px]" href="#" tabindex="0">
-                                        <span class="menu-bullet flex w-[6px] relative before:absolute before:top-0 before:size-[6px] before:rounded-full before:-translate-x-1/2 before:-translate-y-1/2 menu-item-active:before:bg-primary menu-item-hover:before:bg-primary">
-                                        </span>
-                                        <span class="menu-title text-2sm font-normal text-gray-800">
-                                            Cooperations
-                                        </span>
-                                        <span class="menu-badge mr-[-10px]">
-                                            <span class="badge badge-xs">
-                                                Soon
-                                            </span>
-                                        </span>
-                                    </div>
-                                </div>
-                                <div class="menu-item">
-                                    <div class="menu-label border border-transparent items-center grow gap-[14px] pl-[10px] pr-[10px] py-[8px]" href="#" tabindex="0">
-                                        <span class="menu-bullet flex w-[6px] relative before:absolute before:top-0 before:size-[6px] before:rounded-full before:-translate-x-1/2 before:-translate-y-1/2 menu-item-active:before:bg-primary menu-item-hover:before:bg-primary">
-                                        </span>
-                                        <span class="menu-title text-2sm font-normal text-gray-800">
-                                            Leads
-                                        </span>
-                                        <span class="menu-badge mr-[-10px]">
-                                            <span class="badge badge-xs">
-                                                Soon
-                                            </span>
-                                        </span>
-                                    </div>
-                                </div>
-                                <div class="menu-item">
-                                    <div class="menu-label border border-transparent items-center grow gap-[14px] pl-[10px] pr-[10px] py-[8px]" href="#" tabindex="0">
-                                        <span class="menu-bullet flex w-[6px] relative before:absolute before:top-0 before:size-[6px] before:rounded-full before:-translate-x-1/2 before:-translate-y-1/2 menu-item-active:before:bg-primary menu-item-hover:before:bg-primary">
-                                        </span>
-                                        <span class="menu-title text-2sm font-normal text-gray-800">
-                                            Donators
-                                        </span>
-                                        <span class="menu-badge mr-[-10px]">
-                                            <span class="badge badge-xs">
-                                                Soon
-                                            </span>
-                                        </span>
-                                    </div>
-                                </div>
-                            </div>
+                         
                         </div>
                         <div class="" data-menu-item-toggle="accordion" data-menu-item-trigger="click">
                             <div class="menu-link flex items-center grow cursor-pointer  gap-[10px] pl-[10px] pr-[10px] py-[6px]" tabindex="0">
@@ -560,283 +398,32 @@
                                     <i class="ki-filled ki-notepad text-lg">
                                     </i>
                                 </span>
-                                <span class="menu-title text-sm font-medium text-gray-800 menu-item-active:text-primary menu-link-hover:!text-primary">
+                                <span class="menu-title text-sm font-medium text-gray-800 menu-item-active:text-primary menu-link-hover:!text-primary" onclick="window.location.href='LogDetail'">
                                     Logs
                                 </span>
                                 
                             </div>
-                            <div class="menu-accordion gap-0.5 pl-[10px] relative before:absolute before:left-[20px] before:top-0 before:bottom-0 before:border-l before:border-gray-200">
-                                <div class="menu-item" data-menu-item-toggle="accordion" data-menu-item-trigger="click">
-                                    <div class="menu-link border border-transparent grow cursor-pointer gap-[14px] pl-[10px] pr-[10px] py-[8px]" tabindex="0">
-                                        <span class="menu-bullet flex w-[6px] relative before:absolute before:top-0 before:size-[6px] before:rounded-full before:-translate-x-1/2 before:-translate-y-1/2 menu-item-active:before:bg-primary menu-item-hover:before:bg-primary">
-                                        </span>
-                                        <span class="menu-title text-2sm font-normal mr-1 text-gray-800 menu-item-active:text-primary menu-item-active:font-medium menu-link-hover:!text-primary">
-                                            Classic
-                                        </span>
-                                        <span class="menu-arrow text-gray-400 w-[20px] shrink-0 justify-end ml-1 mr-[-10px]">
-                                            <i class="ki-filled ki-plus text-2xs menu-item-show:hidden">
-                                            </i>
-                                            <i class="ki-filled ki-minus text-2xs hidden menu-item-show:inline-flex">
-                                            </i>
-                                        </span>
-                                    </div>
-                                    <div class="menu-accordion gap-0.5 relative before:absolute before:left-[32px] pl-[22px] before:top-0 before:bottom-0 before:border-l before:border-gray-200">
-                                        <div class="menu-item">
-                                            <a class="menu-link border border-transparent items-center grow menu-item-active:bg-secondary-active dark:menu-item-active:bg-coal-300 dark:menu-item-active:border-gray-100 menu-item-active:rounded-lg hover:bg-secondary-active dark:hover:bg-coal-300 dark:hover:border-gray-100 hover:rounded-lg gap-[5px] pl-[10px] pr-[10px] py-[8px]" href="/metronic/tailwind/demo1/authentication/classic/sign-in" tabindex="0">
-                                                <span class="menu-bullet flex w-[6px] relative before:absolute before:top-0 before:size-[6px] before:rounded-full before:-translate-x-1/2 before:-translate-y-1/2 menu-item-active:before:bg-primary menu-item-hover:before:bg-primary">
-                                                </span>
-                                                <span class="menu-title text-2sm font-normal text-gray-800 menu-item-active:text-primary menu-item-active:font-semibold menu-link-hover:!text-primary">
-                                                    Sign In
-                                                </span>
-                                            </a>
-                                        </div>
-                                        <div class="menu-item">
-                                            <a class="menu-link border border-transparent items-center grow menu-item-active:bg-secondary-active dark:menu-item-active:bg-coal-300 dark:menu-item-active:border-gray-100 menu-item-active:rounded-lg hover:bg-secondary-active dark:hover:bg-coal-300 dark:hover:border-gray-100 hover:rounded-lg gap-[5px] pl-[10px] pr-[10px] py-[8px]" href="/metronic/tailwind/demo1/authentication/classic/sign-up" tabindex="0">
-                                                <span class="menu-bullet flex w-[6px] relative before:absolute before:top-0 before:size-[6px] before:rounded-full before:-translate-x-1/2 before:-translate-y-1/2 menu-item-active:before:bg-primary menu-item-hover:before:bg-primary">
-                                                </span>
-                                                <span class="menu-title text-2sm font-normal text-gray-800 menu-item-active:text-primary menu-item-active:font-semibold menu-link-hover:!text-primary">
-                                                    Sign Up
-                                                </span>
-                                            </a>
-                                        </div>
-                                        <div class="menu-item">
-                                            <a class="menu-link border border-transparent items-center grow menu-item-active:bg-secondary-active dark:menu-item-active:bg-coal-300 dark:menu-item-active:border-gray-100 menu-item-active:rounded-lg hover:bg-secondary-active dark:hover:bg-coal-300 dark:hover:border-gray-100 hover:rounded-lg gap-[5px] pl-[10px] pr-[10px] py-[8px]" href="/metronic/tailwind/demo1/authentication/classic/2fa" tabindex="0">
-                                                <span class="menu-bullet flex w-[6px] relative before:absolute before:top-0 before:size-[6px] before:rounded-full before:-translate-x-1/2 before:-translate-y-1/2 menu-item-active:before:bg-primary menu-item-hover:before:bg-primary">
-                                                </span>
-                                                <span class="menu-title text-2sm font-normal text-gray-800 menu-item-active:text-primary menu-item-active:font-semibold menu-link-hover:!text-primary">
-                                                    2FA
-                                                </span>
-                                            </a>
-                                        </div>
-                                        <div class="menu-item">
-                                            <a class="menu-link border border-transparent items-center grow menu-item-active:bg-secondary-active dark:menu-item-active:bg-coal-300 dark:menu-item-active:border-gray-100 menu-item-active:rounded-lg hover:bg-secondary-active dark:hover:bg-coal-300 dark:hover:border-gray-100 hover:rounded-lg gap-[5px] pl-[10px] pr-[10px] py-[8px]" href="/metronic/tailwind/demo1/authentication/classic/check-email" tabindex="0">
-                                                <span class="menu-bullet flex w-[6px] relative before:absolute before:top-0 before:size-[6px] before:rounded-full before:-translate-x-1/2 before:-translate-y-1/2 menu-item-active:before:bg-primary menu-item-hover:before:bg-primary">
-                                                </span>
-                                                <span class="menu-title text-2sm font-normal text-gray-800 menu-item-active:text-primary menu-item-active:font-semibold menu-link-hover:!text-primary">
-                                                    Check Email
-                                                </span>
-                                            </a>
-                                        </div>
-                                        <div class="menu-item" data-menu-item-toggle="accordion" data-menu-item-trigger="click">
-                                            <div class="menu-link border border-transparent grow cursor-pointer gap-[5px] pl-[10px] pr-[10px] py-[8px]" tabindex="0">
-                                                <span class="menu-bullet flex w-[6px] relative before:absolute before:top-0 before:size-[6px] before:rounded-full before:-translate-x-1/2 before:-translate-y-1/2 menu-item-active:before:bg-primary menu-item-hover:before:bg-primary">
-                                                </span>
-                                                <span class="menu-title text-2sm font-normal mr-1 text-gray-800 menu-item-active:text-primary menu-item-active:font-medium menu-link-hover:!text-primary">
-                                                    Reset Password
-                                                </span>
-                                                <span class="menu-arrow text-gray-400 w-[20px] shrink-0 justify-end ml-1 mr-[-10px]">
-                                                    <i class="ki-filled ki-plus text-2xs menu-item-show:hidden">
-                                                    </i>
-                                                    <i class="ki-filled ki-minus text-2xs hidden menu-item-show:inline-flex">
-                                                    </i>
-                                                </span>
-                                            </div>
-                                            <div class="menu-accordion gap-0.5 relative before:absolute before:left-[32px] pl-[22px] before:top-0 before:bottom-0 before:border-l before:border-gray-200">
-                                                <div class="menu-item">
-                                                    <a class="menu-link border border-transparent items-center grow menu-item-active:bg-secondary-active dark:menu-item-active:bg-coal-300 dark:menu-item-active:border-gray-100 menu-item-active:rounded-lg hover:bg-secondary-active dark:hover:bg-coal-300 dark:hover:border-gray-100 hover:rounded-lg gap-[5px] pl-[10px] pr-[10px] py-[8px]" href="/metronic/tailwind/demo1/authentication/classic/reset-password/enter-email" tabindex="0">
-                                                        <span class="menu-bullet flex w-[6px] relative before:absolute before:top-0 before:size-[6px] before:rounded-full before:-translate-x-1/2 before:-translate-y-1/2 menu-item-active:before:bg-primary menu-item-hover:before:bg-primary">
-                                                        </span>
-                                                        <span class="menu-title text-2sm font-normal text-gray-800 menu-item-active:text-primary menu-item-active:font-semibold menu-link-hover:!text-primary">
-                                                            Enter Email
-                                                        </span>
-                                                    </a>
-                                                </div>
-                                                <div class="menu-item">
-                                                    <a class="menu-link border border-transparent items-center grow menu-item-active:bg-secondary-active dark:menu-item-active:bg-coal-300 dark:menu-item-active:border-gray-100 menu-item-active:rounded-lg hover:bg-secondary-active dark:hover:bg-coal-300 dark:hover:border-gray-100 hover:rounded-lg gap-[5px] pl-[10px] pr-[10px] py-[8px]" href="/metronic/tailwind/demo1/authentication/classic/reset-password/check-email" tabindex="0">
-                                                        <span class="menu-bullet flex w-[6px] relative before:absolute before:top-0 before:size-[6px] before:rounded-full before:-translate-x-1/2 before:-translate-y-1/2 menu-item-active:before:bg-primary menu-item-hover:before:bg-primary">
-                                                        </span>
-                                                        <span class="menu-title text-2sm font-normal text-gray-800 menu-item-active:text-primary menu-item-active:font-semibold menu-link-hover:!text-primary">
-                                                            Check Email
-                                                        </span>
-                                                    </a>
-                                                </div>
-                                                <div class="menu-item">
-                                                    <a class="menu-link border border-transparent items-center grow menu-item-active:bg-secondary-active dark:menu-item-active:bg-coal-300 dark:menu-item-active:border-gray-100 menu-item-active:rounded-lg hover:bg-secondary-active dark:hover:bg-coal-300 dark:hover:border-gray-100 hover:rounded-lg gap-[5px] pl-[10px] pr-[10px] py-[8px]" href="/metronic/tailwind/demo1/authentication/classic/reset-password/change-password" tabindex="0">
-                                                        <span class="menu-bullet flex w-[6px] relative before:absolute before:top-0 before:size-[6px] before:rounded-full before:-translate-x-1/2 before:-translate-y-1/2 menu-item-active:before:bg-primary menu-item-hover:before:bg-primary">
-                                                        </span>
-                                                        <span class="menu-title text-2sm font-normal text-gray-800 menu-item-active:text-primary menu-item-active:font-semibold menu-link-hover:!text-primary">
-                                                            Change Password
-                                                        </span>
-                                                    </a>
-                                                </div>
-                                                <div class="menu-item">
-                                                    <a class="menu-link border border-transparent items-center grow menu-item-active:bg-secondary-active dark:menu-item-active:bg-coal-300 dark:menu-item-active:border-gray-100 menu-item-active:rounded-lg hover:bg-secondary-active dark:hover:bg-coal-300 dark:hover:border-gray-100 hover:rounded-lg gap-[5px] pl-[10px] pr-[10px] py-[8px]" href="/metronic/tailwind/demo1/authentication/classic/reset-password/password-changed" tabindex="0">
-                                                        <span class="menu-bullet flex w-[6px] relative before:absolute before:top-0 before:size-[6px] before:rounded-full before:-translate-x-1/2 before:-translate-y-1/2 menu-item-active:before:bg-primary menu-item-hover:before:bg-primary">
-                                                        </span>
-                                                        <span class="menu-title text-2sm font-normal text-gray-800 menu-item-active:text-primary menu-item-active:font-semibold menu-link-hover:!text-primary">
-                                                            Password is Changed
-                                                        </span>
-                                                    </a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="menu-item" data-menu-item-toggle="accordion" data-menu-item-trigger="click">
-                                    <div class="menu-link border border-transparent grow cursor-pointer gap-[14px] pl-[10px] pr-[10px] py-[8px]" tabindex="0">
-                                        <span class="menu-bullet flex w-[6px] relative before:absolute before:top-0 before:size-[6px] before:rounded-full before:-translate-x-1/2 before:-translate-y-1/2 menu-item-active:before:bg-primary menu-item-hover:before:bg-primary">
-                                        </span>
-                                        <span class="menu-title text-2sm font-normal mr-1 text-gray-800 menu-item-active:text-primary menu-item-active:font-medium menu-link-hover:!text-primary">
-                                            Branded
-                                        </span>
-                                        <span class="menu-arrow text-gray-400 w-[20px] shrink-0 justify-end ml-1 mr-[-10px]">
-                                            <i class="ki-filled ki-plus text-2xs menu-item-show:hidden">
-                                            </i>
-                                            <i class="ki-filled ki-minus text-2xs hidden menu-item-show:inline-flex">
-                                            </i>
-                                        </span>
-                                    </div>
-                                    <div class="menu-accordion gap-0.5 relative before:absolute before:left-[32px] pl-[22px] before:top-0 before:bottom-0 before:border-l before:border-gray-200">
-                                        <div class="menu-item">
-                                            <a class="menu-link border border-transparent items-center grow menu-item-active:bg-secondary-active dark:menu-item-active:bg-coal-300 dark:menu-item-active:border-gray-100 menu-item-active:rounded-lg hover:bg-secondary-active dark:hover:bg-coal-300 dark:hover:border-gray-100 hover:rounded-lg gap-[5px] pl-[10px] pr-[10px] py-[8px]" href="/metronic/tailwind/demo1/authentication/branded/sign-in" tabindex="0">
-                                                <span class="menu-bullet flex w-[6px] relative before:absolute before:top-0 before:size-[6px] before:rounded-full before:-translate-x-1/2 before:-translate-y-1/2 menu-item-active:before:bg-primary menu-item-hover:before:bg-primary">
-                                                </span>
-                                                <span class="menu-title text-2sm font-normal text-gray-800 menu-item-active:text-primary menu-item-active:font-semibold menu-link-hover:!text-primary">
-                                                    Sign In
-                                                </span>
-                                            </a>
-                                        </div>
-                                        <div class="menu-item">
-                                            <a class="menu-link border border-transparent items-center grow menu-item-active:bg-secondary-active dark:menu-item-active:bg-coal-300 dark:menu-item-active:border-gray-100 menu-item-active:rounded-lg hover:bg-secondary-active dark:hover:bg-coal-300 dark:hover:border-gray-100 hover:rounded-lg gap-[5px] pl-[10px] pr-[10px] py-[8px]" href="/metronic/tailwind/demo1/authentication/branded/sign-up" tabindex="0">
-                                                <span class="menu-bullet flex w-[6px] relative before:absolute before:top-0 before:size-[6px] before:rounded-full before:-translate-x-1/2 before:-translate-y-1/2 menu-item-active:before:bg-primary menu-item-hover:before:bg-primary">
-                                                </span>
-                                                <span class="menu-title text-2sm font-normal text-gray-800 menu-item-active:text-primary menu-item-active:font-semibold menu-link-hover:!text-primary">
-                                                    Sign Up
-                                                </span>
-                                            </a>
-                                        </div>
-                                        <div class="menu-item">
-                                            <a class="menu-link border border-transparent items-center grow menu-item-active:bg-secondary-active dark:menu-item-active:bg-coal-300 dark:menu-item-active:border-gray-100 menu-item-active:rounded-lg hover:bg-secondary-active dark:hover:bg-coal-300 dark:hover:border-gray-100 hover:rounded-lg gap-[5px] pl-[10px] pr-[10px] py-[8px]" href="/metronic/tailwind/demo1/authentication/branded/2fa" tabindex="0">
-                                                <span class="menu-bullet flex w-[6px] relative before:absolute before:top-0 before:size-[6px] before:rounded-full before:-translate-x-1/2 before:-translate-y-1/2 menu-item-active:before:bg-primary menu-item-hover:before:bg-primary">
-                                                </span>
-                                                <span class="menu-title text-2sm font-normal text-gray-800 menu-item-active:text-primary menu-item-active:font-semibold menu-link-hover:!text-primary">
-                                                    2FA
-                                                </span>
-                                            </a>
-                                        </div>
-                                        <div class="menu-item">
-                                            <a class="menu-link border border-transparent items-center grow menu-item-active:bg-secondary-active dark:menu-item-active:bg-coal-300 dark:menu-item-active:border-gray-100 menu-item-active:rounded-lg hover:bg-secondary-active dark:hover:bg-coal-300 dark:hover:border-gray-100 hover:rounded-lg gap-[5px] pl-[10px] pr-[10px] py-[8px]" href="/metronic/tailwind/demo1/authentication/branded/check-email" tabindex="0">
-                                                <span class="menu-bullet flex w-[6px] relative before:absolute before:top-0 before:size-[6px] before:rounded-full before:-translate-x-1/2 before:-translate-y-1/2 menu-item-active:before:bg-primary menu-item-hover:before:bg-primary">
-                                                </span>
-                                                <span class="menu-title text-2sm font-normal text-gray-800 menu-item-active:text-primary menu-item-active:font-semibold menu-link-hover:!text-primary">
-                                                    Check Email
-                                                </span>
-                                            </a>
-                                        </div>
-                                        <div class="menu-item" data-menu-item-toggle="accordion" data-menu-item-trigger="click">
-                                            <div class="menu-link border border-transparent grow cursor-pointer gap-[5px] pl-[10px] pr-[10px] py-[8px]" tabindex="0">
-                                                <span class="menu-bullet flex w-[6px] relative before:absolute before:top-0 before:size-[6px] before:rounded-full before:-translate-x-1/2 before:-translate-y-1/2 menu-item-active:before:bg-primary menu-item-hover:before:bg-primary">
-                                                </span>
-                                                <span class="menu-title text-2sm font-normal mr-1 text-gray-800 menu-item-active:text-primary menu-item-active:font-medium menu-link-hover:!text-primary">
-                                                    Reset Password
-                                                </span>
-                                                <span class="menu-arrow text-gray-400 w-[20px] shrink-0 justify-end ml-1 mr-[-10px]">
-                                                    <i class="ki-filled ki-plus text-2xs menu-item-show:hidden">
-                                                    </i>
-                                                    <i class="ki-filled ki-minus text-2xs hidden menu-item-show:inline-flex">
-                                                    </i>
-                                                </span>
-                                            </div>
-                                            <div class="menu-accordion gap-0.5 relative before:absolute before:left-[32px] pl-[22px] before:top-0 before:bottom-0 before:border-l before:border-gray-200">
-                                                <div class="menu-item">
-                                                    <a class="menu-link border border-transparent items-center grow menu-item-active:bg-secondary-active dark:menu-item-active:bg-coal-300 dark:menu-item-active:border-gray-100 menu-item-active:rounded-lg hover:bg-secondary-active dark:hover:bg-coal-300 dark:hover:border-gray-100 hover:rounded-lg gap-[5px] pl-[10px] pr-[10px] py-[8px]" href="/metronic/tailwind/demo1/authentication/branded/reset-password/enter-email" tabindex="0">
-                                                        <span class="menu-bullet flex w-[6px] relative before:absolute before:top-0 before:size-[6px] before:rounded-full before:-translate-x-1/2 before:-translate-y-1/2 menu-item-active:before:bg-primary menu-item-hover:before:bg-primary">
-                                                        </span>
-                                                        <span class="menu-title text-2sm font-normal text-gray-800 menu-item-active:text-primary menu-item-active:font-semibold menu-link-hover:!text-primary">
-                                                            Enter Email
-                                                        </span>
-                                                    </a>
-                                                </div>
-                                                <div class="menu-item">
-                                                    <a class="menu-link border border-transparent items-center grow menu-item-active:bg-secondary-active dark:menu-item-active:bg-coal-300 dark:menu-item-active:border-gray-100 menu-item-active:rounded-lg hover:bg-secondary-active dark:hover:bg-coal-300 dark:hover:border-gray-100 hover:rounded-lg gap-[5px] pl-[10px] pr-[10px] py-[8px]" href="/metronic/tailwind/demo1/authentication/branded/reset-password/check-email" tabindex="0">
-                                                        <span class="menu-bullet flex w-[6px] relative before:absolute before:top-0 before:size-[6px] before:rounded-full before:-translate-x-1/2 before:-translate-y-1/2 menu-item-active:before:bg-primary menu-item-hover:before:bg-primary">
-                                                        </span>
-                                                        <span class="menu-title text-2sm font-normal text-gray-800 menu-item-active:text-primary menu-item-active:font-semibold menu-link-hover:!text-primary">
-                                                            Check Email
-                                                        </span>
-                                                    </a>
-                                                </div>
-                                                <div class="menu-item">
-                                                    <a class="menu-link border border-transparent items-center grow menu-item-active:bg-secondary-active dark:menu-item-active:bg-coal-300 dark:menu-item-active:border-gray-100 menu-item-active:rounded-lg hover:bg-secondary-active dark:hover:bg-coal-300 dark:hover:border-gray-100 hover:rounded-lg gap-[5px] pl-[10px] pr-[10px] py-[8px]" href="/metronic/tailwind/demo1/authentication/branded/reset-password/change-password" tabindex="0">
-                                                        <span class="menu-bullet flex w-[6px] relative before:absolute before:top-0 before:size-[6px] before:rounded-full before:-translate-x-1/2 before:-translate-y-1/2 menu-item-active:before:bg-primary menu-item-hover:before:bg-primary">
-                                                        </span>
-                                                        <span class="menu-title text-2sm font-normal text-gray-800 menu-item-active:text-primary menu-item-active:font-semibold menu-link-hover:!text-primary">
-                                                            Change Password
-                                                        </span>
-                                                    </a>
-                                                </div>
-                                                <div class="menu-item">
-                                                    <a class="menu-link border border-transparent items-center grow menu-item-active:bg-secondary-active dark:menu-item-active:bg-coal-300 dark:menu-item-active:border-gray-100 menu-item-active:rounded-lg hover:bg-secondary-active dark:hover:bg-coal-300 dark:hover:border-gray-100 hover:rounded-lg gap-[5px] pl-[10px] pr-[10px] py-[8px]" href="/metronic/tailwind/demo1/authentication/branded/reset-password/password-changed" tabindex="0">
-                                                        <span class="menu-bullet flex w-[6px] relative before:absolute before:top-0 before:size-[6px] before:rounded-full before:-translate-x-1/2 before:-translate-y-1/2 menu-item-active:before:bg-primary menu-item-hover:before:bg-primary">
-                                                        </span>
-                                                        <span class="menu-title text-2sm font-normal text-gray-800 menu-item-active:text-primary menu-item-active:font-semibold menu-link-hover:!text-primary">
-                                                            Password is Changed
-                                                        </span>
-                                                    </a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="menu-item">
-                                    <a class="menu-link border border-transparent items-center grow menu-item-active:bg-secondary-active dark:menu-item-active:bg-coal-300 dark:menu-item-active:border-gray-100 menu-item-active:rounded-lg hover:bg-secondary-active dark:hover:bg-coal-300 dark:hover:border-gray-100 hover:rounded-lg gap-[14px] pl-[10px] pr-[10px] py-[8px]" href="/metronic/tailwind/demo1/authentication/welcome-message" tabindex="0">
-                                        <span class="menu-bullet flex w-[6px] relative before:absolute before:top-0 before:size-[6px] before:rounded-full before:-translate-x-1/2 before:-translate-y-1/2 menu-item-active:before:bg-primary menu-item-hover:before:bg-primary">
-                                        </span>
-                                        <span class="menu-title text-2sm font-normal text-gray-800 menu-item-active:text-primary menu-item-active:font-semibold menu-link-hover:!text-primary">
-                                            Welcome Message
-                                        </span>
-                                    </a>
-                                </div>
-                                <div class="menu-item">
-                                    <a class="menu-link border border-transparent items-center grow menu-item-active:bg-secondary-active dark:menu-item-active:bg-coal-300 dark:menu-item-active:border-gray-100 menu-item-active:rounded-lg hover:bg-secondary-active dark:hover:bg-coal-300 dark:hover:border-gray-100 hover:rounded-lg gap-[14px] pl-[10px] pr-[10px] py-[8px]" href="/metronic/tailwind/demo1/authentication/account-deactivated" tabindex="0">
-                                        <span class="menu-bullet flex w-[6px] relative before:absolute before:top-0 before:size-[6px] before:rounded-full before:-translate-x-1/2 before:-translate-y-1/2 menu-item-active:before:bg-primary menu-item-hover:before:bg-primary">
-                                        </span>
-                                        <span class="menu-title text-2sm font-normal text-gray-800 menu-item-active:text-primary menu-item-active:font-semibold menu-link-hover:!text-primary">
-                                            Account Deactivated
-                                        </span>
-                                    </a>
-                                </div>
-                                <div class="menu-item">
-                                    <a class="menu-link border border-transparent items-center grow menu-item-active:bg-secondary-active dark:menu-item-active:bg-coal-300 dark:menu-item-active:border-gray-100 menu-item-active:rounded-lg hover:bg-secondary-active dark:hover:bg-coal-300 dark:hover:border-gray-100 hover:rounded-lg gap-[14px] pl-[10px] pr-[10px] py-[8px]" href="/metronic/tailwind/demo1/authentication/error-404" tabindex="0">
-                                        <span class="menu-bullet flex w-[6px] relative before:absolute before:top-0 before:size-[6px] before:rounded-full before:-translate-x-1/2 before:-translate-y-1/2 menu-item-active:before:bg-primary menu-item-hover:before:bg-primary">
-                                        </span>
-                                        <span class="menu-title text-2sm font-normal text-gray-800 menu-item-active:text-primary menu-item-active:font-semibold menu-link-hover:!text-primary">
-                                            Error 404
-                                        </span>
-                                    </a>
-                                </div>
-                                <div class="menu-item">
-                                    <a class="menu-link border border-transparent items-center grow menu-item-active:bg-secondary-active dark:menu-item-active:bg-coal-300 dark:menu-item-active:border-gray-100 menu-item-active:rounded-lg hover:bg-secondary-active dark:hover:bg-coal-300 dark:hover:border-gray-100 hover:rounded-lg gap-[14px] pl-[10px] pr-[10px] py-[8px]" href="/metronic/tailwind/demo1/authentication/error-500" tabindex="0">
-                                        <span class="menu-bullet flex w-[6px] relative before:absolute before:top-0 before:size-[6px] before:rounded-full before:-translate-x-1/2 before:-translate-y-1/2 menu-item-active:before:bg-primary menu-item-hover:before:bg-primary">
-                                        </span>
-                                        <span class="menu-title text-2sm font-normal text-gray-800 menu-item-active:text-primary menu-item-active:font-semibold menu-link-hover:!text-primary">
-                                            Error 500
-                                        </span>
-                                    </a>
-                                </div>
+                          
+                        </div>
+                        <div class="" data-menu-item-toggle="accordion" data-menu-item-trigger="click">
+                            <div class="menu-link flex items-center grow cursor-pointer  gap-[10px] pl-[10px] pr-[10px] py-[6px]" tabindex="0">
+                                <span class="menu-icon items-start text-gray-500 dark:text-gray-400 w-[20px]">
+                                    <i class="ki-filled ki-user text-lg">
+                                    </i>
+                                </span>
+                                <span class="menu-title text-sm font-medium text-gray-800" onclick="window.location.href='User'">
+                                    User Management
+                                </span>
+
                             </div>
+
                         </div>
                         <div class="menu-item pt-2.25 pb-px">
                             <span class="menu-heading uppercase text-2sm font-medium text-gray-500 pl-[10px] pr-[10px]">
                                 Apps
                             </span>
                         </div>
-                        <div class="menu-item">
-                            <div class="menu-label border border-transparent gap-[10px] pl-[10px] pr-[10px] py-[6px]" href="" tabindex="0">
-                                <span class="menu-icon items-start text-gray-500 dark:text-gray-400 w-[20px]">
-                                    <i class="ki-filled ki-users text-lg">
-                                    </i>
-                                </span>
-                                <span class="menu-title text-sm font-medium text-gray-800">
-                                    User Management
-                                </span>
-                                <span class="menu-badge mr-[-10px]">
-                                    <span class="badge badge-xs">
-                                        Soon
-                                    </span>
-                                </span>
-                            </div>
-                        </div>
+                       
                         <div class="menu-item">
                             <div class="menu-label border border-transparent gap-[10px] pl-[10px] pr-[10px] py-[6px]" href="" tabindex="0">
                                 <span class="menu-icon items-start text-gray-500 dark:text-gray-400 w-[20px]">
@@ -905,7 +492,7 @@
                 <div class="container-fixed flex justify-between items-stretch lg:gap-4" id="header_container">
                     <!-- Mobile Logo -->
                     <div class="flex gap-1 lg:hidden items-center -ml-1">
-                        <a class="shrink-0" href="/metronic/tailwind/demo1/">
+                        <a class="shrink-0" href="Home">
                             <img class="max-h-[25px] w-full" src="images/mini-logo.svg">
                         </a>
                         <div class="flex items-center">

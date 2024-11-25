@@ -91,6 +91,9 @@ namespace NewsWebsite.Controllers
                     // Gán giá trị từ pagedResult
                     pagedPostList = pagedResult?.Records ?? new List<PostDTO>();
                     totalRecords = pagedResult?.TotalRecords ?? 0;
+
+                    // Lọc các bài viết có Status = 1
+                    pagedPostList = pagedPostList.Where(p => p.Status == 1).ToList();
                 }
                 else
                 {
@@ -135,11 +138,11 @@ namespace NewsWebsite.Controllers
             }
 
             // Lọc ra 3 bài viết có số lượt xem cao nhất
-            var popularPosts = allPosts.OrderByDescending(p => p.Views).Take(3).ToList();
+            var popularPosts = allPosts.Where(p => p.Status == 1).OrderByDescending(p => p.Views).Take(3).ToList();
             ViewBag.PopularPosts = popularPosts;
 
             // Lọc ra 3 bài viết có số lượt thích cao nhất
-            var topLikedPosts = allPosts.OrderByDescending(p => p.LikeNumber).Take(3).ToList();
+            var topLikedPosts = allPosts.Where(p => p.Status == 1).OrderByDescending(p => p.LikeNumber).Take(3).ToList();
             ViewBag.TopLikedPosts = topLikedPosts;
 
             // Calculate total pages for pagination

@@ -39,7 +39,11 @@ namespace NewsAPI.Controllers.Generic
             {
                 var dto = new UserDTO();
                 _mapper.Map(entity, dto);
-                return Ok(dto);
+                return Ok(new
+                {
+                    success = true,
+                    data = dto,
+                });
             }
             else
                 return NoContent();

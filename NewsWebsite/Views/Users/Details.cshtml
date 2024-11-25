@@ -92,44 +92,31 @@
             <!-- Profile Sidebar -->
             <div style="flex: 1; text-align: center; margin-right: 20px;">
                 <img class="rounded-circle" width="150px" src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg">
-                <h4>Edogaru</h4>
-                <p>edogaru@mail.com.my</p>
+                <h4>@Model?.FullName</h4>
+                <p>@Model?.Email</p>
             </div>
 
             <!-- Profile Form -->
             <div style="flex: 2;">
                 <h4>Profile Settings</h4>
                 <div>
-                    <label class="labels">@Model?.Username</label>
-                    <input type="text" class="form-control" placeholder="First Name">
+                    <label class="labels">User Name</label>
+                    <input type="text" class="form-control" placeholder="First Name" value="@Model?.Username">
 
                     <label class="labels">Surname</label>
                     <input type="text" class="form-control" placeholder="Surname">
 
-                    <label class="labels">Mobile Number</label>
-                    <input type="text" class="form-control" placeholder="Mobile Number">
+                    <label class="labels">Full Name</label>
+                    <input type="text" class="form-control" placeholder="@Model?.FullName">
 
-                    <label class="labels">Address</label>
-                    <input type="text" class="form-control" placeholder="Address Line 1">
-                    <input type="text" class="form-control" placeholder="Address Line 2">
-
-                    <label class="labels">Email ID</label>
-                    <input type="email" class="form-control" placeholder="Email">
-
-                    <label class="labels">Education</label>
-                    <input type="text" class="form-control" placeholder="Education">
-
-                    <label class="labels">Country</label>
-                    <input type="text" class="form-control" placeholder="Country">
-
-                    <label class="labels">State/Region</label>
-                    <input type="text" class="form-control" placeholder="State/Region">
+                    <label class="labels">Email</label>
+                    <input type="email" class="form-control" placeholder="@Model?.Email">
 
                     <button class="profile-button">Save Profile</button>
                 </div>
             </div>
 
-            <!-- Experience -->
+@*             <!-- Experience -->
             <div style="flex: 1; margin-left: 20px;">
                 <h4>Experience</h4>
                 <div>
@@ -141,7 +128,7 @@
 
                     <button class="add-experience">Add Experience</button>
                 </div>
-            </div>
+            </div> *@
         </div>
     </div>
 </body>

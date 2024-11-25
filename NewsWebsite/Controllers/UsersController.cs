@@ -36,7 +36,7 @@ namespace NewsWebsite.Controllers
                 //}
 
                 // Gọi API lấy thông tin user
-                var res = await _callApi.GetAsync($"Users/Get/{id}", _accessToken);
+                var res = await _callApi.GetAsync($"Users/Get?id={id}", _accessToken);
                 if (res.success && res.data != null)
                 {
                     var user = res.data.ToObject<UserDTO>();

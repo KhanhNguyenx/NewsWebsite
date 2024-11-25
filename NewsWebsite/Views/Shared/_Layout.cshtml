@@ -117,6 +117,16 @@
                     </li>
                     }
                     </ul> *@
+                    <div style="margin-right: 10px;">
+                        <input type="text"
+                               id="search-input"
+                               class="form-control"
+                               placeholder="Search posts by title"
+                               style="width: 400px;" />
+                        <button id="search-btn" class="btn btn-primary ml-2">Search</button>
+                    </div>
+
+                    <div id="search-results"></div>
                     <div class="relative">
                         @if (User.Identity.IsAuthenticated)
                         {
@@ -273,6 +283,40 @@
     <script src="~/js/tether.min.js"></script>
     <script src="~/js/bootstrap.min.js"></script>
     <script src="~/js/custom.js"></script>
+    <script>
+        $(document).ready(function () {
+            // Xử lý khi người dùng nhấn nút "Search"
+            $('#search-btn').click(function () {
+                const query = $('#search-input').val().trim();
 
+                if (!query) {
+                    alert("Please enter a search query.");
+                    return;
+                }
+
+                // Gọi AJAX để lấy kết quả tìm kiếm
+                $.ajax({
+                    url: `/Posts/Search?query=${encodeURIComponent(query)}`, // Đường dẫn đến action xử lý tìm kiếm
+                    method: 'GET',
+                    success: function (data) {
+                        // Hiển thị kết quả trong phần tử #search-results
+                        $('#search-results').html(data);
+                    },
+                    error: function (xhr, status, error) {
+                        console.error('Error occurred while searching:', error);
+                        $('#search-results').html('<p>Error occurred while searching. Please try again.</p>');
+                    }
+                });
+            });
+
+            // Tìm kiếm khi nhấn Enter
+            $('#search-input').keypress(function (e) {
+                if (e.which === 13) { // 13 là mã phím Enter
+                    $('#search-btn').click();
+                }
+            });
+        });
+
+    </script>
 </body>
 </html>

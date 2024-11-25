@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@using System.Security.Claims
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <!-- Basic -->
@@ -133,7 +134,9 @@
                                         <i class="fa fa-cogs"></i> Admin Setting
                                     </a>
                                 }
-                                <a class="block px-4 py-2 text-sm" href="Author/Profile">Settings</a>
+                                <a class="block px-4 py-2 text-sm" asp-controller="Users" asp-action="Details" asp-route-id="@User.FindFirst(ClaimTypes.NameIdentifier)?.Value">
+                                    Settings
+                                </a>
                                 <div class="border-t my-2"></div>
                                 <a class="block px-4 py-2 text-sm text-red-600" href="Author/Logout">Log Out</a>
                             </div>

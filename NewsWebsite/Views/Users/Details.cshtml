@@ -1,0 +1,153 @@
+﻿@model NewsAPI.DTOs.UserDTO
+
+@{
+    ViewData["Title"] = "User Details";
+    Layout = "Views/Shared/_Layout.cshtml"; // Đảm bảo trang này kế thừa từ _Layout
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile Settings</title>
+    <style>
+        body {
+            background: #6a1b9a; /* Nền tím nhạt */
+            font-family: Arial, sans-serif;
+            color: #fff;
+        }
+
+        .container {
+            margin: 0 auto;
+            max-width: 900px;
+            background: #fff;
+            color: #000;
+            border-radius: 10px;
+            padding: 20px;
+        }
+
+        .rounded-circle {
+            border: 2px solid #fff;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+        }
+
+        .form-control:focus {
+            box-shadow: none;
+            border-color: #BA68C8;
+        }
+
+        .profile-button {
+            background: #4a148c;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .profile-button:hover {
+            background: #6a1b9a;
+        }
+
+        .labels {
+            font-size: 14px;
+            margin-bottom: 5px;
+            display: block;
+        }
+
+        .add-experience {
+            background: transparent;
+            color: #6a1b9a;
+            border: 1px solid #6a1b9a;
+            padding: 5px 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            text-align: center;
+        }
+
+        .add-experience:hover {
+            background: #BA68C8;
+            color: white;
+        }
+
+        h4 {
+            color: #6a1b9a;
+        }
+
+        .text-center {
+            text-align: center;
+        }
+
+        .flex {
+            display: flex;
+            justify-content: space-between;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="flex">
+            <!-- Profile Sidebar -->
+            <div style="flex: 1; text-align: center; margin-right: 20px;">
+                <img class="rounded-circle" width="150px" src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg">
+                <h4>Edogaru</h4>
+                <p>edogaru@mail.com.my</p>
+            </div>
+
+            <!-- Profile Form -->
+            <div style="flex: 2;">
+                <h4>Profile Settings</h4>
+                <div>
+                    <label class="labels">@* @Model?.Username *@</label>
+                    <input type="text" class="form-control" placeholder="First Name">
+
+                    <label class="labels">Surname</label>
+                    <input type="text" class="form-control" placeholder="Surname">
+
+                    <label class="labels">Mobile Number</label>
+                    <input type="text" class="form-control" placeholder="Mobile Number">
+
+                    <label class="labels">Address</label>
+                    <input type="text" class="form-control" placeholder="Address Line 1">
+                    <input type="text" class="form-control" placeholder="Address Line 2">
+
+                    <label class="labels">Email ID</label>
+                    <input type="email" class="form-control" placeholder="Email">
+
+                    <label class="labels">Education</label>
+                    <input type="text" class="form-control" placeholder="Education">
+
+                    <label class="labels">Country</label>
+                    <input type="text" class="form-control" placeholder="Country">
+
+                    <label class="labels">State/Region</label>
+                    <input type="text" class="form-control" placeholder="State/Region">
+
+                    <button class="profile-button">Save Profile</button>
+                </div>
+            </div>
+
+            <!-- Experience -->
+            <div style="flex: 1; margin-left: 20px;">
+                <h4>Experience</h4>
+                <div>
+                    <label class="labels">Experience in Designing</label>
+                    <input type="text" class="form-control" placeholder="Experience">
+
+                    <label class="labels">Additional Details</label>
+                    <input type="text" class="form-control" placeholder="Additional Details">
+
+                    <button class="add-experience">Add Experience</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

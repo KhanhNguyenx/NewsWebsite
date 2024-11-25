@@ -1,0 +1,130 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Meta tags  -->
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+
+    <title>Lineone - From Layout v4</title>
+    <link rel="icon" type="image/png" href="images/favicon.png">
+
+    <!-- CSS Assets -->
+    <link rel="stylesheet" href="~/PostUpsert/css/app.css">
+
+    <!-- Javascript Assets -->
+    <script src="~/PostUpsert/js/app.js" defer=""></script>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&amp;display=swap" rel="stylesheet">
+    <script>
+        localStorage.getItem("_x_darkMode_on") === "true" &&
+            document.documentElement.classList.add("dark");
+    </script>
+</head>
+
+<body x-data="" class="is-header-blur" x-bind="$store.global.documentBody">
+    <!-- App preloader-->
+    <div class="app-preloader fixed z-50 grid h-full w-full place-content-center bg-slate-50 dark:bg-navy-900">
+        <div class="app-preloader-inner relative inline-block size-48"></div>
+    </div>
+
+    <!-- Page Wrapper -->
+    <div id="root" class="min-h-100vh flex grow bg-slate-50 dark:bg-navy-900" x-cloak="">
+        <!-- Main Content Wrapper -->
+        <main class="main-content w-full px-[var(--margin-x)] pb-8">
+            <div class="flex flex-col items-center justify-between space-y-4 py-5 sm:flex-row sm:space-y-0 lg:py-6">
+                <div class="flex items-center space-x-1">
+                </div>
+                <div class="flex justify-center space-x-2">
+                    <button class="btn min-w-[7rem] border border-slate-300 font-medium text-slate-700 hover:bg-slate-150 focus:bg-slate-150 active:bg-slate-150/80 dark:border-navy-450 dark:text-navy-100 dark:hover:bg-navy-500 dark:focus:bg-navy-500 dark:active:bg-navy-500/90">
+                        Preview
+                    </button>
+                    <button class="btn min-w-[7rem] bg-primary font-medium text-white hover:bg-primary-focus focus:bg-primary-focus active:bg-primary-focus/90 dark:bg-accent dark:hover:bg-accent-focus dark:focus:bg-accent-focus dark:active:bg-accent/90">
+                        Save
+                    </button>
+                </div>
+            </div>
+            <div class="grid grid-cols-12 gap-4 sm:gap-5 lg:gap-6">
+                <div class="col-span-12 lg:col-span-8">
+                    <div class="card">
+                        <div class="tabs flex flex-col">
+                            <div class="tab-content p-4 sm:p-5">
+                                <div class="space-y-5">
+                                    <label class="block">
+                                        <span class="font-medium text-slate-600 dark:text-navy-100">Username</span>
+                                        <input class="form-input mt-1.5 w-full rounded-lg border border-slate-300 bg-transparent px-3 py-2 placeholder:text-slate-400/70 hover:border-slate-400 focus:border-primary dark:border-navy-450 dark:hover:border-navy-400 dark:focus:border-accent" placeholder="Enter Username" type="text">
+                                    </label>
+                                    <label class="block">
+                                        <span class="font-medium text-slate-600 dark:text-navy-100">Email</span>
+                                        <input class="form-input mt-1.5 w-full rounded-lg border border-slate-300 bg-transparent px-3 py-2 placeholder:text-slate-400/70 hover:border-slate-400 focus:border-primary dark:border-navy-450 dark:hover:border-navy-400 dark:focus:border-accent" placeholder="Enter Email" type="text">
+                                    </label>
+                                    <label class="block">
+                                        <span class="font-medium text-slate-600 dark:text-navy-100">Full Name</span>
+                                        <input class="form-input mt-1.5 w-full rounded-lg border border-slate-300 bg-transparent px-3 py-2 placeholder:text-slate-400/70 hover:border-slate-400 focus:border-primary dark:border-navy-450 dark:hover:border-navy-400 dark:focus:border-accent" placeholder="Enter Full Name" type="text">
+                                    </label>
+                                    <label class="block">
+                                        <span class="font-medium text-slate-600 dark:text-navy-100">Notes</span>
+                                        <input class="form-input mt-1.5 w-full rounded-lg border border-slate-300 bg-transparent px-3 py-2 placeholder:text-slate-400/70 hover:border-slate-400 focus:border-primary dark:border-navy-450 dark:hover:border-navy-400 dark:focus:border-accent" placeholder="Enter Notes" type="text">
+                                    </label>
+
+                                    @* <label class="block">
+                                        <span class="font-medium text-slate-600 dark:text-navy-100">Post Images</span>
+                                        <div class="filepond fp-bordered fp-grid mt-1.5 [--fp-grid:2]">
+                                            <input type="file" name="Images" class="dropify" multiple />
+                                        </div>
+                                    </label> *@
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-span-12 lg:col-span-4">
+                    <div class="card space-y-5 p-4 sm:p-5">
+                        <span class="font-medium text-slate-600 dark:text-navy-100">Status</span>
+                        <label class="inline-flex items-center space-x-2">
+                            <input class="form-radio is-basic size-7 rounded-full border-slate-400/70 checked:border-slate-500 checked:bg-slate-500 hover:border-slate-500 focus:border-slate-500 dark:border-navy-400 dark:checked:bg-navy-400"
+                                   name="Status"
+                                   type="radio"
+                                   value="1"
+                                   
+                            />
+                            <p>On</p>
+                            <input class="form-radio is-basic size-7 rounded-full border-slate-400/70 checked:border-primary checked:bg-primary hover:border-primary focus:border-primary dark:border-navy-400 dark:checked:border-accent dark:checked:bg-accent dark:hover:border-accent dark:focus:border-accent"
+                                   name="Status"
+                                   type="radio"
+                                   value="0"
+                            />
+                            <p>Off</p>
+                        </label>
+
+                        <span class="font-medium text-slate-600 dark:text-navy-100">IsAuthor</span>
+                        <label class="inline-flex items-center space-x-2">
+                            <input class="form-radio is-basic size-7 rounded-full border-slate-400/70 checked:border-slate-500 checked:bg-slate-500 hover:border-slate-500 focus:border-slate-500 dark:border-navy-400 dark:checked:bg-navy-400"
+                                   name="IsHot"
+                                   type="radio"
+                                   value="true"
+                            />
+                            <p>On</p>
+                            <input class="form-radio is-basic size-7 rounded-full border-slate-400/70 checked:border-primary checked:bg-primary hover:border-primary focus:border-primary dark:border-navy-400 dark:checked:border-accent dark:checked:bg-accent dark:hover:border-accent dark:focus:border-accent"
+                                   name="IsHot"
+                                   type="radio"
+                                   value="false"
+                            />
+                            <p>Off</p>
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+    <script>
+        window.addEventListener("DOMContentLoaded", () => Alpine.start());
+    </script>
+
+
+</body>
+</html>

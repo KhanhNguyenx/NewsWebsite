@@ -95,6 +95,7 @@ namespace NewsWebsite.Controllers
             }
             List<PostDTO> postList = new();
             List<ImageDTO> imageList = new();
+            List<CategoryDTO> categoryList = new();
 
             try
             {
@@ -135,6 +136,15 @@ namespace NewsWebsite.Controllers
                 return RedirectToAction("Index");
             }
 
+            // Fetch the list of categories
+            using (var categoryResponse = await _client.GetAsync("Categories/GetList"))
+            {
+                if (categoryResponse.IsSuccessStatusCode)
+                {
+                    var categoryData = await categoryResponse.Content.ReadAsStringAsync();
+                    categoryList = JsonConvert.DeserializeObject<List<CategoryDTO>>(categoryData);
+                }
+            }
             if (!postList.Any())
             {
                 TempData["ErrorMessage"] = "No posts found for the specified category.";
@@ -143,7 +153,7 @@ namespace NewsWebsite.Controllers
             // Pass the data to the view
             ViewBag.PostList = postList;
             ViewBag.ImageList = imageList;
-
+            ViewBag.CategoryList = categoryList;
             return View();
         }
     }

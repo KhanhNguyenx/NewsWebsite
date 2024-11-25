@@ -52,7 +52,7 @@
                             @{
                                 var category = (ViewBag.CategoryList as List<CategoryDTO>)?.FirstOrDefault(cat => cat.Id == Convert.ToInt32(ViewContext.RouteData.Values["id"]));
                                 <text>@(category?.CategoryName ?? "Unknown Category")</text>
-                                <small class="hidden-xs-down hidden-sm-down">@category?.Description ?? "No description available."</small>
+                                <small class="hidden-xs-down hidden-sm-down">@category?.Description </small>
                             }
                         </h2>
                     </div><!-- end col -->

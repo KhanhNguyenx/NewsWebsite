@@ -39,12 +39,13 @@ public partial class NewsWebDbContext : DbContext
     public virtual DbSet<UserPost> UserPosts { get; set; }
 
     public virtual DbSet<UserProfile> UserProfiles { get; set; }
-
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<Category>(entity =>
         {
             entity.HasKey(e => e.Id).HasName("PK_Category");
+
+            entity.ToTable(tb => tb.HasTrigger("trg_Categories_Log"));
 
             entity.Property(e => e.Id)
                 .ValueGeneratedNever()
@@ -115,6 +116,12 @@ public partial class NewsWebDbContext : DbContext
         {
             entity.HasKey(e => e.Id).HasName("PK_Id_Log");
 
+            entity.ToTable(tb =>
+                {
+                    tb.HasTrigger("trg_Logs_PreventDelete");
+                    tb.HasTrigger("trg_Logs_PreventUpdate");
+                });
+
             entity.Property(e => e.Id)
                 .HasMaxLength(100)
                 .IsUnicode(false)
@@ -132,6 +139,8 @@ public partial class NewsWebDbContext : DbContext
         modelBuilder.Entity<Post>(entity =>
         {
             entity.HasKey(e => e.Id).HasName("PK_Id_Post");
+
+            entity.ToTable(tb => tb.HasTrigger("trg_Posts_Log"));
 
             entity.HasIndex(e => e.Slug, "UQ__Posts__BC7B5FB6A923B680").IsUnique();
 
@@ -218,6 +227,8 @@ public partial class NewsWebDbContext : DbContext
         modelBuilder.Entity<User>(entity =>
         {
             entity.HasKey(e => e.Id).HasName("PK_Id_Users");
+
+            entity.ToTable(tb => tb.HasTrigger("trg_Users_Log"));
 
             entity.HasIndex(e => e.Username, "UQ__Users__536C85E4C9602F3F").IsUnique();
 

@@ -1,10 +1,12 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using NewsAPI.DTOs;
+using Microsoft.AspNetCore.Authorization;
 
 namespace NewsWebsite.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    //[Authorize(Roles ="Admin")]
     public class CategoryController : Controller
     {
         Uri baseAddress = new Uri("https://localhost:44358");
